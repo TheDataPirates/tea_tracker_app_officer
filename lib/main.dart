@@ -2,16 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:teatrackerappofficer/screens/login_screen.dart';
 import 'screens/main_menu_screen.dart';
-import 'screens/bought_leaf_screen.dart';
-import 'screens/withering_loft_screen.dart';
-import 'screens/rolling_room_screen.dart';
-import 'screens/roll_breaking_room_screen.dart';
-import 'screens/fermenting_room_screen.dart';
-import 'screens/drying_room_screen.dart';
-import 'screens/shifting_room_screen.dart';
-import 'screens/packing_room.dart';
-import 'screens/dispatching_room_screen.dart';
-import 'screens/difference_report_screen.dart';
+import 'screens/mainMenu/bought_leaf_screen.dart';
+import 'screens/mainMenu/withering_loft_screen.dart';
+import 'screens/mainMenu/rolling_room_screen.dart';
+import 'screens/mainMenu/roll_breaking_room_screen.dart';
+import 'screens/mainMenu/fermenting_room_screen.dart';
+import 'screens/mainMenu/drying_room_screen.dart';
+import 'screens/mainMenu/shifting_room_screen.dart';
+import 'screens/mainMenu/packing_room.dart';
+import 'screens/mainMenu/dispatching_room_screen.dart';
+import 'screens/mainMenu/difference_report_screen.dart';
+import 'screens/witheringLoft/trough_loading_screen.dart';
+import 'screens/witheringLoft/withering_start_screen.dart';
+import 'screens/witheringLoft/withering_mixing_screen.dart';
+import 'screens/witheringLoft/withering_finish_screen.dart';
+import 'screens/witheringLoft/trough_unloading_screen.dart';
+import 'screens/witheringLoft/trough_loading_view_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // set lock to landscape view only
@@ -42,7 +48,12 @@ class MyApp extends StatelessWidget {
         'PackingRoom': (context) => PackingRoomScreen(),
         'DispatchingRoom': (context) => DispatchingRoomScreen(),
         'DifferenceReport': (context) => DifferenceReportScreen(),
-
+        'TroughLoading': (context) => TroughLoadingScreen(),
+        'WitheringStart': (context) => WitheringStartScreen(),
+        'WitheringMixing': (context) => WitheringMixingScreen(),
+        'WitheringFinish': (context) => WitheringFinishScreen(),
+        'TroughUnloading': (context) => TroughUnloadingScreen(),
+        'TroughLoadingView': (context) => TroughLoadingViewScreen(),
       },
     );
   }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class BoughtLeafScreen extends StatelessWidget {
+class TroughLoadingViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bought Leaf'),
+        title: Text('Trough Loading View'),
       ),
     );
   }
