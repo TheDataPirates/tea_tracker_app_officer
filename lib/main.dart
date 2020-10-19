@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:teatrackerappofficer/providers/trough_arrangement.dart';
 import 'package:teatrackerappofficer/screens/login_screen.dart';
 import 'screens/main_menu_screen.dart';
 import 'screens/mainMenu/bought_leaf_screen.dart';
@@ -30,31 +32,34 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        accentColor: Colors.greenAccent,
+    return ChangeNotifierProvider(
+      create: (ctx) => TroughArrangement(),
+      child: MaterialApp(
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+          accentColor: Colors.greenAccent,
+        ),
+        home: LoginScreen(),
+        routes: {
+          'MainMenu': (context) => MainMenuScreen(),
+          'BoughtLeaf': (context) => BoughtLeafScreen(),
+          'WitheringLoft': (context) => WitheringLoftScreen(),
+          'RollingRoom': (context) => RollingRoomScreen(),
+          'RollBreakingRoom': (context) => RollBreakingRoomScreen(),
+          'FermentingRoom': (context) => FermentingRoomScreen(),
+          'DryingRoom': (context) => DryingRoomScreen(),
+          'ShiftingRoom': (context) => ShiftingRoomScreen(),
+          'PackingRoom': (context) => PackingRoomScreen(),
+          'DispatchingRoom': (context) => DispatchingRoomScreen(),
+          'DifferenceReport': (context) => DifferenceReportScreen(),
+          'TroughLoading': (context) => TroughLoadingScreen(),
+          'WitheringStart': (context) => WitheringStartScreen(),
+          'WitheringMixing': (context) => WitheringMixingScreen(),
+          'WitheringFinish': (context) => WitheringFinishScreen(),
+          'TroughUnloading': (context) => TroughUnloadingScreen(),
+          'TroughLoadingView': (context) => TroughLoadingViewScreen(),
+        },
       ),
-      home: LoginScreen(),
-      routes: {
-        'MainMenu': (context) => MainMenuScreen(),
-        'BoughtLeaf': (context) => BoughtLeafScreen(),
-        'WitheringLoft': (context) => WitheringLoftScreen(),
-        'RollingRoom': (context) => RollingRoomScreen(),
-        'RollBreakingRoom': (context) => RollBreakingRoomScreen(),
-        'FermentingRoom': (context) => FermentingRoomScreen(),
-        'DryingRoom': (context) => DryingRoomScreen(),
-        'ShiftingRoom': (context) => ShiftingRoomScreen(),
-        'PackingRoom': (context) => PackingRoomScreen(),
-        'DispatchingRoom': (context) => DispatchingRoomScreen(),
-        'DifferenceReport': (context) => DifferenceReportScreen(),
-        'TroughLoading': (context) => TroughLoadingScreen(),
-        'WitheringStart': (context) => WitheringStartScreen(),
-        'WitheringMixing': (context) => WitheringMixingScreen(),
-        'WitheringFinish': (context) => WitheringFinishScreen(),
-        'TroughUnloading': (context) => TroughUnloadingScreen(),
-        'TroughLoadingView': (context) => TroughLoadingViewScreen(),
-      },
     );
   }
 }

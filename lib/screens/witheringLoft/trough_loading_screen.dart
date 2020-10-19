@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:teatrackerappofficer/providers/trough_loading.dart';
+import 'package:teatrackerappofficer/providers/trough_arrangement.dart';
+import 'package:provider/provider.dart';
 
 class TroughLoadingScreen extends StatefulWidget {
   @override
@@ -9,7 +11,7 @@ class TroughLoadingScreen extends StatefulWidget {
 class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
   final _formKey = GlobalKey<FormState>();
   var _troughLoading = TroughLoading(
-      troughNumber: null, boxNumber: null, gradeOfGL: '', netWeight: null);
+      id: null,troughNumber: null, boxNumber: null, gradeOfGL: null, netWeight: null);
 
   void _saveTroughArrangementDetails() {
 
@@ -21,10 +23,12 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
 
     _formKey.currentState.save();
 
-    print(_troughLoading.troughNumber);
-    print(_troughLoading.boxNumber);
-    print(_troughLoading.gradeOfGL);
-    print(_troughLoading.netWeight);
+//    print(_troughLoading.troughNumber);
+//    print(_troughLoading.boxNumber);
+//    print(_troughLoading.gradeOfGL);
+//    print(_troughLoading.netWeight);
+
+    Provider.of<TroughArrangement>(context, listen: false).addTroughLoadingItem(_troughLoading);
 
     Navigator.of(context).pushNamed('TroughLoadingView');
   }
@@ -86,6 +90,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                       },
                       onSaved: (value) {
                         _troughLoading = TroughLoading(
+                            id: null,
                             troughNumber: int.parse(value),
                             boxNumber: _troughLoading.boxNumber,
                             gradeOfGL: _troughLoading.gradeOfGL,
@@ -122,6 +127,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                       },
                       onSaved: (value) {
                         _troughLoading = TroughLoading(
+                            id: null,
                             troughNumber: _troughLoading.troughNumber,
                             boxNumber: int.parse(value),
                             gradeOfGL: _troughLoading.gradeOfGL,
@@ -163,6 +169,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                       },
                       onSaved: (value) {
                         _troughLoading = TroughLoading(
+                            id: null,
                             troughNumber: _troughLoading.troughNumber,
                             boxNumber: _troughLoading.boxNumber,
                             gradeOfGL: value,
@@ -199,6 +206,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                       },
                       onSaved: (value) {
                         _troughLoading = TroughLoading(
+                            id: null,
                             troughNumber: _troughLoading.troughNumber,
                             boxNumber: _troughLoading.boxNumber,
                             gradeOfGL: _troughLoading.gradeOfGL,
