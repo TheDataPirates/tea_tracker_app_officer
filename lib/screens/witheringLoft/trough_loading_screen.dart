@@ -9,19 +9,19 @@ class TroughLoadingScreen extends StatefulWidget {
 }
 
 class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
-  final _formKey = GlobalKey<FormState>();
+  final _formKeyTroughLoading = GlobalKey<FormState>();
   var _troughLoading = TroughLoading(
       id: null,troughNumber: null, boxNumber: null, gradeOfGL: null, netWeight: null);
 
   void _saveTroughArrangementDetails() {
 
-    final isValid = _formKey.currentState.validate();
+    final isValid = _formKeyTroughLoading.currentState.validate();
 
     if(!isValid){
       return;
     }
 
-    _formKey.currentState.save();
+    _formKeyTroughLoading.currentState.save();
 
 //    print(_troughLoading.troughNumber);
 //    print(_troughLoading.boxNumber);
@@ -54,7 +54,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
       ),
       body: SafeArea(
         child: Form(
-          key: _formKey,
+          key: _formKeyTroughLoading,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

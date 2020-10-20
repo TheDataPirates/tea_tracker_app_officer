@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/trough_arrangement.dart';
+import 'package:teatrackerappofficer/providers/withering_mixing_provider.dart';
 import 'package:teatrackerappofficer/screens/login_screen.dart';
 import 'screens/main_menu_screen.dart';
 import 'screens/mainMenu/bought_leaf_screen.dart';
@@ -20,6 +21,7 @@ import 'screens/witheringLoft/withering_mixing_screen.dart';
 import 'screens/witheringLoft/withering_finish_screen.dart';
 import 'screens/witheringLoft/trough_unloading_screen.dart';
 import 'screens/witheringLoft/trough_loading_view_screen.dart';
+import 'screens/witheringLoft/withering_mixing_view_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // set lock to landscape view only
@@ -32,8 +34,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (ctx) => TroughArrangement(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(value: TroughArrangement()),
+        ChangeNotifierProvider.value(value: WitheringMixingProvider()),
+      ],
       child: MaterialApp(
         theme: ThemeData(
           primarySwatch: Colors.green,
@@ -58,6 +63,7 @@ class MyApp extends StatelessWidget {
           'WitheringFinish': (context) => WitheringFinishScreen(),
           'TroughUnloading': (context) => TroughUnloadingScreen(),
           'TroughLoadingView': (context) => TroughLoadingViewScreen(),
+          'WitheringMixingView': (context) => WitheringMixingViewScreen(),
         },
       ),
     );
