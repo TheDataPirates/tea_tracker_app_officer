@@ -3,13 +3,13 @@ import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/withering_starting__finishing_provider.dart';
 import 'package:teatrackerappofficer/widgets/withering_starting_finishing_item.dart';
 
-class WitheringStartingViewScreen extends StatelessWidget {
+class WitheringFinishingViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final witheringStarting = Provider.of<WitheringStartingFinishingProvider>(context);
+    final witheringFinishing = Provider.of<WitheringStartingFinishingProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Withering Starting View'),
+        title: Text('Withering Finishing View'),
         actions: [
           IconButton(
             icon: Icon(Icons.check),
@@ -25,13 +25,13 @@ class WitheringStartingViewScreen extends StatelessWidget {
         children: [
           Expanded(
               child: ListView.builder(
-                itemCount: witheringStarting.witheringStartingItems.length,
+                itemCount: witheringFinishing.witheringFinishingItems.length,
                 itemBuilder: (ctx, i) => WitheringStartingFinishingItem(
-                  id: witheringStarting.witheringStartingItems[i].id,
-                  troughNumber: witheringStarting.witheringStartingItems[i].troughNumber,
-                  time: witheringStarting.witheringStartingItems[i].time,
-                  temperature: witheringStarting.witheringStartingItems[i].temperature,
-                  humidity: witheringStarting.witheringStartingItems[i].humidity,
+                  id: witheringFinishing.witheringFinishingItems[i].id,
+                  troughNumber: witheringFinishing.witheringFinishingItems[i].troughNumber,
+                  time: witheringFinishing.witheringFinishingItems[i].time,
+                  temperature: witheringFinishing.witheringFinishingItems[i].temperature,
+                  humidity: witheringFinishing.witheringFinishingItems[i].humidity,
                 ),
               ))
         ],
@@ -39,7 +39,7 @@ class WitheringStartingViewScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add, color: Colors.white,),
         onPressed: (){
-          Navigator.of(context).pushNamed('WitheringStarting');
+          Navigator.of(context).pushNamed('WitheringFinishing');
         },
         backgroundColor: Colors.green,
       ),

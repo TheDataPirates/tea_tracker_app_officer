@@ -39,7 +39,7 @@ class WitheringLoftScreen extends StatelessWidget {
                   height: _height,
                   width: _width,
                   name: 'Withering Finish',
-                  destination: 'WitheringFinish',
+                  destination: 'WitheringFinishing',
                 ),
                 MainMenuFlatButtonContainer(
                   height: _height,

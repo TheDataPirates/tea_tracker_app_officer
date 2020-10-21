@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:date_time_format/date_time_format.dart';
 import 'package:teatrackerappofficer/widgets/withering_view_item.dart';
 
-class WitheringStartingItem extends StatelessWidget {
+class WitheringStartingFinishingItem extends StatelessWidget {
   final String id;
   final int troughNumber;
   final DateTime time;
   final double temperature;
   final double humidity;
 
-  const WitheringStartingItem(
+  const WitheringStartingFinishingItem(
       {Key key,
       this.id,
       this.troughNumber,

@@ -1,37 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:teatrackerappofficer/providers/withering_starting_finishing.dart';
 import 'package:teatrackerappofficer/providers/withering_starting__finishing_provider.dart';
+import 'package:teatrackerappofficer/providers/withering_starting_finishing.dart';
 
-class WitheringStartScreen extends StatefulWidget {
+class WitheringFinishScreen extends StatefulWidget {
   @override
-  _WitheringStartScreenState createState() => _WitheringStartScreenState();
+  _WitheringFinishScreenState createState() => _WitheringFinishScreenState();
 }
 
-class _WitheringStartScreenState extends State<WitheringStartScreen> {
+class _WitheringFinishScreenState extends State<WitheringFinishScreen> {
+  final _formKeyWitheringFinishing = GlobalKey<FormState>();
+  var _witheringFinishing = WitheringStartingFinishing(
+      id: null,
+      troughNumber: null,
+      time: null,
+      temperature: null,
+      humidity: null);
 
-  final _formKeyWitheringStarting = GlobalKey<FormState>();
-  var _witheringStarting = WitheringStartingFinishing(
-      id: null, troughNumber: null, time: null, temperature: null, humidity: null);
-
-  void _saveWitheringStartingProviderDetails() {
-    final isValid = _formKeyWitheringStarting.currentState.validate();
+  void _saveWitheringFinishingProviderDetails() {
+    final isValid = _formKeyWitheringFinishing.currentState.validate();
 
     if (!isValid) {
       return;
     }
 
-    _formKeyWitheringStarting.currentState.save();
+    _formKeyWitheringFinishing.currentState.save();
 
     Provider.of<WitheringStartingFinishingProvider>(context, listen: false)
-        .addWitheringStartingItem(_witheringStarting);
+        .addWitheringFinishingItem(_witheringFinishing);
 
-    Navigator.of(context).pushNamed('WitheringStartingView');
+    Navigator.of(context).pushNamed('WitheringFinishingView');
   }
 
   @override
   Widget build(BuildContext context) {
-
     final _height =
         MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
 
@@ -39,11 +41,11 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Withering Starting'),
+        title: Text('Withering Finishing'),
         actions: [
           IconButton(
             icon: Icon(Icons.check),
-            onPressed: _saveWitheringStartingProviderDetails,
+            onPressed: _saveWitheringFinishingProviderDetails,
             disabledColor: Colors.white,
             iconSize: 35.0,
           )
@@ -51,7 +53,7 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
       ),
       body: SafeArea(
         child: Form(
-          key: _formKeyWitheringStarting,
+          key: _formKeyWitheringFinishing,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -84,12 +86,12 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
                         return null;
                       },
                       onSaved: (value) {
-                        _witheringStarting = WitheringStartingFinishing(
+                        _witheringFinishing = WitheringStartingFinishing(
                             id: null,
                             troughNumber: int.parse(value),
                             time: null,
-                            temperature: _witheringStarting.temperature,
-                            humidity: _witheringStarting.humidity);
+                            temperature: _witheringFinishing.temperature,
+                            humidity: _witheringFinishing.humidity);
                       },
                     ),
                   ),
@@ -124,12 +126,12 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
                         return null;
                       },
                       onSaved: (value) {
-                        _witheringStarting = WitheringStartingFinishing(
+                        _witheringFinishing = WitheringStartingFinishing(
                             id: null,
-                            troughNumber: _witheringStarting.troughNumber,
+                            troughNumber: _witheringFinishing.troughNumber,
                             time: null,
                             temperature: double.parse(value),
-                            humidity: _witheringStarting.humidity);
+                            humidity: _witheringFinishing.humidity);
                       },
                     ),
                   ),
@@ -159,11 +161,11 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
                         return null;
                       },
                       onSaved: (value) {
-                        _witheringStarting = WitheringStartingFinishing(
+                        _witheringFinishing = WitheringStartingFinishing(
                             id: null,
-                            troughNumber: _witheringStarting.troughNumber,
+                            troughNumber: _witheringFinishing.troughNumber,
                             time: DateTime.now(),
-                            temperature: _witheringStarting.temperature,
+                            temperature: _witheringFinishing.temperature,
                             humidity: double.parse(value));
                       },
                     ),
