@@ -22,7 +22,7 @@ class WitheringLoftScreen extends StatelessWidget {
                   height: _height,
                   width: _width,
                   name: 'Withering Start',
-                  destination: 'WitheringStart',
+                  destination: 'WitheringStarting',
                 ),
                 MainMenuFlatButtonContainer(
                   height: _height,

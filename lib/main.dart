@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/trough_arrangement.dart';
 import 'package:teatrackerappofficer/providers/withering_mixing_provider.dart';
+import 'package:teatrackerappofficer/providers/withering_starting_provider.dart';
 import 'package:teatrackerappofficer/screens/login_screen.dart';
 import 'screens/main_menu_screen.dart';
 import 'screens/mainMenu/bought_leaf_screen.dart';
@@ -16,12 +17,13 @@ import 'screens/mainMenu/packing_room.dart';
 import 'screens/mainMenu/dispatching_room_screen.dart';
 import 'screens/mainMenu/difference_report_screen.dart';
 import 'screens/witheringLoft/trough_loading_screen.dart';
-import 'screens/witheringLoft/withering_start_screen.dart';
+import 'screens/witheringLoft/withering_starting_screen.dart';
 import 'screens/witheringLoft/withering_mixing_screen.dart';
 import 'screens/witheringLoft/withering_finish_screen.dart';
 import 'screens/witheringLoft/trough_unloading_screen.dart';
 import 'screens/witheringLoft/trough_loading_view_screen.dart';
 import 'screens/witheringLoft/withering_mixing_view_screen.dart';
+import 'screens/witheringLoft/withering_starting_view_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // set lock to landscape view only
@@ -38,6 +40,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider.value(value: TroughArrangement()),
         ChangeNotifierProvider.value(value: WitheringMixingProvider()),
+        ChangeNotifierProvider.value(value: WitheringStartingProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(
@@ -58,12 +61,13 @@ class MyApp extends StatelessWidget {
           'DispatchingRoom': (context) => DispatchingRoomScreen(),
           'DifferenceReport': (context) => DifferenceReportScreen(),
           'TroughLoading': (context) => TroughLoadingScreen(),
-          'WitheringStart': (context) => WitheringStartScreen(),
+          'WitheringStarting': (context) => WitheringStartScreen(),
           'WitheringMixing': (context) => WitheringMixingScreen(),
           'WitheringFinish': (context) => WitheringFinishScreen(),
           'TroughUnloading': (context) => TroughUnloadingScreen(),
           'TroughLoadingView': (context) => TroughLoadingViewScreen(),
           'WitheringMixingView': (context) => WitheringMixingViewScreen(),
+          'WitheringStartingView': (context) => WitheringStartingViewScreen(),
         },
       ),
     );
