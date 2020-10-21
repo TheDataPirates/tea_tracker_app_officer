@@ -44,8 +44,8 @@ class WitheringLoftScreen extends StatelessWidget {
                 MainMenuFlatButtonContainer(
                   height: _height,
                   width: _width,
-                  name: 'Trough Unloading',
-                  destination: 'TroughUnloading',
+                  name: 'Withering Unloading',
+                  destination: 'WitheringUnloading',
                 ),
               ],
             ),

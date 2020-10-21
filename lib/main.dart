@@ -21,7 +21,7 @@ import 'screens/witheringLoft/trough_loading_screen.dart';
 import 'screens/witheringLoft/withering_starting_screen.dart';
 import 'screens/witheringLoft/withering_mixing_screen.dart';
 import 'screens/witheringLoft/withering_finishing_screen.dart';
-import 'screens/witheringLoft/trough_unloading_screen.dart';
+import 'screens/witheringLoft/withering_unloading_screen.dart';
 import 'screens/witheringLoft/trough_loading_view_screen.dart';
 import 'screens/witheringLoft/withering_mixing_view_screen.dart';
 import 'screens/witheringLoft/withering_starting_view_screen.dart';
@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
           'WitheringStarting': (context) => WitheringStartScreen(),
           'WitheringMixing': (context) => WitheringMixingScreen(),
           'WitheringFinishing': (context) => WitheringFinishScreen(),
-          'TroughUnloading': (context) => TroughUnloadingScreen(),
+          'WitheringUnloading': (context) => WitheringUnloadingScreen(),
           'TroughLoadingView': (context) => TroughLoadingViewScreen(),
           'WitheringMixingView': (context) => WitheringMixingViewScreen(),
           'WitheringStartingView': (context) => WitheringStartingViewScreen(),
