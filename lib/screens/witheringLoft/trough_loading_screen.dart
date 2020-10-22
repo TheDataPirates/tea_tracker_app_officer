@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:teatrackerappofficer/providers/trough_loading.dart';
-import 'package:teatrackerappofficer/providers/trough_arrangement.dart';
+import 'package:teatrackerappofficer/providers/withering_loading.dart';
+import 'package:teatrackerappofficer/providers/withering_loading_unloading_provider.dart';
 import 'package:provider/provider.dart';
 
 class TroughLoadingScreen extends StatefulWidget {
@@ -10,8 +10,8 @@ class TroughLoadingScreen extends StatefulWidget {
 
 class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
   final _formKeyTroughLoading = GlobalKey<FormState>();
-  var _troughLoading = TroughLoading(
-      id: null,troughNumber: null, boxNumber: null, gradeOfGL: null, netWeight: null);
+  var _troughLoading = WitheringLoading(
+      id: null,troughNumber: null, boxNumber: null, gradeOfGL: null, netWeight: null, date: null,);
 
   void _saveTroughArrangementDetails() {
 
@@ -28,7 +28,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
 //    print(_troughLoading.gradeOfGL);
 //    print(_troughLoading.netWeight);
 
-    Provider.of<TroughArrangement>(context, listen: false).addTroughLoadingItem(_troughLoading);
+    Provider.of<WitheringLoadingUnloadingProvider>(context, listen: false).addTroughLoadingItem(_troughLoading);
 
     Navigator.of(context).pushNamed('TroughLoadingView');
   }
@@ -69,7 +69,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                           labelText: 'Trough Number : ',
                           errorStyle: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 17.0
+                            fontSize: 17.0,
                           ),
                           contentPadding: EdgeInsets.all(30.0),
                           border: OutlineInputBorder(
@@ -89,12 +89,13 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                         return null;
                       },
                       onSaved: (value) {
-                        _troughLoading = TroughLoading(
+                        _troughLoading = WitheringLoading(
                             id: null,
                             troughNumber: int.parse(value),
                             boxNumber: _troughLoading.boxNumber,
                             gradeOfGL: _troughLoading.gradeOfGL,
-                            netWeight: _troughLoading.netWeight);
+                            netWeight: _troughLoading.netWeight,
+                            date: null,);
                       },
                     ),
                   ),
@@ -126,12 +127,13 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                         return null;
                       },
                       onSaved: (value) {
-                        _troughLoading = TroughLoading(
+                        _troughLoading = WitheringLoading(
                             id: null,
                             troughNumber: _troughLoading.troughNumber,
                             boxNumber: int.parse(value),
                             gradeOfGL: _troughLoading.gradeOfGL,
-                            netWeight: _troughLoading.netWeight);
+                            netWeight: _troughLoading.netWeight,
+                          date: null,);
                       },
                     ),
                   )
@@ -168,12 +170,13 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                         return null;
                       },
                       onSaved: (value) {
-                        _troughLoading = TroughLoading(
+                        _troughLoading = WitheringLoading(
                             id: null,
                             troughNumber: _troughLoading.troughNumber,
                             boxNumber: _troughLoading.boxNumber,
                             gradeOfGL: value,
-                            netWeight: _troughLoading.netWeight);
+                            netWeight: _troughLoading.netWeight,
+                          date: null,);
                       },
                     ),
                   ),
@@ -205,12 +208,13 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                         return null;
                       },
                       onSaved: (value) {
-                        _troughLoading = TroughLoading(
+                        _troughLoading = WitheringLoading(
                             id: null,
                             troughNumber: _troughLoading.troughNumber,
                             boxNumber: _troughLoading.boxNumber,
                             gradeOfGL: _troughLoading.gradeOfGL,
-                            netWeight: double.parse(value));
+                            netWeight: double.parse(value),
+                          date: DateTime.now(),);
                       },
                     ),
                   )

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:teatrackerappofficer/providers/withering_unloading_provider.dart';
+import 'package:teatrackerappofficer/providers/withering_loading_unloading_provider.dart';
+import 'package:teatrackerappofficer/widgets/withering_unloading_item.dart';
 
 class WitheringUnloadingViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final witheringUnloading = Provider.of<WitheringUnloadingProvider>(context);
+    final witheringLoadingUnloading =
+        Provider.of<WitheringLoadingUnloadingProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Withering Unloading View'),
@@ -29,30 +31,60 @@ class WitheringUnloadingViewScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Total Batch Weight : ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,),),
-                  SizedBox(width: 20.0,),
-                  Chip(label: Text('${witheringUnloading.totalBatchWeight}' + ' Kg'),
-                  backgroundColor: Theme.of(context).primaryColor,),
+                  Text(
+                    'Total Batch ' + '${witheringLoadingUnloading.lastBatchNumberItem}' + ' Weight : ',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20.0,
+                  ),
+                  Chip(
+                    label: Text(
+                        '${witheringLoadingUnloading.latestBatchTotalWeight}' +
+                            ' Kg'),
+                    backgroundColor: Theme.of(context).primaryColor,
+                  ),
                 ],
               ),
             ),
           ),
           Expanded(
               child: ListView.builder(
-                itemCount: witheringUnloading.witheringUnloadingItems.length,
-//                itemBuilder: (ctx, i) => WitheringStartingFinishingItem(
-//                  id: witheringFinishing.witheringFinishingItems[i].id,
-//                  troughNumber: witheringFinishing.witheringFinishingItems[i].troughNumber,
-//                  time: witheringFinishing.witheringFinishingItems[i].time,
-//                  temperature: witheringFinishing.witheringFinishingItems[i].temperature,
-//                  humidity: witheringFinishing.witheringFinishingItems[i].humidity,
-//                ),
-              ))
+            itemCount: witheringLoadingUnloading.witheringUnloadingItems.length,
+            itemBuilder: (ctx, i) => WitheringUnloadingItem(
+              id: witheringLoadingUnloading.witheringUnloadingItems[i].id,
+              batchNumber: witheringLoadingUnloading
+                  .witheringUnloadingItems[i].batchNumber,
+              troughNumber: witheringLoadingUnloading
+                  .witheringUnloadingItems[i].troughNumber,
+              boxNumber: witheringLoadingUnloading
+                  .witheringUnloadingItems[i].boxNumber,
+              lotWeight: witheringLoadingUnloading
+                  .witheringUnloadingItems[i].lotWeight,
+              date: witheringLoadingUnloading.witheringUnloadingItems[i].date,
+              witheringPercentage:
+                  witheringLoadingUnloading.witheringTroughBoxDatePercentage(
+                troughNumber: witheringLoadingUnloading
+                    .witheringUnloadingItems[i].troughNumber,
+                boxNumber: witheringLoadingUnloading
+                    .witheringUnloadingItems[i].boxNumber,
+                date: witheringLoadingUnloading.witheringUnloadingItems[i].date,
+                lotWeight: witheringLoadingUnloading
+                    .witheringUnloadingItems[i].lotWeight,
+              ),
+            ),
+          ))
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add, color: Colors.white,),
-        onPressed: (){
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+        onPressed: () {
           Navigator.of(context).pushNamed('WitheringUnloading');
         },
         backgroundColor: Colors.green,

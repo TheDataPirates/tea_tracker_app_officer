@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:teatrackerappofficer/providers/trough_arrangement.dart';
+import 'package:teatrackerappofficer/providers/withering_loading_unloading_provider.dart';
 import 'package:teatrackerappofficer/providers/withering_mixing_provider.dart';
 import 'package:teatrackerappofficer/providers/withering_starting__finishing_provider.dart';
 import 'package:teatrackerappofficer/screens/login_screen.dart';
 import 'package:teatrackerappofficer/screens/witheringLoft/withering_finishing_view_screen.dart';
+import 'package:teatrackerappofficer/screens/witheringLoft/withering_unloading_batch_choosing_screen.dart';
+import 'package:teatrackerappofficer/screens/witheringLoft/withering_unloading_view_screen.dart';
 import 'screens/main_menu_screen.dart';
 import 'screens/mainMenu/bought_leaf_screen.dart';
 import 'screens/mainMenu/withering_loft_screen.dart';
@@ -39,7 +41,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: TroughArrangement()),
+        ChangeNotifierProvider.value(value: WitheringLoadingUnloadingProvider()),
         ChangeNotifierProvider.value(value: WitheringMixingProvider()),
         ChangeNotifierProvider.value(value: WitheringStartingFinishingProvider()),
       ],
@@ -64,12 +66,14 @@ class MyApp extends StatelessWidget {
           'TroughLoading': (context) => TroughLoadingScreen(),
           'WitheringStarting': (context) => WitheringStartScreen(),
           'WitheringMixing': (context) => WitheringMixingScreen(),
-          'WitheringFinishing': (context) => WitheringFinishScreen(),
+          'WitheringFinishing': (context) => WitheringFinishingScreen(),
           'WitheringUnloading': (context) => WitheringUnloadingScreen(),
           'TroughLoadingView': (context) => TroughLoadingViewScreen(),
           'WitheringMixingView': (context) => WitheringMixingViewScreen(),
           'WitheringStartingView': (context) => WitheringStartingViewScreen(),
           'WitheringFinishingView': (context) => WitheringFinishingViewScreen(),
+          'WitheringUnloadingBatchChoosing': (context) => WitheringUnloadingBatchChoosingScreen(),
+          'WitheringUnloadingView': (context) => WitheringUnloadingViewScreen(),
         },
       ),
     );

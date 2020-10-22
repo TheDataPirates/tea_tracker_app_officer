@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:teatrackerappofficer/providers/withering_unloading.dart';
 import 'package:provider/provider.dart';
-import 'package:teatrackerappofficer/providers/withering_unloading_provider.dart';
+import 'package:teatrackerappofficer/providers/withering_loading_unloading_provider.dart';
 
 class WitheringUnloadingScreen extends StatefulWidget {
   @override
@@ -30,7 +30,7 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
 
     _formKeyWitheringUnloading.currentState.save();
 
-    Provider.of<WitheringUnloadingProvider>(context, listen: false)
+    Provider.of<WitheringLoadingUnloadingProvider>(context, listen: false)
         .addWitheringUnloadingItem(_witheringUnloading);
 
     Navigator.of(context).pushNamed('WitheringUnloadingView');
@@ -39,7 +39,7 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
   @override
   Widget build(BuildContext context) {
 
-    final witheringUnloadingBatchNumber = Provider.of<WitheringUnloadingProvider>(context);
+    final witheringUnloadingBatchNumber = Provider.of<WitheringLoadingUnloadingProvider>(context);
 
     final _height =
         MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
@@ -177,7 +177,7 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
                           id: null,
                           batchNumber: witheringUnloadingBatchNumber.lastBatchNumberItem,
                           troughNumber: _witheringUnloading.troughNumber,
-                          date: null,
+                          date: DateTime.now(),
                           boxNumber: _witheringUnloading.boxNumber,
                           lotWeight: double.parse(value),
                         );

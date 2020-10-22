@@ -45,7 +45,7 @@ class WitheringLoftScreen extends StatelessWidget {
                   height: _height,
                   width: _width,
                   name: 'Withering Unloading',
-                  destination: 'WitheringUnloading',
+                  destination: 'WitheringUnloadingBatchChoosing',
                 ),
               ],
             ),

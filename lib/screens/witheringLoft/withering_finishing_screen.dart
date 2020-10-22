@@ -3,12 +3,12 @@ import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/withering_starting__finishing_provider.dart';
 import 'package:teatrackerappofficer/providers/withering_starting_finishing.dart';
 
-class WitheringFinishScreen extends StatefulWidget {
+class WitheringFinishingScreen extends StatefulWidget {
   @override
-  _WitheringFinishScreenState createState() => _WitheringFinishScreenState();
+  _WitheringFinishingScreenState createState() => _WitheringFinishingScreenState();
 }
 
-class _WitheringFinishScreenState extends State<WitheringFinishScreen> {
+class _WitheringFinishingScreenState extends State<WitheringFinishingScreen> {
   final _formKeyWitheringFinishing = GlobalKey<FormState>();
   var _witheringFinishing = WitheringStartingFinishing(
       id: null,
