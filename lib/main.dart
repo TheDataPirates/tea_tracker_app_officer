@@ -49,6 +49,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.green,
           accentColor: Colors.greenAccent,
+          textTheme: TextTheme(bodyText1: TextStyle(color: Colors.white)),
         ),
         home: LoginScreen(),
         routes: {

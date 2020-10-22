@@ -43,7 +43,7 @@ class WitheringLoadingUnloadingProvider with ChangeNotifier {
             print('inside 1 trough number : ' + '${witheringLoadingItem.troughNumber}' + '${witheringLoadingItem.boxNumber}');
             if(witheringLoadingItem.boxNumber == boxNumber) {//From those filtered records check and get the records which have the same trough number and the box number which is passed by the function input parameters which are the trough unloading details.
               print('inside 2 box number : ' + '${witheringLoadingItem.troughNumber}' + '${witheringLoadingItem.boxNumber}');
-              wither = ((lotWeight / witheringLoadingItem.netWeight) * 100.0);
+              wither = (100.0 - ((lotWeight / witheringLoadingItem.netWeight) * 100.0));
               //The filtered record is the same trough and box details we filled earlier, therefore we can divide the net weight of the loading from the lot weight of the unloading and get the percentage.
             }
           }

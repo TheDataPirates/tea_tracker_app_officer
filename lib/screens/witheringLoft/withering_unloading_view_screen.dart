@@ -44,8 +44,9 @@ class WitheringUnloadingViewScreen extends StatelessWidget {
                   Chip(
                     label: Text(
                         '${witheringLoadingUnloading.latestBatchTotalWeight}' +
-                            ' Kg'),
+                            ' Kg', style: Theme.of(context).textTheme.bodyText1),
                     backgroundColor: Theme.of(context).primaryColor,
+
                   ),
                 ],
               ),
