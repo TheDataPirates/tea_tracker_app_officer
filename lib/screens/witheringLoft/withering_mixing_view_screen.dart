@@ -37,13 +37,20 @@ class WitheringMixingViewScreen extends StatelessWidget {
               ))
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add, color: Colors.white,),
-        onPressed: (){
-          Navigator.of(context).pushNamed('WitheringMixing');
-        },
-        backgroundColor: Colors.green,
+      floatingActionButton: Container(
+        height: 70.0,
+        width: 70.0,
+        child: FittedBox(
+          child: FloatingActionButton(
+            child: Icon(Icons.add, color: Colors.white,size: 40.0,),
+            onPressed: (){
+              Navigator.of(context).pushNamed('WitheringMixing');
+            },
+            backgroundColor: Colors.green,
+          ),
+        ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

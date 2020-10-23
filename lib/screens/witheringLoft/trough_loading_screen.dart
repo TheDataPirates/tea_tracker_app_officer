@@ -167,6 +167,9 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                         if(value.length >= 2){
                           return 'Please Enter A Valid Leaf Grade !';
                         }
+                        if((value != 'A') && (value != 'B') && (value != 'C') && (value != 'a') && (value != 'b') && (value != 'c')){
+                          return 'Please Enter A Valid Leaf Grade !';
+                        }
                         return null;
                       },
                       onSaved: (value) {
@@ -202,7 +205,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                         if(value.isEmpty){
                           return 'Please Enter Net Weight !';
                         }
-                        if(double.parse(value) <= 0){
+                        if(double.parse(value) >= 201 || double.parse(value) <= 0){
                           return 'Please Enter A Valid Net Weight !';
                         }
                         return null;

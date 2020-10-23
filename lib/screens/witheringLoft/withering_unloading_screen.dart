@@ -167,7 +167,7 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
                         if (value.isEmpty) {
                           return 'Please Enter Lot Weight !';
                         }
-                        if (double.parse(value) <= 0) {
+                        if (double.parse(value) <= 0 || double.parse(value) >= 201) {
                           return 'Please Enter A Valid Lot Weight !';
                         }
                         return null;

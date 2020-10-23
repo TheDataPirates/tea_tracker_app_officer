@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:date_time_format/date_time_format.dart';
 
 class WitheringMixingItem extends StatelessWidget {
 
@@ -13,17 +14,24 @@ class WitheringMixingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    var timeNow = time.format('H:i,  d/m/Y');
+
     return Card(
       margin: EdgeInsets.symmetric(
-        horizontal: 1,
+        horizontal: 10,
         vertical: 4,
       ),
       child: Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(5.0),
         child: ListTile(
-          leading: CircleAvatar(child: Text(troughNumber.toString()),),
-          title: Text('Turn : ' + '$turn' + '          ' + 'Time : ' + '$time'),
-          subtitle: Text('Temperature : ' + '$temperature' + '          ' + 'Humidity : ' + '$humidity'),
+          leading: CircleAvatar(child: Text(troughNumber.toString(), style: TextStyle(fontSize: 40.0,)),radius: 50.0,),
+          title: Text('Turn : ' + '$turn' , style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),),
+          subtitle: Text('Time : ' + '$timeNow', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
+          trailing: Column(children: [
+            Text('Temperature : ' + '$temperature', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
+            Text('Humidity : ' + '$humidity', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
+          ],),
         ),
       ),
     );

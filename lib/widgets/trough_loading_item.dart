@@ -14,16 +14,16 @@ class TroughLoadingItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: EdgeInsets.symmetric(
-        horizontal: 1,
-        vertical: 4,
+        horizontal: 10,
+        vertical: 5,
       ),
       child: Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(5.0),
         child: ListTile(
-          leading: CircleAvatar(child: Text(gradeGL),),
-          title: Text('Trough Number : ' + '$troughNumber'),
-          subtitle: Text('Box Number : ' + '$boxNumber'),
-          trailing: Text('$netWeight' + ' Kg'),
+          leading: CircleAvatar(child: Text(gradeGL, style: TextStyle(fontSize: 40.0),),radius: 50.0,),
+          title: Text('Trough Number : ' + '$troughNumber', style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),),
+          subtitle: Text('Box Number : ' + '$boxNumber', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
+          trailing: Text('$netWeight' + ' Kg', style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),),
         ),
       ),
     );

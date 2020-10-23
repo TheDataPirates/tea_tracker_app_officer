@@ -35,7 +35,7 @@ class WitheringUnloadingViewScreen extends StatelessWidget {
                     'Total Batch ' + '${witheringLoadingUnloading.lastBatchNumberItem}' + ' Weight : ',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 20.0,
+                      fontSize: 30.0,
                     ),
                   ),
                   SizedBox(
@@ -44,7 +44,8 @@ class WitheringUnloadingViewScreen extends StatelessWidget {
                   Chip(
                     label: Text(
                         '${witheringLoadingUnloading.latestBatchTotalWeight}' +
-                            ' Kg', style: Theme.of(context).textTheme.bodyText1),
+                            ' Kg', style: TextStyle(fontSize: 20.0, color: Colors.white),),
+
                     backgroundColor: Theme.of(context).primaryColor,
 
                   ),
@@ -80,16 +81,24 @@ class WitheringUnloadingViewScreen extends StatelessWidget {
           ))
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
+      floatingActionButton: Container(
+        width: 70.0,
+        height: 70.0,
+        child: FittedBox(
+          child: FloatingActionButton(
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+              size: 40.0,
+            ),
+            onPressed: () {
+              Navigator.of(context).pushNamed('WitheringUnloading');
+            },
+            backgroundColor: Colors.green,
+          ),
         ),
-        onPressed: () {
-          Navigator.of(context).pushNamed('WitheringUnloading');
-        },
-        backgroundColor: Colors.green,
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

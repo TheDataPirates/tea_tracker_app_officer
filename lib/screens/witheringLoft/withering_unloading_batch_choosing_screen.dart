@@ -26,6 +26,9 @@ class _WitheringUnloadingBatchChoosingScreenState
     Provider.of<WitheringLoadingUnloadingProvider>(context, listen: false)
         .addWitheringUnloadingBatchNumberItem(batchNumberItem);
 
+//    Provider.of<WitheringLoadingUnloadingProvider>(context, listen: false)
+//        .witheringUnloadingItems.clear();
+
     Navigator.of(context).pushNamed('WitheringUnloading');
   }
 

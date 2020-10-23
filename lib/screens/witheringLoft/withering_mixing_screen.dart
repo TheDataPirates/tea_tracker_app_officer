@@ -113,7 +113,7 @@ class _WitheringMixingScreenState extends State<WitheringMixingScreen> {
                         if (value.isEmpty) {
                           return 'Please Enter Turn !';
                         }
-                        if (int.parse(value) >= 4 || int.parse(value) <= 0) {
+                        if (int.parse(value) >= 5 || int.parse(value) <= 0) {
                           return 'Please Enter A Valid Turn !';
                         }
                         return null;
