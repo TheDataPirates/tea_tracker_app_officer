@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teatrackerappofficer/providers/withering_starting_finishing.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_starting_finishing.dart';
 
 
 class WitheringStartingFinishingProvider with ChangeNotifier{

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:teatrackerappofficer/providers/withering_mixing.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_mixing.dart';
 import 'package:provider/provider.dart';
-import 'package:teatrackerappofficer/providers/withering_mixing_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_mixing_provider.dart';
 
 class WitheringMixingScreen extends StatefulWidget {
   @override

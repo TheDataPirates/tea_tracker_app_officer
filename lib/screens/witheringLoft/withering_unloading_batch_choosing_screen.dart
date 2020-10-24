@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:teatrackerappofficer/providers/withering_loading_unloading_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_provider.dart';
 
 class WitheringUnloadingBatchChoosingScreen extends StatefulWidget {
   @override

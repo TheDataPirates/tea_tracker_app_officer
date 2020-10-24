@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:teatrackerappofficer/providers/withering_loading_unloading_provider.dart';
-import 'package:teatrackerappofficer/providers/withering_mixing_provider.dart';
-import 'package:teatrackerappofficer/providers/withering_starting__finishing_provider.dart';
+import 'package:teatrackerappofficer/providers/rolling/rolling_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_mixing_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_starting__finishing_provider.dart';
 import 'package:teatrackerappofficer/screens/login_screen.dart';
+import 'package:teatrackerappofficer/screens/rolling/rolling_input_screen.dart';
+import 'package:teatrackerappofficer/screens/rolling/rolling_input_view_screen.dart';
+import 'package:teatrackerappofficer/screens/rolling/rolling_output_screen.dart';
 import 'package:teatrackerappofficer/screens/witheringLoft/withering_finishing_view_screen.dart';
 import 'package:teatrackerappofficer/screens/witheringLoft/withering_unloading_batch_choosing_screen.dart';
 import 'package:teatrackerappofficer/screens/witheringLoft/withering_unloading_view_screen.dart';
@@ -44,6 +48,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(value: WitheringLoadingUnloadingProvider()),
         ChangeNotifierProvider.value(value: WitheringMixingProvider()),
         ChangeNotifierProvider.value(value: WitheringStartingFinishingProvider()),
+        ChangeNotifierProvider.value(value: RollingProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(
@@ -75,6 +80,9 @@ class MyApp extends StatelessWidget {
           'WitheringFinishingView': (context) => WitheringFinishingViewScreen(),
           'WitheringUnloadingBatchChoosing': (context) => WitheringUnloadingBatchChoosingScreen(),
           'WitheringUnloadingView': (context) => WitheringUnloadingViewScreen(),
+          'RollingInput': (context) => RollingInputScreen(),
+          'RollingOutput': (context) => RollingOutputScreen(),
+          'RollingInputView': (context) => RollingInputViewScreen(),
         },
       ),
     );

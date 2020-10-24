@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:teatrackerappofficer/providers/withering_starting__finishing_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_starting__finishing_provider.dart';
 import 'package:teatrackerappofficer/widgets/withering_starting_finishing_item.dart';
 
 class WitheringFinishingViewScreen extends StatelessWidget {

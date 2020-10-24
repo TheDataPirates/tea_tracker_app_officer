@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:teatrackerappofficer/providers/withering_loading.dart';
-import 'package:teatrackerappofficer/providers/withering_loading_unloading_provider.dart';
+import 'file:///C:/Users/lenovo/AndroidStudioProjects/tea_tracker_app_officer/lib/providers/withering/withering_loading.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_provider.dart';
 import 'package:provider/provider.dart';
 
 class TroughLoadingScreen extends StatefulWidget {

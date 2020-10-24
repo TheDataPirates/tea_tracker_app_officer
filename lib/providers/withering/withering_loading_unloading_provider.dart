@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:teatrackerappofficer/providers/withering_unloading.dart';
-import 'package:teatrackerappofficer/providers/withering_loading.dart';
+import 'file:///C:/Users/lenovo/AndroidStudioProjects/tea_tracker_app_officer/lib/providers/withering/withering_unloading.dart';
+import 'file:///C:/Users/lenovo/AndroidStudioProjects/tea_tracker_app_officer/lib/providers/withering/withering_loading.dart';
 
 class WitheringLoadingUnloadingProvider with ChangeNotifier {
   List<WitheringUnloading> _witheringUnloadingItems = [];
