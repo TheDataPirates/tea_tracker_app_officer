@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/rolling/rolling.dart';
-import 'package:teatrackerappofficer/providers/rolling/rolling_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 
 class RollingOutputScreen extends StatefulWidget {
   @override
@@ -23,7 +23,7 @@ class _RollingOutputScreenState extends State<RollingOutputScreen> {
 
     _formKeyRollingOutput.currentState.save();
 
-    Provider.of<RollingProvider>(context, listen: false)
+    Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
         .addRollingOutputItem(_rollingOutput);
 
     Navigator.of(context).pushNamed('RollingOutputView');

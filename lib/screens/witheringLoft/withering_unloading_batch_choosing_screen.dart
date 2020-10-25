@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 
 class WitheringUnloadingBatchChoosingScreen extends StatefulWidget {
   @override
@@ -23,7 +23,7 @@ class _WitheringUnloadingBatchChoosingScreenState
 
     _formKeyWitheringUnloadingBatchChoosing.currentState.save();
 
-    Provider.of<WitheringLoadingUnloadingProvider>(context, listen: false)
+    Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
         .addWitheringUnloadingBatchNumberItem(batchNumberItem);
 
 //    Provider.of<WitheringLoadingUnloadingProvider>(context, listen: false)

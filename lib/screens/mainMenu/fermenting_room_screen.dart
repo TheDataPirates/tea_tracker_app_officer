@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/rolling/fermenting.dart';
-import 'package:teatrackerappofficer/providers/rolling/rolling_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
+
 
 class FermentingRoomScreen extends StatefulWidget {
   @override
@@ -23,7 +24,7 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
 
     _formKeyFermenting.currentState.save();
 
-    Provider.of<RollingProvider>(context, listen: false)
+    Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
         .addFermentingItem(_fermenting);
 
     Navigator.of(context).pushNamed('FermentingView');
@@ -157,7 +158,7 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
                         if (value.isEmpty) {
                           return 'Please Enter Dhool Out Weight !';
                         }
-                        if (int.parse(value) <= 0 || int.parse(value) >= 351) {
+                        if (int.parse(value) <= 0 || int.parse(value) >= 101) {
                           return 'Please Enter A Valid Dhool Out Weight !';
                         }
                         return null;

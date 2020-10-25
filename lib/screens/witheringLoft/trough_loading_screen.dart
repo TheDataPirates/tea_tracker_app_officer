@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/lenovo/AndroidStudioProjects/tea_tracker_app_officer/lib/providers/withering/withering_loading.dart';
-import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:provider/provider.dart';
 
 class TroughLoadingScreen extends StatefulWidget {
@@ -28,7 +28,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
 //    print(_troughLoading.gradeOfGL);
 //    print(_troughLoading.netWeight);
 
-    Provider.of<WitheringLoadingUnloadingProvider>(context, listen: false).addTroughLoadingItem(_troughLoading);
+    Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).addTroughLoadingItem(_troughLoading);
 
     Navigator.of(context).pushNamed('TroughLoadingView');
   }

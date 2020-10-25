@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/rolling/rolling.dart';
-import 'package:teatrackerappofficer/providers/rolling/rolling_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 
 class RollingInputScreen extends StatefulWidget {
   @override
@@ -23,7 +23,7 @@ class _RollingInputScreenState extends State<RollingInputScreen> {
 
     _formKeyRollingInput.currentState.save();
 
-    Provider.of<RollingProvider>(context, listen: false)
+    Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
         .addRollingInputItem(_rollingInput);
 
     Navigator.of(context).pushNamed('RollingInputView');
@@ -31,6 +31,8 @@ class _RollingInputScreenState extends State<RollingInputScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    final _rollingProvider = Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
 
     final _height =
         MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
@@ -169,7 +171,7 @@ class _RollingInputScreenState extends State<RollingInputScreen> {
                           rollingTurn: _rollingInput.rollingTurn,
                           time: DateTime.now(),
                           rollerNumber: int.parse(value),
-                          weight: null,//In here need to create a method that will return the weight of the batch.
+                          weight: _rollingProvider.batchWeight(_rollingInput.batchNumber, DateTime.now(), _rollingInput.rollingTurn),//In here need to create a method that will return the weight of the batch.
                         );
                       },
                     ),

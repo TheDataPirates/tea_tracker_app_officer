@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/rolling/roll_breaking.dart';
-import 'package:teatrackerappofficer/providers/rolling/rolling_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
+
 
 class RollBreakingRoomScreen extends StatefulWidget {
   @override
@@ -23,7 +24,7 @@ class _RollBreakingRoomScreenState extends State<RollBreakingRoomScreen> {
 
     _formKeyRollBreaking.currentState.save();
 
-    Provider.of<RollingProvider>(context, listen: false)
+    Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
         .addRollBreakingItem(_rollBreaking);
 
     Navigator.of(context).pushNamed('RollBreakingView');
@@ -194,7 +195,7 @@ class _RollBreakingRoomScreenState extends State<RollBreakingRoomScreen> {
                         if (value.isEmpty) {
                           return 'Please Enter Weight !';
                         }
-                        if (int.parse(value) <= 0 || int.parse(value) >= 351) {
+                        if (int.parse(value) <= 0 || int.parse(value) >= 51) {
                           return 'Please Enter A Valid Weight !';
                         }
                         return null;

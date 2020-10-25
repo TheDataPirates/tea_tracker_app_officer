@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:teatrackerappofficer/providers/rolling/rolling_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/widgets/fermenting_item.dart';
 
 class FermentingViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final fermenting = Provider.of<RollingProvider>(context);
+    final fermenting = Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Fermenting View'),

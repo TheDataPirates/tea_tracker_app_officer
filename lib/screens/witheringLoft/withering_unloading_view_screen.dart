@@ -1,21 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/batch.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/widgets/withering_unloading_item.dart';
 
-class WitheringUnloadingViewScreen extends StatelessWidget {
+class WitheringUnloadingViewScreen extends StatefulWidget {
+
+  @override
+  _WitheringUnloadingViewScreenState createState() => _WitheringUnloadingViewScreenState();
+}
+
+class _WitheringUnloadingViewScreenState extends State<WitheringUnloadingViewScreen> {
+
+  var _batch = Batch(id: null, batchNumber: null, batchWeight: null, time: null);
+
+  void _saveBatchWeightAndNavigate (){
+
+    Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
+        .addBatchItem(_batch);
+
+//    print(_batch.batchNumber);
+//    print(_batch.batchWeight);
+
+    Navigator.of(context).pushNamed('MainMenu');
+  }
+
   @override
   Widget build(BuildContext context) {
     final witheringLoadingUnloading =
-        Provider.of<WitheringLoadingUnloadingProvider>(context);
+        Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Withering Unloading View'),
         actions: [
           IconButton(
             icon: Icon(Icons.check),
-            onPressed: () {
-              Navigator.of(context).pushNamed('MainMenu');
+            onPressed: (){
+
+              _batch = Batch(
+                  id: DateTime.now().toString(),
+                  batchNumber: witheringLoadingUnloading.lastBatchNumberItem,
+                  batchWeight: witheringLoadingUnloading.latestBatchTotalWeight,
+                  time: DateTime.now(),
+              );
+
+              _saveBatchWeightAndNavigate();
             },
             disabledColor: Colors.white,
             iconSize: 35.0,

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:teatrackerappofficer/providers/rolling/rolling_provider.dart';
-import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_mixing_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_starting__finishing_provider.dart';
 import 'package:teatrackerappofficer/screens/login_screen.dart';
@@ -48,10 +47,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: WitheringLoadingUnloadingProvider()),
+        ChangeNotifierProvider.value(value: WitheringLoadingUnloadingRollingProvider()),
         ChangeNotifierProvider.value(value: WitheringMixingProvider()),
         ChangeNotifierProvider.value(value: WitheringStartingFinishingProvider()),
-        ChangeNotifierProvider.value(value: RollingProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(

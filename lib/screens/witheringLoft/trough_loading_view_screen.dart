@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/widgets/trough_loading_item.dart';
 
 class TroughLoadingViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final troughLoading = Provider.of<WitheringLoadingUnloadingProvider>(context);
+    final troughLoading = Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Trough Loading View'),

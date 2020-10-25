@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:teatrackerappofficer/providers/rolling/rolling_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/widgets/rolling_item.dart';
 
 class RollingOutputViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final rollingOutput = Provider.of<RollingProvider>(context);
+    final rollingOutput = Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Rolling Output View'),
