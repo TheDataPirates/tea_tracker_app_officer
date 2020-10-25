@@ -5,7 +5,7 @@ class FermentingItem extends StatelessWidget {
 
   final String id;
   final int batchNumber;
-  final int dhoolNumber;
+  final dhoolNumber;
   final DateTime time;
   final double dhoolInWeight;
   final double dhoolOutWeight;

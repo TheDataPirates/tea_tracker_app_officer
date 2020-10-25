@@ -33,6 +33,8 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
   @override
   Widget build(BuildContext context) {
 
+    final fermenting = Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
+
     final _height =
         MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
 
@@ -121,16 +123,16 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
                         if (value.isEmpty) {
                           return 'Please Enter Dhool Number !';
                         }
-                        if (int.parse(value) <= 0 || int.parse(value) >= 6) {
-                          return 'Please Enter A Valid Dhool Number !';
-                        }
+//                        if (int.parse(value) <= 0 || int.parse(value) >= 6 || value != ) { This validation cannot be added because the dhool number for bigbulk is a string value (BB)
+//                          return 'Please Enter A Valid Dhool Number !';
+//                        }
                         return null;
                       },
                       onSaved: (value) {
                         _fermenting = Fermenting(
                           id: null,
                           batchNumber: _fermenting.batchNumber,
-                          dhoolNumber: int.parse(value),
+                          dhoolNumber: value,
                           time: null,
                           dhoolInWeight: null,
                           dhoolOutWeight: _fermenting.dhoolOutWeight,
@@ -169,7 +171,7 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
                           batchNumber: _fermenting.batchNumber,
                           dhoolNumber: _fermenting.dhoolNumber,
                           time: DateTime.now(),
-                          dhoolInWeight: null,//In here have to build a method to return the dhool input weight
+                          dhoolInWeight: fermenting.dhoolInputWeight(_fermenting.batchNumber, DateTime.now(), _fermenting.dhoolNumber),//In here have to build a method to return the dhool input weight
                           dhoolOutWeight: double.parse(value),
                         );
                       },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teatrackerappofficer/providers/rolling/big_bulk.dart';
 import 'package:teatrackerappofficer/providers/rolling/fermenting.dart';
 import 'package:teatrackerappofficer/providers/rolling/roll_breaking.dart';
 import 'package:teatrackerappofficer/providers/rolling/rolling.dart';
@@ -166,6 +167,34 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   }
 
 
+  //----------------Big Bulk -------------------
+
+  List<BigBulk> _bigBulkItems = [];
+
+  List<BigBulk> get bigBulkItems {
+    return [..._bigBulkItems];
+  }
+
+  int get bigBulkItemCount {
+    return _bigBulkItems.length;
+  }
+
+  BigBulk findByIdBigBulk(String id) {
+    return _bigBulkItems.firstWhere((bigBulk) => bigBulk.id == id);
+  }
+
+  void addBigBulkItem(BigBulk bigBulk) {
+    final newBigBulkItem = BigBulk(
+      id: DateTime.now().toString(),
+      bigBulkNumber: bigBulk.bigBulkNumber,
+      bigBulkWeight: bigBulk.bigBulkWeight,
+      time: DateTime.now(),
+    );
+
+    _bigBulkItems.add(bigBulk);
+    notifyListeners();
+  }
+
 
   //----------------Rolling Input -------------------
 
@@ -257,6 +286,18 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  int latestRollBreakingBatch(){
+    int latestBatchNumber = 0;
+    latestBatchNumber = _rollBreakingItems[_rollBreakingItems.length-1].batchNumber;
+    return latestBatchNumber;
+  }
+
+  int latestRollBreakingTurn(){
+    int rollBreakingNumber = 0;
+    rollBreakingNumber = _rollBreakingItems[_rollBreakingItems.length-1].rollBreakingTurn;
+    return rollBreakingNumber;
+  }
+
   //----------------Fermenting -------------------
 
   List<Fermenting> _fermentingItems = [];
@@ -286,4 +327,33 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     _fermentingItems.add(fermenting);
     notifyListeners();
   }
+
+  double dhoolInputWeight(int batchNumber, DateTime dateTime, dhoolNum){
+    double dIWeight = 0;
+    _rollBreakingItems.forEach((rollBreaking) {
+      if ((rollBreaking.time.year == dateTime.year) &&
+          (rollBreaking.time.month == dateTime.month) &&
+          (rollBreaking.time.day == dateTime.day)){
+        if(rollBreaking.batchNumber == batchNumber){
+          if(dhoolNum == 'BB' || dhoolNum == 'bb'){
+            _bigBulkItems.forEach((bigBulk) {
+              if ((bigBulk.time.year == dateTime.year) &&
+              (bigBulk.time.month == dateTime.month) &&
+              (bigBulk.time.day == dateTime.day)){
+                if(bigBulk.bigBulkNumber == batchNumber){
+                  dIWeight = bigBulk.bigBulkWeight;
+                }
+              }
+            });
+          }else{
+            if(rollBreaking.rollBreakingTurn == int.parse(dhoolNum)){
+              dIWeight = rollBreaking.weight;
+            }
+          }
+        }
+      }
+    });
+    return dIWeight;
+  }
+
 }
