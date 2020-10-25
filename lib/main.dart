@@ -6,9 +6,12 @@ import 'package:teatrackerappofficer/providers/withering/withering_loading_unloa
 import 'package:teatrackerappofficer/providers/withering/withering_mixing_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_starting__finishing_provider.dart';
 import 'package:teatrackerappofficer/screens/login_screen.dart';
+import 'package:teatrackerappofficer/screens/rolling/fermenting_view_screen.dart';
+import 'package:teatrackerappofficer/screens/rolling/roll_breaking_view_screen.dart';
 import 'package:teatrackerappofficer/screens/rolling/rolling_input_screen.dart';
 import 'package:teatrackerappofficer/screens/rolling/rolling_input_view_screen.dart';
 import 'package:teatrackerappofficer/screens/rolling/rolling_output_screen.dart';
+import 'package:teatrackerappofficer/screens/rolling/rolling_output_view_screen.dart';
 import 'package:teatrackerappofficer/screens/witheringLoft/withering_finishing_view_screen.dart';
 import 'package:teatrackerappofficer/screens/witheringLoft/withering_unloading_batch_choosing_screen.dart';
 import 'package:teatrackerappofficer/screens/witheringLoft/withering_unloading_view_screen.dart';
@@ -83,6 +86,9 @@ class MyApp extends StatelessWidget {
           'RollingInput': (context) => RollingInputScreen(),
           'RollingOutput': (context) => RollingOutputScreen(),
           'RollingInputView': (context) => RollingInputViewScreen(),
+          'RollingOutputView': (context) => RollingOutputViewScreen(),
+          'RollBreakingView': (context) => RollBreakingViewScreen(),
+          'FermentingView': (context) => FermentingViewScreen(),
         },
       ),
     );

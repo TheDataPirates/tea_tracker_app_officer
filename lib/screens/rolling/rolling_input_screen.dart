@@ -166,7 +166,7 @@ class _RollingInputScreenState extends State<RollingInputScreen> {
                         _rollingInput = Rolling(
                           id: null,
                           batchNumber: _rollingInput.batchNumber,
-                          rollingTurn: int.parse(value),
+                          rollingTurn: _rollingInput.rollingTurn,
                           time: DateTime.now(),
                           rollerNumber: int.parse(value),
                           weight: null,//In here need to create a method that will return the weight of the batch.
