@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/lenovo/AndroidStudioProjects/tea_tracker_app_officer/lib/providers/withering/withering_unloading.dart';
+
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_unloading.dart';
 
 class WitheringUnloadingScreen extends StatefulWidget {
   @override
@@ -38,8 +39,8 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-    final witheringUnloadingBatchNumber = Provider.of<WitheringLoadingUnloadingProvider>(context);
+    final witheringUnloadingBatchNumber =
+        Provider.of<WitheringLoadingUnloadingProvider>(context);
 
     final _height =
         MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
@@ -167,7 +168,8 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
                         if (value.isEmpty) {
                           return 'Please Enter Lot Weight !';
                         }
-                        if (double.parse(value) <= 0 || double.parse(value) >= 201) {
+                        if (double.parse(value) <= 0 ||
+                            double.parse(value) >= 201) {
                           return 'Please Enter A Valid Lot Weight !';
                         }
                         return null;
@@ -175,7 +177,8 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
                       onSaved: (value) {
                         _witheringUnloading = WitheringUnloading(
                           id: null,
-                          batchNumber: witheringUnloadingBatchNumber.lastBatchNumberItem,
+                          batchNumber:
+                              witheringUnloadingBatchNumber.lastBatchNumberItem,
                           troughNumber: _witheringUnloading.troughNumber,
                           date: DateTime.now(),
                           boxNumber: _witheringUnloading.boxNumber,

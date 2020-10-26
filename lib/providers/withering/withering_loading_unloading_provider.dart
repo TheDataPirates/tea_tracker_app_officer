@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/lenovo/AndroidStudioProjects/tea_tracker_app_officer/lib/providers/withering/withering_unloading.dart';
-import 'file:///C:/Users/lenovo/AndroidStudioProjects/tea_tracker_app_officer/lib/providers/withering/withering_loading.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_unloading.dart';
 
 class WitheringLoadingUnloadingProvider with ChangeNotifier {
   List<WitheringUnloading> _witheringUnloadingItems = [];
@@ -29,28 +29,35 @@ class WitheringLoadingUnloadingProvider with ChangeNotifier {
   }
 
   double witheringTroughBoxDatePercentage(
-      {int troughNumber, int boxNumber, DateTime date, double lotWeight}) {//Taking inputs of the loft unloading
+      {int troughNumber, int boxNumber, DateTime date, double lotWeight}) {
+    //Taking inputs of the loft unloading
     double wither = 0.0;
     _troughLoadingItems.forEach((witheringLoadingItem) {
       if ((witheringLoadingItem.date.year == date.year) &&
           (witheringLoadingItem.date.month == date.month) &&
           ((witheringLoadingItem.date.day == date.day) ||
-              (witheringLoadingItem.date.day == (date.day - 1)))) {//Taking the records of trough loading which is equal to trough unloading date or one day before. because sometimes trough unloading can take place one day after trough loading.
+              (witheringLoadingItem.date.day == (date.day - 1)))) {
+        //Taking the records of trough loading which is equal to trough unloading date or one day before. because sometimes trough unloading can take place one day after trough loading.
 
-      print('for each : ' + '${witheringLoadingItem.troughNumber}' + '${witheringLoadingItem.boxNumber}');
-        if (witheringLoadingItem.troughNumber == troughNumber)
-          {
-            print('inside 1 trough number : ' + '${witheringLoadingItem.troughNumber}' + '${witheringLoadingItem.boxNumber}');
-            if(witheringLoadingItem.boxNumber == boxNumber) {//From those filtered records check and get the records which have the same trough number and the box number which is passed by the function input parameters which are the trough unloading details.
-              print('inside 2 box number : ' + '${witheringLoadingItem.troughNumber}' + '${witheringLoadingItem.boxNumber}');
-              wither = (100.0 - ((lotWeight / witheringLoadingItem.netWeight) * 100.0));
-              //The filtered record is the same trough and box details we filled earlier, therefore we can divide the net weight of the loading from the lot weight of the unloading and get the percentage.
-            }
+        print('for each : ' +
+            '${witheringLoadingItem.troughNumber}' +
+            '${witheringLoadingItem.boxNumber}');
+        if (witheringLoadingItem.troughNumber == troughNumber) {
+          print('inside 1 trough number : ' +
+              '${witheringLoadingItem.troughNumber}' +
+              '${witheringLoadingItem.boxNumber}');
+          if (witheringLoadingItem.boxNumber == boxNumber) {
+            //From those filtered records check and get the records which have the same trough number and the box number which is passed by the function input parameters which are the trough unloading details.
+            print('inside 2 box number : ' +
+                '${witheringLoadingItem.troughNumber}' +
+                '${witheringLoadingItem.boxNumber}');
+            wither = (100.0 -
+                ((lotWeight / witheringLoadingItem.netWeight) * 100.0));
+            //The filtered record is the same trough and box details we filled earlier, therefore we can divide the net weight of the loading from the lot weight of the unloading and get the percentage.
           }
-
+        }
       }
-    }
-    );
+    });
     return wither;
   }
 
