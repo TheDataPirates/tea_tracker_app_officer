@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teatrackerappofficer/providers/rolling/big_bulk.dart';
+import 'package:teatrackerappofficer/providers/rolling/drying.dart';
 import 'package:teatrackerappofficer/providers/rolling/fermenting.dart';
 import 'package:teatrackerappofficer/providers/rolling/roll_breaking.dart';
 import 'package:teatrackerappofficer/providers/rolling/rolling.dart';
@@ -354,6 +355,51 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       }
     });
     return dIWeight;
+  }
+
+
+  //----------------Drying -------------------
+
+  List<Drying> _dryingItems = [];
+
+  List<Drying> get dryingItems {
+    return [..._dryingItems];
+  }
+
+  int get dryingItemCount {
+    return _dryingItems.length;
+  }
+
+  Drying findByIdDrying(String id) {
+    return _dryingItems.firstWhere((drying) => drying.id == id);
+  }
+
+  void addDryingItem(Drying drying) {
+    final newDrierItem = Drying(
+      id: DateTime.now().toString(),
+      batchNumber: drying.batchNumber,
+      dhoolNumber: drying.dhoolNumber,
+      drierInWeight: drying.drierInWeight,
+      drierOutWeight: drying.drierOutWeight,
+      time: DateTime.now(),
+    );
+
+    _dryingItems.add(drying);
+    notifyListeners();
+  }
+
+  double drierInputWeight(int batchNumber, DateTime dateTime, dhoolNum){
+    double dryIWeight = 0;
+    _fermentingItems.forEach((fermenting) {
+      if ((fermenting.time.year == dateTime.year) &&
+          (fermenting.time.month == dateTime.month) &&
+          (fermenting.time.day == dateTime.day)){
+        if((fermenting.batchNumber == batchNumber) && (fermenting.dhoolNumber == dhoolNum)){
+          dryIWeight = fermenting.dhoolOutWeight;
+        }
+      }
+    });
+    return dryIWeight;
   }
 
 }

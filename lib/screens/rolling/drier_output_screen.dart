@@ -1,39 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:teatrackerappofficer/providers/rolling/fermenting.dart';
+import 'package:teatrackerappofficer/providers/rolling/drying.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 
-
-class FermentingRoomScreen extends StatefulWidget {
+class DrierOutputScreen extends StatefulWidget {
   @override
-  _FermentingRoomScreenState createState() => _FermentingRoomScreenState();
+  _DrierOutputScreenState createState() => _DrierOutputScreenState();
 }
 
-class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
+class _DrierOutputScreenState extends State<DrierOutputScreen> {
 
-  final _formKeyFermenting = GlobalKey<FormState>();
-  var _fermenting = Fermenting(
-      id: null, batchNumber: null, dhoolNumber: null, time: null, dhoolInWeight: null, dhoolOutWeight: null);
+  final _formKeyDrying = GlobalKey<FormState>();
+  var _drying = Drying(
+      id: null, batchNumber: null, dhoolNumber: null, time: null, drierInWeight: null, drierOutWeight: null);
 
-  void _saveFermentingProviderDetails() {
-    final isValid = _formKeyFermenting.currentState.validate();
+  void _saveDryingProviderDetails() {
+    final isValid = _formKeyDrying.currentState.validate();
 
     if (!isValid) {
       return;
     }
 
-    _formKeyFermenting.currentState.save();
+    _formKeyDrying.currentState.save();
 
     Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
-        .addFermentingItem(_fermenting);
+        .addDryingItem(_drying);
 
-    Navigator.of(context).pushNamed('FermentingView');
+    Navigator.of(context).pushNamed('DrierOutputView');
   }
 
   @override
   Widget build(BuildContext context) {
 
-    final fermenting = Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
+    final drying = Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
 
     final _height =
         MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
@@ -42,11 +41,11 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fermenting Room'),
+        title: Text('Drier Output'),
         actions: [
           IconButton(
             icon: Icon(Icons.check),
-            onPressed: _saveFermentingProviderDetails,
+            onPressed: _saveDryingProviderDetails,
             disabledColor: Colors.white,
             iconSize: 35.0,
           ),
@@ -54,7 +53,7 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
       ),
       body: SafeArea(
         child: Form(
-          key: _formKeyFermenting,
+          key: _formKeyDrying,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -87,13 +86,13 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
                         return null;
                       },
                       onSaved: (value) {
-                        _fermenting = Fermenting(
+                        _drying = Drying(
                           id: null,
                           batchNumber: int.parse(value),
-                          dhoolNumber: _fermenting.dhoolNumber,
+                          dhoolNumber: _drying.dhoolNumber,
                           time: null,
-                          dhoolInWeight: null,
-                          dhoolOutWeight: _fermenting.dhoolOutWeight,
+                          drierInWeight: null,
+                          drierOutWeight: _drying.drierOutWeight,
                         );
                       },
                     ),
@@ -129,13 +128,13 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
                         return null;
                       },
                       onSaved: (value) {
-                        _fermenting = Fermenting(
+                        _drying = Drying(
                           id: null,
-                          batchNumber: _fermenting.batchNumber,
+                          batchNumber: _drying.batchNumber,
                           dhoolNumber: value,
                           time: null,
-                          dhoolInWeight: null,
-                          dhoolOutWeight: _fermenting.dhoolOutWeight,
+                          drierInWeight: null,
+                          drierOutWeight: _drying.drierOutWeight,
                         );
                       },
                     ),
@@ -145,7 +144,7 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
                     width: _width * 0.4,
                     child: TextFormField(
                       decoration: InputDecoration(
-                          labelText: 'Dhool Out Weight : ',
+                          labelText: 'Drier Out Weight : ',
                           errorStyle: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 17.0),
                           contentPadding: EdgeInsets.all(30.0),
@@ -158,21 +157,21 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
                           fontSize: 30.0, fontWeight: FontWeight.bold),
                       validator: (value) {
                         if (value.isEmpty) {
-                          return 'Please Enter Dhool Out Weight !';
+                          return 'Please Enter Drier Out Weight !';
                         }
                         if (int.parse(value) <= 0 || int.parse(value) >= 101) {
-                          return 'Please Enter A Valid Dhool Out Weight !';
+                          return 'Please Enter A Valid Drier Out Weight !';
                         }
                         return null;
                       },
                       onSaved: (value) {
-                        _fermenting = Fermenting(
+                        _drying = Drying(
                           id: null,
-                          batchNumber: _fermenting.batchNumber,
-                          dhoolNumber: _fermenting.dhoolNumber,
+                          batchNumber: _drying.batchNumber,
+                          dhoolNumber: _drying.dhoolNumber,
                           time: DateTime.now(),
-                          dhoolInWeight: fermenting.dhoolInputWeight(_fermenting.batchNumber, DateTime.now(), _fermenting.dhoolNumber),//In here have to build a method to return the dhool input weight
-                          dhoolOutWeight: double.parse(value),
+                          drierInWeight: drying.drierInputWeight(_drying.batchNumber, DateTime.now(), _drying.dhoolNumber),//In here have to build a method to return the drier input weight
+                          drierOutWeight: double.parse(value),
                         );
                       },
                     ),
