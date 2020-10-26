@@ -23,7 +23,6 @@ class TeaCollections with ChangeNotifier {
   Supplier get newSupplier => _newSupplier;
 
   Future<void> addLot(
-    String Id,
     String supNo,
     String supName,
     String contType,
@@ -38,7 +37,6 @@ class TeaCollections with ChangeNotifier {
   ) async {
     //create lot object
     final newLot = Lot(
-      lotId: Id,
       supplier_id: supNo,
       supplier_name: supName,
       container_type: contType,
@@ -55,8 +53,11 @@ class TeaCollections with ChangeNotifier {
     try {
       await http.post(
         url,
-        body: json.encode({
-          'lot_id': newLot.lotId,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, dynamic>{
+          'lot_id': DateTime.now().toIso8601String(),
           'grade_GL': newLot.leaf_grade,
           'gross_weight': newLot.gross_weight,
           'no_of_container': newLot.no_of_containers,
@@ -72,7 +73,7 @@ class TeaCollections with ChangeNotifier {
       notifyListeners();
     } catch (error) {
       print(error);
-//      throw error;
+      throw error;
     }
   }
 //getting all records
@@ -123,42 +124,6 @@ class TeaCollections with ChangeNotifier {
         );
       }
 
-//      print(extractedDataLits);
-//      final List<Lot> loadedLots = [];
-//      extractedDataLits.forEach((key, lotData) {
-//        print(key);
-//        print(lotData);
-//        _lot_items = lotData
-//            .map(
-//              (lotdata) => Lot(
-//                  lotId: lotdata['lot_id'],
-//                  no_of_containers: lotdata['no_of_container'],
-//                  leaf_grade: lotdata['grade_GL'],
-//                  gross_weight: lotdata['gross_weight'],
-//                  water: lotdata['water'],
-//                  course_leaf: lotdata['course_leaf'],
-//                  other: lotdata['other'],
-//                  net_weight: lotdata['net_weight'],
-//                  deductions: lotdata['deduction'],
-//                  date: lotdata['date']),
-//            )
-//            .toList();
-//      });
-//        loadedLots.add(
-//          Lot(
-//              lotId: lotData['lot_id'],
-//              no_of_containers: lotData['no_of_container'],
-//              leaf_grade: lotData['grade_GL'],
-//              gross_weight: lotData['gross_weight'],
-//              water: lotData['water'],
-//              course_leaf: lotData['course_leaf'],
-//              other: lotData['other'],
-//              net_weight: lotData['net_weight'],
-//              deductions: lotData['deduction'],
-//              date: lotData['date']),
-//        );
-//      });
-//      _lot_items = Lots;
       notifyListeners();
     } catch (error) {
       print(error);
