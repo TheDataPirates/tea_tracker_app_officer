@@ -8,14 +8,16 @@ import 'package:teatrackerappofficer/providers/withering/batch.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_unloading.dart';
 
-
-
 class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
-  List<WitheringUnloading> _witheringUnloadingItems = [];
+
 
   List<int> _batchNumberItems = [];
 
   List<Batch> _batchItems = [];
+
+  List<Batch> get batchItems {
+    return [..._batchItems];
+  }
 
   void addBatchItem(Batch batch) {
     final newBatchItem = Batch(
@@ -29,27 +31,31 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  double batchWeight (int batchNo, DateTime dateTime, int rollingTurn){
+  double batchWeight(int batchNo, DateTime dateTime, int rollingTurn) {
     double bWeight;
     _batchItems.forEach((batchItem) {
       if ((batchItem.time.year == dateTime.year) &&
           (batchItem.time.month == dateTime.month) &&
-          (batchItem.time.day == dateTime.day)){
-        if(batchItem.batchNumber == batchNo){
-          if(rollingTurn == 1){
+          (batchItem.time.day == dateTime.day)) {
+        if (batchItem.batchNumber == batchNo) {
+          if (rollingTurn == 1) {
             bWeight = batchItem.batchWeight;
-          }else if(rollingTurn > 1){
+          } else if (rollingTurn > 1) {
             _rollingOutputItems.forEach((rollingOutputItem) {
               if ((rollingOutputItem.time.year == dateTime.year) &&
                   (rollingOutputItem.time.month == dateTime.month) &&
-                  (rollingOutputItem.time.day == dateTime.day)){
-                if((rollingOutputItem.batchNumber == batchNo) && (rollingOutputItem.rollingTurn == (rollingTurn - 1))){
+                  (rollingOutputItem.time.day == dateTime.day)) {
+                if ((rollingOutputItem.batchNumber == batchNo) &&
+                    (rollingOutputItem.rollingTurn == (rollingTurn - 1))) {
                   _rollBreakingItems.forEach((rollBreakingItem) {
                     if ((rollBreakingItem.time.year == dateTime.year) &&
                         (rollBreakingItem.time.month == dateTime.month) &&
-                        (rollBreakingItem.time.day == dateTime.day)){
-                      if((rollBreakingItem.batchNumber == batchNo) && (rollBreakingItem.rollBreakingTurn == (rollingTurn - 1))){
-                        bWeight = rollingOutputItem.weight - rollBreakingItem.weight;
+                        (rollBreakingItem.time.day == dateTime.day)) {
+                      if ((rollBreakingItem.batchNumber == batchNo) &&
+                          (rollBreakingItem.rollBreakingTurn ==
+                              (rollingTurn - 1))) {
+                        bWeight =
+                            rollingOutputItem.weight - rollBreakingItem.weight;
                       }
                     }
                   });
@@ -85,34 +91,44 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   }
 
   double witheringTroughBoxDatePercentage(
-      {int troughNumber, int boxNumber, DateTime date, double lotWeight}) {//Taking inputs of the loft unloading
+      {int troughNumber, int boxNumber, DateTime date, double lotWeight}) {
+    //Taking inputs of the loft unloading
     double wither = 0.0;
     _troughLoadingItems.forEach((witheringLoadingItem) {
       if ((witheringLoadingItem.date.year == date.year) &&
           (witheringLoadingItem.date.month == date.month) &&
           ((witheringLoadingItem.date.day == date.day) ||
-              (witheringLoadingItem.date.day == (date.day - 1)))) {//Taking the records of trough loading which is equal to trough unloading date or one day before. because sometimes trough unloading can take place one day after trough loading.
+              (witheringLoadingItem.date.day == (date.day - 1)))) {
+        //Taking the records of trough loading which is equal to trough unloading date or one day before. because sometimes trough unloading can take place one day after trough loading.
 
-      print('for each : ' + '${witheringLoadingItem.troughNumber}' + '${witheringLoadingItem.boxNumber}');
-        if (witheringLoadingItem.troughNumber == troughNumber)
-          {
-            print('inside 1 trough number : ' + '${witheringLoadingItem.troughNumber}' + '${witheringLoadingItem.boxNumber}');
-            if(witheringLoadingItem.boxNumber == boxNumber) {//From those filtered records check and get the records which have the same trough number and the box number which is passed by the function input parameters which are the trough unloading details.
-              print('inside 2 box number : ' + '${witheringLoadingItem.troughNumber}' + '${witheringLoadingItem.boxNumber}');
-              wither = (100.0 - ((lotWeight / witheringLoadingItem.netWeight) * 100.0));
-              //The filtered record is the same trough and box details we filled earlier, therefore we can divide the net weight of the loading from the lot weight of the unloading and get the percentage.
-            }
+        print('for each : ' +
+            '${witheringLoadingItem.troughNumber}' +
+            '${witheringLoadingItem.boxNumber}');
+        if (witheringLoadingItem.troughNumber == troughNumber) {
+          print('inside 1 trough number : ' +
+              '${witheringLoadingItem.troughNumber}' +
+              '${witheringLoadingItem.boxNumber}');
+          if (witheringLoadingItem.boxNumber == boxNumber) {
+            //From those filtered records check and get the records which have the same trough number and the box number which is passed by the function input parameters which are the trough unloading details.
+            print('inside 2 box number : ' +
+                '${witheringLoadingItem.troughNumber}' +
+                '${witheringLoadingItem.boxNumber}');
+            wither = (100.0 -
+                ((lotWeight / witheringLoadingItem.netWeight) * 100.0));
+            //The filtered record is the same trough and box details we filled earlier, therefore we can divide the net weight of the loading from the lot weight of the unloading and get the percentage.
           }
-
+        }
       }
-    }
-    );
+    });
     return wither;
   }
 
   int get lastBatchNumberItem {
     return _batchNumberItems[_batchNumberItems.length - 1];
   }
+
+
+  List<WitheringUnloading> _witheringUnloadingItems = [];
 
   List<WitheringUnloading> get witheringUnloadingItems {
     return [..._witheringUnloadingItems];
@@ -167,7 +183,6 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     notifyListeners();
   }
 
-
   //----------------Big Bulk -------------------
 
   List<BigBulk> _bigBulkItems = [];
@@ -195,7 +210,6 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     _bigBulkItems.add(bigBulk);
     notifyListeners();
   }
-
 
   //----------------Rolling Input -------------------
 
@@ -270,7 +284,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   }
 
   RollBreaking findByIdRollBreaking(String id) {
-    return _rollBreakingItems.firstWhere((rollBreaking) => rollBreaking.id == id);
+    return _rollBreakingItems
+        .firstWhere((rollBreaking) => rollBreaking.id == id);
   }
 
   void addRollBreakingItem(RollBreaking rollBreaking) {
@@ -287,15 +302,17 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  int latestRollBreakingBatch(){
+  int latestRollBreakingBatch() {
     int latestBatchNumber = 0;
-    latestBatchNumber = _rollBreakingItems[_rollBreakingItems.length-1].batchNumber;
+    latestBatchNumber =
+        _rollBreakingItems[_rollBreakingItems.length - 1].batchNumber;
     return latestBatchNumber;
   }
 
-  int latestRollBreakingTurn(){
+  int latestRollBreakingTurn() {
     int rollBreakingNumber = 0;
-    rollBreakingNumber = _rollBreakingItems[_rollBreakingItems.length-1].rollBreakingTurn;
+    rollBreakingNumber =
+        _rollBreakingItems[_rollBreakingItems.length - 1].rollBreakingTurn;
     return rollBreakingNumber;
   }
 
@@ -329,25 +346,25 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  double dhoolInputWeight(int batchNumber, DateTime dateTime, dhoolNum){
+  double dhoolInputWeight(int batchNumber, DateTime dateTime, dhoolNum) {
     double dIWeight = 0;
     _rollBreakingItems.forEach((rollBreaking) {
       if ((rollBreaking.time.year == dateTime.year) &&
           (rollBreaking.time.month == dateTime.month) &&
-          (rollBreaking.time.day == dateTime.day)){
-        if(rollBreaking.batchNumber == batchNumber){
-          if(dhoolNum == 'BB' || dhoolNum == 'bb'){
+          (rollBreaking.time.day == dateTime.day)) {
+        if (rollBreaking.batchNumber == batchNumber) {
+          if (dhoolNum == 'BB' || dhoolNum == 'bb') {
             _bigBulkItems.forEach((bigBulk) {
               if ((bigBulk.time.year == dateTime.year) &&
-              (bigBulk.time.month == dateTime.month) &&
-              (bigBulk.time.day == dateTime.day)){
-                if(bigBulk.bigBulkNumber == batchNumber){
+                  (bigBulk.time.month == dateTime.month) &&
+                  (bigBulk.time.day == dateTime.day)) {
+                if (bigBulk.bigBulkNumber == batchNumber) {
                   dIWeight = bigBulk.bigBulkWeight;
                 }
               }
             });
-          }else{
-            if(rollBreaking.rollBreakingTurn == int.parse(dhoolNum)){
+          } else {
+            if (rollBreaking.rollBreakingTurn == int.parse(dhoolNum)) {
               dIWeight = rollBreaking.weight;
             }
           }
@@ -356,7 +373,6 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     });
     return dIWeight;
   }
-
 
   //----------------Drying -------------------
 
@@ -388,18 +404,82 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  double drierInputWeight(int batchNumber, DateTime dateTime, dhoolNum){
+  double drierInputWeight(int batchNumber, DateTime dateTime, dhoolNum) {
     double dryIWeight = 0;
     _fermentingItems.forEach((fermenting) {
       if ((fermenting.time.year == dateTime.year) &&
           (fermenting.time.month == dateTime.month) &&
-          (fermenting.time.day == dateTime.day)){
-        if((fermenting.batchNumber == batchNumber) && (fermenting.dhoolNumber == dhoolNum)){
+          (fermenting.time.day == dateTime.day)) {
+        if ((fermenting.batchNumber == batchNumber) &&
+            (fermenting.dhoolNumber == dhoolNum)) {
           dryIWeight = fermenting.dhoolOutWeight;
         }
       }
     });
     return dryIWeight;
+  }
+
+//----------------Outturn -------------------
+
+  double totalDayOutturn(DateTime dateTime) {
+    double totOutturn = 0;
+    double totIn = 0;
+    double totOut = 0;
+    _troughLoadingItems.forEach((troughLoading) {
+      if ((troughLoading.date.year == dateTime.year) &&
+          (troughLoading.date.month == dateTime.month) &&
+          ((troughLoading.date.day == dateTime.day) || (troughLoading.date.day == dateTime.day - 1))){
+        totIn += troughLoading.netWeight;
+      }
+    });
+    _dryingItems.forEach((dryingItem) {
+      if ((dryingItem.time.year == dateTime.year) &&
+          (dryingItem.time.month == dateTime.month) &&
+          (dryingItem.time.day == dateTime.day)){
+        totOut += dryingItem.drierOutWeight;
+      }
+    });
+    totOutturn = (totOut / totIn) * 100.0;
+    return totOutturn;
+  }
+
+
+  double batchOutturn(int batchNum, DateTime dateTime){
+    double totOutturn = 0;
+    double totIn = 0;
+    double totOut = 0;
+    int batchTrough = 0;
+    int batchBox = 0;
+    _witheringUnloadingItems.forEach((witheringUnloading) {
+      if ((witheringUnloading.date.year == dateTime.year) &&
+          (witheringUnloading.date.month == dateTime.month) &&
+          (witheringUnloading.date.day == dateTime.day)){
+        if(witheringUnloading.batchNumber == batchNum){
+          batchTrough = witheringUnloading.troughNumber;
+          batchBox = witheringUnloading.boxNumber;
+          _troughLoadingItems.forEach((troughLoading) {
+            if ((troughLoading.date.year == dateTime.year) &&
+                (troughLoading.date.month == dateTime.month) &&
+                ((troughLoading.date.day == dateTime.day) || (troughLoading.date.day == dateTime.day - 1))){
+              if(troughLoading.troughNumber == batchTrough && troughLoading.boxNumber == batchBox){
+                totIn += troughLoading.netWeight;
+              }
+            }
+          });
+        }
+      }
+    });
+    _dryingItems.forEach((dryingItem) {
+      if ((dryingItem.time.year == dateTime.year) &&
+      (dryingItem.time.month == dateTime.month) &&
+      (dryingItem.time.day == dateTime.day)){
+        if(dryingItem.batchNumber == batchNum){
+          totOut += dryingItem.drierOutWeight;
+        }
+      }
+    });
+    totOutturn = (totOut / totIn) * 100.0;
+    return totOutturn;
   }
 
 }
