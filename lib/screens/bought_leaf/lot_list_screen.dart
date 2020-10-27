@@ -59,7 +59,8 @@ class _LotListScreenState extends State<LotListScreen> {
         Provider.of<TeaCollections>(context, listen: false).getCurrentDate();
     return Scaffold(
       appBar: AppBar(
-        title: Text('ID: ${widget.supplierID}    NAME: ${widget.supplierName}'),
+        title: Text(
+            'ID: ${Provider.of<TeaCollections>(context, listen: false).newSupplier.supplierId}    NAME: ${Provider.of<TeaCollections>(context, listen: false).newSupplier.supplierName}'),
         actions: [
           IconButton(
             tooltip: "printing",

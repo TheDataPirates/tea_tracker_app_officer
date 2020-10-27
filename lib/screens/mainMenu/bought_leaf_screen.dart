@@ -6,32 +6,70 @@ import '../bought_leaf/lot_list_screen.dart';
 
 import '../../constants.dart';
 
-class BoughtLeafScreen extends StatelessWidget {
+class BoughtLeafScreen extends StatefulWidget {
+  @override
+  _BoughtLeafScreenState createState() => _BoughtLeafScreenState();
+}
+
+class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
   final supplierNoEditingController = TextEditingController();
+
   final supplierNameEditingController = TextEditingController();
 
-  @override
-  Widget build(BuildContext context) {
-    Future<void> saveLot() async {
-      if (supplierNoEditingController.text.isEmpty ||
-          supplierNameEditingController.text.isEmpty) {
-        return showDialog<void>(
+  Future<void> submit() async {
+    if (supplierNoEditingController.text.isEmpty ||
+        supplierNameEditingController.text.isEmpty) {
+      await showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('AlertDialog'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  const Text('No supplier id or name entered'),
+                  const Text('Please Enter again'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: const Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      try {
+        await Provider.of<TeaCollections>(context, listen: false).saveSupplier(
+            supplierNoEditingController.text,
+            supplierNameEditingController.text);
+        print("navigate");
+
+        Navigator.of(context).pushNamed('LotListScreen');
+      } catch (error) {
+        await showDialog<void>(
           context: context,
           barrierDismissible: false, // user must tap button!
           builder: (BuildContext context) {
             return AlertDialog(
-              title: const Text('AlertDialog'),
+              title: Text('AlertDialog'),
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
-                    const Text('No supplier name entered'),
-                    const Text('Please Enter again'),
+                    Text('An error occurred'),
+                    Text('Something went wrong'),
                   ],
                 ),
               ),
               actions: <Widget>[
                 FlatButton(
-                  child: const Text("OK"),
+                  child: Text("OK"),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -40,23 +78,12 @@ class BoughtLeafScreen extends StatelessWidget {
             );
           },
         );
-      } else {
-        Provider.of<TeaCollections>(context, listen: false).saveSupplier(
-            supplierNoEditingController.text,
-            supplierNameEditingController.text);
-
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => LotListScreen(
-              supplierID: supplierNoEditingController.text,
-              supplierName: supplierNameEditingController.text,
-            ),
-          ),
-        );
       }
     }
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
@@ -117,11 +144,11 @@ class BoughtLeafScreen extends StatelessWidget {
 //            height: MediaQuery.of(context).size.height * 0.05,
             child: RaisedButton.icon(
               onPressed: () {
-                saveLot();
+                submit();
               },
               icon: Icon(Icons.add),
               label: const Text(
-                'SAVE',
+                'SUBMIT',
                 style: const TextStyle(fontSize: 20),
               ),
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,

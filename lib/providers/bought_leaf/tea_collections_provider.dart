@@ -1,5 +1,6 @@
 import 'dart:ffi';
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -76,32 +77,10 @@ class TeaCollections with ChangeNotifier {
       throw error;
     }
   }
-//getting all records
-//  Future<void> fetchAndSetLotData() async {
-//    final dataList = await DBHelper.getData('lots');
-//
-//    _lot_items = dataList
-//        .map(
-//          (item) => Lot(
-//            lotId: item['lotId'],
-//            supplier_id: item['supplier_id'],
-//            supplier_name: item['supplier_name'],
-//            container_type: item['container_type'],
-//            no_of_containers: item['no_of_containers'],
-//            leaf_grade: item['leaf_grade'],
-//            gross_weight: item['g_weight'],
-//            water: item['water'],
-//            course_leaf: item['course_leaf'],
-//            other: item['other'],
-//            date: item['date'],
-//          ),
-//        )
-//        .toList();
-//    notifyListeners();
-//  }
 
   Future<void> fetchAndSetLotData(String id, String date) async {
     const url = 'http://10.0.2.2:8080/bleaf/lots';
+    _lot_items = [];
     try {
       final dataList = await http.get(url);
       final extractedDataList = jsonDecode(dataList.body);
@@ -162,10 +141,36 @@ class TeaCollections with ChangeNotifier {
     }
   }
 
-  void saveSupplier(String supId, String supName) {
-    _newSupplier = Supplier(supId, supName);
-
-    notifyListeners();
+  Future<void> saveSupplier(String supId, String supName) async {
+    //when use async await whole func wrap into future. so no need to must return.
+    const url = 'http://10.0.2.2:8080/bleaf/bulk';
+    int id = Random().nextInt(1000);
+    try {
+      final response = await http.post(
+        //
+        //creates a bulk record on the mysql
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, dynamic>{
+          'bulk_id': id,
+          'user_id': '4',
+          'supplier_id': supId
+        }),
+      );
+      print(response.statusCode);
+      if (response.statusCode == 500) {
+        // check whether server sent bad respond
+        throw Exception('Failed ');
+      } else if (response.statusCode == 200) {
+        // respond okay. without having else part this future not return anything, not worked calling placed.
+        _newSupplier = Supplier(supId, supName);
+      }
+    } catch (err) {
+      print(err);
+      throw err;
+    }
   }
 
   String getCurrentDate() {
