@@ -5,6 +5,8 @@ import 'package:teatrackerappofficer/providers/withering/withering_loading_unloa
 import 'package:teatrackerappofficer/providers/withering/withering_mixing_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_starting__finishing_provider.dart';
 import 'package:teatrackerappofficer/screens/login_screen.dart';
+import 'package:teatrackerappofficer/screens/mainMenu/re_measuring.dart';
+import 'package:teatrackerappofficer/screens/mainMenu/view_all_sections.dart';
 import 'package:teatrackerappofficer/screens/rolling/drier_output_screen.dart';
 import 'package:teatrackerappofficer/screens/rolling/drier_output_view_screen.dart';
 import 'package:teatrackerappofficer/screens/rolling/fermenting_view_screen.dart';
@@ -93,6 +95,8 @@ class MyApp extends StatelessWidget {
           'DrierOutput': (context) => DrierOutputScreen(),
           'OutturnReport': (context) => OutturnReportScreen(),
           'DrierOutputView': (context) => DrierOutputViewScreen(),
+          'ReMeasuring': (context) => ReMeasuringScreen(),
+          'ViewAllSections': (context) => ViewAllSectionsScreen(),
         },
       ),
     );
