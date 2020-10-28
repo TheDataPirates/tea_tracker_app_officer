@@ -33,16 +33,44 @@ class _LotListScreenState extends State<LotListScreen> {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Approve'),
-              onPressed: () {
-                Provider.of<TeaCollections>(context, listen: false)
-                    .deleteLot(id);
+              child: const Text('Accept'),
+              onPressed: () async {
+                try {
+                  await Provider.of<TeaCollections>(context, listen: false)
+                      .deleteLot(id);
 
-                Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                } catch (error) {
+                  await showDialog<void>(
+                    context: context,
+                    barrierDismissible: false, // user must tap button!
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('AlertDialog'),
+                        content: SingleChildScrollView(
+                          child: ListBody(
+                            children: <Widget>[
+                              Text('An error occurred'),
+                              Text('Something went wrong'),
+                            ],
+                          ),
+                        ),
+                        actions: <Widget>[
+                          FlatButton(
+                            child: Text("OK"),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
               },
             ),
             TextButton(
-              child: const Text('Not Approve'),
+              child: const Text('Decline'),
               onPressed: () {
                 Navigator.of(context).pop();
               },

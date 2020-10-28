@@ -15,6 +15,7 @@ class TeaCollections with ChangeNotifier {
     return [..._lot_items];
   }
 
+  int Bulkid = Random().nextInt(1000);
   int lotTotDeduct;
 
   Supplier _newSupplier;
@@ -67,6 +68,7 @@ class TeaCollections with ChangeNotifier {
           'other': newLot.other,
           'net_weight': newLot.net_weight,
           'deduction': newLot.deductions,
+          'bulkId': Bulkid
         }),
       );
       _lot_items.add(newLot); // add new obj to items array
@@ -109,10 +111,27 @@ class TeaCollections with ChangeNotifier {
     } //raw query to get isdeleted = 0
   }
 
-  void deleteLot(String id) {
-    _lot_items
-        .removeWhere((lot) => lot.lotId == id); // remove lot from the array
-//    DBHelper.deleteLot(1, id); // setting isDeleted = 1 in sqldb
+  Future<void> deleteLot(String id) async {
+    final url = 'http://10.0.2.2:8080/bleaf/lot/$id';
+    // remove lot from the array
+    try {
+      final response = await http.delete(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+      if (response.statusCode == 500) {
+        // check whether server sent bad respond
+        throw Exception('Failed ');
+      } else if (response.statusCode == 200) {
+        // respond okay. without having else part this future not return anything, not worked calling placed.
+        _lot_items.removeWhere((lot) => lot.lotId == id);
+      }
+    } catch (error) {
+      print(error);
+      throw error;
+    }
     notifyListeners();
   }
 
@@ -141,10 +160,10 @@ class TeaCollections with ChangeNotifier {
     }
   }
 
-  Future<void> saveSupplier(String supId, String supName) async {
+  Future<void> verifySupplier(String supId, String supName) async {
     //when use async await whole func wrap into future. so no need to must return.
     const url = 'http://10.0.2.2:8080/bleaf/bulk';
-    int id = Random().nextInt(1000);
+
     try {
       final response = await http.post(
         //
@@ -154,8 +173,8 @@ class TeaCollections with ChangeNotifier {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(<String, dynamic>{
-          'bulk_id': id,
-          'user_id': '4',
+          'bulk_id': Bulkid,
+          'user_id': '2',
           'supplier_id': supId
         }),
       );

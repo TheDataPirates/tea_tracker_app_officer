@@ -46,11 +46,10 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
       );
     } else {
       try {
-        await Provider.of<TeaCollections>(context, listen: false).saveSupplier(
-            supplierNoEditingController.text,
-            supplierNameEditingController.text);
-        print("navigate");
-
+        await Provider.of<TeaCollections>(context, listen: false)
+            .verifySupplier(supplierNoEditingController.text,
+                supplierNameEditingController.text);
+        print('bulk saved');
         Navigator.of(context).pushNamed('LotListScreen');
       } catch (error) {
         await showDialog<void>(
