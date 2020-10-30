@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
       color: Theme.of(context).primaryColor,
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0,),
         onPressed: () {
           Navigator.of(context).pushNamed('MainMenu');
           print(_emailFieldController.text);

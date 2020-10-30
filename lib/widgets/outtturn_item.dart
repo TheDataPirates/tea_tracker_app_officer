@@ -10,14 +10,14 @@ class OutturnItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         horizontal: 10,
         vertical: 4,
       ),
       child: Padding(
-        padding: EdgeInsets.all(5.0),
+        padding: const EdgeInsets.all(5.0),
         child: ListTile(
-          leading: Text(
+          leading: const Text(
             'Batch Number : ',
             style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
           ),
@@ -30,7 +30,7 @@ class OutturnItem extends StatelessWidget {
           ),
           trailing: Chip(
             label: Text(
-              '$outturn' + ' %',
+              '${outturn.toStringAsFixed(4)}' + ' %',
               style: TextStyle(fontSize: 20.0, color: Colors.white),
             ),
             backgroundColor: Theme.of(context).primaryColor,

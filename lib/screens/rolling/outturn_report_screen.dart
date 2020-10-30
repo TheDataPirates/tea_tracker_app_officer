@@ -6,16 +6,15 @@ import 'package:teatrackerappofficer/widgets/outtturn_item.dart';
 class OutturnReportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     final out = Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Outturn Report'),
+        title: const Text('Outturn Report'),
         actions: [
           IconButton(
-            icon: Icon(Icons.check),
-            onPressed: (){
+            icon: const Icon(Icons.check),
+            onPressed: () {
               Navigator.of(context).pushNamed('MainMenu');
             },
             disabledColor: Colors.white,
@@ -26,15 +25,15 @@ class OutturnReportScreen extends StatelessWidget {
       body: Column(
         children: [
           Card(
-            margin: EdgeInsets.all(15.0),
+            margin: const EdgeInsets.all(15.0),
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Total Day Outturn : ',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 30.0,
                     ),
@@ -44,11 +43,11 @@ class OutturnReportScreen extends StatelessWidget {
                   ),
                   Chip(
                     label: Text(
-                      '${out.totalDayOutturn(DateTime.now())}' +
-                          ' %', style: TextStyle(fontSize: 20.0, color: Colors.white),),
-
+                      '${out.totalDayOutturn(DateTime.now()).toStringAsFixed(4)}' +
+                          ' %',
+                      style: TextStyle(fontSize: 20.0, color: Colors.white),
+                    ),
                     backgroundColor: Theme.of(context).primaryColor,
-
                   ),
                 ],
               ),
@@ -56,12 +55,15 @@ class OutturnReportScreen extends StatelessWidget {
           ),
           Expanded(
               child: ListView.builder(
-                itemCount: out.batchItems.length,
-                itemBuilder: (ctx, i) => OutturnItem(
-                  batchNumber: out.batchItems[i].batchNumber,
-                  outturn: out.batchOutturn(out.batchItems[i].batchNumber, DateTime.now()),//A double value of the outturn of a given batch should be calculated and returned when the batch number and date is provided
-                ),
-              ))
+            itemCount: out.batchItems.length,
+            itemBuilder: (ctx, i) => OutturnItem(
+              batchNumber: out.batchItems[i].batchNumber,
+              outturn: out.batchOutturn(
+                  out.batchItems[i].batchNumber,
+                  DateTime
+                      .now()), //A double value of the outturn of a given batch should be calculated and returned when the batch number and date is provided
+            ),
+          ))
         ],
       ),
     );

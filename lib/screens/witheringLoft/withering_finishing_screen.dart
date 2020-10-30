@@ -5,7 +5,8 @@ import 'package:teatrackerappofficer/providers/withering/withering_starting_fini
 
 class WitheringFinishingScreen extends StatefulWidget {
   @override
-  _WitheringFinishingScreenState createState() => _WitheringFinishingScreenState();
+  _WitheringFinishingScreenState createState() =>
+      _WitheringFinishingScreenState();
 }
 
 class _WitheringFinishingScreenState extends State<WitheringFinishingScreen> {
@@ -41,10 +42,10 @@ class _WitheringFinishingScreenState extends State<WitheringFinishingScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Withering Finishing'),
+        title: const Text('Withering Finishing'),
         actions: [
           IconButton(
-            icon: Icon(Icons.check),
+            icon: const Icon(Icons.check),
             onPressed: _saveWitheringFinishingProviderDetails,
             disabledColor: Colors.white,
             iconSize: 35.0,
@@ -64,18 +65,25 @@ class _WitheringFinishingScreenState extends State<WitheringFinishingScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
-                      decoration: InputDecoration(
-                          labelText: 'Trough Number : ',
-                          errorStyle: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17.0),
-                          contentPadding: EdgeInsets.all(30.0),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(50.0)))),
+                      decoration: const InputDecoration(
+                        labelText: 'Trough Number : ',
+                        errorStyle: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17.0,
+                        ),
+                        contentPadding: const EdgeInsets.all(30.0),
+                        border: const OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(50.0),
+                          ),
+                        ),
+                      ),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please Enter Trough Number !';
@@ -104,23 +112,31 @@ class _WitheringFinishingScreenState extends State<WitheringFinishingScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
-                      decoration: InputDecoration(
-                          labelText: 'Temperature : ',
-                          errorStyle: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17.0),
-                          contentPadding: EdgeInsets.all(30.0),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(50.0)))),
+                      decoration: const InputDecoration(
+                        labelText: 'Temperature : ',
+                        errorStyle: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17.0,
+                        ),
+                        contentPadding: const EdgeInsets.all(30.0),
+                        border: const OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(50.0),
+                          ),
+                        ),
+                      ),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please Enter Temperature !';
                         }
-                        if (double.parse(value) <= 20 || double.parse(value) >= 40) {
+                        if (double.parse(value) <= 20 ||
+                            double.parse(value) >= 40) {
                           return 'Please Enter A Valid Temperature !';
                         }
                         return null;
@@ -139,23 +155,31 @@ class _WitheringFinishingScreenState extends State<WitheringFinishingScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
-                      decoration: InputDecoration(
-                          labelText: 'Humidity : ',
-                          errorStyle: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17.0),
-                          contentPadding: EdgeInsets.all(30.0),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(50.0)))),
+                      decoration: const InputDecoration(
+                        labelText: 'Humidity : ',
+                        errorStyle: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17.0,
+                        ),
+                        contentPadding: const EdgeInsets.all(30.0),
+                        border: const OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(50.0),
+                          ),
+                        ),
+                      ),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please Enter Humidity !';
                         }
-                        if (double.parse(value) <= 50 || double.parse(value) >= 90) {
+                        if (double.parse(value) <= 50 ||
+                            double.parse(value) >= 90) {
                           return 'Please Enter A Valid Humidity !';
                         }
                         return null;

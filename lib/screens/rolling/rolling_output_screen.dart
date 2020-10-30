@@ -9,10 +9,14 @@ class RollingOutputScreen extends StatefulWidget {
 }
 
 class _RollingOutputScreenState extends State<RollingOutputScreen> {
-
   final _formKeyRollingOutput = GlobalKey<FormState>();
   var _rollingOutput = Rolling(
-      id: null, batchNumber: null, rollingTurn: null, time: null, rollerNumber: null, weight: null);
+      id: null,
+      batchNumber: null,
+      rollingTurn: null,
+      time: null,
+      rollerNumber: null,
+      weight: null);
 
   void _saveRollingOutputProviderDetails() {
     final isValid = _formKeyRollingOutput.currentState.validate();
@@ -23,7 +27,8 @@ class _RollingOutputScreenState extends State<RollingOutputScreen> {
 
     _formKeyRollingOutput.currentState.save();
 
-    Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
+    Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+            listen: false)
         .addRollingOutputItem(_rollingOutput);
 
     Navigator.of(context).pushNamed('RollingOutputView');
@@ -31,7 +36,6 @@ class _RollingOutputScreenState extends State<RollingOutputScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final _height =
         MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
 
@@ -39,10 +43,10 @@ class _RollingOutputScreenState extends State<RollingOutputScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Rolling Output'),
+        title: const Text('Rolling Output'),
         actions: [
           IconButton(
-            icon: Icon(Icons.check),
+            icon: const Icon(Icons.check),
             onPressed: _saveRollingOutputProviderDetails,
             disabledColor: Colors.white,
             iconSize: 35.0,
@@ -62,18 +66,25 @@ class _RollingOutputScreenState extends State<RollingOutputScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
-                      decoration: InputDecoration(
-                          labelText: 'Batch Number : ',
-                          errorStyle: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17.0),
-                          contentPadding: EdgeInsets.all(30.0),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(50.0)))),
+                      decoration: const InputDecoration(
+                        labelText: 'Batch Number : ',
+                        errorStyle: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17.0,
+                        ),
+                        contentPadding: const EdgeInsets.all(30.0),
+                        border: const OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(50.0),
+                          ),
+                        ),
+                      ),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please Enter Batch Number !';
@@ -99,18 +110,25 @@ class _RollingOutputScreenState extends State<RollingOutputScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
-                      decoration: InputDecoration(
-                          labelText: 'Rolling Turn : ',
-                          errorStyle: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17.0),
-                          contentPadding: EdgeInsets.all(30.0),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(50.0)))),
+                      decoration: const InputDecoration(
+                        labelText: 'Rolling Turn : ',
+                        errorStyle: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17.0,
+                        ),
+                        contentPadding: const EdgeInsets.all(30.0),
+                        border: const OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(50.0),
+                          ),
+                        ),
+                      ),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please Enter Rolling Turn !';
@@ -141,18 +159,25 @@ class _RollingOutputScreenState extends State<RollingOutputScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
-                      decoration: InputDecoration(
-                          labelText: 'Roller Number : ',
-                          errorStyle: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17.0),
-                          contentPadding: EdgeInsets.all(30.0),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(50.0)))),
+                      decoration: const InputDecoration(
+                        labelText: 'Roller Number : ',
+                        errorStyle: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17.0,
+                        ),
+                        contentPadding: const EdgeInsets.all(30.0),
+                        border: const OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(50.0),
+                          ),
+                        ),
+                      ),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please Enter Roller Number !';
@@ -178,18 +203,25 @@ class _RollingOutputScreenState extends State<RollingOutputScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
-                      decoration: InputDecoration(
-                          labelText: 'Weight : ',
-                          errorStyle: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17.0),
-                          contentPadding: EdgeInsets.all(30.0),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(50.0)))),
+                      decoration: const InputDecoration(
+                        labelText: 'Weight : ',
+                        errorStyle: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17.0,
+                        ),
+                        contentPadding: const EdgeInsets.all(30.0),
+                        border: const OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(50.0),
+                          ),
+                        ),
+                      ),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please Enter Weight !';

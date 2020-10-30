@@ -6,13 +6,14 @@ import 'package:teatrackerappofficer/widgets/trough_loading_item.dart';
 class TroughLoadingViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final troughLoading = Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
+    final troughLoading =
+        Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Trough Loading View'),
+        title: const Text('Trough Loading View'),
         actions: [
           IconButton(
-            icon: Icon(Icons.check),
+            icon: const Icon(Icons.check),
             onPressed: () {
               Navigator.of(context).pushNamed('MainMenu');
             },
@@ -41,8 +42,12 @@ class TroughLoadingViewScreen extends StatelessWidget {
         height: 70.0,
         child: FittedBox(
           child: FloatingActionButton(
-            child: Icon(Icons.add, color: Colors.white, size: 40.0,),
-            onPressed: (){
+            child: const Icon(
+              Icons.add,
+              color: Colors.white,
+              size: 40.0,
+            ),
+            onPressed: () {
               Navigator.of(context).pushNamed('TroughLoading');
             },
             backgroundColor: Colors.green,

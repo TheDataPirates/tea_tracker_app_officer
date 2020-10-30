@@ -9,10 +9,14 @@ class DrierOutputScreen extends StatefulWidget {
 }
 
 class _DrierOutputScreenState extends State<DrierOutputScreen> {
-
   final _formKeyDrying = GlobalKey<FormState>();
   var _drying = Drying(
-      id: null, batchNumber: null, dhoolNumber: null, time: null, drierInWeight: null, drierOutWeight: null);
+      id: null,
+      batchNumber: null,
+      dhoolNumber: null,
+      time: null,
+      drierInWeight: null,
+      drierOutWeight: null);
 
   void _saveDryingProviderDetails() {
     final isValid = _formKeyDrying.currentState.validate();
@@ -23,7 +27,8 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
 
     _formKeyDrying.currentState.save();
 
-    Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
+    Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+            listen: false)
         .addDryingItem(_drying);
 
     Navigator.of(context).pushNamed('DrierOutputView');
@@ -31,8 +36,8 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-    final drying = Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
+    final drying =
+        Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
 
     final _height =
         MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
@@ -41,10 +46,10 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Drier Output'),
+        title: const Text('Drier Output'),
         actions: [
           IconButton(
-            icon: Icon(Icons.check),
+            icon: const Icon(Icons.check),
             onPressed: _saveDryingProviderDetails,
             disabledColor: Colors.white,
             iconSize: 35.0,
@@ -64,18 +69,25 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
-                      decoration: InputDecoration(
-                          labelText: 'Batch Number : ',
-                          errorStyle: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17.0),
-                          contentPadding: EdgeInsets.all(30.0),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(50.0)))),
+                      decoration: const InputDecoration(
+                        labelText: 'Batch Number : ',
+                        errorStyle: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17.0,
+                        ),
+                        contentPadding: const EdgeInsets.all(30.0),
+                        border: const OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(50.0),
+                          ),
+                        ),
+                      ),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please Enter Batch Number !';
@@ -106,23 +118,36 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
-                      decoration: InputDecoration(
-                          labelText: 'Dhool Number : ',
-                          errorStyle: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17.0),
-                          contentPadding: EdgeInsets.all(30.0),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(50.0)))),
+                      decoration: const InputDecoration(
+                        labelText: 'Dhool Number : ',
+                        errorStyle: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17.0,
+                        ),
+                        contentPadding: const EdgeInsets.all(30.0),
+                        border: const OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(50.0),
+                          ),
+                        ),
+                      ),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please Enter Dhool Number !';
                         }
-                        if ((value != 'BB') && (value != 'bb') && (int.parse(value) != 1) &&  (int.parse(value) != 2 && (int.parse(value) != 3) && (int.parse(value) != 4) && (int.parse(value) != 5))) {
+                        if ((value != 'BB') &&
+                            (value != 'bb') &&
+                            (int.parse(value) != 1) &&
+                            (int.parse(value) != 2 &&
+                                (int.parse(value) != 3) &&
+                                (int.parse(value) != 4) &&
+                                (int.parse(value) != 5))) {
                           return 'Please Enter A Valid Dhool Number !';
                         }
                         return null;
@@ -143,18 +168,25 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
-                      decoration: InputDecoration(
-                          labelText: 'Drier Out Weight : ',
-                          errorStyle: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17.0),
-                          contentPadding: EdgeInsets.all(30.0),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(50.0)))),
+                      decoration: const InputDecoration(
+                        labelText: 'Drier Out Weight : ',
+                        errorStyle: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17.0,
+                        ),
+                        contentPadding: const EdgeInsets.all(30.0),
+                        border: const OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(50.0),
+                          ),
+                        ),
+                      ),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please Enter Drier Out Weight !';
@@ -170,7 +202,11 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
                           batchNumber: _drying.batchNumber,
                           dhoolNumber: _drying.dhoolNumber,
                           time: DateTime.now(),
-                          drierInWeight: drying.drierInputWeight(_drying.batchNumber, DateTime.now(), _drying.dhoolNumber),//In here have to build a method to return the drier input weight
+                          drierInWeight: drying.drierInputWeight(
+                              _drying.batchNumber,
+                              DateTime.now(),
+                              _drying
+                                  .dhoolNumber), //In here have to build a method to return the drier input weight
                           drierOutWeight: double.parse(value),
                         );
                       },

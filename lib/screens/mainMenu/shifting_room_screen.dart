@@ -5,7 +5,7 @@ class ShiftingRoomScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Shifting Room'),
+        title: const Text('Shifting Room'),
       ),
     );
   }

@@ -12,7 +12,7 @@ class DryingRoomScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Drying Room'),
+        title: const Text('Drying Room'),
       ),
       body: SafeArea(
         child: Column(

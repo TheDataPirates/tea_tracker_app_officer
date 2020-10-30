@@ -12,7 +12,7 @@ class RollingRoomScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Rolling Room'),
+        title: const Text('Rolling Room'),
       ),
       body: SafeArea(
         child: Column(

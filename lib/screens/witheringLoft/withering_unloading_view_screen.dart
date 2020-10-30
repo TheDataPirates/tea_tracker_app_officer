@@ -31,12 +31,11 @@ class _WitheringUnloadingViewScreenState extends State<WitheringUnloadingViewScr
         Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Withering Unloading View'),
+        title: const Text('Withering Unloading View'),
         actions: [
           IconButton(
-            icon: Icon(Icons.check),
+            icon: const Icon(Icons.check),
             onPressed: (){
-
               _batch = Batch(
                   id: DateTime.now().toString(),
                   batchNumber: witheringLoadingUnloading.lastBatchNumberItem,
@@ -54,9 +53,9 @@ class _WitheringUnloadingViewScreenState extends State<WitheringUnloadingViewScr
       body: Column(
         children: [
           Card(
-            margin: EdgeInsets.all(15.0),
+            margin: const EdgeInsets.all(15.0),
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -115,7 +114,7 @@ class _WitheringUnloadingViewScreenState extends State<WitheringUnloadingViewScr
         height: 70.0,
         child: FittedBox(
           child: FloatingActionButton(
-            child: Icon(
+            child: const Icon(
               Icons.add,
               color: Colors.white,
               size: 40.0,

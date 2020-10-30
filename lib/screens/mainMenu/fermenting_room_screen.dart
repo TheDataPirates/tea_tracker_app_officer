@@ -3,17 +3,20 @@ import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/rolling/fermenting.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 
-
 class FermentingRoomScreen extends StatefulWidget {
   @override
   _FermentingRoomScreenState createState() => _FermentingRoomScreenState();
 }
 
 class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
-
   final _formKeyFermenting = GlobalKey<FormState>();
   var _fermenting = Fermenting(
-      id: null, batchNumber: null, dhoolNumber: null, time: null, dhoolInWeight: null, dhoolOutWeight: null);
+      id: null,
+      batchNumber: null,
+      dhoolNumber: null,
+      time: null,
+      dhoolInWeight: null,
+      dhoolOutWeight: null);
 
   void _saveFermentingProviderDetails() {
     final isValid = _formKeyFermenting.currentState.validate();
@@ -24,7 +27,8 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
 
     _formKeyFermenting.currentState.save();
 
-    Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
+    Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+            listen: false)
         .addFermentingItem(_fermenting);
 
     Navigator.of(context).pushNamed('FermentingView');
@@ -32,8 +36,8 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-    final fermenting = Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
+    final fermenting =
+        Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
 
     final _height =
         MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
@@ -42,10 +46,10 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fermenting Room'),
+        title: const Text('Fermenting Room'),
         actions: [
           IconButton(
-            icon: Icon(Icons.check),
+            icon: const Icon(Icons.check),
             onPressed: _saveFermentingProviderDetails,
             disabledColor: Colors.white,
             iconSize: 35.0,
@@ -65,18 +69,25 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
-                      decoration: InputDecoration(
-                          labelText: 'Batch Number : ',
-                          errorStyle: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17.0),
-                          contentPadding: EdgeInsets.all(30.0),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(50.0)))),
+                      decoration: const InputDecoration(
+                        labelText: 'Batch Number : ',
+                        errorStyle: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17.0,
+                        ),
+                        contentPadding: const EdgeInsets.all(30.0),
+                        border: const OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(50.0),
+                          ),
+                        ),
+                      ),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please Enter Batch Number !';
@@ -107,23 +118,36 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
-                      decoration: InputDecoration(
-                          labelText: 'Dhool Number : ',
-                          errorStyle: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17.0),
-                          contentPadding: EdgeInsets.all(30.0),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(50.0)))),
+                      decoration: const InputDecoration(
+                        labelText: 'Dhool Number : ',
+                        errorStyle: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17.0,
+                        ),
+                        contentPadding: const EdgeInsets.all(30.0),
+                        border: const OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(50.0),
+                          ),
+                        ),
+                      ),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please Enter Dhool Number !';
                         }
-                        if ((value != 'BB') && (value != 'bb') && (int.parse(value) != 1) &&  (int.parse(value) != 2 && (int.parse(value) != 3) && (int.parse(value) != 4) && (int.parse(value) != 5))) {
+                        if ((value != 'BB') &&
+                            (value != 'bb') &&
+                            (int.parse(value) != 1) &&
+                            (int.parse(value) != 2 &&
+                                (int.parse(value) != 3) &&
+                                (int.parse(value) != 4) &&
+                                (int.parse(value) != 5))) {
                           return 'Please Enter A Valid Dhool Number !';
                         }
                         return null;
@@ -144,23 +168,30 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
-                      decoration: InputDecoration(
-                          labelText: 'Dhool Out Weight : ',
-                          errorStyle: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17.0),
-                          contentPadding: EdgeInsets.all(30.0),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(50.0)))),
+                      decoration: const InputDecoration(
+                        labelText: 'Dhool Out Weight : ',
+                        errorStyle: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17.0,
+                        ),
+                        contentPadding: const EdgeInsets.all(30.0),
+                        border: const OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(50.0),
+                          ),
+                        ),
+                      ),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please Enter Dhool Out Weight !';
                         }
-                        if (int.parse(value) <= 0 || int.parse(value) >= 101) {
+                        if (int.parse(value) <= 0 || int.parse(value) >= 300) {
                           return 'Please Enter A Valid Dhool Out Weight !';
                         }
                         return null;
@@ -171,7 +202,11 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
                           batchNumber: _fermenting.batchNumber,
                           dhoolNumber: _fermenting.dhoolNumber,
                           time: DateTime.now(),
-                          dhoolInWeight: fermenting.dhoolInputWeight(_fermenting.batchNumber, DateTime.now(), _fermenting.dhoolNumber),//In here have to build a method to return the dhool input weight
+                          dhoolInWeight: fermenting.dhoolInputWeight(
+                              _fermenting.batchNumber,
+                              DateTime.now(),
+                              _fermenting
+                                  .dhoolNumber), //In here have to build a method to return the dhool input weight
                           dhoolOutWeight: double.parse(value),
                         );
                       },

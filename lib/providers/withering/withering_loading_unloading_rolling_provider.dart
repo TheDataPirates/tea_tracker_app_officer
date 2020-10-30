@@ -9,7 +9,7 @@ import 'package:teatrackerappofficer/providers/withering/withering_loading.dart'
 import 'package:teatrackerappofficer/providers/withering/withering_unloading.dart';
 
 class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
-
+  //----------------Batch -------------------
 
   List<int> _batchNumberItems = [];
 
@@ -69,11 +69,6 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return bWeight;
   }
 
-  void addWitheringUnloadingBatchNumberItem(int batchNumberItem) {
-    _batchNumberItems.add(batchNumberItem);
-    notifyListeners();
-  }
-
   double get latestBatchTotalWeight {
     var total = 0.0;
     _witheringUnloadingItems.forEach((witheringUnloadingItem) {
@@ -88,6 +83,17 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       }
     });
     return total;
+  }
+
+  int get lastBatchNumberItem {
+    return _batchNumberItems[_batchNumberItems.length - 1];
+  }
+
+  //----------------Withering -------------------
+
+  void addWitheringUnloadingBatchNumberItem(int batchNumberItem) {
+    _batchNumberItems.add(batchNumberItem);
+    notifyListeners();
   }
 
   double witheringTroughBoxDatePercentage(
@@ -123,10 +129,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return wither;
   }
 
-  int get lastBatchNumberItem {
-    return _batchNumberItems[_batchNumberItems.length - 1];
-  }
-
+  //----------------Withering Unloading -------------------
 
   List<WitheringUnloading> _witheringUnloadingItems = [];
 
@@ -156,6 +159,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     _witheringUnloadingItems.add(witheringUnloading);
     notifyListeners();
   }
+
+  //----------------Withering Loading -------------------
 
   List<WitheringLoading> _troughLoadingItems = [];
 
@@ -428,14 +433,15 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     _troughLoadingItems.forEach((troughLoading) {
       if ((troughLoading.date.year == dateTime.year) &&
           (troughLoading.date.month == dateTime.month) &&
-          ((troughLoading.date.day == dateTime.day) || (troughLoading.date.day == dateTime.day - 1))){
+          ((troughLoading.date.day == dateTime.day) ||
+              (troughLoading.date.day == dateTime.day - 1))) {
         totIn += troughLoading.netWeight;
       }
     });
     _dryingItems.forEach((dryingItem) {
       if ((dryingItem.time.year == dateTime.year) &&
           (dryingItem.time.month == dateTime.month) &&
-          (dryingItem.time.day == dateTime.day)){
+          (dryingItem.time.day == dateTime.day)) {
         totOut += dryingItem.drierOutWeight;
       }
     });
@@ -443,8 +449,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return totOutturn;
   }
 
-
-  double batchOutturn(int batchNum, DateTime dateTime){
+  double batchOutturn(int batchNum, DateTime dateTime) {
     double totOutturn = 0;
     double totIn = 0;
     double totOut = 0;
@@ -453,15 +458,17 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     _witheringUnloadingItems.forEach((witheringUnloading) {
       if ((witheringUnloading.date.year == dateTime.year) &&
           (witheringUnloading.date.month == dateTime.month) &&
-          (witheringUnloading.date.day == dateTime.day)){
-        if(witheringUnloading.batchNumber == batchNum){
+          (witheringUnloading.date.day == dateTime.day)) {
+        if (witheringUnloading.batchNumber == batchNum) {
           batchTrough = witheringUnloading.troughNumber;
           batchBox = witheringUnloading.boxNumber;
           _troughLoadingItems.forEach((troughLoading) {
             if ((troughLoading.date.year == dateTime.year) &&
                 (troughLoading.date.month == dateTime.month) &&
-                ((troughLoading.date.day == dateTime.day) || (troughLoading.date.day == dateTime.day - 1))){
-              if(troughLoading.troughNumber == batchTrough && troughLoading.boxNumber == batchBox){
+                ((troughLoading.date.day == dateTime.day) ||
+                    (troughLoading.date.day == dateTime.day - 1))) {
+              if (troughLoading.troughNumber == batchTrough &&
+                  troughLoading.boxNumber == batchBox) {
                 totIn += troughLoading.netWeight;
               }
             }
@@ -471,9 +478,9 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     });
     _dryingItems.forEach((dryingItem) {
       if ((dryingItem.time.year == dateTime.year) &&
-      (dryingItem.time.month == dateTime.month) &&
-      (dryingItem.time.day == dateTime.day)){
-        if(dryingItem.batchNumber == batchNum){
+          (dryingItem.time.month == dateTime.month) &&
+          (dryingItem.time.day == dateTime.day)) {
+        if (dryingItem.batchNumber == batchNum) {
           totOut += dryingItem.drierOutWeight;
         }
       }
@@ -481,5 +488,4 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     totOutturn = (totOut / totIn) * 100.0;
     return totOutturn;
   }
-
 }

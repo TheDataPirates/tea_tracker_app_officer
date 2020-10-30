@@ -34,10 +34,10 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
         Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Roll Breaking View'),
+        title: const Text('Roll Breaking View'),
         actions: [
           IconButton(
-            icon: Icon(Icons.check),
+            icon: const Icon(Icons.check),
             onPressed: () {
               Navigator.of(context).pushNamed('MainMenu');
             },
@@ -72,7 +72,7 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
             width: 70.0,
             child: FittedBox(
               child: FloatingActionButton(
-                child: Icon(
+                child: const Icon(
                   Icons.add,
                   color: Colors.white,
                   size: 40.0,
@@ -89,9 +89,9 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
             width: 30.0,
           ),
           FloatingActionButton.extended(
-            label: Text(
+            label: const Text(
               'End Batch',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 30.0,
                 color: Colors.white,
               ),
@@ -102,24 +102,28 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
                 barrierDismissible: false, // user must tap button!
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: Text('Are You Sure?'),
+                    title: const Text('Are You Sure?'),
                     content: SingleChildScrollView(
                       child: ListBody(
                         children: <Widget>[
-                          Text('Do you want to end the batch?'),
+                          const Text('Do you want to end the batch?'),
                         ],
                       ),
                     ),
                     actions: <Widget>[
                       TextButton(
-                        child: Text('Yes'),
+                        child: const Text('Yes'),
                         onPressed: () {
                           // Alert dialog should be shown and if yes store the bigbulk weight from the batch weight method in withering loading unloading rolling provider as the big bulk number equal to the batch number
 
                           _bigBulk = BigBulk(
                             id: DateTime.now().toString(),
-                            bigBulkNumber: rollBreaking.latestRollBreakingBatch(),
-                            bigBulkWeight: rollBreaking.batchWeight(rollBreaking.latestRollBreakingBatch(), DateTime.now(), rollBreaking.latestRollBreakingTurn() + 1),
+                            bigBulkNumber:
+                                rollBreaking.latestRollBreakingBatch(),
+                            bigBulkWeight: rollBreaking.batchWeight(
+                                rollBreaking.latestRollBreakingBatch(),
+                                DateTime.now(),
+                                rollBreaking.latestRollBreakingTurn() + 1),
                             time: DateTime.now(),
                           );
 
@@ -127,7 +131,7 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
                         },
                       ),
                       TextButton(
-                        child: Text('No'),
+                        child: const Text('No'),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },

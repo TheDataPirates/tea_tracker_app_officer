@@ -5,7 +5,7 @@ class ReMeasuringScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Re Measuring'),
+        title: const Text('Re Measuring'),
       ),
     );
   }

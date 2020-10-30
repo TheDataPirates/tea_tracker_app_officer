@@ -11,7 +11,7 @@ class BoughtLeafScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bought Leaf'),
+        title: const Text('Bought Leaf'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),

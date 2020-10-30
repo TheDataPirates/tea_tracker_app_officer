@@ -17,12 +17,12 @@ class FermentingItem extends StatelessWidget {
     var timeNow = time.format('H:i,  d/m/Y');
 
     return Card(
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         horizontal: 10,
         vertical: 4,
       ),
       child: Padding(
-        padding: EdgeInsets.all(5.0),
+        padding: const EdgeInsets.all(5.0),
         child: ListTile(
           leading: CircleAvatar(child: Text(batchNumber.toString(), style: TextStyle(fontSize: 40.0,)),radius: 50.0,),
           title: Text('Dhool Number : ' + '$dhoolNumber' , style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),),

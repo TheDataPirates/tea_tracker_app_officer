@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.green,
           accentColor: Colors.greenAccent,
-          textTheme: TextTheme(bodyText1: TextStyle(color: Colors.white)),
+          textTheme: const TextTheme(bodyText1: const TextStyle(color: Colors.white),),
         ),
         home: LoginScreen(),
         routes: {
