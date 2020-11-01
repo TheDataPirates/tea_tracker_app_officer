@@ -15,7 +15,7 @@ class TeaCollections with ChangeNotifier {
     return [..._lot_items];
   }
 
-  int Bulkid = Random().nextInt(1000);
+  int Bulkid = Random().nextInt(10000);
   int lotTotDeduct;
 
   Supplier _newSupplier;
