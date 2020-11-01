@@ -10,7 +10,9 @@ class WitheringLoftScreen extends StatelessWidget {
     final _width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      appBar: AppBar(title: Text('Withering Loft'),),
+      appBar: AppBar(
+        title: const Text('Withering Loft'),
+      ),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

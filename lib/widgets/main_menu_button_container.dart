@@ -23,7 +23,7 @@ class MainMenuFlatButtonContainer extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pushNamed(destination);
           },
-          child: Text(this.name,style: TextStyle(
+          child: Text(this.name,style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 25.0

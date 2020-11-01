@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:teatrackerappofficer/providers/bought_leaf/tea_collections_provider.dart';
 import 'package:teatrackerappofficer/providers/rolling/rolling_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_mixing_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_starting__finishing_provider.dart';
-import 'package:teatrackerappofficer/screens/bought_leaf/input_collection_screen.dart';
-import 'package:teatrackerappofficer/screens/bought_leaf/list_tile_lot_screen.dart';
-import 'package:teatrackerappofficer/screens/bought_leaf/lot_list_screen.dart';
-import 'package:teatrackerappofficer/screens/bought_leaf/print_screen.dart';
 import 'package:teatrackerappofficer/screens/login_screen.dart';
 import 'package:teatrackerappofficer/screens/rolling/fermenting_view_screen.dart';
 import 'package:teatrackerappofficer/screens/rolling/roll_breaking_view_screen.dart';
@@ -55,11 +50,13 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider.value(
             value: WitheringLoadingUnloadingProvider()),
+        ChangeNotifierProvider.value(value: WitheringLoadingUnloadingRollingProvider()),
         ChangeNotifierProvider.value(value: WitheringMixingProvider()),
         ChangeNotifierProvider.value(
             value: WitheringStartingFinishingProvider()),
         ChangeNotifierProvider.value(value: RollingProvider()),
         ChangeNotifierProvider.value(value: TeaCollections()),
+        ChangeNotifierProvider.value(value: WitheringStartingFinishingProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(
@@ -89,8 +86,7 @@ class MyApp extends StatelessWidget {
           'WitheringMixingView': (context) => WitheringMixingViewScreen(),
           'WitheringStartingView': (context) => WitheringStartingViewScreen(),
           'WitheringFinishingView': (context) => WitheringFinishingViewScreen(),
-          'WitheringUnloadingBatchChoosing': (context) =>
-              WitheringUnloadingBatchChoosingScreen(),
+          'WitheringUnloadingBatchChoosing': (context) => WitheringUnloadingBatchChoosingScreen(),
           'WitheringUnloadingView': (context) => WitheringUnloadingViewScreen(),
           'RollingInput': (context) => RollingInputScreen(),
           'RollingOutput': (context) => RollingOutputScreen(),
@@ -103,6 +99,11 @@ class MyApp extends StatelessWidget {
           'LotListScreen': (ctx) => LotListScreen(),
           'ListTileLotScreen': (ctx) => ListTileLot(),
           'PrintScreen': (ctx) => PrintScreen()
+          'DrierOutput': (context) => DrierOutputScreen(),
+          'OutturnReport': (context) => OutturnReportScreen(),
+          'DrierOutputView': (context) => DrierOutputViewScreen(),
+          'ReMeasuring': (context) => ReMeasuringScreen(),
+          'ViewAllSections': (context) => ViewAllSectionsScreen(),
         },
       ),
     );

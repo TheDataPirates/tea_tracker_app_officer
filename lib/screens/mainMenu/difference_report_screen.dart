@@ -5,7 +5,7 @@ class DifferenceReportScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Difference Report'),
+        title: const Text('Difference Report'),
       ),
     );
   }

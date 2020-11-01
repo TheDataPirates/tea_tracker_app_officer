@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
-import 'package:teatrackerappofficer/widgets/trough_loading_item.dart';
+import 'package:teatrackerappofficer/widgets/drying_item.dart';
 
-class TroughLoadingViewScreen extends StatelessWidget {
+class DrierOutputViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final troughLoading =
+    final drying =
         Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Trough Loading View'),
+        title: const Text('Drier Output View'),
         actions: [
           IconButton(
             icon: const Icon(Icons.check),
@@ -26,20 +27,21 @@ class TroughLoadingViewScreen extends StatelessWidget {
         children: [
           Expanded(
               child: ListView.builder(
-            itemCount: troughLoading.troughLoadingItems.length,
-            itemBuilder: (ctx, i) => TroughLoadingItem(
-              id: troughLoading.troughLoadingItems[i].id,
-              troughNumber: troughLoading.troughLoadingItems[i].troughNumber,
-              boxNumber: troughLoading.troughLoadingItems[i].boxNumber,
-              gradeGL: troughLoading.troughLoadingItems[i].gradeOfGL,
-              netWeight: troughLoading.troughLoadingItems[i].netWeight,
+            itemCount: drying.dryingItems.length,
+            itemBuilder: (ctx, i) => DryingItem(
+              id: drying.dryingItems[i].id,
+              batchNumber: drying.dryingItems[i].batchNumber,
+              dhoolNumber: drying.dryingItems[i].dhoolNumber,
+              time: drying.dryingItems[i].time,
+              drierInWeight: drying.dryingItems[i].drierInWeight,
+              drierOutWeight: drying.dryingItems[i].drierOutWeight,
             ),
           ))
         ],
       ),
       floatingActionButton: Container(
-        width: 70.0,
         height: 70.0,
+        width: 70.0,
         child: FittedBox(
           child: FloatingActionButton(
             child: const Icon(
@@ -48,7 +50,7 @@ class TroughLoadingViewScreen extends StatelessWidget {
               size: 40.0,
             ),
             onPressed: () {
-              Navigator.of(context).pushNamed('TroughLoading');
+              Navigator.of(context).pushNamed('DrierOutput');
             },
             backgroundColor: Colors.green,
           ),

@@ -6,13 +6,14 @@ import 'package:teatrackerappofficer/widgets/withering_starting_finishing_item.d
 class WitheringStartingViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final witheringStarting = Provider.of<WitheringStartingFinishingProvider>(context);
+    final witheringStarting =
+        Provider.of<WitheringStartingFinishingProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Withering Starting View'),
+        title: const Text('Withering Starting View'),
         actions: [
           IconButton(
-            icon: Icon(Icons.check),
+            icon: const Icon(Icons.check),
             onPressed: () {
               Navigator.of(context).pushNamed('MainMenu');
             },
@@ -25,20 +26,25 @@ class WitheringStartingViewScreen extends StatelessWidget {
         children: [
           Expanded(
               child: ListView.builder(
-                itemCount: witheringStarting.witheringStartingItems.length,
-                itemBuilder: (ctx, i) => WitheringStartingFinishingItem(
-                  id: witheringStarting.witheringStartingItems[i].id,
-                  troughNumber: witheringStarting.witheringStartingItems[i].troughNumber,
-                  time: witheringStarting.witheringStartingItems[i].time,
-                  temperature: witheringStarting.witheringStartingItems[i].temperature,
-                  humidity: witheringStarting.witheringStartingItems[i].humidity,
-                ),
-              ))
+            itemCount: witheringStarting.witheringStartingItems.length,
+            itemBuilder: (ctx, i) => WitheringStartingFinishingItem(
+              id: witheringStarting.witheringStartingItems[i].id,
+              troughNumber:
+                  witheringStarting.witheringStartingItems[i].troughNumber,
+              time: witheringStarting.witheringStartingItems[i].time,
+              temperature:
+                  witheringStarting.witheringStartingItems[i].temperature,
+              humidity: witheringStarting.witheringStartingItems[i].humidity,
+            ),
+          ))
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add, color: Colors.white,),
-        onPressed: (){
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+        onPressed: () {
           Navigator.of(context).pushNamed('WitheringStarting');
         },
         backgroundColor: Colors.green,

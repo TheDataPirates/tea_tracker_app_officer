@@ -9,10 +9,10 @@ class WitheringMixingViewScreen extends StatelessWidget {
     final witheringMixing = Provider.of<WitheringMixingProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Withering Mixing View'),
+        title: const Text('Withering Mixing View'),
         actions: [
           IconButton(
-            icon: Icon(Icons.check),
+            icon: const Icon(Icons.check),
             onPressed: () {
               Navigator.of(context).pushNamed('MainMenu');
             },
@@ -42,7 +42,7 @@ class WitheringMixingViewScreen extends StatelessWidget {
         width: 70.0,
         child: FittedBox(
           child: FloatingActionButton(
-            child: Icon(Icons.add, color: Colors.white,size: 40.0,),
+            child: const Icon(Icons.add, color: Colors.white,size: 40.0,),
             onPressed: (){
               Navigator.of(context).pushNamed('WitheringMixing');
             },

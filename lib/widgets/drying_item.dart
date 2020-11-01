@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:date_time_format/date_time_format.dart';
 
-class FermentingItem extends StatelessWidget {
+class DryingItem extends StatelessWidget {
 
   final String id;
   final int batchNumber;
   final dhoolNumber;
   final DateTime time;
-  final double dhoolInWeight;
-  final double dhoolOutWeight;
+  final double drierInWeight;
+  final double drierOutWeight;
 
-  const FermentingItem({Key key, this.id, this.batchNumber, this.dhoolNumber, this.time, this.dhoolInWeight, this.dhoolOutWeight}) : super(key: key);
+  const DryingItem({Key key, this.id, this.batchNumber, this.dhoolNumber, this.time, this.drierInWeight, this.drierOutWeight}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +28,8 @@ class FermentingItem extends StatelessWidget {
           title: Text('Dhool Number : ' + '$dhoolNumber' , style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),),
           subtitle: Text('Time : ' + '$timeNow', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
           trailing: Column(children: [
-            Text('Dhool In Weight : ' + '$dhoolInWeight', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
-            Text('Dhool Out Weight : ' + '$dhoolOutWeight', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
+            Text('Drier In Weight : ' + '$drierInWeight', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
+            Text('Drier Out Weight : ' + '$drierOutWeight', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
           ],),
         ),
       ),

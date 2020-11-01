@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class Fermenting with ChangeNotifier {
+class Drying with ChangeNotifier {
   final String id;
   final int batchNumber;
-  final  dhoolNumber;
-  final double dhoolInWeight;
-  final double dhoolOutWeight;
+  final dhoolNumber;
+  final double drierInWeight;
+  final double drierOutWeight;
   final DateTime time;
 
-  Fermenting({
+  Drying({
     @required this.id,
     @required this.batchNumber,
     @required this.dhoolNumber,
-    @required this.dhoolInWeight,
-    @required this.dhoolOutWeight,
+    @required this.drierInWeight,
+    @required this.drierOutWeight,
     @required this.time,
   });
 }

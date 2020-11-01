@@ -24,12 +24,12 @@ class WitheringStartingFinishingItem extends StatelessWidget {
     var timeNow = time.format('d/m/Y, H:i');
 
     return Card(
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         horizontal: 1,
         vertical: 4,
       ),
       child: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

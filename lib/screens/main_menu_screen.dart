@@ -10,7 +10,6 @@ class MainMenuScreen extends StatelessWidget {
     final _width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      //backgroundColor: Colors.lightBlueAccent,
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -42,8 +41,9 @@ class MainMenuScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                MainMenuFlatButtonContainer(height: _height, width: _width, name: 'Re-Measuring', destination: 'ReMeasuring',),
                 MainMenuFlatButtonContainer(height: _height, width: _width, name: 'Difference Report', destination: 'DifferenceReport',),
-
+                MainMenuFlatButtonContainer(height: _height, width: _width, name: 'View All Sections', destination: 'ViewAllSections',),
               ],
             ),
           ],

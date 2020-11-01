@@ -6,13 +6,14 @@ import 'package:teatrackerappofficer/widgets/withering_starting_finishing_item.d
 class WitheringFinishingViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final witheringFinishing = Provider.of<WitheringStartingFinishingProvider>(context);
+    final witheringFinishing =
+        Provider.of<WitheringStartingFinishingProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Withering Finishing View'),
+        title: const Text('Withering Finishing View'),
         actions: [
           IconButton(
-            icon: Icon(Icons.check),
+            icon: const Icon(Icons.check),
             onPressed: () {
               Navigator.of(context).pushNamed('MainMenu');
             },
@@ -25,15 +26,17 @@ class WitheringFinishingViewScreen extends StatelessWidget {
         children: [
           Expanded(
               child: ListView.builder(
-                itemCount: witheringFinishing.witheringFinishingItems.length,
-                itemBuilder: (ctx, i) => WitheringStartingFinishingItem(
-                  id: witheringFinishing.witheringFinishingItems[i].id,
-                  troughNumber: witheringFinishing.witheringFinishingItems[i].troughNumber,
-                  time: witheringFinishing.witheringFinishingItems[i].time,
-                  temperature: witheringFinishing.witheringFinishingItems[i].temperature,
-                  humidity: witheringFinishing.witheringFinishingItems[i].humidity,
-                ),
-              ))
+            itemCount: witheringFinishing.witheringFinishingItems.length,
+            itemBuilder: (ctx, i) => WitheringStartingFinishingItem(
+              id: witheringFinishing.witheringFinishingItems[i].id,
+              troughNumber:
+                  witheringFinishing.witheringFinishingItems[i].troughNumber,
+              time: witheringFinishing.witheringFinishingItems[i].time,
+              temperature:
+                  witheringFinishing.witheringFinishingItems[i].temperature,
+              humidity: witheringFinishing.witheringFinishingItems[i].humidity,
+            ),
+          ))
         ],
       ),
       floatingActionButton: Container(
@@ -41,9 +44,12 @@ class WitheringFinishingViewScreen extends StatelessWidget {
         height: 70.0,
         child: FittedBox(
           child: FloatingActionButton(
-            child: Icon(Icons.add, color: Colors.white,size: 40.0,),
-
-            onPressed: (){
+            child: const Icon(
+              Icons.add,
+              color: Colors.white,
+              size: 40.0,
+            ),
+            onPressed: () {
               Navigator.of(context).pushNamed('WitheringFinishing');
             },
             backgroundColor: Colors.green,

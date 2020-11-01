@@ -9,10 +9,13 @@ class WitheringStartScreen extends StatefulWidget {
 }
 
 class _WitheringStartScreenState extends State<WitheringStartScreen> {
-
   final _formKeyWitheringStarting = GlobalKey<FormState>();
   var _witheringStarting = WitheringStartingFinishing(
-      id: null, troughNumber: null, time: null, temperature: null, humidity: null);
+      id: null,
+      troughNumber: null,
+      time: null,
+      temperature: null,
+      humidity: null);
 
   void _saveWitheringStartingProviderDetails() {
     final isValid = _formKeyWitheringStarting.currentState.validate();
@@ -31,7 +34,6 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final _height =
         MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
 
@@ -39,10 +41,10 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Withering Starting'),
+        title: const Text('Withering Starting'),
         actions: [
           IconButton(
-            icon: Icon(Icons.check),
+            icon: const Icon(Icons.check),
             onPressed: _saveWitheringStartingProviderDetails,
             disabledColor: Colors.white,
             iconSize: 35.0,
@@ -62,17 +64,17 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           labelText: 'Trough Number : ',
-                          errorStyle: TextStyle(
+                          errorStyle: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 17.0),
-                          contentPadding: EdgeInsets.all(30.0),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(50.0)))),
+                          contentPadding: const EdgeInsets.all(30.0),
+                          border: const OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(
+                                  Radius.circular(50.0)))),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 30.0, fontWeight: FontWeight.bold),
                       validator: (value) {
                         if (value.isEmpty) {
@@ -102,23 +104,24 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           labelText: 'Temperature : ',
-                          errorStyle: TextStyle(
+                          errorStyle: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 17.0),
-                          contentPadding: EdgeInsets.all(30.0),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(50.0)))),
+                          contentPadding: const EdgeInsets.all(30.0),
+                          border: const OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(
+                                  Radius.circular(50.0)))),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 30.0, fontWeight: FontWeight.bold),
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please Enter Temperature !';
                         }
-                        if (double.parse(value) <= 20 || double.parse(value) >= 40) {
+                        if (double.parse(value) <= 20 ||
+                            double.parse(value) >= 40) {
                           return 'Please Enter A Valid Temperature !';
                         }
                         return null;
@@ -137,23 +140,26 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           labelText: 'Humidity : ',
-                          errorStyle: TextStyle(
+                          errorStyle: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 17.0),
-                          contentPadding: EdgeInsets.all(30.0),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(50.0)))),
+                          contentPadding: const EdgeInsets.all(30.0),
+                          border: const OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(
+                                  Radius.circular(50.0)))),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please Enter Humidity !';
                         }
-                        if (double.parse(value) <= 50 || double.parse(value) >= 90) {
+                        if (double.parse(value) <= 50 ||
+                            double.parse(value) >= 90) {
                           return 'Please Enter A Valid Humidity !';
                         }
                         return null;
