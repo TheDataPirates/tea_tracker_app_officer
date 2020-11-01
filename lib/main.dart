@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:teatrackerappofficer/providers/rolling/rolling_provider.dart';
-import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_provider.dart';
+import 'package:teatrackerappofficer/providers/bought_leaf/tea_collections_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_mixing_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_starting__finishing_provider.dart';
+import 'package:teatrackerappofficer/screens/bought_leaf/input_collection_screen.dart';
+import 'package:teatrackerappofficer/screens/bought_leaf/list_tile_lot_screen.dart';
+import 'package:teatrackerappofficer/screens/bought_leaf/lot_list_screen.dart';
+import 'package:teatrackerappofficer/screens/bought_leaf/print_screen.dart';
 import 'package:teatrackerappofficer/screens/login_screen.dart';
+import 'package:teatrackerappofficer/screens/mainMenu/re_measuring.dart';
+import 'package:teatrackerappofficer/screens/mainMenu/view_all_sections.dart';
+import 'package:teatrackerappofficer/screens/rolling/drier_output_screen.dart';
+import 'package:teatrackerappofficer/screens/rolling/drier_output_view_screen.dart';
 import 'package:teatrackerappofficer/screens/rolling/fermenting_view_screen.dart';
+import 'package:teatrackerappofficer/screens/rolling/outturn_report_screen.dart';
 import 'package:teatrackerappofficer/screens/rolling/roll_breaking_view_screen.dart';
 import 'package:teatrackerappofficer/screens/rolling/rolling_input_screen.dart';
 import 'package:teatrackerappofficer/screens/rolling/rolling_input_view_screen.dart';
@@ -49,14 +58,11 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(
-            value: WitheringLoadingUnloadingProvider()),
-        ChangeNotifierProvider.value(value: WitheringLoadingUnloadingRollingProvider()),
+            value: WitheringLoadingUnloadingRollingProvider()),
         ChangeNotifierProvider.value(value: WitheringMixingProvider()),
+        ChangeNotifierProvider.value(value: TeaCollections()),
         ChangeNotifierProvider.value(
             value: WitheringStartingFinishingProvider()),
-        ChangeNotifierProvider.value(value: RollingProvider()),
-        ChangeNotifierProvider.value(value: TeaCollections()),
-        ChangeNotifierProvider.value(value: WitheringStartingFinishingProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(
@@ -86,7 +92,8 @@ class MyApp extends StatelessWidget {
           'WitheringMixingView': (context) => WitheringMixingViewScreen(),
           'WitheringStartingView': (context) => WitheringStartingViewScreen(),
           'WitheringFinishingView': (context) => WitheringFinishingViewScreen(),
-          'WitheringUnloadingBatchChoosing': (context) => WitheringUnloadingBatchChoosingScreen(),
+          'WitheringUnloadingBatchChoosing': (context) =>
+              WitheringUnloadingBatchChoosingScreen(),
           'WitheringUnloadingView': (context) => WitheringUnloadingViewScreen(),
           'RollingInput': (context) => RollingInputScreen(),
           'RollingOutput': (context) => RollingOutputScreen(),
@@ -98,7 +105,7 @@ class MyApp extends StatelessWidget {
           'InputCollectionScreen': (ctx) => InputCollectionScreen(),
           'LotListScreen': (ctx) => LotListScreen(),
           'ListTileLotScreen': (ctx) => ListTileLot(),
-          'PrintScreen': (ctx) => PrintScreen()
+          'PrintScreen': (ctx) => PrintScreen(),
           'DrierOutput': (context) => DrierOutputScreen(),
           'OutturnReport': (context) => OutturnReportScreen(),
           'DrierOutputView': (context) => DrierOutputViewScreen(),
