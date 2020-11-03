@@ -21,19 +21,48 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
     lotWeight: null,
   );
 
-  void _saveWitheringUnloadingProviderDetails() {
+  void _saveWitheringUnloadingProviderDetails(int troughN, int boxN) {
     final isValid = _formKeyWitheringUnloading.currentState.validate();
 
     if (!isValid) {
       return;
     }
 
-    _formKeyWitheringUnloading.currentState.save();
+    if(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isTroughBoxUsed(troughN, boxN, DateTime.now())){
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('You have already entered trough ' + '$troughN' + ' and box ' + '$boxN'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  const Text('Please enter a different box in a trough !'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  return;
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }else{
+      _formKeyWitheringUnloading.currentState.save();
 
-    Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
-        .addWitheringUnloadingItem(_witheringUnloading);
+      Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
+          .addWitheringUnloadingItem(_witheringUnloading);
 
-    Navigator.of(context).pushNamed('WitheringUnloadingView');
+      Navigator.of(context).pushNamed('WitheringUnloadingView');
+    }
+
   }
 
   @override
@@ -46,13 +75,18 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
 
     final _width = MediaQuery.of(context).size.width;
 
+    TextEditingController troughNum = TextEditingController();
+    TextEditingController boxNum = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Withering Unloading'),
         actions: [
           IconButton(
             icon: const Icon(Icons.check),
-            onPressed: _saveWitheringUnloadingProviderDetails,
+            onPressed: (){
+              _saveWitheringUnloadingProviderDetails(int.parse(troughNum.text), int.parse(boxNum.text));
+            },
             disabledColor: Colors.white,
             iconSize: 35.0,
           )
@@ -71,6 +105,7 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
+                      controller: troughNum,
                       decoration: const InputDecoration(
                           labelText: 'Trough Number : ',
                           errorStyle: TextStyle(
@@ -113,6 +148,7 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
+                      controller: boxNum,
                       decoration: const InputDecoration(
                           labelText: 'Box Number : ',
                           errorStyle: const TextStyle(

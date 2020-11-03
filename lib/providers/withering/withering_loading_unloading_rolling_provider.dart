@@ -31,6 +31,20 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  bool isBatchNumberUsed (int batchNumber, DateTime dateTime){
+    bool value = false;
+    _batchItems.forEach((batch) {
+      if ((batch.time.year == dateTime.year) &&
+          (batch.time.month == dateTime.month) &&
+          (batch.time.day == dateTime.day)){
+        if(batch.batchNumber == batchNumber){
+          value = true;
+        }
+      }
+    });
+    return value;
+  }
+
   double batchWeight(int batchNo, DateTime dateTime, int rollingTurn) {
     double bWeight;
     _batchItems.forEach((batchItem) {
@@ -158,6 +172,20 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
     _witheringUnloadingItems.add(witheringUnloading);
     notifyListeners();
+  }
+
+  bool isTroughBoxUsed(int troughNo, int boxNo, DateTime dateTime){
+    bool value = false;
+    _witheringUnloadingItems.forEach((unloading) {
+      if ((unloading.date.year == dateTime.year) &&
+          (unloading.date.month == dateTime.month) &&
+          (unloading.date.day == dateTime.day)){
+        if(unloading.troughNumber == troughNo && unloading.boxNumber == boxNo){
+          value = true;
+        }
+      }
+    });
+    return value;
   }
 
   //----------------Withering Loading -------------------
