@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/bought_leaf/tea_collections_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_mixing_provider.dart';
@@ -57,61 +58,83 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(
-            value: WitheringLoadingUnloadingRollingProvider()),
-        ChangeNotifierProvider.value(value: WitheringMixingProvider()),
-        ChangeNotifierProvider.value(value: TeaCollections()),
-        ChangeNotifierProvider.value(
-            value: WitheringStartingFinishingProvider()),
-      ],
-      child: MaterialApp(
-        theme: ThemeData(
-          primarySwatch: Colors.green,
-          accentColor: Colors.greenAccent,
-          textTheme: TextTheme(bodyText1: TextStyle(color: Colors.white)),
+        ChangeNotifierProvider<Auth>(
+          create: (_) => Auth(),
         ),
-        home: LoginScreen(),
-        routes: {
-          'MainMenu': (context) => MainMenuScreen(),
-          'BoughtLeaf': (context) => BoughtLeafScreen(),
-          'WitheringLoft': (context) => WitheringLoftScreen(),
-          'RollingRoom': (context) => RollingRoomScreen(),
-          'RollBreakingRoom': (context) => RollBreakingRoomScreen(),
-          'FermentingRoom': (context) => FermentingRoomScreen(),
-          'DryingRoom': (context) => DryingRoomScreen(),
-          'ShiftingRoom': (context) => ShiftingRoomScreen(),
-          'PackingRoom': (context) => PackingRoomScreen(),
-          'DispatchingRoom': (context) => DispatchingRoomScreen(),
-          'DifferenceReport': (context) => DifferenceReportScreen(),
-          'TroughLoading': (context) => TroughLoadingScreen(),
-          'WitheringStarting': (context) => WitheringStartScreen(),
-          'WitheringMixing': (context) => WitheringMixingScreen(),
-          'WitheringFinishing': (context) => WitheringFinishingScreen(),
-          'WitheringUnloading': (context) => WitheringUnloadingScreen(),
-          'TroughLoadingView': (context) => TroughLoadingViewScreen(),
-          'WitheringMixingView': (context) => WitheringMixingViewScreen(),
-          'WitheringStartingView': (context) => WitheringStartingViewScreen(),
-          'WitheringFinishingView': (context) => WitheringFinishingViewScreen(),
-          'WitheringUnloadingBatchChoosing': (context) =>
-              WitheringUnloadingBatchChoosingScreen(),
-          'WitheringUnloadingView': (context) => WitheringUnloadingViewScreen(),
-          'RollingInput': (context) => RollingInputScreen(),
-          'RollingOutput': (context) => RollingOutputScreen(),
-          'RollingInputView': (context) => RollingInputViewScreen(),
-          'RollingOutputView': (context) => RollingOutputViewScreen(),
-          'RollBreakingView': (context) => RollBreakingViewScreen(),
-          'FermentingView': (context) => FermentingViewScreen(),
-          //
-          'InputCollectionScreen': (ctx) => InputCollectionScreen(),
-          'LotListScreen': (ctx) => LotListScreen(),
-          'ListTileLotScreen': (ctx) => ListTileLot(),
-          'PrintScreen': (ctx) => PrintScreen(),
-          'DrierOutput': (context) => DrierOutputScreen(),
-          'OutturnReport': (context) => OutturnReportScreen(),
-          'DrierOutputView': (context) => DrierOutputViewScreen(),
-          'ReMeasuring': (context) => ReMeasuringScreen(),
-          'ViewAllSections': (context) => ViewAllSectionsScreen(),
-        },
+        ChangeNotifierProvider.value(
+          value: WitheringLoadingUnloadingRollingProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: WitheringMixingProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: TeaCollections(),
+        ),
+        ChangeNotifierProvider.value(
+          value: WitheringStartingFinishingProvider(),
+        ),
+      ],
+      child: Consumer<Auth>(
+        builder: (ctx, auth, _) => MaterialApp(
+          theme: ThemeData(
+            primarySwatch: Colors.green,
+            accentColor: Colors.greenAccent,
+            textTheme: TextTheme(bodyText1: TextStyle(color: Colors.white)),
+          ),
+          home: auth.isAuth
+              ? MainMenuScreen()
+              : FutureBuilder(
+                  future: auth.tryAutoLogin(),
+                  builder: (ctx, authResults) =>
+                      authResults.connectionState == ConnectionState.waiting
+                          ? Center(child: CircularProgressIndicator())
+                          : LoginScreen(),
+                ),
+          routes: {
+            'LoginScreen': (context) => LoginScreen(),
+            'MainMenu': (context) => MainMenuScreen(),
+            'BoughtLeaf': (context) => BoughtLeafScreen(),
+            'WitheringLoft': (context) => WitheringLoftScreen(),
+            'RollingRoom': (context) => RollingRoomScreen(),
+            'RollBreakingRoom': (context) => RollBreakingRoomScreen(),
+            'FermentingRoom': (context) => FermentingRoomScreen(),
+            'DryingRoom': (context) => DryingRoomScreen(),
+            'ShiftingRoom': (context) => ShiftingRoomScreen(),
+            'PackingRoom': (context) => PackingRoomScreen(),
+            'DispatchingRoom': (context) => DispatchingRoomScreen(),
+            'DifferenceReport': (context) => DifferenceReportScreen(),
+            'TroughLoading': (context) => TroughLoadingScreen(),
+            'WitheringStarting': (context) => WitheringStartScreen(),
+            'WitheringMixing': (context) => WitheringMixingScreen(),
+            'WitheringFinishing': (context) => WitheringFinishingScreen(),
+            'WitheringUnloading': (context) => WitheringUnloadingScreen(),
+            'TroughLoadingView': (context) => TroughLoadingViewScreen(),
+            'WitheringMixingView': (context) => WitheringMixingViewScreen(),
+            'WitheringStartingView': (context) => WitheringStartingViewScreen(),
+            'WitheringFinishingView': (context) =>
+                WitheringFinishingViewScreen(),
+            'WitheringUnloadingBatchChoosing': (context) =>
+                WitheringUnloadingBatchChoosingScreen(),
+            'WitheringUnloadingView': (context) =>
+                WitheringUnloadingViewScreen(),
+            'RollingInput': (context) => RollingInputScreen(),
+            'RollingOutput': (context) => RollingOutputScreen(),
+            'RollingInputView': (context) => RollingInputViewScreen(),
+            'RollingOutputView': (context) => RollingOutputViewScreen(),
+            'RollBreakingView': (context) => RollBreakingViewScreen(),
+            'FermentingView': (context) => FermentingViewScreen(),
+            //
+            'InputCollectionScreen': (ctx) => InputCollectionScreen(),
+            'LotListScreen': (ctx) => LotListScreen(),
+            'ListTileLotScreen': (ctx) => ListTileLot(),
+            'PrintScreen': (ctx) => PrintScreen(),
+            'DrierOutput': (context) => DrierOutputScreen(),
+            'OutturnReport': (context) => OutturnReportScreen(),
+            'DrierOutputView': (context) => DrierOutputViewScreen(),
+            'ReMeasuring': (context) => ReMeasuringScreen(),
+            'ViewAllSections': (context) => ViewAllSectionsScreen(),
+          },
+        ),
       ),
     );
   }

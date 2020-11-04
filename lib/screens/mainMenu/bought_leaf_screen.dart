@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/bought_leaf/tea_collections_provider.dart';
 import '../bought_leaf/lot_list_screen.dart';
 
@@ -17,6 +18,9 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
   final supplierNameEditingController = TextEditingController();
 
   Future<void> submit() async {
+    final auth = Provider.of<Auth>(context, listen: false);
+    String token = auth.token;
+    String user = auth.user_id;
     if (supplierNoEditingController.text.isEmpty ||
         supplierNameEditingController.text.isEmpty) {
       await showDialog<void>(
@@ -48,7 +52,7 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
       try {
         await Provider.of<TeaCollections>(context, listen: false)
             .verifySupplier(supplierNoEditingController.text,
-                supplierNameEditingController.text);
+                supplierNameEditingController.text, token, user);
         print('bulk saved');
         Navigator.of(context).pushNamed('LotListScreen');
       } catch (error) {

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/bought_leaf/tea_collections_provider.dart';
 import 'list_tile_lot_screen.dart';
 
@@ -16,7 +17,7 @@ class LotListScreen extends StatefulWidget {
 }
 
 class _LotListScreenState extends State<LotListScreen> {
-  Future<void> _showMyDialog(String id) async {
+  Future<void> _showMyDialog(String id, String token) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -37,7 +38,7 @@ class _LotListScreenState extends State<LotListScreen> {
               onPressed: () async {
                 try {
                   await Provider.of<TeaCollections>(context, listen: false)
-                      .deleteLot(id);
+                      .deleteLot(id, token);
 
                   Navigator.of(context).pop();
                 } catch (error) {
@@ -83,6 +84,8 @@ class _LotListScreenState extends State<LotListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final auth = Provider.of<Auth>(context, listen: false);
+    final token = auth.token;
     final currentDate =
         Provider.of<TeaCollections>(context, listen: false).getCurrentDate();
     return Scaffold(
@@ -103,8 +106,8 @@ class _LotListScreenState extends State<LotListScreen> {
       ),
       body: FutureBuilder(
         future: Provider.of<TeaCollections>(context, listen: false)
-            .fetchAndSetLotData(widget.supplierID,
-                currentDate), //fetching lot details which is deleted 0 & supplierID & Date
+            .fetchAndSetLotData(widget.supplierID, currentDate,
+                token), //fetching lot details which is deleted 0 & supplierID & Date
         builder: (ctx, snapshot) => snapshot.connectionState ==
                 ConnectionState.waiting
             ? Center(
@@ -159,7 +162,7 @@ class _LotListScreenState extends State<LotListScreen> {
                               icon: const Icon(Icons.delete),
                               onPressed: () {
                                 _showMyDialog(
-                                    teaCollections.lot_items[i].lotId);
+                                    teaCollections.lot_items[i].lotId, token);
                               },
                             ),
                             onTap: () {

@@ -32,6 +32,10 @@ dependencies:
   date_time_format: ^1.1.0
   date_format: ^1.0.9
   http: ^0.12.2
+  flutter_form_builder: ^3.14.1
+  jwt_decoder: ^1.0.3
+  intl: ^0.16.1
+  shared_preferences: ^0.5.12+4
 
 
 dev_dependencies:

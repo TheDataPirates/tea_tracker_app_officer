@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import './lot.dart';
 import './supplier.dart';
 import 'package:date_format/date_format.dart';
@@ -25,6 +26,7 @@ class TeaCollections with ChangeNotifier {
   Supplier get newSupplier => _newSupplier;
 
   Future<void> addLot(
+    String authToken,
     String supNo,
     String supName,
     String contType,
@@ -57,6 +59,7 @@ class TeaCollections with ChangeNotifier {
         url,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
         },
         body: jsonEncode(<String, dynamic>{
           'lot_id': DateTime.now().toIso8601String(),
@@ -80,11 +83,18 @@ class TeaCollections with ChangeNotifier {
     }
   }
 
-  Future<void> fetchAndSetLotData(String id, String date) async {
+  Future<void> fetchAndSetLotData(
+      String id, String date, String authToken) async {
     const url = 'http://10.0.2.2:8080/bleaf/lots';
     _lot_items = [];
     try {
-      final dataList = await http.get(url);
+      final dataList = await http.get(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+      );
       final extractedDataList = jsonDecode(dataList.body);
       print(extractedDataList);
       List loadedLots = extractedDataList['lots'];
@@ -111,7 +121,7 @@ class TeaCollections with ChangeNotifier {
     } //raw query to get isdeleted = 0
   }
 
-  Future<void> deleteLot(String id) async {
+  Future<void> deleteLot(String id, String authToken) async {
     final url = 'http://10.0.2.2:8080/bleaf/lot/$id';
     // remove lot from the array
     try {
@@ -119,6 +129,7 @@ class TeaCollections with ChangeNotifier {
         url,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
         },
       );
       if (response.statusCode == 500) {
@@ -160,7 +171,8 @@ class TeaCollections with ChangeNotifier {
     }
   }
 
-  Future<void> verifySupplier(String supId, String supName) async {
+  Future<void> verifySupplier(
+      String supId, String supName, String authToken, String userId) async {
     //when use async await whole func wrap into future. so no need to must return.
     const url = 'http://10.0.2.2:8080/bleaf/bulk';
 
@@ -171,15 +183,16 @@ class TeaCollections with ChangeNotifier {
         url,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
         },
         body: jsonEncode(<String, dynamic>{
           'bulk_id': Bulkid,
-          'user_id': '2',
+          'user_id': userId,
           'supplier_id': supId
         }),
       );
       print(response.statusCode);
-      if (response.statusCode == 500) {
+      if (response.statusCode == 500 || response.statusCode == 404) {
         // check whether server sent bad respond
         throw Exception('Failed ');
       } else if (response.statusCode == 200) {
