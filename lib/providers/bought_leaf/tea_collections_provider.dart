@@ -207,7 +207,7 @@ class TeaCollections with ChangeNotifier {
 
   String getCurrentDate() {
     final now = formatDate(DateTime.now(), [yyyy, '-', mm, '-', dd]);
-    print(now);
+
     return now;
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
+import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_starting_finishing.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_starting__finishing_provider.dart';
 
@@ -17,7 +19,9 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
       temperature: null,
       humidity: null);
 
-  void _saveWitheringStartingProviderDetails() {
+  Future<void> _saveWitheringStartingProviderDetails() async {
+    final authToken = Provider.of<Auth>(context, listen: false).token;
+
     final isValid = _formKeyWitheringStarting.currentState.validate();
 
     if (!isValid) {
@@ -25,17 +29,47 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
     }
 
     _formKeyWitheringStarting.currentState.save();
+    try {
+      await Provider.of<WitheringStartingFinishingProvider>(context,
+              listen: false)
+          .addWitheringStartingItem(_witheringStarting, authToken);
 
-    Provider.of<WitheringStartingFinishingProvider>(context, listen: false)
-        .addWitheringStartingItem(_witheringStarting);
-
-    Navigator.of(context).pushNamed('WitheringStartingView');
+      Navigator.of(context).pushNamed('WitheringStartingView');
+    } catch (e) {
+      await showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: AlertDialog(
+                title: const Text('Warning !'),
+                content: ListBody(
+                  children: <Widget>[
+                    const Text('Error has occured'),
+                    Text(e.toString()),
+                  ],
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('Okay'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final _height =
-        MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
+    final _height = MediaQuery.of(context).size.height;
 
     final _width = MediaQuery.of(context).size.width;
 
@@ -51,18 +85,18 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
           )
         ],
       ),
-      body: SafeArea(
-        child: Form(
-          key: _formKeyWitheringStarting,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      body: Form(
+        key: _formKeyWitheringStarting,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListView(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    height: _height * 0.2,
-                    width: _width * 0.4,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 300.0),
+                child: Container(
+                  width: _width * 0.2,
+                  height: _height * 0.4,
+                  child: Center(
                     child: TextFormField(
                       decoration: const InputDecoration(
                           labelText: 'Trough Number : ',
@@ -95,14 +129,14 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
                       },
                     ),
                   ),
-                ],
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
-                    height: _height * 0.2,
                     width: _width * 0.4,
+                    height: _height * 0.4,
                     child: TextFormField(
                       decoration: const InputDecoration(
                           labelText: 'Temperature : ',
@@ -136,8 +170,11 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
                       },
                     ),
                   ),
+//                  SizedBox(
+//                    width: _width * 0.15,
+//                  ),
                   Container(
-                    height: _height * 0.2,
+                    height: _height * 0.4,
                     width: _width * 0.4,
                     child: TextFormField(
                       decoration: const InputDecoration(
@@ -175,7 +212,7 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
                     ),
                   )
                 ],
-              ),
+              )
             ],
           ),
         ),
