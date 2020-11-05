@@ -8,10 +8,10 @@ class WitheringStartingFinishing with ChangeNotifier {
   final double humidity;
 
   WitheringStartingFinishing({
-    @required this.id,
-    @required this.troughNumber,
-    @required this.time,
-    @required this.temperature,
-    @required this.humidity,
+    this.id,
+    this.troughNumber,
+    this.time,
+    this.temperature,
+    this.humidity,
   });
 }

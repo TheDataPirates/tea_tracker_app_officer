@@ -20,10 +20,10 @@ class WitheringStartingFinishingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     var timeNow = time.format('d/m/Y, H:i');
 
     return Card(
+      elevation: 10,
       margin: const EdgeInsets.symmetric(
         horizontal: 1,
         vertical: 4,
@@ -33,13 +33,24 @@ class WitheringStartingFinishingItem extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              WitheringViewItem(variableName: troughNumber, name: 'Trough Number',),
-              WitheringViewItem(variableName: timeNow, name: 'Time',),
-              WitheringViewItem(variableName: temperature, name: 'Temperature',),
-              WitheringViewItem(variableName: humidity, name: 'Humidity',),
+              WitheringViewItem(
+                variableName: troughNumber,
+                name: 'Trough Number',
+              ),
+              WitheringViewItem(
+                variableName: timeNow,
+                name: 'Time',
+              ),
+              WitheringViewItem(
+                variableName: temperature,
+                name: 'Temperature',
+              ),
+              WitheringViewItem(
+                variableName: humidity,
+                name: 'Humidity',
+              ),
             ],
           )),
     );
   }
 }
-

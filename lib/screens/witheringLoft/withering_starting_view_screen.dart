@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_starting__finishing_provider.dart';
 import 'package:teatrackerappofficer/widgets/withering_starting_finishing_item.dart';
 
 class WitheringStartingViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final witheringStarting =
-        Provider.of<WitheringStartingFinishingProvider>(context);
+    final auth = Provider.of<Auth>(context, listen: false);
+    final token = auth.token;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Withering Starting View'),
@@ -22,22 +24,43 @@ class WitheringStartingViewScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-              child: ListView.builder(
-            itemCount: witheringStarting.witheringStartingItems.length,
-            itemBuilder: (ctx, i) => WitheringStartingFinishingItem(
-              id: witheringStarting.witheringStartingItems[i].id,
-              troughNumber:
-                  witheringStarting.witheringStartingItems[i].troughNumber,
-              time: witheringStarting.witheringStartingItems[i].time,
-              temperature:
-                  witheringStarting.witheringStartingItems[i].temperature,
-              humidity: witheringStarting.witheringStartingItems[i].humidity,
-            ),
-          ))
-        ],
+      body: FutureBuilder(
+        future: Provider.of<WitheringStartingFinishingProvider>(context,
+                listen: false)
+            .fetchAndSetWitheringStartingItem(token),
+        builder: (ctx, snapshot) => snapshot.connectionState ==
+                ConnectionState.waiting
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Consumer<WitheringStartingFinishingProvider>(
+                child: Center(
+                  child: const Text(
+                      'Got no Withering starting items found yet, start adding some!'),
+                ),
+                builder: (ctx, WitheringStartingFinishingProvider, ch) =>
+                    WitheringStartingFinishingProvider
+                                .witheringStartingItems.length <=
+                            0
+                        ? ch
+                        : ListView.builder(
+                            itemCount: WitheringStartingFinishingProvider
+                                .witheringStartingItems.length,
+                            itemBuilder: (ctx, i) =>
+                                WitheringStartingFinishingItem(
+                              id: WitheringStartingFinishingProvider
+                                  .witheringStartingItems[i].id,
+                              troughNumber: WitheringStartingFinishingProvider
+                                  .witheringStartingItems[i].troughNumber,
+                              time: WitheringStartingFinishingProvider
+                                  .witheringStartingItems[i].time,
+                              temperature: WitheringStartingFinishingProvider
+                                  .witheringStartingItems[i].temperature,
+                              humidity: WitheringStartingFinishingProvider
+                                  .witheringStartingItems[i].humidity,
+                            ),
+                          ),
+              ),
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(

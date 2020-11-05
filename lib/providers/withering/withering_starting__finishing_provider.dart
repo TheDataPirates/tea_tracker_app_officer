@@ -57,6 +57,38 @@ class WitheringStartingFinishingProvider with ChangeNotifier {
     }
   }
 
+  Future<void> fetchAndSetWitheringStartingItem(String authToken) async {
+    _witheringStartingItems = [];
+    const url = 'http://10.0.2.2:8080/loft/startings';
+    try {
+      final dataList = await http.get(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+      );
+      final extractedDataList = jsonDecode(dataList.body);
+//      print(extractedDataList);
+      List loadedLots = extractedDataList['startings'];
+      print(loadedLots);
+      for (var i in loadedLots) {
+        _witheringStartingItems.add(
+          WitheringStartingFinishing(
+            id: i['tp_id'] as String,
+            troughNumber: i['TroughTroughId'] as int,
+            time: DateTime.parse(i['date']),
+            temperature: double.parse(i['temperature'].toString()),
+            humidity: double.parse(i['humidity'].toString()),
+          ),
+        );
+      }
+      notifyListeners();
+    } catch (error) {
+      print(error);
+    }
+  }
+
   List<WitheringStartingFinishing> _witheringFinishingItems = [];
   List<WitheringStartingFinishing> get witheringFinishingItems {
     return [..._witheringFinishingItems];
