@@ -65,6 +65,16 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
 
   }
 
+  final _troughNum = TextEditingController();
+  final _boxNum = TextEditingController();
+
+  void dispose() {
+    _troughNum.dispose();
+    _boxNum.dispose();
+    super.dispose();
+  }
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -75,9 +85,6 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
 
     final _width = MediaQuery.of(context).size.width;
 
-    TextEditingController troughNum = TextEditingController();
-    TextEditingController boxNum = TextEditingController();
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Withering Unloading'),
@@ -85,7 +92,7 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
           IconButton(
             icon: const Icon(Icons.check),
             onPressed: (){
-              _saveWitheringUnloadingProviderDetails(int.parse(troughNum.text), int.parse(boxNum.text));
+              _saveWitheringUnloadingProviderDetails(int.parse(_troughNum.text), int.parse(_boxNum.text));
             },
             disabledColor: Colors.white,
             iconSize: 35.0,
@@ -105,7 +112,7 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
-                      controller: troughNum,
+                      controller: _troughNum,
                       decoration: const InputDecoration(
                           labelText: 'Trough Number : ',
                           errorStyle: TextStyle(
@@ -148,7 +155,7 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
-                      controller: boxNum,
+                      controller: _boxNum,
                       decoration: const InputDecoration(
                           labelText: 'Box Number : ',
                           errorStyle: const TextStyle(

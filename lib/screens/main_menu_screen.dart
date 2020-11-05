@@ -34,6 +34,7 @@ class MainMenuScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 MainMenuFlatButtonContainer(height: _height, width: _width, name: 'Shifting Room', destination: 'ShiftingRoom',),
+//                MainMenuFlatButtonContainer(height: _height, width: _width, name: 'Trough Loading', destination: 'TroughLoading',),
                 MainMenuFlatButtonContainer(height: _height, width: _width, name: 'Packing Room', destination: 'PackingRoom',),
                 MainMenuFlatButtonContainer(height: _height, width: _width, name: 'Dispatching Room', destination: 'DispatchingRoom',),
               ],

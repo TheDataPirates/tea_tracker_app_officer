@@ -68,6 +68,15 @@ class _WitheringUnloadingBatchChoosingScreenState
 
   }
 
+  final _batchNum = TextEditingController();
+
+  void dispose() {
+    _batchNum.dispose();
+
+    super.dispose();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final _height =
@@ -76,7 +85,7 @@ class _WitheringUnloadingBatchChoosingScreenState
     final _width = MediaQuery.of(context).size.width;
 
 //    int batchNum = 0;
-    TextEditingController batchNum = TextEditingController();
+
 
     return Scaffold(
       appBar: AppBar(
@@ -85,7 +94,7 @@ class _WitheringUnloadingBatchChoosingScreenState
           IconButton(
             icon: const Icon(Icons.check),
             onPressed: (){
-              _saveWitheringUnloadingBatchNumberItem(int.parse(batchNum.text));
+              _saveWitheringUnloadingBatchNumberItem(int.parse(_batchNum.text));
             },
             disabledColor: Colors.white,
             iconSize: 35.0,
@@ -105,7 +114,7 @@ class _WitheringUnloadingBatchChoosingScreenState
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
-                      controller: batchNum,
+                      controller: _batchNum,
                       decoration: const InputDecoration(
                           labelText: 'Batch Number : ',
                           errorStyle: const TextStyle(

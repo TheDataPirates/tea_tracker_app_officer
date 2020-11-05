@@ -5,6 +5,7 @@ import 'package:teatrackerappofficer/providers/rolling/fermenting.dart';
 import 'package:teatrackerappofficer/providers/rolling/roll_breaking.dart';
 import 'package:teatrackerappofficer/providers/rolling/rolling.dart';
 import 'package:teatrackerappofficer/providers/withering/batch.dart';
+import 'package:teatrackerappofficer/providers/withering/ended_loading_trough_box.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_unloading.dart';
 
@@ -215,6 +216,97 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     _troughLoadingItems.add(troughLoading);
     notifyListeners();
   }
+
+  int latestAddedLoadingTroughNumber(){
+    return _troughLoadingItems[_troughLoadingItems.length-1].troughNumber;
+  }
+
+  int latestAddedLoadingBoxNumber(){
+    return _troughLoadingItems[_troughLoadingItems.length-1].boxNumber;
+  }
+
+  double totalTroughBoxWeight(int troughNum, int boxNum, DateTime dateTime){
+    double totalWeight = 0;
+    _troughLoadingItems.forEach((troughLoading) {
+      if ((troughLoading.date.year == dateTime.year) &&
+          (troughLoading.date.month == dateTime.month) &&
+          (troughLoading.date.day == dateTime.day)){
+        if(troughLoading.troughNumber == troughNum && troughLoading.boxNumber == boxNum){
+          totalWeight += troughLoading.netWeight;
+        }
+      }
+    });
+    return totalWeight;
+  }
+
+  bool isTroughBoxLeafGradeCorrect (int troughNumber, int boxNumber, String leafGrade, DateTime dateTime){
+    bool value = false;
+    int troughBoxCount = 0;
+    if(_troughLoadingItems.length == 0){
+      value = true;
+    }else{
+      _troughLoadingItems.forEach((troughLoadingItems) {
+        if ((troughLoadingItems.date.year == dateTime.year) &&
+            (troughLoadingItems.date.month == dateTime.month) &&
+            (troughLoadingItems.date.day == dateTime.day)){
+          if(troughLoadingItems.troughNumber == troughNumber && troughLoadingItems.boxNumber == boxNumber){
+            troughBoxCount ++;
+            if(troughLoadingItems.gradeOfGL == leafGrade){
+              value = true;
+            }
+          }
+        }
+      });
+      if(troughBoxCount == 0){
+        value = true;
+      }
+    }
+    return value;
+  }
+
+  //----------------Ended Loading Trough Box -------------------
+
+  List<EndedLoadingTroughBox> _endedLoadingTroughBoxItems = [];
+
+  List<EndedLoadingTroughBox> get endedLoadingTroughBoxItems {
+    return [..._endedLoadingTroughBoxItems];
+  }
+
+  int get endedLoadingTroughBoxItemCount {
+    return _endedLoadingTroughBoxItems.length;
+  }
+
+  EndedLoadingTroughBox findByIdEndedLoad(String id) {
+    return _endedLoadingTroughBoxItems.firstWhere((troughLoadEnd) => troughLoadEnd.id == id);
+  }
+
+  void addEndedLoadingTroughBoxItem(EndedLoadingTroughBox endedLoadingTroughBox) {
+    final newEndedTroughLoadingItem = EndedLoadingTroughBox(
+        id: DateTime.now().toString(),
+        troughNumber: endedLoadingTroughBox.troughNumber,
+        boxNumber: endedLoadingTroughBox.boxNumber,
+        date: endedLoadingTroughBox.date
+    );
+
+    _endedLoadingTroughBoxItems.add(endedLoadingTroughBox);
+    notifyListeners();
+  }
+
+  bool isTroughBoxEnded (int troughNumber, int boxNumber, DateTime dateTime){
+    bool value = false;
+    _endedLoadingTroughBoxItems.forEach((endedLoadingTroughBox) {
+      if ((endedLoadingTroughBox.date.year == dateTime.year) &&
+          (endedLoadingTroughBox.date.month == dateTime.month) &&
+          (endedLoadingTroughBox.date.day == dateTime.day)){
+        if(endedLoadingTroughBox.troughNumber == troughNumber && endedLoadingTroughBox.boxNumber == boxNumber){
+          value = true;
+        }
+      }
+    });
+    return value;
+  }
+
+
 
   //----------------Big Bulk -------------------
 
