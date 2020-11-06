@@ -32,6 +32,8 @@ dependencies:
   date_time_format: ^1.1.0
   date_format: ^1.0.9
   http: ^0.12.2
+  google_fonts: ^1.1.1
+  font_awesome_flutter: ^8.10.0
 
 
 dev_dependencies:
@@ -50,6 +52,20 @@ flutter:
   uses-material-design: true
   assets:
     - images/logo.jpg
+    - images/bg1.jpg
+    - images/bg2.jpg
+    - images/bg3.jpg
+    - images/bg4.jpg
+    - images/bg5.jpg
+    - images/bg6.jpg
+    - images/bg7.jpg
+    - images/bg8.jpg
+    - images/bg9.jpg
+    - images/bg10.jpg
+    - images/bg11.jpg
+    - images/bg12.jpg
+    - images/bg13.jpg
+    - images/boughtleaf.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -67,12 +83,11 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+#  fonts:
+#    - family: MyFlutterApp
+#      fonts:
+#        - asset: fonts/MyFlutterApp.ttf
+
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
