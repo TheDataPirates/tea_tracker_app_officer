@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_mixing.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_mixing_provider.dart';
@@ -18,7 +19,8 @@ class _WitheringMixingScreenState extends State<WitheringMixingScreen> {
       temperature: null,
       humidity: null);
 
-  void _saveWitheringMixingProviderDetails() {
+  Future<void> _saveWitheringMixingProviderDetails() async {
+    final authToken = Provider.of<Auth>(context, listen: false).token;
     final isValid = _formKeyWitheringMixing.currentState.validate();
 
     if (!isValid) {
@@ -26,11 +28,41 @@ class _WitheringMixingScreenState extends State<WitheringMixingScreen> {
     }
 
     _formKeyWitheringMixing.currentState.save();
+    try {
+      await Provider.of<WitheringMixingProvider>(context, listen: false)
+          .addWitheringMixingItem(_witheringMixing, authToken);
 
-    Provider.of<WitheringMixingProvider>(context, listen: false)
-        .addWitheringMixingItem(_witheringMixing);
-
-    Navigator.of(context).pushNamed('WitheringMixingView');
+      Navigator.of(context).pushNamed('WitheringMixingView');
+    } catch (e) {
+      await showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: AlertDialog(
+                title: const Text('Warning !'),
+                content: ListBody(
+                  children: <Widget>[
+                    const Text('Error has occured'),
+                    Text(e.toString()),
+                  ],
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('Okay'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
   }
 
   @override
