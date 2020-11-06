@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_starting__finishing_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_starting_finishing.dart';
 
@@ -18,7 +19,8 @@ class _WitheringFinishingScreenState extends State<WitheringFinishingScreen> {
       temperature: null,
       humidity: null);
 
-  void _saveWitheringFinishingProviderDetails() {
+  Future<void> _saveWitheringFinishingProviderDetails() async {
+    final authToken = Provider.of<Auth>(context, listen: false).token;
     final isValid = _formKeyWitheringFinishing.currentState.validate();
 
     if (!isValid) {
@@ -26,11 +28,42 @@ class _WitheringFinishingScreenState extends State<WitheringFinishingScreen> {
     }
 
     _formKeyWitheringFinishing.currentState.save();
+    try {
+      await Provider.of<WitheringStartingFinishingProvider>(context,
+              listen: false)
+          .addWitheringFinishingItem(_witheringFinishing, authToken);
 
-    Provider.of<WitheringStartingFinishingProvider>(context, listen: false)
-        .addWitheringFinishingItem(_witheringFinishing);
-
-    Navigator.of(context).pushNamed('WitheringFinishingView');
+      Navigator.of(context).pushNamed('WitheringFinishingView');
+    } catch (error) {
+      await showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: AlertDialog(
+                title: const Text('Warning !'),
+                content: ListBody(
+                  children: <Widget>[
+                    const Text('Error has occured'),
+                    Text(error.toString()),
+                  ],
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('Okay'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
   }
 
   @override

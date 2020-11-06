@@ -103,17 +103,72 @@ class WitheringStartingFinishingProvider with ChangeNotifier {
         .firstWhere((witherFinish) => witherFinish.id == id);
   }
 
-  void addWitheringFinishingItem(
-      WitheringStartingFinishing witheringFinishing) {
+  Future<void> addWitheringFinishingItem(
+      WitheringStartingFinishing witheringFinishing, String authToken) async {
     final newWitheringFinishingItem = WitheringStartingFinishing(
         id: DateTime.now().toString(),
         troughNumber: witheringFinishing.troughNumber,
         time: DateTime.now(),
         temperature: witheringFinishing.temperature,
         humidity: witheringFinishing.humidity);
+    const url = 'http://10.0.2.2:8080/loft/finishing';
+    try {
+      final response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'id': DateTime.now().toIso8601String(),
+          'troughNumber': witheringFinishing.troughNumber,
+          'time': getCurrentDate(),
+          'temperature': witheringFinishing.temperature,
+          'humidity': witheringFinishing.humidity,
+          'process_name': 'finishing'
+        }),
+      );
+      if (response.statusCode == 200) {
+        _witheringFinishingItems.add(witheringFinishing);
+        notifyListeners();
+      } else {
+        throw Exception('Failed ');
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
 
-    _witheringFinishingItems.add(witheringFinishing);
-    notifyListeners();
+  Future<void> fetchAndSetWitheringFinishingItem(String authToken) async {
+    _witheringFinishingItems = [];
+    const url = 'http://10.0.2.2:8080/loft/finishings';
+    try {
+      final dataList = await http.get(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+      );
+      final extractedDataList = jsonDecode(dataList.body);
+//      print(extractedDataList);
+      List loadedLots = extractedDataList['finishings'];
+      print(loadedLots);
+      for (var i in loadedLots) {
+        _witheringFinishingItems.add(
+          WitheringStartingFinishing(
+            id: i['tp_id'] as String,
+            troughNumber: i['TroughTroughId'] as int,
+            time: DateTime.parse(i['date']),
+            temperature: double.parse(i['temperature'].toString()),
+            humidity: double.parse(i['humidity'].toString()),
+          ),
+        );
+      }
+      notifyListeners();
+    } catch (error) {
+      print(error);
+    }
   }
 
   String getCurrentDate() {
