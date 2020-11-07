@@ -54,7 +54,34 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
           );
         },
       );
-    }else{
+    }else if(!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isTroughBoxLoaded(troughN, boxN, DateTime.now()))){
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('You have not loaded trough ' + '$troughN' + ' box ' + '$boxN'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  const Text('Please enter a loaded box in a trough !'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  return;
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+    else{
       _formKeyWitheringUnloading.currentState.save();
 
       Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)

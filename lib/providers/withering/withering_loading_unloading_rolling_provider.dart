@@ -32,13 +32,13 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  bool isBatchNumberUsed (int batchNumber, DateTime dateTime){
+  bool isBatchNumberUsed(int batchNumber, DateTime dateTime) {
     bool value = false;
     _batchItems.forEach((batch) {
       if ((batch.time.year == dateTime.year) &&
           (batch.time.month == dateTime.month) &&
-          (batch.time.day == dateTime.day)){
-        if(batch.batchNumber == batchNumber){
+          (batch.time.day == dateTime.day)) {
+        if (batch.batchNumber == batchNumber) {
           value = true;
         }
       }
@@ -69,8 +69,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
                       if ((rollBreakingItem.batchNumber == batchNo) &&
                           (rollBreakingItem.rollBreakingTurn ==
                               (rollingTurn - 1))) {
-                        bWeight =
-                            rollingOutputItem.weight - rollBreakingItem.weight;
+                        bWeight = rollingOutputItem.weightOut -
+                            rollBreakingItem.weight;
                       }
                     }
                   });
@@ -175,13 +175,28 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  bool isTroughBoxUsed(int troughNo, int boxNo, DateTime dateTime){
+  bool isTroughBoxUsed(int troughNo, int boxNo, DateTime dateTime) {
     bool value = false;
     _witheringUnloadingItems.forEach((unloading) {
       if ((unloading.date.year == dateTime.year) &&
           (unloading.date.month == dateTime.month) &&
-          (unloading.date.day == dateTime.day)){
-        if(unloading.troughNumber == troughNo && unloading.boxNumber == boxNo){
+          (unloading.date.day == dateTime.day)) {
+        if (unloading.troughNumber == troughNo &&
+            unloading.boxNumber == boxNo) {
+          value = true;
+        }
+      }
+    });
+    return value;
+  }
+
+  bool isTroughBoxLoaded(int troughNo, int boxNo, DateTime dateTime){
+    bool value = false;
+    _troughLoadingItems.forEach((troughLoading) {
+      if ((troughLoading.date.year == dateTime.year) &&
+          (troughLoading.date.month == dateTime.month) &&
+          ((troughLoading.date.day == dateTime.day) || (troughLoading.date.day == dateTime.day - 1))){
+        if(troughLoading.troughNumber == troughNo && troughLoading.boxNumber == boxNo){
           value = true;
         }
       }
@@ -207,31 +222,34 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   void addTroughLoadingItem(WitheringLoading troughLoading) {
     final newTroughLoadingItem = WitheringLoading(
-        id: DateTime.now().toString(),
-        troughNumber: troughLoading.troughNumber,
-        boxNumber: troughLoading.boxNumber,
-        gradeOfGL: troughLoading.gradeOfGL,
-        netWeight: troughLoading.netWeight);
+      id: DateTime.now().toString(),
+      troughNumber: troughLoading.troughNumber,
+      boxNumber: troughLoading.boxNumber,
+      gradeOfGL: troughLoading.gradeOfGL,
+      netWeight: troughLoading.netWeight,
+      date: DateTime.now(),
+    );
 
     _troughLoadingItems.add(troughLoading);
     notifyListeners();
   }
 
-  int latestAddedLoadingTroughNumber(){
-    return _troughLoadingItems[_troughLoadingItems.length-1].troughNumber;
+  int latestAddedLoadingTroughNumber() {
+    return _troughLoadingItems[_troughLoadingItems.length - 1].troughNumber;
   }
 
-  int latestAddedLoadingBoxNumber(){
-    return _troughLoadingItems[_troughLoadingItems.length-1].boxNumber;
+  int latestAddedLoadingBoxNumber() {
+    return _troughLoadingItems[_troughLoadingItems.length - 1].boxNumber;
   }
 
-  double totalTroughBoxWeight(int troughNum, int boxNum, DateTime dateTime){
+  double totalTroughBoxWeight(int troughNum, int boxNum, DateTime dateTime) {
     double totalWeight = 0;
     _troughLoadingItems.forEach((troughLoading) {
       if ((troughLoading.date.year == dateTime.year) &&
           (troughLoading.date.month == dateTime.month) &&
-          (troughLoading.date.day == dateTime.day)){
-        if(troughLoading.troughNumber == troughNum && troughLoading.boxNumber == boxNum){
+          (troughLoading.date.day == dateTime.day)) {
+        if (troughLoading.troughNumber == troughNum &&
+            troughLoading.boxNumber == boxNum) {
           totalWeight += troughLoading.netWeight;
         }
       }
@@ -239,25 +257,27 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return totalWeight;
   }
 
-  bool isTroughBoxLeafGradeCorrect (int troughNumber, int boxNumber, String leafGrade, DateTime dateTime){
+  bool isTroughBoxLeafGradeCorrect(
+      int troughNumber, int boxNumber, String leafGrade, DateTime dateTime) {
     bool value = false;
     int troughBoxCount = 0;
-    if(_troughLoadingItems.length == 0){
+    if (_troughLoadingItems.length == 0) {
       value = true;
-    }else{
+    } else {
       _troughLoadingItems.forEach((troughLoadingItems) {
         if ((troughLoadingItems.date.year == dateTime.year) &&
             (troughLoadingItems.date.month == dateTime.month) &&
-            (troughLoadingItems.date.day == dateTime.day)){
-          if(troughLoadingItems.troughNumber == troughNumber && troughLoadingItems.boxNumber == boxNumber){
-            troughBoxCount ++;
-            if(troughLoadingItems.gradeOfGL == leafGrade){
+            (troughLoadingItems.date.day == dateTime.day)) {
+          if (troughLoadingItems.troughNumber == troughNumber &&
+              troughLoadingItems.boxNumber == boxNumber) {
+            troughBoxCount++;
+            if (troughLoadingItems.gradeOfGL == leafGrade) {
               value = true;
             }
           }
         }
       });
-      if(troughBoxCount == 0){
+      if (troughBoxCount == 0) {
         value = true;
       }
     }
@@ -277,36 +297,36 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   }
 
   EndedLoadingTroughBox findByIdEndedLoad(String id) {
-    return _endedLoadingTroughBoxItems.firstWhere((troughLoadEnd) => troughLoadEnd.id == id);
+    return _endedLoadingTroughBoxItems
+        .firstWhere((troughLoadEnd) => troughLoadEnd.id == id);
   }
 
-  void addEndedLoadingTroughBoxItem(EndedLoadingTroughBox endedLoadingTroughBox) {
+  void addEndedLoadingTroughBoxItem(
+      EndedLoadingTroughBox endedLoadingTroughBox) {
     final newEndedTroughLoadingItem = EndedLoadingTroughBox(
         id: DateTime.now().toString(),
         troughNumber: endedLoadingTroughBox.troughNumber,
         boxNumber: endedLoadingTroughBox.boxNumber,
-        date: endedLoadingTroughBox.date
-    );
+        date: endedLoadingTroughBox.date);
 
     _endedLoadingTroughBoxItems.add(endedLoadingTroughBox);
     notifyListeners();
   }
 
-  bool isTroughBoxEnded (int troughNumber, int boxNumber, DateTime dateTime){
+  bool isTroughBoxEnded(int troughNumber, int boxNumber, DateTime dateTime) {
     bool value = false;
     _endedLoadingTroughBoxItems.forEach((endedLoadingTroughBox) {
       if ((endedLoadingTroughBox.date.year == dateTime.year) &&
           (endedLoadingTroughBox.date.month == dateTime.month) &&
-          (endedLoadingTroughBox.date.day == dateTime.day)){
-        if(endedLoadingTroughBox.troughNumber == troughNumber && endedLoadingTroughBox.boxNumber == boxNumber){
+          (endedLoadingTroughBox.date.day == dateTime.day)) {
+        if (endedLoadingTroughBox.troughNumber == troughNumber &&
+            endedLoadingTroughBox.boxNumber == boxNumber) {
           value = true;
         }
       }
     });
     return value;
   }
-
-
 
   //----------------Big Bulk -------------------
 
@@ -338,33 +358,33 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   //----------------Rolling Input -------------------
 
-  List<Rolling> _rollingInputItems = [];
-
-  List<Rolling> get rollingInputItems {
-    return [..._rollingInputItems];
-  }
-
-  int get rollingInputItemCount {
-    return _rollingInputItems.length;
-  }
-
-  Rolling findById(String id) {
-    return _rollingInputItems.firstWhere((rolling) => rolling.id == id);
-  }
-
-  void addRollingInputItem(Rolling rolling) {
-    final newRollingInputItem = Rolling(
-      id: DateTime.now().toString(),
-      batchNumber: rolling.batchNumber,
-      rollingTurn: rolling.rollingTurn,
-      rollerNumber: rolling.rollerNumber,
-      weight: rolling.weight,
-      time: DateTime.now(),
-    );
-
-    _rollingInputItems.add(rolling);
-    notifyListeners();
-  }
+//  List<Rolling> _rollingInputItems = [];
+//
+//  List<Rolling> get rollingInputItems {
+//    return [..._rollingInputItems];
+//  }
+//
+//  int get rollingInputItemCount {
+//    return _rollingInputItems.length;
+//  }
+//
+//  Rolling findById(String id) {
+//    return _rollingInputItems.firstWhere((rolling) => rolling.id == id);
+//  }
+//
+//  void addRollingInputItem(Rolling rolling) {
+//    final newRollingInputItem = Rolling(
+//      id: DateTime.now().toString(),
+//      batchNumber: rolling.batchNumber,
+//      rollingTurn: rolling.rollingTurn,
+//      rollerNumber: rolling.rollerNumber,
+//      weightIn: rolling.weightIn,
+//      time: DateTime.now(),
+//    );
+//
+//    _rollingInputItems.add(rolling);
+//    notifyListeners();
+//  }
 
   //----------------Rolling Output -------------------
 
@@ -388,13 +408,106 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       batchNumber: rolling.batchNumber,
       rollingTurn: rolling.rollingTurn,
       rollerNumber: rolling.rollerNumber,
-      weight: rolling.weight,
+      weightIn: rolling.weightIn,
+      weightOut: rolling.weightOut,
       time: DateTime.now(),
     );
 
     _rollingOutputItems.add(rolling);
     notifyListeners();
   }
+
+  bool isBatchRollingTurnAlreadyUsed(int batchNumber, int rollingTurn, DateTime dateTime){
+    bool value = false;
+    _rollingOutputItems.forEach((rollingOutput) {
+      if ((rollingOutput.time.year == dateTime.year) &&
+          (rollingOutput.time.month == dateTime.month) &&
+          (rollingOutput.time.day == dateTime.day)){
+        if(rollingOutput.batchNumber == batchNumber && rollingOutput.rollingTurn == rollingTurn){
+          value = true;
+        }
+      }
+    });
+    return value;
+  }
+
+  bool isBatchEnded (int batchNumber, DateTime dateTime){
+    bool value = false;
+    _bigBulkItems.forEach((bigBulk) {
+      if ((bigBulk.time.year == dateTime.year) &&
+          (bigBulk.time.month == dateTime.month) &&
+          (bigBulk.time.day == dateTime.day)){
+        if(bigBulk.bigBulkNumber == batchNumber){
+          value = true;
+        }
+      }
+    });
+    return value;
+  }
+
+  bool isBatchMade (int batchNumber, DateTime dateTime){
+    bool value = false;
+    _batchItems.forEach((batch) {
+      if ((batch.time.year == dateTime.year) &&
+          (batch.time.month == dateTime.month) &&
+          (batch.time.day == dateTime.day)){
+        if(batch.batchNumber == batchNumber){
+          value = true;
+        }
+      }
+    });
+    return value;
+  }
+
+//  int inputedBatchRollingTurn(int batchNumber, DateTime dateTime){
+//    int rollingTurn = 0;
+//    _rollingInputItems.forEach((rollingInput) {
+//      if ((rollingInput.time.year == dateTime.year) &&
+//          (rollingInput.time.month == dateTime.month) &&
+//          (rollingInput.time.day == dateTime.day)){
+//        if(rollingInput.batchNumber == batchNumber){
+//          rollingTurn = rollingInput.rollingTurn;
+//        }
+//      }
+//    });
+//    return rollingTurn;
+//  }
+//
+//  int inputedBatchRollerNumber(int batchNumber, DateTime dateTime){
+//    int rollerNumber = 0;
+//    _rollingInputItems.forEach((rollingInput) {
+//      if ((rollingInput.time.year == dateTime.year) &&
+//          (rollingInput.time.month == dateTime.month) &&
+//          (rollingInput.time.day == dateTime.day)){
+//        if(rollingInput.batchNumber == batchNumber){
+//          rollerNumber = rollingInput.rollerNumber;
+//        }
+//      }
+//    });
+//    return rollerNumber;
+//  }
+//
+//  bool isBatchInputedForAParticularTurn(int batchNumber, int rollingTurn, DateTime dateTime){
+//    bool value = false;
+//    _rollingInputItems.forEach((rollingInput) {
+//      if ((rollingInput.time.year == dateTime.year) &&
+//          (rollingInput.time.month == dateTime.month) &&
+//          (rollingInput.time.day == dateTime.day)){
+//        if(rollingInput.batchNumber == batchNumber && rollingInput.rollingTurn == rollingTurn){
+//          _rollingOutputItems.forEach((rollingOutput) {
+//            if ((rollingOutput.time.year == dateTime.year) &&
+//                (rollingOutput.time.month == dateTime.month) &&
+//                (rollingOutput.time.day == dateTime.day)){
+//              if(rollingOutput.batchNumber != batchNumber && rollingOutput.rollingTurn != rollingTurn){
+//                value = true;
+//              }
+//            }
+//          });
+//        }
+//      }
+//    });
+//    return value;
+//  }
 
 //----------------Roll Breaking -------------------
 

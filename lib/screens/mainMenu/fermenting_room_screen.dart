@@ -16,7 +16,7 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
       dhoolNumber: null,
       time: null,
       dhoolInWeight: null,
-      dhoolOutWeight: null);
+      dhoolOutWeight: null,);
 
   void _saveFermentingProviderDetails() {
     final isValid = _formKeyFermenting.currentState.validate();
