@@ -16,6 +16,8 @@ class _LoginScreenState extends State<LoginScreen> {
     obscureText: false,
     style: style,
     decoration: InputDecoration(
+      filled: true,
+      fillColor: Colors.white.withOpacity(0.9),
       contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
       hintText: "Email",
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
@@ -26,6 +28,8 @@ class _LoginScreenState extends State<LoginScreen> {
     obscureText: true,
     style: style,
     decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.white.withOpacity(0.9),
         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         hintText: "Password",
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
@@ -57,42 +61,55 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Colors.white, fontWeight: FontWeight.bold)),
       ),
     );
-    return Scaffold(
-      body: Center(
-        child: Container(
-          color: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.3,
-                    child: Image.asset(
-                      "images/logo.jpg",
-                      fit: BoxFit.contain,
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("images/bg1.jpg"),
+          fit: BoxFit.cover,
+          colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Center(
+          child: Container(
+//            color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50.0),
+                      border: Border.all(color: Colors.black, width: 4.0)),
+                      height: MediaQuery.of(context).size.height * 0.3,
+                      child: Image.asset(
+                        "images/logo.jpg",
+                        fit: BoxFit.contain,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.15),
-                  Container(
-                    child: emailField,
-                    height: MediaQuery.of(context).size.height * 0.1,
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-                  Container(
-                    child: passwordField,
-                    height: MediaQuery.of(context).size.height * 0.1,
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.05,
-                  ),
-                  loginButon,
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.1,
-                  ),
-                ],
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.15),
+                    Container(
+                      child: emailField,
+                      height: MediaQuery.of(context).size.height * 0.1,
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                    Container(
+                      child: passwordField,
+                      height: MediaQuery.of(context).size.height * 0.1,
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                    ),
+                    loginButon,
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
