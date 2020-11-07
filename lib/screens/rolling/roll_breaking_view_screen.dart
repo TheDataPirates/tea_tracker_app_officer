@@ -18,22 +18,53 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
     time: null,
   );
 
-  void _saveBigBulkDetails() {
-    Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-            listen: false)
-        .addBigBulkItem(_bigBulk);
+  Future<void> _saveBigBulkDetails(String token) async {
+    try {
+      await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+              listen: false)
+          .addBigBulkItem(_bigBulk, token);
 
-    print(_bigBulk.bigBulkNumber);
-    print(_bigBulk.bigBulkWeight);
+      print(_bigBulk.bigBulkNumber);
+      print(_bigBulk.bigBulkWeight);
 
-    Navigator.of(context).pushNamed('MainMenu');
+      Navigator.of(context).pushNamed('MainMenu');
+    } catch (error) {
+      await showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: AlertDialog(
+                title: const Text('Warning !'),
+                content: ListBody(
+                  children: <Widget>[
+                    const Text('Error has occured'),
+                    Text(error.toString()),
+                  ],
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('Okay'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-//    final rollBreaking = Provider.of<WitheringLoadingUnloadingRollingProvider>(
-//        context,
-//        listen: false);
+    final rollBreaking = Provider.of<WitheringLoadingUnloadingRollingProvider>(
+        context,
+        listen: false);
     final token = Provider.of<Auth>(context, listen: false).token;
     return Scaffold(
       appBar: AppBar(
@@ -143,18 +174,18 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
                         onPressed: () {
                           // Alert dialog should be shown and if yes store the bigbulk weight from the batch weight method in withering loading unloading rolling provider as the big bulk number equal to the batch number
 
-//                          _bigBulk = BigBulk(
-//                            id: DateTime.now().toString(),
-//                            bigBulkNumber:
-//                                rollBreaking.latestRollBreakingBatch(),
-//                            bigBulkWeight: rollBreaking.batchWeight(
-//                                rollBreaking.latestRollBreakingBatch(),
-//                                DateTime.now(),
-//                                rollBreaking.latestRollBreakingTurn() + 1),
-//                            time: DateTime.now(),
-//                          );
-//
-//                          _saveBigBulkDetails();
+                          _bigBulk = BigBulk(
+                            id: DateTime.now().toString(),
+                            bigBulkNumber:
+                                rollBreaking.latestRollBreakingBatch(),
+                            bigBulkWeight: rollBreaking.batchWeight(
+                                rollBreaking.latestRollBreakingBatch(),
+                                DateTime.now(),
+                                rollBreaking.latestRollBreakingTurn() + 1),
+                            time: DateTime.now(),
+                          );
+
+                          _saveBigBulkDetails(token);
                         },
                       ),
                       TextButton(

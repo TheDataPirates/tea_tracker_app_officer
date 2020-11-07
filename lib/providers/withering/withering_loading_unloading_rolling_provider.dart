@@ -208,16 +208,38 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return _bigBulkItems.firstWhere((bigBulk) => bigBulk.id == id);
   }
 
-  void addBigBulkItem(BigBulk bigBulk) {
+  Future<void> addBigBulkItem(BigBulk bigBulk, String authToken) async {
     final newBigBulkItem = BigBulk(
       id: DateTime.now().toString(),
       bigBulkNumber: bigBulk.bigBulkNumber,
       bigBulkWeight: bigBulk.bigBulkWeight,
       time: DateTime.now(),
     );
-
-    _bigBulkItems.add(bigBulk);
-    notifyListeners();
+    const url = 'http://10.0.2.2:8080/rolling/rbreaking';
+    try {
+      final response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'id': DateTime.now().toIso8601String(),
+          'batchNumber': bigBulk.bigBulkNumber,
+          'time': DateTime.now().toIso8601String(),
+          'rollBreakingTurn': 'BB',
+          'weight': bigBulk.bigBulkWeight,
+        }),
+      );
+      if (response.statusCode == 200) {
+        _bigBulkItems.add(bigBulk);
+        notifyListeners();
+      } else {
+        throw Exception('Failed ');
+      }
+    } catch (error) {
+      throw error;
+    }
   }
 
   //----------------Rolling Input -------------------
@@ -319,7 +341,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
           'id': DateTime.now().toIso8601String(),
           'batchNumber': rollBreaking.batchNumber,
           'time': DateTime.now().toIso8601String(),
-          'rollBreakingTurn': rollBreaking.rollBreakingTurn,
+          'rollBreakingTurn': rollBreaking.rollBreakingTurn.toString(),
           'rollBreakerNumber': rollBreaking.rollBreakerNumber,
           'weight': rollBreaking.weight,
         }),
