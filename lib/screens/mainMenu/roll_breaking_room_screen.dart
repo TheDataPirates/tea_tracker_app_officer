@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/rolling/roll_breaking.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 
@@ -18,7 +19,8 @@ class _RollBreakingRoomScreenState extends State<RollBreakingRoomScreen> {
       rollBreakerNumber: null,
       weight: null);
 
-  void _saveRollBreakingProviderDetails() {
+  Future<void> _saveRollBreakingProviderDetails() async {
+    final authToken = Provider.of<Auth>(context, listen: false).token;
     final isValid = _formKeyRollBreaking.currentState.validate();
 
     if (!isValid) {
@@ -26,12 +28,42 @@ class _RollBreakingRoomScreenState extends State<RollBreakingRoomScreen> {
     }
 
     _formKeyRollBreaking.currentState.save();
+    try {
+      await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+              listen: false)
+          .addRollBreakingItem(_rollBreaking, authToken);
 
-    Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-            listen: false)
-        .addRollBreakingItem(_rollBreaking);
-
-    Navigator.of(context).pushNamed('RollBreakingView');
+      Navigator.of(context).pushNamed('RollBreakingView');
+    } catch (e) {
+      await showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: AlertDialog(
+                title: const Text('Warning !'),
+                content: ListBody(
+                  children: <Widget>[
+                    const Text('Error has occured'),
+                    Text(e.toString()),
+                  ],
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('Okay'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
   }
 
   @override

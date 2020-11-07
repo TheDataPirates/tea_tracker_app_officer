@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:teatrackerappofficer/providers/rolling/big_bulk.dart';
 import 'package:teatrackerappofficer/providers/rolling/drying.dart';
@@ -7,6 +10,7 @@ import 'package:teatrackerappofficer/providers/rolling/rolling.dart';
 import 'package:teatrackerappofficer/providers/withering/batch.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_unloading.dart';
+import 'package:http/http.dart' as http;
 
 class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   //----------------Batch -------------------
@@ -293,7 +297,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         .firstWhere((rollBreaking) => rollBreaking.id == id);
   }
 
-  void addRollBreakingItem(RollBreaking rollBreaking) {
+  Future<void> addRollBreakingItem(
+      RollBreaking rollBreaking, String authToken) async {
     final newRollBreakingItem = RollBreaking(
       id: DateTime.now().toString(),
       batchNumber: rollBreaking.batchNumber,
@@ -302,9 +307,65 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       weight: rollBreaking.weight,
       time: DateTime.now(),
     );
+    const url = 'http://10.0.2.2:8080/rolling/rbreaking';
+    try {
+      final response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'id': DateTime.now().toIso8601String(),
+          'batchNumber': rollBreaking.batchNumber,
+          'time': DateTime.now().toIso8601String(),
+          'rollBreakingTurn': rollBreaking.rollBreakingTurn,
+          'rollBreakerNumber': rollBreaking.rollBreakerNumber,
+          'weight': rollBreaking.weight,
+        }),
+      );
+      if (response.statusCode == 200) {
+        _rollBreakingItems.add(rollBreaking);
+        notifyListeners();
+      } else {
+        throw Exception('Failed ');
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
 
-    _rollBreakingItems.add(rollBreaking);
-    notifyListeners();
+  Future<void> fetchAndSetWitheringRollBreakingItem(String authToken) async {
+    _rollBreakingItems = [];
+    const url = 'http://10.0.2.2:8080/rolling/rbreakings';
+    try {
+      final dataList = await http.get(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+      );
+      final extractedDataList = jsonDecode(dataList.body);
+//      print(extractedDataList);
+      List loadedLots = extractedDataList['rollbreakings'];
+      print(loadedLots);
+      for (var i in loadedLots) {
+        _rollBreakingItems.add(
+          RollBreaking(
+            id: i['id'] as String,
+            batchNumber: int.parse(i['batch_no'].toString()),
+            time: DateTime.parse(i['rb_out_time']),
+            rollBreakerNumber: int.parse(i['rb_id'].toString()),
+            rollBreakingTurn: int.parse(i['rb_turn'].toString()),
+            weight: double.parse(i['dhool_out_weight'].toString()),
+          ),
+        );
+      }
+      notifyListeners();
+    } catch (error) {
+      print(error);
+    }
   }
 
   int latestRollBreakingBatch() {
@@ -487,5 +548,11 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     });
     totOutturn = (totOut / totIn) * 100.0;
     return totOutturn;
+  }
+
+  String getCurrentDate() {
+    final now = formatDate(DateTime.now(), [yyyy, '-', mm, '-', dd]);
+
+    return now;
   }
 }
