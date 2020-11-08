@@ -28,7 +28,7 @@ class Auth with ChangeNotifier {
   }
 
   Future<void> login(String userId, String password) async {
-    logout();
+//    logout();
     const url = 'http://10.0.2.2:8080/auth/login';
     try {
       final response = await http.post(
