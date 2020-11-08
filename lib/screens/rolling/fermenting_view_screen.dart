@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/widgets/fermenting_item.dart';
 
 class FermentingViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final fermenting =
-        Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
+    final token = Provider.of<Auth>(context, listen: false).token;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Fermenting View'),
@@ -22,21 +23,48 @@ class FermentingViewScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-              child: ListView.builder(
-            itemCount: fermenting.fermentingItems.length,
-            itemBuilder: (ctx, i) => FermentingItem(
-              id: fermenting.fermentingItems[i].id,
-              batchNumber: fermenting.fermentingItems[i].batchNumber,
-              dhoolNumber: fermenting.fermentingItems[i].dhoolNumber,
-              time: fermenting.fermentingItems[i].time,
-              dhoolInWeight: fermenting.fermentingItems[i].dhoolInWeight,
-              dhoolOutWeight: fermenting.fermentingItems[i].dhoolOutWeight,
-            ),
-          ))
-        ],
+      body: FutureBuilder(
+        future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+                listen: false)
+            .fetchAndSetFermentingItem(token),
+        builder: (ctx, snapshot) => snapshot.connectionState ==
+                ConnectionState.waiting
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Consumer<WitheringLoadingUnloadingRollingProvider>(
+                child: Center(
+                  child: const Text(
+                      'Got no Withering roll breaking items found yet, start adding some!'),
+                ),
+                builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
+                    WitheringLoadingUnloadingRollingProvider
+                                .fermentingItems.length <=
+                            0
+                        ? ch
+                        : ListView.builder(
+                            itemCount: WitheringLoadingUnloadingRollingProvider
+                                .fermentingItems.length,
+                            itemBuilder: (ctx, i) => FermentingItem(
+                              id: WitheringLoadingUnloadingRollingProvider
+                                  .fermentingItems[i].id,
+                              batchNumber:
+                                  WitheringLoadingUnloadingRollingProvider
+                                      .fermentingItems[i].batchNumber,
+                              dhoolNumber:
+                                  WitheringLoadingUnloadingRollingProvider
+                                      .fermentingItems[i].dhoolNumber,
+                              time: WitheringLoadingUnloadingRollingProvider
+                                  .fermentingItems[i].time,
+                              dhoolInWeight:
+                                  WitheringLoadingUnloadingRollingProvider
+                                      .fermentingItems[i].dhoolInWeight,
+                              dhoolOutWeight:
+                                  WitheringLoadingUnloadingRollingProvider
+                                      .fermentingItems[i].dhoolOutWeight,
+                            ),
+                          ),
+              ),
       ),
       floatingActionButton: Container(
         height: 70.0,

@@ -194,13 +194,15 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return value;
   }
 
-  bool isTroughBoxLoaded(int troughNo, int boxNo, DateTime dateTime){
+  bool isTroughBoxLoaded(int troughNo, int boxNo, DateTime dateTime) {
     bool value = false;
     _troughLoadingItems.forEach((troughLoading) {
       if ((troughLoading.date.year == dateTime.year) &&
           (troughLoading.date.month == dateTime.month) &&
-          ((troughLoading.date.day == dateTime.day) || (troughLoading.date.day == dateTime.day - 1))){
-        if(troughLoading.troughNumber == troughNo && troughLoading.boxNumber == boxNo){
+          ((troughLoading.date.day == dateTime.day) ||
+              (troughLoading.date.day == dateTime.day - 1))) {
+        if (troughLoading.troughNumber == troughNo &&
+            troughLoading.boxNumber == boxNo) {
           value = true;
         }
       }
@@ -443,13 +445,15 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  bool isBatchRollingTurnAlreadyUsed(int batchNumber, int rollingTurn, DateTime dateTime){
+  bool isBatchRollingTurnAlreadyUsed(
+      int batchNumber, int rollingTurn, DateTime dateTime) {
     bool value = false;
     _rollingOutputItems.forEach((rollingOutput) {
       if ((rollingOutput.time.year == dateTime.year) &&
           (rollingOutput.time.month == dateTime.month) &&
-          (rollingOutput.time.day == dateTime.day)){
-        if(rollingOutput.batchNumber == batchNumber && rollingOutput.rollingTurn == rollingTurn){
+          (rollingOutput.time.day == dateTime.day)) {
+        if (rollingOutput.batchNumber == batchNumber &&
+            rollingOutput.rollingTurn == rollingTurn) {
           value = true;
         }
       }
@@ -457,13 +461,13 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return value;
   }
 
-  bool isBatchEnded (int batchNumber, DateTime dateTime){
+  bool isBatchEnded(int batchNumber, DateTime dateTime) {
     bool value = false;
     _bigBulkItems.forEach((bigBulk) {
       if ((bigBulk.time.year == dateTime.year) &&
           (bigBulk.time.month == dateTime.month) &&
-          (bigBulk.time.day == dateTime.day)){
-        if(bigBulk.bigBulkNumber == batchNumber){
+          (bigBulk.time.day == dateTime.day)) {
+        if (bigBulk.bigBulkNumber == batchNumber) {
           value = true;
         }
       }
@@ -471,13 +475,13 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return value;
   }
 
-  bool isBatchMade (int batchNumber, DateTime dateTime){
+  bool isBatchMade(int batchNumber, DateTime dateTime) {
     bool value = false;
     _batchItems.forEach((batch) {
       if ((batch.time.year == dateTime.year) &&
           (batch.time.month == dateTime.month) &&
-          (batch.time.day == dateTime.day)){
-        if(batch.batchNumber == batchNumber){
+          (batch.time.day == dateTime.day)) {
+        if (batch.batchNumber == batchNumber) {
           value = true;
         }
       }
@@ -653,7 +657,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return _fermentingItems.firstWhere((ferment) => ferment.id == id);
   }
 
-  void addFermentingItem(Fermenting fermenting) {
+  Future<void> addFermentingItem(
+      Fermenting fermenting, String authToken) async {
     final newFermentingItem = Fermenting(
       id: DateTime.now().toString(),
       batchNumber: fermenting.batchNumber,
@@ -662,9 +667,65 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       dhoolOutWeight: fermenting.dhoolOutWeight,
       time: DateTime.now(),
     );
+    const url = 'http://10.0.2.2:8080/rolling/fermenting';
+    try {
+      final response = await http.patch(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'id': DateTime.now().toIso8601String(),
+          'batchNumber': newFermentingItem.batchNumber,
+          'time': DateTime.now().toIso8601String(),
+          'dhoolNumber': newFermentingItem.dhoolNumber.toString(),
+          'dhoolInWeight': newFermentingItem.dhoolInWeight,
+          'dhoolOutWeight': newFermentingItem.dhoolOutWeight,
+        }),
+      );
+      if (response.statusCode == 200) {
+        fermentingItems.add(newFermentingItem);
+        notifyListeners();
+      } else {
+        throw Exception('Failed ');
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
 
-    _fermentingItems.add(fermenting);
-    notifyListeners();
+  Future<void> fetchAndSetFermentingItem(String authToken) async {
+    _fermentingItems = [];
+    const url = 'http://10.0.2.2:8080/rolling/fermentings';
+    try {
+      final dataList = await http.get(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+      );
+      final extractedDataList = jsonDecode(dataList.body);
+//      print(extractedDataList);
+      List loadedLots = extractedDataList['fermentings'];
+      print(loadedLots);
+      for (var i in loadedLots) {
+        _fermentingItems.add(
+          Fermenting(
+            id: i['id'].toString(),
+            batchNumber: int.parse(i['batch_no'].toString()),
+            time: DateTime.parse(i['fd_time_out']),
+            dhoolInWeight: double.parse(i['dhool_out_weight'].toString()),
+            dhoolNumber: i['rb_turn'].toString(),
+            dhoolOutWeight: double.parse(i['fd_out_kg'].toString()),
+          ),
+        );
+      }
+      notifyListeners();
+    } catch (error) {
+      print(error);
+    }
   }
 
   double dhoolInputWeight(int batchNumber, DateTime dateTime, dhoolNum) {
