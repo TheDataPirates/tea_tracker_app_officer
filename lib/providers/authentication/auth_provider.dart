@@ -89,8 +89,8 @@ class Auth with ChangeNotifier {
   }
 
   Future<void> logout() async {
-    Duration tokenTime = JwtDecoder.getTokenTime(_token);
-    print(tokenTime.inSeconds);
+//    Duration tokenTime = JwtDecoder.getTokenTime(_token);
+//    print(tokenTime.inSeconds);
     print('pressed logout');
     _token = null;
     _user_id = null;

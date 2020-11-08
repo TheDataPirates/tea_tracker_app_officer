@@ -224,7 +224,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return _troughLoadingItems.firstWhere((troughLoad) => troughLoad.id == id);
   }
 
-  void addTroughLoadingItem(WitheringLoading troughLoading) {
+  Future<void> addTroughLoadingItem(WitheringLoading troughLoading, String authToken) async {
     final newTroughLoadingItem = WitheringLoading(
       id: DateTime.now().toString(),
       troughNumber: troughLoading.troughNumber,

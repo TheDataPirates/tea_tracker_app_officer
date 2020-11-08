@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,8 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
     date: null,
   );
 
-  void _saveTroughArrangementDetails() {//int troughN, int boxN, String leafG
+  Future<void> _saveTroughArrangementDetails() async {//int troughN, int boxN, String leafG
+    final authToken = Provider.of<Auth>(context, listen: false).token;
     final isValid = _formKeyTroughLoading.currentState.validate();
 
     if (!isValid) {
@@ -90,7 +92,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
 
       Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
           listen: false)
-          .addTroughLoadingItem(_troughLoading);
+          .addTroughLoadingItem(_troughLoading, authToken);
 
       Navigator.of(context).pushNamed('TroughLoadingView');
     }
