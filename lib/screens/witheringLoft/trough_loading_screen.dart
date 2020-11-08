@@ -84,20 +84,43 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
       );
     }else{
       _formKeyTroughLoading.currentState.save();
+      try{
+        Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+            listen: false)
+            .addTroughLoadingItem(_troughLoading, authToken);
 
-//    print(_troughLoading.troughNumber);
-//    print(_troughLoading.boxNumber);
-//    print(_troughLoading.gradeOfGL);
-//    print(_troughLoading.netWeight);
-
-      Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-          listen: false)
-          .addTroughLoadingItem(_troughLoading, authToken);
-
-      Navigator.of(context).pushNamed('TroughLoadingView');
+        Navigator.of(context).pushNamed('TroughLoadingView');
+      }catch (error) {
+        await showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: AlertDialog(
+                  title: const Text('Warning !'),
+                  content: ListBody(
+                    children: <Widget>[
+                      const Text('Error has occured'),
+                      Text(error.toString()),
+                    ],
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      child: const Text('Okay'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      }
     }
-
-
   }
 
   final _troughNum = TextEditingController();

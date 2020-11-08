@@ -233,9 +233,67 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       netWeight: troughLoading.netWeight,
       date: DateTime.now(),
     );
+    const url = 'http://10.0.2.2:8080/loft/loading';
 
-    _troughLoadingItems.add(troughLoading);
-    notifyListeners();
+    try {
+      final response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'id': DateTime.now().toIso8601String(),
+          'troughNumber': troughLoading.troughNumber,
+          'date': getCurrentDate(),
+          'boxNumber': troughLoading.boxNumber,
+          'gradeOfGL': troughLoading.gradeOfGL,
+          'netWeight': troughLoading.netWeight,
+        }),
+      );
+      if (response.statusCode == 200) {
+        _troughLoadingItems.add(troughLoading);
+        notifyListeners();
+      } else {
+        throw Exception('Failed ');
+      }
+    } catch (error) {
+      throw error;
+    }
+
+  }
+
+  Future<void> fetchAndSetTroughLoadingItem(String authToken) async {
+    _troughLoadingItems = [];
+    const url = 'http://10.0.2.2:8080/loft/loadings';
+    try {
+      final dataList = await http.get(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+      );
+      final extractedDataList = jsonDecode(dataList.body);
+//      print(extractedDataList);
+      List loadedLots = extractedDataList['loadings'];
+      print(loadedLots);
+      for (var i in loadedLots) {
+        _troughLoadingItems.add(
+          WitheringLoading(
+            id: i['load_bulk_box_id'] as String,
+            troughNumber: i['trough_number'] as int,
+            date: DateTime.parse(i['date']),
+            netWeight: double.parse(i['net_weight'].toString()),
+            boxNumber: i['BoxBoxId'] as int,
+            gradeOfGL: i['leaf_grade'] as String,
+          ),
+        );
+      }
+      notifyListeners();
+    } catch (error) {
+      print(error);
+    }
   }
 
   int latestAddedLoadingTroughNumber() {
@@ -305,7 +363,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         .firstWhere((troughLoadEnd) => troughLoadEnd.id == id);
   }
 
-  void addEndedLoadingTroughBoxItem(
+  void addEndedLoadingTroughBoxItem (
       EndedLoadingTroughBox endedLoadingTroughBox) {
     final newEndedTroughLoadingItem = EndedLoadingTroughBox(
         id: DateTime.now().toString(),
