@@ -66,7 +66,7 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
                 child: ListBody(
                   children: <Widget>[
                     Text('An error occurred'),
-                    Text('Something went wrong'),
+                    Text(error.toString()),
                   ],
                 ),
               ),
