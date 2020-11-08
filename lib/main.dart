@@ -77,7 +77,7 @@ class MyApp extends StatelessWidget {
       child: Consumer<Auth>(
         builder: (ctx, auth, _) => MaterialApp(
           theme: ThemeData(
-            primarySwatch: Colors.green,
+            primarySwatch: Colors.lightGreen,
             accentColor: Colors.greenAccent,
             textTheme: TextTheme(bodyText1: TextStyle(color: Colors.white)),
           ),
