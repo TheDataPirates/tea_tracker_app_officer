@@ -281,12 +281,12 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       for (var i in loadedLots) {
         _troughLoadingItems.add(
           WitheringLoading(
-            id: i['load_bulk_box_id'] as String,
-            troughNumber: i['trough_number'] as int,
+            id: i['load_bulk_box_id'].toString(),
+            troughNumber: int.parse(i['trough_number'].toString()),
             date: DateTime.parse(i['date']),
             netWeight: double.parse(i['net_weight'].toString()),
-            boxNumber: i['BoxBoxId'] as int,
-            gradeOfGL: i['leaf_grade'] as String,
+            boxNumber: int.parse(i['box_number'].toString()),
+            gradeOfGL: i['leaf_grade'].toString(),
           ),
         );
       }

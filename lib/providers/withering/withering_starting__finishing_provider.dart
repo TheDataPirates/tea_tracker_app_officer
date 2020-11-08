@@ -89,6 +89,22 @@ class WitheringStartingFinishingProvider with ChangeNotifier {
     }
   }
 
+  bool isTroughStarted (int troughNumber, DateTime dateTime){
+    bool value = false;
+    _witheringStartingItems.forEach((troughStarting) {
+      if ((troughStarting.time.year == dateTime.year) &&
+          (troughStarting.time.month == dateTime.month) &&
+          (troughStarting.time.day == dateTime.day)){
+        if(troughStarting.troughNumber == troughNumber){
+          value = true;
+        }
+      }
+    });
+    return value;
+  }
+
+  //--------------------------- Withering Finishing ----------------------
+
   List<WitheringStartingFinishing> _witheringFinishingItems = [];
   List<WitheringStartingFinishing> get witheringFinishingItems {
     return [..._witheringFinishingItems];
