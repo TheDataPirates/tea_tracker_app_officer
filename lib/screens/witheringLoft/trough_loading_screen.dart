@@ -19,25 +19,94 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
     date: null,
   );
 
-  void _saveTroughArrangementDetails() {
+  void _saveTroughArrangementDetails() {//int troughN, int boxN, String leafG
     final isValid = _formKeyTroughLoading.currentState.validate();
 
     if (!isValid) {
       return;
     }
 
-    _formKeyTroughLoading.currentState.save();
+    if(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isTroughBoxEnded(int.parse(_troughNum.text), int.parse(_boxNum.text), DateTime.now())){
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('You have already ended trough ' + '${int.parse(_troughNum.text)}' + ' box ' + '${int.parse(_boxNum.text)}'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  const Text('Please enter a different batch number !'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  return;
+                },
+              ),
+            ],
+          );
+        },
+      );
+//    print(batchNo);
+//    return;
+    }else if(!Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isTroughBoxLeafGradeCorrect(int.parse(_troughNum.text), int.parse(_boxNum.text), _leafGrade.text, DateTime.now())){
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('You have already entered different leaf grade in trough ' + '${int.parse(_troughNum.text)}' + ' box ' + '${int.parse(_boxNum.text)}'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  const Text('Please check the Leaf Grade !'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  return;
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }else{
+      _formKeyTroughLoading.currentState.save();
 
 //    print(_troughLoading.troughNumber);
 //    print(_troughLoading.boxNumber);
 //    print(_troughLoading.gradeOfGL);
 //    print(_troughLoading.netWeight);
 
-    Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-            listen: false)
-        .addTroughLoadingItem(_troughLoading);
+      Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+          listen: false)
+          .addTroughLoadingItem(_troughLoading);
 
-    Navigator.of(context).pushNamed('TroughLoadingView');
+      Navigator.of(context).pushNamed('TroughLoadingView');
+    }
+
+
+  }
+
+  final _troughNum = TextEditingController();
+  final _boxNum = TextEditingController();
+  final _leafGrade = TextEditingController();
+
+  void dispose() {
+    _troughNum.dispose();
+    _boxNum.dispose();
+    _leafGrade.dispose();
+    super.dispose();
   }
 
   @override
@@ -53,7 +122,9 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.check),
-            onPressed: _saveTroughArrangementDetails,
+            onPressed: (){
+              _saveTroughArrangementDetails();//int.parse(_troughNum.text), int.parse(_boxNum.text), _leafGrade.text
+            },
             disabledColor: Colors.white,
             iconSize: 35.0,
           )
@@ -72,6 +143,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
+                      controller: _troughNum,
                       decoration: const InputDecoration(
                         labelText: 'Trough Number : ',
                         errorStyle: const TextStyle(
@@ -116,6 +188,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
+                      controller: _boxNum,
                       decoration: const InputDecoration(
                         labelText: 'Box Number : ',
                         errorStyle: const TextStyle(
@@ -163,6 +236,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
+                      controller: _leafGrade,
                       decoration: const InputDecoration(
                         labelText: 'Grade of GL : ',
                         errorStyle: const TextStyle(

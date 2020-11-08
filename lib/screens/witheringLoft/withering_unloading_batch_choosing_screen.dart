@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
@@ -14,23 +16,66 @@ class _WitheringUnloadingBatchChoosingScreenState
   final _formKeyWitheringUnloadingBatchChoosing = GlobalKey<FormState>();
   var batchNumberItem;
 
-  void _saveWitheringUnloadingBatchNumberItem() {
+  void _saveWitheringUnloadingBatchNumberItem(int batchNo) {
     final isValid = _formKeyWitheringUnloadingBatchChoosing.currentState.validate();
 
     if (!isValid) {
       return;
     }
 
-    _formKeyWitheringUnloadingBatchChoosing.currentState.save();
+//    print(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isBatchNumberUsed(batchNo));
 
-    Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
-        .addWitheringUnloadingBatchNumberItem(batchNumberItem);
+    if(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isBatchNumberUsed(batchNo, DateTime.now())){
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('You have already made batch ' + '$batchNo'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  const Text('Please enter a different batch number !'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  return;
+                },
+              ),
+            ],
+          );
+        },
+      );
+//    print(batchNo);
+//    return;
+    }else{
+      _formKeyWitheringUnloadingBatchChoosing.currentState.save();
+
+      Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
+          .addWitheringUnloadingBatchNumberItem(batchNumberItem);
 
 //    Provider.of<WitheringLoadingUnloadingProvider>(context, listen: false)
 //        .witheringUnloadingItems.clear();
 
-    Navigator.of(context).pushNamed('WitheringUnloading');
+      Navigator.of(context).pushNamed('WitheringUnloading');
+    }
+
+
   }
+
+  final _batchNum = TextEditingController();
+
+  void dispose() {
+    _batchNum.dispose();
+
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +84,18 @@ class _WitheringUnloadingBatchChoosingScreenState
 
     final _width = MediaQuery.of(context).size.width;
 
+//    int batchNum = 0;
+
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Withering Unloading Batch Choosing'),
         actions: [
           IconButton(
             icon: const Icon(Icons.check),
-            onPressed: _saveWitheringUnloadingBatchNumberItem,
+            onPressed: (){
+              _saveWitheringUnloadingBatchNumberItem(int.parse(_batchNum.text));
+            },
             disabledColor: Colors.white,
             iconSize: 35.0,
           )
@@ -64,6 +114,7 @@ class _WitheringUnloadingBatchChoosingScreenState
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
+                      controller: _batchNum,
                       decoration: const InputDecoration(
                           labelText: 'Batch Number : ',
                           errorStyle: const TextStyle(
@@ -77,6 +128,7 @@ class _WitheringUnloadingBatchChoosingScreenState
                       style: const TextStyle(
                           fontSize: 30.0, fontWeight: FontWeight.bold),
                       validator: (value) {
+//                        batchNum = int.parse(value);
                         if (value.isEmpty) {
                           return 'Please Enter Batch Number !';
                         }

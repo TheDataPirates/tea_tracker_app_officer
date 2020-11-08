@@ -5,7 +5,8 @@ class Rolling with ChangeNotifier {
   final int batchNumber;
   final int rollingTurn;
   final int rollerNumber;
-  final double weight;
+  final double weightIn;
+  final double weightOut;
   final DateTime time;
 
   Rolling({
@@ -13,7 +14,8 @@ class Rolling with ChangeNotifier {
     @required this.batchNumber,
     @required this.rollingTurn,
     @required this.rollerNumber,
-    @required this.weight,
+    @required this.weightIn,
     @required this.time,
+    @required this.weightOut,
   });
 }

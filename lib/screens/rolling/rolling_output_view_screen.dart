@@ -32,7 +32,8 @@ class RollingOutputViewScreen extends StatelessWidget {
                   rollingTurn: rollingOutput.rollingOutputItems[i].rollingTurn,
                   time: rollingOutput.rollingOutputItems[i].time,
                   rollerNumber: rollingOutput.rollingOutputItems[i].rollerNumber,
-                  weight: rollingOutput.rollingOutputItems[i].weight,
+                  weightIn: rollingOutput.rollingOutputItems[i].weightIn,
+                  weightOut: rollingOutput.rollingOutputItems[i].weightOut,
                 ),
               ))
         ],
@@ -44,7 +45,7 @@ class RollingOutputViewScreen extends StatelessWidget {
           child: FloatingActionButton(
             child: const Icon(Icons.add, color: Colors.white,size: 40.0,),
             onPressed: (){
-              Navigator.of(context).pushNamed('RollingOutput');
+              Navigator.of(context).pushNamed('RollingRoom');
             },
             backgroundColor: Colors.green,
           ),
