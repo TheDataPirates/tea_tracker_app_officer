@@ -695,6 +695,34 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return rollBreakingNumber;
   }
 
+  bool isBatchRollBreakingTurnAlreadyUsed(int batchNumber, int rollBreakingTurn, DateTime dateTime){
+    bool value = false;
+    _rollBreakingItems.forEach((rollBreaking) {
+      if ((rollBreaking.time.year == dateTime.year) &&
+          (rollBreaking.time.month == dateTime.month) &&
+          (rollBreaking.time.day == dateTime.day)){
+        if(rollBreaking.batchNumber == batchNumber && rollBreaking.rollBreakingTurn == rollBreakingTurn){
+          value = true;
+        }
+      }
+    });
+    return value;
+  }
+
+  bool isDhoolMade(int batchNumber, int dhoolNumber, DateTime dateTime){
+    bool value = false;
+    _rollBreakingItems.forEach((rollBreaking) {
+      if ((rollBreaking.time.year == dateTime.year) &&
+          (rollBreaking.time.month == dateTime.month) &&
+          (rollBreaking.time.day == dateTime.day)){
+        if(rollBreaking.batchNumber == batchNumber && rollBreaking.rollBreakingTurn == dhoolNumber){
+          value = true;
+        }
+      }
+    });
+    return value;
+  }
+
   //----------------Fermenting -------------------
 
   List<Fermenting> _fermentingItems = [];
@@ -751,6 +779,20 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       }
     });
     return dIWeight;
+  }
+
+  bool isFermentedDhoolMade(int batchNumber, int dhoolNumber, DateTime dateTime){
+    bool value = false;
+    _fermentingItems.forEach((fermenting) {
+      if ((fermenting.time.year == dateTime.year) &&
+          (fermenting.time.month == dateTime.month) &&
+          (fermenting.time.day == dateTime.day)){
+        if(fermenting.batchNumber == batchNumber && fermenting.dhoolNumber == dhoolNumber){
+          value = true;
+        }
+      }
+    });
+    return value;
   }
 
   //----------------Drying -------------------
