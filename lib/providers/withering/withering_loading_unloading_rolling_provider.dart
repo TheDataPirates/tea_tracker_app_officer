@@ -440,6 +440,20 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     }
   }
 
+  bool isBigBulkMade(int batchNumber, DateTime dateTime){
+    bool value = false;
+    _bigBulkItems.forEach((bigBulk) {
+      if ((bigBulk.time.year == dateTime.year) &&
+          (bigBulk.time.month == dateTime.month) &&
+          (bigBulk.time.day == dateTime.day)){
+        if(bigBulk.bigBulkNumber == batchNumber){
+          value = true;
+        }
+      }
+    });
+    return value;
+  }
+
   //----------------Rolling Input -------------------
 
 //  List<Rolling> _rollingInputItems = [];
@@ -709,7 +723,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return value;
   }
 
-  bool isDhoolMade(int batchNumber, int dhoolNumber, DateTime dateTime){
+  bool isDhoolMade(int batchNumber,  dhoolNumber, DateTime dateTime){
     bool value = false;
     _rollBreakingItems.forEach((rollBreaking) {
       if ((rollBreaking.time.year == dateTime.year) &&
@@ -781,13 +795,15 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return dIWeight;
   }
 
-  bool isFermentedDhoolMade(int batchNumber, int dhoolNumber, DateTime dateTime){
-    bool value = false;
+  bool isFermentedDhoolMade(int batchNumber, dhoolNumber, DateTime dateTime){
+    bool value = true;//this should be false to work the validations
     _fermentingItems.forEach((fermenting) {
       if ((fermenting.time.year == dateTime.year) &&
           (fermenting.time.month == dateTime.month) &&
           (fermenting.time.day == dateTime.day)){
+        print('saved fd ' + fermenting.dhoolNumber + ' batch ' + '${fermenting.batchNumber}');
         if(fermenting.batchNumber == batchNumber && fermenting.dhoolNumber == dhoolNumber){
+          print('value true saved fd ' + fermenting.dhoolNumber);
           value = true;
         }
       }

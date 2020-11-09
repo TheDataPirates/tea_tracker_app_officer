@@ -11,12 +11,13 @@ class FermentingRoomScreen extends StatefulWidget {
 class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
   final _formKeyFermenting = GlobalKey<FormState>();
   var _fermenting = Fermenting(
-      id: null,
-      batchNumber: null,
-      dhoolNumber: null,
-      time: null,
-      dhoolInWeight: null,
-      dhoolOutWeight: null,);
+    id: null,
+    batchNumber: null,
+    dhoolNumber: null,
+    time: null,
+    dhoolInWeight: null,
+    dhoolOutWeight: null,
+  );
 
   void _saveFermentingProviderDetails() {
     final isValid = _formKeyFermenting.currentState.validate();
@@ -25,13 +26,16 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
       return;
     }
 
-    if(!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isBatchMade(int.parse(_batchNum.text), DateTime.now()))){
+    if (!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+            listen: false)
+        .isBatchMade(int.parse(_batchNum.text), DateTime.now()))) {
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('You have not created batch ' + '${int.parse(_batchNum.text)}'),
+            title: Text(
+                'You have not created batch ' + '${int.parse(_batchNum.text)}'),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
@@ -51,47 +55,104 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
           );
         },
       );
-    }else if(!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isDhoolMade(int.parse(_batchNum.text), int.parse(_dhoolNum.text), DateTime.now()))){
-      showDialog<void>(
-        context: context,
-        barrierDismissible: false, // user must tap button!
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('You have not created dhool ' + '${int.parse(_dhoolNum.text)}'),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  const Text('Please enter a different dhool number !'),
-                ],
+    } else if (_dhoolNum.text != 'BB') {
+//      print('Enter != BB');
+      if (!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+              listen: false)
+          .isDhoolMade(int.parse(_batchNum.text), int.parse(_dhoolNum.text),
+              DateTime.now()))) {
+//        print('Enter != BB and isDhoolMade NO');
+        showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('You have not created dhool ' +
+                  '${int.parse(_dhoolNum.text)}'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    const Text('Please enter a different dhool number !'),
+                  ],
+                ),
               ),
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('OK'),
-                onPressed: () {
-                  Navigator.pop(context);
-                  return;
-                },
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('OK'),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    return;
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        _formKeyFermenting.currentState.save();
+
+        Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+                listen: false)
+            .addFermentingItem(_fermenting);
+
+        Navigator.of(context).pushNamed('FermentingView');
+      }
+    } else if (_dhoolNum.text == 'BB') {
+//      print('Enter == BB');
+      if (!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+              listen: false)
+          .isBigBulkMade(int.parse(_batchNum.text), DateTime.now()))) {
+//        print('Enter == BB and isBigBulkMade NO');
+        showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('You have not created bigbulk ' +
+                  '${int.parse(_batchNum.text)}'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    const Text('Please enter a different dhool number !'),
+                  ],
+                ),
               ),
-            ],
-          );
-        },
-      );
-    }else{
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('OK'),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    return;
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        //      print('Enter saving');
+        _formKeyFermenting.currentState.save();
+
+        Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+                listen: false)
+            .addFermentingItem(_fermenting);
+
+        Navigator.of(context).pushNamed('FermentingView');
+      }
+    } else {
+//      print('Enter saving');
       _formKeyFermenting.currentState.save();
 
       Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-          listen: false)
+              listen: false)
           .addFermentingItem(_fermenting);
 
       Navigator.of(context).pushNamed('FermentingView');
     }
-
   }
 
   final _batchNum = TextEditingController();
   final _dhoolNum = TextEditingController();
-
 
   void dispose() {
     _batchNum.dispose();
@@ -258,7 +319,7 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
                         if (value.isEmpty) {
                           return 'Please Enter Dhool Out Weight !';
                         }
-                        if (int.parse(value) <= 0 || int.parse(value) >= 300) {
+                        if (int.parse(value) <= 0 || int.parse(value) >= 301) {
                           return 'Please Enter A Valid Dhool Out Weight !';
                         }
                         return null;
