@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,8 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
     date: null,
   );
 
-  void _saveTroughArrangementDetails() {//int troughN, int boxN, String leafG
+  Future<void> _saveTroughArrangementDetails() async {//int troughN, int boxN, String leafG
+    final authToken = Provider.of<Auth>(context, listen: false).token;
     final isValid = _formKeyTroughLoading.currentState.validate();
 
     if (!isValid) {
@@ -82,20 +84,43 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
       );
     }else{
       _formKeyTroughLoading.currentState.save();
+      try{
+        await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+            listen: false)
+            .addTroughLoadingItem(_troughLoading, authToken);
 
-//    print(_troughLoading.troughNumber);
-//    print(_troughLoading.boxNumber);
-//    print(_troughLoading.gradeOfGL);
-//    print(_troughLoading.netWeight);
-
-      Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-          listen: false)
-          .addTroughLoadingItem(_troughLoading);
-
-      Navigator.of(context).pushNamed('TroughLoadingView');
+        Navigator.of(context).pushNamed('TroughLoadingView');
+      }catch (error) {
+        await showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: AlertDialog(
+                  title: const Text('Warning !'),
+                  content: ListBody(
+                    children: <Widget>[
+                      const Text('Error has occured'),
+                      Text(error.toString()),
+                    ],
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      child: const Text('Okay'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      }
     }
-
-
   }
 
   final _troughNum = TextEditingController();

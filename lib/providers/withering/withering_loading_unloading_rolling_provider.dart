@@ -126,18 +126,18 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
               (witheringLoadingItem.date.day == (date.day - 1)))) {
         //Taking the records of trough loading which is equal to trough unloading date or one day before. because sometimes trough unloading can take place one day after trough loading.
 
-        print('for each : ' +
-            '${witheringLoadingItem.troughNumber}' +
-            '${witheringLoadingItem.boxNumber}');
+//        print('for each : ' +
+//            '${witheringLoadingItem.troughNumber}' +
+//            '${witheringLoadingItem.boxNumber}');
         if (witheringLoadingItem.troughNumber == troughNumber) {
-          print('inside 1 trough number : ' +
-              '${witheringLoadingItem.troughNumber}' +
-              '${witheringLoadingItem.boxNumber}');
+//          print('inside 1 trough number : ' +
+//              '${witheringLoadingItem.troughNumber}' +
+//              '${witheringLoadingItem.boxNumber}');
           if (witheringLoadingItem.boxNumber == boxNumber) {
             //From those filtered records check and get the records which have the same trough number and the box number which is passed by the function input parameters which are the trough unloading details.
-            print('inside 2 box number : ' +
-                '${witheringLoadingItem.troughNumber}' +
-                '${witheringLoadingItem.boxNumber}');
+//            print('inside 2 box number : ' +
+//                '${witheringLoadingItem.troughNumber}' +
+//                '${witheringLoadingItem.boxNumber}');
             wither = (100.0 -
                 ((lotWeight / witheringLoadingItem.netWeight) * 100.0));
             //The filtered record is the same trough and box details we filled earlier, therefore we can divide the net weight of the loading from the lot weight of the unloading and get the percentage.
@@ -226,7 +226,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return _troughLoadingItems.firstWhere((troughLoad) => troughLoad.id == id);
   }
 
-  void addTroughLoadingItem(WitheringLoading troughLoading) {
+  Future<void> addTroughLoadingItem(WitheringLoading troughLoading, String authToken) async {
     final newTroughLoadingItem = WitheringLoading(
       id: DateTime.now().toString(),
       troughNumber: troughLoading.troughNumber,
@@ -235,9 +235,72 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       netWeight: troughLoading.netWeight,
       date: DateTime.now(),
     );
+    const url = 'http://10.0.2.2:8080/loft/loading';
 
-    _troughLoadingItems.add(troughLoading);
-    notifyListeners();
+    try {
+      final response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'id': DateTime.now().toIso8601String(),
+          'troughNumber': troughLoading.troughNumber,
+          'date': DateTime.now().toIso8601String(),
+          'boxNumber': troughLoading.boxNumber,
+          'gradeOfGL': troughLoading.gradeOfGL,
+          'netWeight': troughLoading.netWeight,
+        }),
+      );
+      if (response.statusCode == 200) {
+        _troughLoadingItems.add(troughLoading);
+        notifyListeners();
+      } else {
+        throw Exception('Failed ');
+      }
+    } catch (error) {
+      throw error;
+    }
+
+  }
+
+  Future<void> fetchAndSetTroughLoadingItem(String authToken) async {
+    _troughLoadingItems = [];
+//    print('empty list');
+//    print(troughLoadingItemCount);
+    const url = 'http://10.0.2.2:8080/loft/loadings';
+    try {
+      final dataList = await http.get(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+      );
+      final extractedDataList = jsonDecode(dataList.body);
+//      print(extractedDataList);
+      List loadedLots = extractedDataList['loadings'];
+      print(loadedLots);
+//      loadedLots = [];
+      for (var i in loadedLots) {
+        _troughLoadingItems.add(
+          WitheringLoading(
+            id: i['load_bulk_box_id'].toString(),
+            troughNumber: int.parse(i['trough_number'].toString()),
+            date: DateTime.parse(i['date']),
+            netWeight: double.parse(i['net_weight'].toString()),
+            boxNumber: int.parse(i['box_number'].toString()),
+            gradeOfGL: i['leaf_grade'].toString(),
+          ),
+        );
+//        print(i);
+      }
+//      print(troughLoadingItemCount);
+      notifyListeners();
+    } catch (error) {
+      print(error);
+    }
   }
 
   int latestAddedLoadingTroughNumber() {
@@ -307,7 +370,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         .firstWhere((troughLoadEnd) => troughLoadEnd.id == id);
   }
 
-  void addEndedLoadingTroughBoxItem(
+  void addEndedLoadingTroughBoxItem (
       EndedLoadingTroughBox endedLoadingTroughBox) {
     final newEndedTroughLoadingItem = EndedLoadingTroughBox(
         id: DateTime.now().toString(),
@@ -316,7 +379,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         date: endedLoadingTroughBox.date);
 
     _endedLoadingTroughBoxItems.add(endedLoadingTroughBox);
-    notifyListeners();
+//    notifyListeners();
   }
 
   bool isTroughBoxEnded(int troughNumber, int boxNumber, DateTime dateTime) {
@@ -382,6 +445,20 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     } catch (error) {
       throw error;
     }
+  }
+
+  bool isBigBulkMade(int batchNumber, DateTime dateTime){
+    bool value = false;
+    _bigBulkItems.forEach((bigBulk) {
+      if ((bigBulk.time.year == dateTime.year) &&
+          (bigBulk.time.month == dateTime.month) &&
+          (bigBulk.time.day == dateTime.day)){
+        if(bigBulk.bigBulkNumber == batchNumber){
+          value = true;
+        }
+      }
+    });
+    return value;
   }
 
   //----------------Rolling Input -------------------
@@ -641,6 +718,34 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return rollBreakingNumber;
   }
 
+  bool isBatchRollBreakingTurnAlreadyUsed(int batchNumber, int rollBreakingTurn, DateTime dateTime){
+    bool value = false;
+    _rollBreakingItems.forEach((rollBreaking) {
+      if ((rollBreaking.time.year == dateTime.year) &&
+          (rollBreaking.time.month == dateTime.month) &&
+          (rollBreaking.time.day == dateTime.day)){
+        if(rollBreaking.batchNumber == batchNumber && rollBreaking.rollBreakingTurn == rollBreakingTurn){
+          value = true;
+        }
+      }
+    });
+    return value;
+  }
+
+  bool isDhoolMade(int batchNumber,  dhoolNumber, DateTime dateTime){
+    bool value = false;
+    _rollBreakingItems.forEach((rollBreaking) {
+      if ((rollBreaking.time.year == dateTime.year) &&
+          (rollBreaking.time.month == dateTime.month) &&
+          (rollBreaking.time.day == dateTime.day)){
+        if(rollBreaking.batchNumber == batchNumber && rollBreaking.rollBreakingTurn == dhoolNumber){
+          value = true;
+        }
+      }
+    });
+    return value;
+  }
+
   //----------------Fermenting -------------------
 
   List<Fermenting> _fermentingItems = [];
@@ -754,6 +859,24 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       }
     });
     return dIWeight;
+  }
+
+  bool isFermentedDhoolMade(int batchNumber, dhoolNumber, DateTime dateTime){
+    bool value = false;//this should be false to work the validations
+    print('sent fd ' + dhoolNumber + ' batch ' + '$batchNumber');
+    _fermentingItems.forEach((fermenting) {
+      if ((fermenting.time.year == dateTime.year) &&
+          (fermenting.time.month == dateTime.month) &&
+          (fermenting.time.day == dateTime.day)){
+        print('saved fd ' + fermenting.dhoolNumber + ' batch ' + '${fermenting.batchNumber}');
+
+        if(fermenting.batchNumber == batchNumber && fermenting.dhoolNumber == dhoolNumber){
+          print('value true saved fd ' + fermenting.dhoolNumber);
+          value = true;
+        }
+      }
+    });
+    return value;
   }
 
   //----------------Drying -------------------

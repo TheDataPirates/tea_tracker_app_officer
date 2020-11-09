@@ -40,7 +40,7 @@ class WitheringStartingFinishingProvider with ChangeNotifier {
         body: jsonEncode(<String, dynamic>{
           'id': DateTime.now().toIso8601String(),
           'troughNumber': witheringStarting.troughNumber,
-          'time': getCurrentDate(),
+          'time': DateTime.now().toIso8601String(),
           'temperature': witheringStarting.temperature,
           'humidity': witheringStarting.humidity,
           'process_name': 'starting'
@@ -88,6 +88,22 @@ class WitheringStartingFinishingProvider with ChangeNotifier {
       print(error);
     }
   }
+
+  bool isTroughStarted (int troughNumber, DateTime dateTime){
+    bool value = false;
+    _witheringStartingItems.forEach((troughStarting) {
+      if ((troughStarting.time.year == dateTime.year) &&
+          (troughStarting.time.month == dateTime.month) &&
+          (troughStarting.time.day == dateTime.day)){
+        if(troughStarting.troughNumber == troughNumber){
+          value = true;
+        }
+      }
+    });
+    return value;
+  }
+
+  //--------------------------- Withering Finishing ----------------------
 
   List<WitheringStartingFinishing> _witheringFinishingItems = [];
   List<WitheringStartingFinishing> get witheringFinishingItems {
@@ -169,6 +185,20 @@ class WitheringStartingFinishingProvider with ChangeNotifier {
     } catch (error) {
       print(error);
     }
+  }
+
+  bool isTroughFinished (int troughNumber, DateTime dateTime){
+    bool value = false;
+    _witheringFinishingItems.forEach((troughFinishing) {
+      if ((troughFinishing.time.year == dateTime.year) &&
+          (troughFinishing.time.month == dateTime.month) &&
+          (troughFinishing.time.day == dateTime.day)){
+        if(troughFinishing.troughNumber == troughNumber){
+          value = true;
+        }
+      }
+    });
+    return value;
   }
 
   String getCurrentDate() {

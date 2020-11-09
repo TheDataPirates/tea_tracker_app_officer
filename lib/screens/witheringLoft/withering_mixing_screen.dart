@@ -27,44 +27,80 @@ class _WitheringMixingScreenState extends State<WitheringMixingScreen> {
       return;
     }
 
-    _formKeyWitheringMixing.currentState.save();
-    try {
-      await Provider.of<WitheringMixingProvider>(context, listen: false)
-          .addWitheringMixingItem(_witheringMixing, authToken);
-
-      Navigator.of(context).pushNamed('WitheringMixingView');
-    } catch (e) {
-      await showDialog<void>(
+    if(Provider.of<WitheringMixingProvider>(context, listen: false).isBatchMixingTurnUsed(int.parse(_troughNum.text), int.parse(_turn.text), DateTime.now())){
+      showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: AlertDialog(
-                title: const Text('Warning !'),
-                content: ListBody(
-                  children: <Widget>[
-                    const Text('Error has occured'),
-                    Text(e.toString()),
-                  ],
-                ),
-                actions: <Widget>[
-                  TextButton(
-                    child: const Text('Okay'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
+          return AlertDialog(
+            title: Text('You have already entered turn ' + '${int.parse(_turn.text)}' + ' in trough ' + '${int.parse(_troughNum.text)}'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  const Text('Please enter different turn !'),
                 ],
               ),
             ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  return;
+                },
+              ),
+            ],
           );
         },
       );
+    }else{
+      _formKeyWitheringMixing.currentState.save();
+      try {
+        await Provider.of<WitheringMixingProvider>(context, listen: false)
+            .addWitheringMixingItem(_witheringMixing, authToken);
+
+        Navigator.of(context).pushNamed('WitheringMixingView');
+      } catch (e) {
+        await showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: AlertDialog(
+                  title: const Text('Warning !'),
+                  content: ListBody(
+                    children: <Widget>[
+                      const Text('Error has occured'),
+                      Text(e.toString()),
+                    ],
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      child: const Text('Okay'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      }
     }
   }
 
+  final _troughNum = TextEditingController();
+  final _turn = TextEditingController();
+
+  void dispose() {
+    _troughNum.dispose();
+    _turn.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     final _height =
@@ -97,6 +133,7 @@ class _WitheringMixingScreenState extends State<WitheringMixingScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
+                      controller: _troughNum,
                       decoration: const InputDecoration(
                         labelText: 'Trough Number : ',
                         errorStyle: const TextStyle(
@@ -140,6 +177,7 @@ class _WitheringMixingScreenState extends State<WitheringMixingScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
+                      controller: _turn,
                       decoration: const InputDecoration(
                         labelText: 'Turn : ',
                         errorStyle: const TextStyle(

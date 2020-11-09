@@ -111,6 +111,20 @@ class WitheringMixingProvider with ChangeNotifier {
     }
   }
 
+  bool isBatchMixingTurnUsed (int troughNumber, int turn, DateTime dateTime){
+    bool value = false;
+    _witheringMixingItems.forEach((witheringMixing) {
+      if ((witheringMixing.time.year == dateTime.year) &&
+          (witheringMixing.time.month == dateTime.month) &&
+          (witheringMixing.time.day == dateTime.day)){
+        if(witheringMixing.troughNumber == troughNumber && witheringMixing.turn == turn){
+          value = true;
+        }
+      }
+    });
+    return value;
+  }
+
   String getCurrentDate() {
     final now = formatDate(DateTime.now(), [yyyy, '-', mm, '-', dd]);
 
