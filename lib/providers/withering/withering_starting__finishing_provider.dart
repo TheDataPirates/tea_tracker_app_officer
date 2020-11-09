@@ -122,7 +122,7 @@ class WitheringStartingFinishingProvider with ChangeNotifier {
         body: jsonEncode(<String, dynamic>{
           'id': DateTime.now().toIso8601String(),
           'troughNumber': witheringFinishing.troughNumber,
-          'time': getCurrentDate(),
+          'time': DateTime.now().toIso8601String(),
           'temperature': witheringFinishing.temperature,
           'humidity': witheringFinishing.humidity,
           'process_name': 'finishing'

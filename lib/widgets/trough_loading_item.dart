@@ -7,8 +7,9 @@ class TroughLoadingItem extends StatelessWidget {
   final int boxNumber;
   final String gradeGL;
   final double netWeight;
+  final double recentWeight;
 
-  TroughLoadingItem({this.id, this.troughNumber, this.boxNumber, this.gradeGL, this.netWeight});
+  TroughLoadingItem({this.id, this.troughNumber, this.boxNumber, this.gradeGL, this.netWeight, this.recentWeight});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,13 @@ class TroughLoadingItem extends StatelessWidget {
           leading: CircleAvatar(child: Text(gradeGL, style: TextStyle(fontSize: 40.0),),radius: 50.0,),
           title: Text('Trough Number : ' + '$troughNumber', style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),),
           subtitle: Text('Box Number : ' + '$boxNumber', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
-          trailing: Text('$netWeight' + ' Kg', style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),),
+          trailing: Column(
+            children: [
+              Text('Recently added : ' +'$recentWeight' + ' Kg', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
+              SizedBox(height: 6,),
+              Text('Total Box Weight : ' +'$netWeight' + ' Kg', style: TextStyle(fontSize: 23.0, fontWeight: FontWeight.bold),),
+            ],
+          )
         ),
       ),
     );

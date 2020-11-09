@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:date_format/date_format.dart';
+import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/material.dart';
 import 'withering_mixing.dart';
 import 'package:http/http.dart' as http;
@@ -39,7 +40,7 @@ class WitheringMixingProvider with ChangeNotifier {
         body: jsonEncode(<String, dynamic>{
           'id': DateTime.now().toIso8601String(),
           'troughNumber': witheringMixing.troughNumber,
-          'time': getCurrentDate(),
+          'time': DateTime.now().toIso8601String(),
           'temperature': witheringMixing.temperature,
           'humidity': witheringMixing.humidity,
           'process_name': 'mixing${witheringMixing.turn}'

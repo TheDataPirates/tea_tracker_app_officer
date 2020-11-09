@@ -28,6 +28,7 @@ class Auth with ChangeNotifier {
   }
 
   Future<void> login(String userId, String password) async {
+//    logout();
     const url = 'http://10.0.2.2:8080/auth/login';
     try {
       final response = await http.post(
@@ -89,8 +90,8 @@ class Auth with ChangeNotifier {
   }
 
   Future<void> logout() async {
-    Duration tokenTime = JwtDecoder.getTokenTime(_token);
-    print(tokenTime.inSeconds);
+//    Duration tokenTime = JwtDecoder.getTokenTime(_token);
+//    print(tokenTime.inSeconds);
     print('pressed logout');
     _token = null;
     _user_id = null;

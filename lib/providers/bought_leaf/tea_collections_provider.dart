@@ -40,7 +40,9 @@ class TeaCollections with ChangeNotifier {
     int nWeight,
   ) async {
     //create lot object
+    final lotid = DateTime.now().toIso8601String();
     final newLot = Lot(
+      lotId: lotid,
       supplier_id: supNo,
       supplier_name: supName,
       container_type: contType,
@@ -62,7 +64,7 @@ class TeaCollections with ChangeNotifier {
           'Authorization': 'Bearer $authToken'
         },
         body: jsonEncode(<String, dynamic>{
-          'lot_id': DateTime.now().toIso8601String(),
+          'lot_id': lotid,
           'grade_GL': newLot.leaf_grade,
           'gross_weight': newLot.gross_weight,
           'no_of_container': newLot.no_of_containers,
