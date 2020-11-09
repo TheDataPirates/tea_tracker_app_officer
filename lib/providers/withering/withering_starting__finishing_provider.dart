@@ -40,7 +40,7 @@ class WitheringStartingFinishingProvider with ChangeNotifier {
         body: jsonEncode(<String, dynamic>{
           'id': DateTime.now().toIso8601String(),
           'troughNumber': witheringStarting.troughNumber,
-          'time': getCurrentDate(),
+          'time': DateTime.now().toIso8601String(),
           'temperature': witheringStarting.temperature,
           'humidity': witheringStarting.humidity,
           'process_name': 'starting'
@@ -138,7 +138,7 @@ class WitheringStartingFinishingProvider with ChangeNotifier {
         body: jsonEncode(<String, dynamic>{
           'id': DateTime.now().toIso8601String(),
           'troughNumber': witheringFinishing.troughNumber,
-          'time': getCurrentDate(),
+          'time': DateTime.now().toIso8601String(),
           'temperature': witheringFinishing.temperature,
           'humidity': witheringFinishing.humidity,
           'process_name': 'finishing'
@@ -185,6 +185,20 @@ class WitheringStartingFinishingProvider with ChangeNotifier {
     } catch (error) {
       print(error);
     }
+  }
+
+  bool isTroughFinished (int troughNumber, DateTime dateTime){
+    bool value = false;
+    _witheringFinishingItems.forEach((troughFinishing) {
+      if ((troughFinishing.time.year == dateTime.year) &&
+          (troughFinishing.time.month == dateTime.month) &&
+          (troughFinishing.time.day == dateTime.day)){
+        if(troughFinishing.troughNumber == troughNumber){
+          value = true;
+        }
+      }
+    });
+    return value;
   }
 
   String getCurrentDate() {

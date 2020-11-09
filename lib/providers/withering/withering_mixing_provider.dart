@@ -39,7 +39,7 @@ class WitheringMixingProvider with ChangeNotifier {
         body: jsonEncode(<String, dynamic>{
           'id': DateTime.now().toIso8601String(),
           'troughNumber': witheringMixing.troughNumber,
-          'time': getCurrentDate(),
+          'time': DateTime.now().toIso8601String(),
           'temperature': witheringMixing.temperature,
           'humidity': witheringMixing.humidity,
           'process_name': 'mixing${witheringMixing.turn}'
@@ -108,6 +108,20 @@ class WitheringMixingProvider with ChangeNotifier {
         }
         break;
     }
+  }
+
+  bool isBatchMixingTurnUsed (int troughNumber, int turn, DateTime dateTime){
+    bool value = false;
+    _witheringMixingItems.forEach((witheringMixing) {
+      if ((witheringMixing.time.year == dateTime.year) &&
+          (witheringMixing.time.month == dateTime.month) &&
+          (witheringMixing.time.day == dateTime.day)){
+        if(witheringMixing.troughNumber == troughNumber && witheringMixing.turn == turn){
+          value = true;
+        }
+      }
+    });
+    return value;
   }
 
   String getCurrentDate() {
