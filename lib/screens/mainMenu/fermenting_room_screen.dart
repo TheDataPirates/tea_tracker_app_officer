@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/rolling/fermenting.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 
@@ -11,12 +12,13 @@ class FermentingRoomScreen extends StatefulWidget {
 class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
   final _formKeyFermenting = GlobalKey<FormState>();
   var _fermenting = Fermenting(
-      id: null,
-      batchNumber: null,
-      dhoolNumber: null,
-      time: null,
-      dhoolInWeight: null,
-      dhoolOutWeight: null,);
+    id: null,
+    batchNumber: null,
+    dhoolNumber: null,
+    time: null,
+    dhoolInWeight: null,
+    dhoolOutWeight: null,
+  );
 
   Future<void> _saveFermentingProviderDetails() async {
     final authToken = Provider.of<Auth>(context, listen: false).token;
@@ -26,7 +28,9 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
       return;
     }
 
-    if (!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isBatchMade(int.parse(_batchNum.text), DateTime.now()))) {
+    if (!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+            listen: false)
+        .isBatchMade(int.parse(_batchNum.text), DateTime.now()))) {
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
@@ -53,106 +57,116 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
           );
         },
       );
-    } else if (Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isFermentedDhoolMade(int.parse(_batchNum.text), int.parse(_dhoolNum.text), DateTime.now())) {
-      print('Enter isFermentedDhoolMade');
-      print('entered fd num : ' + '${int.parse(_dhoolNum.text)}');
-      showDialog<void>(
-        context: context,
-        barrierDismissible: false, // user must tap button!
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('You have not created fermented dhool ' +
-                '${int.parse(_dhoolNum.text)}'),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  const Text(
-                      'Please enter a different fermented dhool number !'),
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('OK'),
-                onPressed: () {
-                  Navigator.pop(context);
-                  return;
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }else if (_dhoolNum.text != 'BB') {
-//      print('Enter != BB');
-      if (!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isDhoolMade(int.parse(_batchNum.text), int.parse(_dhoolNum.text), DateTime.now()))) {
-//        print('Enter != BB and isDhoolMade NO');
-        showDialog<void>(
+    }
+//    else if (Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+//            listen: false)
+//        .isFermentedDhoolMade(int.parse(_batchNum.text),
+//            int.parse(_dhoolNum.text), DateTime.now())) {
+//      print('Enter isFermentedDhoolMade');
+//      print('entered fd num : ' + '${int.parse(_dhoolNum.text)}');
+//      showDialog<void>(
+//        context: context,
+//        barrierDismissible: false, // user must tap button!
+//        builder: (BuildContext context) {
+//          return AlertDialog(
+//            title: Text('You have not created fermented dhool ' +
+//                '${int.parse(_dhoolNum.text)}'),
+//            content: SingleChildScrollView(
+//              child: ListBody(
+//                children: <Widget>[
+//                  const Text(
+//                      'Please enter a different fermented dhool number !'),
+//                ],
+//              ),
+//            ),
+//            actions: <Widget>[
+//              TextButton(
+//                child: const Text('OK'),
+//                onPressed: () {
+//                  Navigator.pop(context);
+//                  return;
+//                },
+//              ),
+//            ],
+//          );
+//        },
+//      );
+//    }
+//    else if (_dhoolNum.text != 'BB') {
+////      print('Enter != BB');
+//      if (!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+//              listen: false)
+//          .isDhoolMade(int.parse(_batchNum.text), int.parse(_dhoolNum.text),
+//              DateTime.now()))) {
+////        print('Enter != BB and isDhoolMade NO');
+//        showDialog<void>(
+//          context: context,
+//          barrierDismissible: false, // user must tap button!
+//          builder: (BuildContext context) {
+//            return AlertDialog(
+//              title: Text('You have not created dhool ' +
+//                  '${int.parse(_dhoolNum.text)}'),
+//              content: SingleChildScrollView(
+//                child: ListBody(
+//                  children: <Widget>[
+//                    const Text('Please enter a different dhool number !'),
+//                  ],
+//                ),
+//              ),
+//              actions: <Widget>[
+//                TextButton(
+//                  child: const Text('OK'),
+//                  onPressed: () {
+//                    Navigator.pop(context);
+//                    return;
+//                  },
+//                ),
+//              ],
+//            );
+//          },
+//        );
+//      }
+//    }
+    else {
+      try {
+        _formKeyFermenting.currentState.save();
+
+        await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+                listen: false)
+            .addFermentingItem(_fermenting, authToken);
+
+        Navigator.of(context).pushNamed('FermentingView');
+      } catch (e) {
+        await showDialog<void>(
           context: context,
           barrierDismissible: false, // user must tap button!
           builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('You have not created dhool ' +
-                  '${int.parse(_dhoolNum.text)}'),
-              content: SingleChildScrollView(
-                child: ListBody(
-                  children: <Widget>[
-                    const Text('Please enter a different dhool number !'),
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: AlertDialog(
+                  title: const Text('Warning !'),
+                  content: ListBody(
+                    children: <Widget>[
+                      const Text('Error has occured'),
+                      Text(e.toString()),
+                    ],
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      child: const Text('Okay'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
                   ],
                 ),
               ),
-              actions: <Widget>[
-                TextButton(
-                  child: const Text('OK'),
-                  onPressed: () {
-                    Navigator.pop(context);
-                    return;
-                  },
-                ),
-              ],
             );
           },
         );
-      } else {
-        try {
-          _formKeyFermenting.currentState.save();
-
-          await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-              listen: false)
-              .addFermentingItem(_fermenting, authToken);
-
-          Navigator.of(context).pushNamed('FermentingView');
-        } catch (e) {
-          await showDialog<void>(
-            context: context,
-            barrierDismissible: false, // user must tap button!
-            builder: (BuildContext context) {
-              return SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: AlertDialog(
-                    title: const Text('Warning !'),
-                    content: ListBody(
-                      children: <Widget>[
-                        const Text('Error has occured'),
-                        Text(e.toString()),
-                      ],
-                    ),
-                    actions: <Widget>[
-                      TextButton(
-                        child: const Text('Okay'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          );
-        }
       }
+    }
   }
 
   final _batchNum = TextEditingController();

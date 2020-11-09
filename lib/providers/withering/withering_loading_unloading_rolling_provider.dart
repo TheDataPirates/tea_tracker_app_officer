@@ -226,7 +226,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return _troughLoadingItems.firstWhere((troughLoad) => troughLoad.id == id);
   }
 
-  Future<void> addTroughLoadingItem(WitheringLoading troughLoading, String authToken) async {
+  Future<void> addTroughLoadingItem(
+      WitheringLoading troughLoading, String authToken) async {
     final newTroughLoadingItem = WitheringLoading(
       id: DateTime.now().toString(),
       troughNumber: troughLoading.troughNumber,
@@ -262,7 +263,6 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     } catch (error) {
       throw error;
     }
-
   }
 
   Future<void> fetchAndSetTroughLoadingItem(String authToken) async {
@@ -370,7 +370,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         .firstWhere((troughLoadEnd) => troughLoadEnd.id == id);
   }
 
-  void addEndedLoadingTroughBoxItem (
+  void addEndedLoadingTroughBoxItem(
       EndedLoadingTroughBox endedLoadingTroughBox) {
     final newEndedTroughLoadingItem = EndedLoadingTroughBox(
         id: DateTime.now().toString(),
@@ -447,13 +447,13 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     }
   }
 
-  bool isBigBulkMade(int batchNumber, DateTime dateTime){
+  bool isBigBulkMade(int batchNumber, DateTime dateTime) {
     bool value = false;
     _bigBulkItems.forEach((bigBulk) {
       if ((bigBulk.time.year == dateTime.year) &&
           (bigBulk.time.month == dateTime.month) &&
-          (bigBulk.time.day == dateTime.day)){
-        if(bigBulk.bigBulkNumber == batchNumber){
+          (bigBulk.time.day == dateTime.day)) {
+        if (bigBulk.bigBulkNumber == batchNumber) {
           value = true;
         }
       }
@@ -718,13 +718,15 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return rollBreakingNumber;
   }
 
-  bool isBatchRollBreakingTurnAlreadyUsed(int batchNumber, int rollBreakingTurn, DateTime dateTime){
+  bool isBatchRollBreakingTurnAlreadyUsed(
+      int batchNumber, int rollBreakingTurn, DateTime dateTime) {
     bool value = false;
     _rollBreakingItems.forEach((rollBreaking) {
       if ((rollBreaking.time.year == dateTime.year) &&
           (rollBreaking.time.month == dateTime.month) &&
-          (rollBreaking.time.day == dateTime.day)){
-        if(rollBreaking.batchNumber == batchNumber && rollBreaking.rollBreakingTurn == rollBreakingTurn){
+          (rollBreaking.time.day == dateTime.day)) {
+        if (rollBreaking.batchNumber == batchNumber &&
+            rollBreaking.rollBreakingTurn == rollBreakingTurn) {
           value = true;
         }
       }
@@ -732,13 +734,14 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return value;
   }
 
-  bool isDhoolMade(int batchNumber,  dhoolNumber, DateTime dateTime){
+  bool isDhoolMade(int batchNumber, dhoolNumber, DateTime dateTime) {
     bool value = false;
     _rollBreakingItems.forEach((rollBreaking) {
       if ((rollBreaking.time.year == dateTime.year) &&
           (rollBreaking.time.month == dateTime.month) &&
-          (rollBreaking.time.day == dateTime.day)){
-        if(rollBreaking.batchNumber == batchNumber && rollBreaking.rollBreakingTurn == dhoolNumber){
+          (rollBreaking.time.day == dateTime.day)) {
+        if (rollBreaking.batchNumber == batchNumber &&
+            rollBreaking.rollBreakingTurn == dhoolNumber) {
           value = true;
         }
       }
@@ -861,23 +864,23 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return dIWeight;
   }
 
-  bool isFermentedDhoolMade(int batchNumber, dhoolNumber, DateTime dateTime){
-    bool value = false;//this should be false to work the validations
-    print('sent fd ' + dhoolNumber + ' batch ' + '$batchNumber');
-    _fermentingItems.forEach((fermenting) {
-      if ((fermenting.time.year == dateTime.year) &&
-          (fermenting.time.month == dateTime.month) &&
-          (fermenting.time.day == dateTime.day)){
-        print('saved fd ' + fermenting.dhoolNumber + ' batch ' + '${fermenting.batchNumber}');
-
-        if(fermenting.batchNumber == batchNumber && fermenting.dhoolNumber == dhoolNumber){
-          print('value true saved fd ' + fermenting.dhoolNumber);
-          value = true;
-        }
-      }
-    });
-    return value;
-  }
+//  bool isFermentedDhoolMade(int batchNumber, dhoolNumber, DateTime dateTime){
+//    bool value = false;//this should be false to work the validations
+//    print('sent fd ' + dhoolNumber + ' batch ' + '$batchNumber');
+//    _fermentingItems.forEach((fermenting) {
+//      if ((fermenting.time.year == dateTime.year) &&
+//          (fermenting.time.month == dateTime.month) &&
+//          (fermenting.time.day == dateTime.day)){
+//        print('saved fd ' + fermenting.dhoolNumber + ' batch ' + '${fermenting.batchNumber}');
+//
+//        if(fermenting.batchNumber == batchNumber && fermenting.dhoolNumber == dhoolNumber){
+//          print('value true saved fd ' + fermenting.dhoolNumber);
+//          value = true;
+//        }
+//      }
+//    });
+//    return value;
+//  }
 
   //----------------Drying -------------------
 
