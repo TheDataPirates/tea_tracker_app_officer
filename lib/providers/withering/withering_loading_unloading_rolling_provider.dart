@@ -265,6 +265,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   Future<void> fetchAndSetTroughLoadingItem(String authToken) async {
     _troughLoadingItems = [];
+//    print('empty list');
+//    print(troughLoadingItemCount);
     const url = 'http://10.0.2.2:8080/loft/loadings';
     try {
       final dataList = await http.get(
@@ -278,6 +280,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 //      print(extractedDataList);
       List loadedLots = extractedDataList['loadings'];
       print(loadedLots);
+//      loadedLots = [];
       for (var i in loadedLots) {
         _troughLoadingItems.add(
           WitheringLoading(
@@ -289,7 +292,9 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
             gradeOfGL: i['leaf_grade'].toString(),
           ),
         );
+//        print(i);
       }
+//      print(troughLoadingItemCount);
       notifyListeners();
     } catch (error) {
       print(error);
@@ -372,7 +377,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         date: endedLoadingTroughBox.date);
 
     _endedLoadingTroughBoxItems.add(endedLoadingTroughBox);
-    notifyListeners();
+//    notifyListeners();
   }
 
   bool isTroughBoxEnded(int troughNumber, int boxNumber, DateTime dateTime) {
@@ -796,12 +801,14 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   }
 
   bool isFermentedDhoolMade(int batchNumber, dhoolNumber, DateTime dateTime){
-    bool value = true;//this should be false to work the validations
+    bool value = false;//this should be false to work the validations
+    print('sent fd ' + dhoolNumber + ' batch ' + '$batchNumber');
     _fermentingItems.forEach((fermenting) {
       if ((fermenting.time.year == dateTime.year) &&
           (fermenting.time.month == dateTime.month) &&
           (fermenting.time.day == dateTime.day)){
         print('saved fd ' + fermenting.dhoolNumber + ' batch ' + '${fermenting.batchNumber}');
+
         if(fermenting.batchNumber == batchNumber && fermenting.dhoolNumber == dhoolNumber){
           print('value true saved fd ' + fermenting.dhoolNumber);
           value = true;

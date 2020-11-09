@@ -32,10 +32,10 @@ class _TroughLoadingViewScreenState extends State<TroughLoadingViewScreen> {
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);
     final token = auth.token;
-
-    final troughLoading = Provider.of<WitheringLoadingUnloadingRollingProvider>(
-        context,
-        listen: false);
+//
+//    final troughLoading = Provider.of<WitheringLoadingUnloadingRollingProvider>(
+//        context,
+//        listen: false);
 
     return Scaffold(
       appBar: AppBar(
@@ -87,6 +87,7 @@ class _TroughLoadingViewScreenState extends State<TroughLoadingViewScreen> {
                               recentWeight:
                                   WitheringLoadingUnloadingRollingProvider
                                       .troughLoadingItems[i].netWeight,
+//                              netWeight: 10.0,
                               netWeight: WitheringLoadingUnloadingRollingProvider
                                   .totalTroughBoxWeight(
                                       WitheringLoadingUnloadingRollingProvider
@@ -174,9 +175,13 @@ class _TroughLoadingViewScreenState extends State<TroughLoadingViewScreen> {
                           _endedLoadingTroughBox = EndedLoadingTroughBox(
                             id: DateTime.now().toString(),
                             troughNumber:
-                                troughLoading.latestAddedLoadingTroughNumber(),
+                            Provider.of<WitheringLoadingUnloadingRollingProvider>(
+                                context,
+                                listen: false).latestAddedLoadingTroughNumber(),
                             boxNumber:
-                                troughLoading.latestAddedLoadingBoxNumber(),
+                            Provider.of<WitheringLoadingUnloadingRollingProvider>(
+                                context,
+                                listen: false).latestAddedLoadingBoxNumber(),
                             date: DateTime.now(),
                           );
 

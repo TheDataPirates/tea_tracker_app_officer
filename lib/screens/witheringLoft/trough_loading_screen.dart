@@ -85,7 +85,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
     }else{
       _formKeyTroughLoading.currentState.save();
       try{
-        Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+        await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
             listen: false)
             .addTroughLoadingItem(_troughLoading, authToken);
 
