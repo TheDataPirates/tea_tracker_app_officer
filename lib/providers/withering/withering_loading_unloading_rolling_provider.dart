@@ -793,7 +793,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         }),
       );
       if (response.statusCode == 200) {
-        fermentingItems.add(newFermentingItem);
+        _fermentingItems.add(newFermentingItem);
         notifyListeners();
       } else {
         throw Exception('Failed ');
