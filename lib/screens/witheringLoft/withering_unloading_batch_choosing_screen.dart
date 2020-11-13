@@ -16,7 +16,7 @@ class _WitheringUnloadingBatchChoosingScreenState
   final _formKeyWitheringUnloadingBatchChoosing = GlobalKey<FormState>();
   var batchNumberItem;
 
-  void _saveWitheringUnloadingBatchNumberItem(int batchNo) {
+  void _saveWitheringUnloadingBatchNumberItem() {
     final isValid = _formKeyWitheringUnloadingBatchChoosing.currentState.validate();
 
     if (!isValid) {
@@ -25,13 +25,13 @@ class _WitheringUnloadingBatchChoosingScreenState
 
 //    print(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isBatchNumberUsed(batchNo));
 
-    if(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isBatchNumberUsed(batchNo, DateTime.now())){
+    if(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isBatchNumberUsed(int.parse(_batchNum.text), DateTime.now())){
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('You have already made batch ' + '$batchNo'),
+            title: Text('You have already made batch ' + '${int.parse(_batchNum.text)}'),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
@@ -72,7 +72,6 @@ class _WitheringUnloadingBatchChoosingScreenState
 
   void dispose() {
     _batchNum.dispose();
-
     super.dispose();
   }
 
@@ -94,7 +93,7 @@ class _WitheringUnloadingBatchChoosingScreenState
           IconButton(
             icon: const Icon(Icons.check),
             onPressed: (){
-              _saveWitheringUnloadingBatchNumberItem(int.parse(_batchNum.text));
+              _saveWitheringUnloadingBatchNumberItem();
             },
             disabledColor: Colors.white,
             iconSize: 35.0,

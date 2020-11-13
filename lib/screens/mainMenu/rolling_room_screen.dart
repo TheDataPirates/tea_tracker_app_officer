@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/rolling/rolling.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
-import 'package:teatrackerappofficer/widgets/main_menu_button_container.dart';
+//import 'package:teatrackerappofficer/widgets/main_menu_button_container.dart';
 
 class RollingRoomScreen extends StatefulWidget {
   @override
@@ -22,20 +22,20 @@ class _RollingRoomScreenState extends State<RollingRoomScreen> {
       weightIn: null,
   weightOut: null,);
 
-  void _saveRollingOutputProviderDetails(int batchN, int rollingT) {
+  void _saveRollingOutputProviderDetails() {
     final isValid = _formKeyRollingOutput.currentState.validate();
 
     if (!isValid) {
       return;
     }
 
-    if(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isBatchRollingTurnAlreadyUsed(batchN, rollingT, DateTime.now())){
+    if(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isBatchRollingTurnAlreadyUsed(int.parse(_batchNum.text), int.parse(_rollingTurn.text), DateTime.now())){
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('You have already used rolling turn ' + '$rollingT' + ' on batch ' + '$batchN'),
+            title: Text('You have already used rolling turn ' + '${int.parse(_rollingTurn.text)}' + ' on batch ' + '${int.parse(_batchNum.text)}'),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
@@ -55,13 +55,13 @@ class _RollingRoomScreenState extends State<RollingRoomScreen> {
           );
         },
       );
-    }else if (Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isBatchEnded(batchN, DateTime.now())){
+    }else if (Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isBatchEnded(int.parse(_batchNum.text), DateTime.now())){
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('You have already ended batch ' + '$batchN'),
+            title: Text('You have already ended batch ' + '${int.parse(_batchNum.text)}'),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
@@ -81,13 +81,13 @@ class _RollingRoomScreenState extends State<RollingRoomScreen> {
           );
         },
       );
-    }else if(!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isBatchMade(batchN, DateTime.now()))){
+    }else if(!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isBatchMade(int.parse(_batchNum.text), DateTime.now()))){
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('You have not created batch ' + '$batchN'),
+            title: Text('You have not created batch ' + '${int.parse(_batchNum.text)}'),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
@@ -148,7 +148,7 @@ class _RollingRoomScreenState extends State<RollingRoomScreen> {
           IconButton(
             icon: const Icon(Icons.check),
             onPressed: (){
-              _saveRollingOutputProviderDetails(int.parse(_batchNum.text), int.parse(_rollingTurn.text));
+              _saveRollingOutputProviderDetails();
             },
             disabledColor: Colors.white,
             iconSize: 35.0,

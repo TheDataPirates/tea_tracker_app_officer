@@ -21,20 +21,20 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
     lotWeight: null,
   );
 
-  void _saveWitheringUnloadingProviderDetails(int troughN, int boxN) {
+  void _saveWitheringUnloadingProviderDetails() {
     final isValid = _formKeyWitheringUnloading.currentState.validate();
 
     if (!isValid) {
       return;
     }
 
-    if(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isTroughBoxUsed(troughN, boxN, DateTime.now())){
+    if(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isTroughBoxUsed(int.parse(_troughNum.text ), int.parse(_boxNum.text), DateTime.now())){
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('You have already entered trough ' + '$troughN' + ' and box ' + '$boxN'),
+            title: Text('You have already entered trough ' + '${int.parse(_troughNum.text )}' + ' and box ' + '${int.parse(_boxNum.text)}'),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
@@ -54,13 +54,13 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
           );
         },
       );
-    }else if(!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isTroughBoxLoaded(troughN, boxN, DateTime.now()))){
+    }else if(!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isTroughBoxLoaded(int.parse(_troughNum.text ), int.parse(_boxNum.text), DateTime.now()))){
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('You have not loaded trough ' + '$troughN' + ' box ' + '$boxN'),
+            title: Text('You have not loaded trough ' + '${int.parse(_troughNum.text )}' + ' box ' + '${int.parse(_boxNum.text)}'),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
@@ -119,7 +119,7 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
           IconButton(
             icon: const Icon(Icons.check),
             onPressed: (){
-              _saveWitheringUnloadingProviderDetails(int.parse(_troughNum.text), int.parse(_boxNum.text));
+              _saveWitheringUnloadingProviderDetails();
             },
             disabledColor: Colors.white,
             iconSize: 35.0,
@@ -237,7 +237,7 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
                         if (value.isEmpty) {
                           return 'Please Enter Lot Weight !';
                         }
-                        if (double.parse(value) <= 0 || double.parse(value) >= 201) {
+                        if (double.parse(value) <= 0 || double.parse(value) >= 351) {
                           return 'Please Enter A Valid Lot Weight !';
                         }
                         return null;

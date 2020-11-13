@@ -119,6 +119,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       {int troughNumber, int boxNumber, DateTime date, double lotWeight}) {
     //Taking inputs of the loft unloading
     double wither = 0.0;
+    double totNetWeight = 0.0;
     _troughLoadingItems.forEach((witheringLoadingItem) {
       if ((witheringLoadingItem.date.year == date.year) &&
           (witheringLoadingItem.date.month == date.month) &&
@@ -138,13 +139,13 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 //            print('inside 2 box number : ' +
 //                '${witheringLoadingItem.troughNumber}' +
 //                '${witheringLoadingItem.boxNumber}');
-            wither = (100.0 -
-                ((lotWeight / witheringLoadingItem.netWeight) * 100.0));
+            totNetWeight += witheringLoadingItem.netWeight;
             //The filtered record is the same trough and box details we filled earlier, therefore we can divide the net weight of the loading from the lot weight of the unloading and get the percentage.
           }
         }
       }
     });
+    wither = (100.0 - ((lotWeight / totNetWeight) * 100.0));
     return wither;
   }
 
@@ -864,23 +865,23 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return dIWeight;
   }
 
-//  bool isFermentedDhoolMade(int batchNumber, dhoolNumber, DateTime dateTime){
-//    bool value = false;//this should be false to work the validations
+  bool isFermentedDhoolMade(int batchNumber, dhoolNumber, DateTime dateTime){
+    bool value = false;//this should be false to work the validations
 //    print('sent fd ' + dhoolNumber + ' batch ' + '$batchNumber');
-//    _fermentingItems.forEach((fermenting) {
-//      if ((fermenting.time.year == dateTime.year) &&
-//          (fermenting.time.month == dateTime.month) &&
-//          (fermenting.time.day == dateTime.day)){
+    _fermentingItems.forEach((fermenting) {
+      if ((fermenting.time.year == dateTime.year) &&
+          (fermenting.time.month == dateTime.month) &&
+          (fermenting.time.day == dateTime.day)){
 //        print('saved fd ' + fermenting.dhoolNumber + ' batch ' + '${fermenting.batchNumber}');
-//
-//        if(fermenting.batchNumber == batchNumber && fermenting.dhoolNumber == dhoolNumber){
+
+        if(fermenting.batchNumber == batchNumber && fermenting.dhoolNumber == dhoolNumber){
 //          print('value true saved fd ' + fermenting.dhoolNumber);
-//          value = true;
-//        }
-//      }
-//    });
-//    return value;
-//  }
+          value = true;
+        }
+      }
+    });
+    return value;
+  }
 
   //----------------Drying -------------------
 
