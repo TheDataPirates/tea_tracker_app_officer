@@ -865,7 +865,32 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return dIWeight;
   }
 
-  bool isFermentedDhoolMade(int batchNumber, dhoolNumber, DateTime dateTime){
+  bool isFermentedDhoolMade(int batchNumber, int dhoolNumber, DateTime dateTime){
+    bool value = false;//this should be false to work the validations
+//    print('sent fd ' + '$dhoolNumber' + ' batch ' + '$batchNumber');
+    _fermentingItems.forEach((fermenting) {
+      if ((fermenting.time.year == dateTime.year) &&
+          (fermenting.time.month == dateTime.month) &&
+          (fermenting.time.day == dateTime.day)){
+//        print('saved fd ' + '${fermenting.dhoolNumber}' + ' batch ' + '${fermenting.batchNumber}');
+        if(fermenting.dhoolNumber != 'BB'){
+//          print('In != BB');
+          if(fermenting.batchNumber == batchNumber){
+//            print('In batch ==');
+//            print('sent fd : ' + '$dhoolNumber');
+//            print('saved fd : ' + '${fermenting.dhoolNumber}');
+            if(int.parse(fermenting.dhoolNumber) == dhoolNumber){
+//              print('value true saved fd ' + '${fermenting.dhoolNumber}');
+              value = true;
+            }
+          }
+        }
+      }
+    });
+    return value;
+  }
+
+  bool isFermentedBigBulkMade(int batchNumber, String dhoolNumber, DateTime dateTime){
     bool value = false;//this should be false to work the validations
 //    print('sent fd ' + dhoolNumber + ' batch ' + '$batchNumber');
     _fermentingItems.forEach((fermenting) {
@@ -873,10 +898,15 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
           (fermenting.time.month == dateTime.month) &&
           (fermenting.time.day == dateTime.day)){
 //        print('saved fd ' + fermenting.dhoolNumber + ' batch ' + '${fermenting.batchNumber}');
-
-        if(fermenting.batchNumber == batchNumber && fermenting.dhoolNumber == dhoolNumber){
-//          print('value true saved fd ' + fermenting.dhoolNumber);
-          value = true;
+        if(fermenting.dhoolNumber == 'BB'){
+//          print('In == BB');
+          if(fermenting.batchNumber == batchNumber){
+//            print('In batch ==');
+            if(fermenting.dhoolNumber == dhoolNumber){
+//              print('value true saved fd ' + fermenting.dhoolNumber);
+              value = true;
+            }
+          }
         }
       }
     });

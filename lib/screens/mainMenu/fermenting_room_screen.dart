@@ -58,12 +58,12 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
         },
       );
     }else if (_dhoolNum.text != 'BB') {
-      print('Enter != BB');
+//      print('Enter != BB');
       if (!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
               listen: false)
           .isDhoolMade(int.parse(_batchNum.text), int.parse(_dhoolNum.text),
               DateTime.now()))) {
-        print('Enter != BB and isDhoolMade NO');
+//        print('Enter != BB and isDhoolMade NO');
         showDialog<void>(
           context: context,
           barrierDismissible: false, // user must tap button!
@@ -94,14 +94,14 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
           listen: false)
           .isFermentedDhoolMade(int.parse(_batchNum.text),
           int.parse(_dhoolNum.text), DateTime.now())) {
-        print('Enter isFermentedDhoolMade');
-        print('entered fd num : ' + '${int.parse(_dhoolNum.text)}');
+//        print('Enter isFermentedDhoolMade');
+//        print('entered fd num : ' + '${int.parse(_dhoolNum.text)}');
         showDialog<void>(
           context: context,
           barrierDismissible: false, // user must tap button!
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('You have not created fermented dhool ' +
+              title: Text('You have already created fermented dhool ' +
                   '${int.parse(_dhoolNum.text)}'),
               content: SingleChildScrollView(
                 child: ListBody(
@@ -164,11 +164,11 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
         }
       }
     }    else if (_dhoolNum.text == 'BB') {
-      print('Enter == BB');
+//      print('Enter == BB');
       if (!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
           listen: false)
           .isBigBulkMade(int.parse(_batchNum.text), DateTime.now()))) {
-        print('Enter == BB and isDhoolMade NO');
+//        print('Enter == BB and isDhoolMade NO');
         showDialog<void>(
           context: context,
           barrierDismissible: false, // user must tap button!
@@ -197,16 +197,16 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
         );
       }else if (Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
           listen: false)
-          .isFermentedDhoolMade(int.parse(_batchNum.text),
+          .isFermentedBigBulkMade(int.parse(_batchNum.text),
           _dhoolNum.text, DateTime.now())) {
-        print('Enter isFermentedDhoolMade');
-        print('entered fd num : ' + '${int.parse(_dhoolNum.text)}');
+//        print('Enter isFermentedDhoolMade');
+//        print('entered fd num : ' + _dhoolNum.text);
         showDialog<void>(
           context: context,
           barrierDismissible: false, // user must tap button!
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('You have not created fermented dhool ' +
+              title: Text('You have already created fermented dhool ' +
                   _dhoolNum.text),
               content: SingleChildScrollView(
                 child: ListBody(
@@ -429,7 +429,6 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
                           return 'Please Enter Dhool Number !';
                         }
                         if ((value != 'BB') &&
-                            (value != 'bb') &&
                             (int.parse(value) != 1) &&
                             (int.parse(value) != 2 &&
                                 (int.parse(value) != 3) &&

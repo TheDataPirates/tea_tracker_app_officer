@@ -275,7 +275,6 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
                           return 'Please Enter Dhool Number !';
                         }
                         if ((value != 'BB') &&
-                            (value != 'bb') &&
                             (int.parse(value) != 1) &&
                             (int.parse(value) != 2 &&
                                 (int.parse(value) != 3) &&
