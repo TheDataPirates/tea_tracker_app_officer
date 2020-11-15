@@ -958,6 +958,55 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return dryIWeight;
   }
 
+
+  bool isDryedDhoolMade(int batchNumber, int dhoolNumber, DateTime dateTime){
+    bool value = false;//this should be false to work the validations
+//    print('sent fd ' + '$dhoolNumber' + ' batch ' + '$batchNumber');
+    _dryingItems.forEach((drying) {
+      if ((drying.time.year == dateTime.year) &&
+          (drying.time.month == dateTime.month) &&
+          (drying.time.day == dateTime.day)){
+//        print('saved fd ' + '${fermenting.dhoolNumber}' + ' batch ' + '${fermenting.batchNumber}');
+        if(drying.dhoolNumber != 'BB'){
+//          print('In != BB');
+          if(drying.batchNumber == batchNumber){
+//            print('In batch ==');
+//            print('sent fd : ' + '$dhoolNumber');
+//            print('saved fd : ' + '${fermenting.dhoolNumber}');
+            if(int.parse(drying.dhoolNumber) == dhoolNumber){
+//              print('value true saved fd ' + '${fermenting.dhoolNumber}');
+              value = true;
+            }
+          }
+        }
+      }
+    });
+    return value;
+  }
+
+  bool isDryedBigBulkMade(int batchNumber, String dhoolNumber, DateTime dateTime){
+    bool value = false;//this should be false to work the validations
+//    print('sent fd ' + dhoolNumber + ' batch ' + '$batchNumber');
+    _dryingItems.forEach((drying) {
+      if ((drying.time.year == dateTime.year) &&
+          (drying.time.month == dateTime.month) &&
+          (drying.time.day == dateTime.day)){
+//        print('saved fd ' + fermenting.dhoolNumber + ' batch ' + '${fermenting.batchNumber}');
+        if(drying.dhoolNumber == 'BB'){
+//          print('In == BB');
+          if(drying.batchNumber == batchNumber){
+//            print('In batch ==');
+            if(drying.dhoolNumber == dhoolNumber){
+//              print('value true saved fd ' + fermenting.dhoolNumber);
+              value = true;
+            }
+          }
+        }
+      }
+    });
+    return value;
+  }
+
 //----------------Outturn -------------------
 
   double totalDayOutturn(DateTime dateTime) {

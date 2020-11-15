@@ -55,96 +55,238 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
         },
       );
     }
-//    else if (_dhoolNum.text != 'BB') {
+    else if (_dhoolNum.text != 'BB') {
 //      print('Enter != BB');
-//      if (!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-//              listen: false)
-//          .isFermentedDhoolMade(int.parse(_batchNum.text),
-//              int.parse(_dhoolNum.text), DateTime.now()))) {
-//        print('Enter != BB and isFermentedDhoolMade No');
+      if (!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+              listen: false)
+          .isFermentedDhoolMade(int.parse(_batchNum.text), int.parse(_dhoolNum.text),
+              DateTime.now()))) {
+//        print('Enter != BB and isDhoolMade NO');
+        showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('You have not created fermented dhool ' +
+                  '${int.parse(_dhoolNum.text)}'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    const Text('Please enter a different fermented dhool number !'),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('OK'),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    return;
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      } else if (Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+          listen: false)
+          .isDryedDhoolMade(int.parse(_batchNum.text),
+          int.parse(_dhoolNum.text), DateTime.now())) {
+//        print('Enter isFermentedDhoolMade');
 //        print('entered fd num : ' + '${int.parse(_dhoolNum.text)}');
-//        showDialog<void>(
-//          context: context,
-//          barrierDismissible: false, // user must tap button!
-//          builder: (BuildContext context) {
-//            return AlertDialog(
-//              title: Text('You have not created fermented dhool ' +
-//                  '${int.parse(_dhoolNum.text)}'),
-//              content: SingleChildScrollView(
-//                child: ListBody(
-//                  children: <Widget>[
-//                    const Text(
-//                        'Please enter a different fermented dhool number !'),
-//                  ],
-//                ),
-//              ),
-//              actions: <Widget>[
-//                TextButton(
-//                  child: const Text('OK'),
-//                  onPressed: () {
-//                    Navigator.pop(context);
-//                    return;
-//                  },
-//                ),
-//              ],
-//            );
-//          },
-//        );
-//      }
-//      else {
-//        _formKeyDrying.currentState.save();
+        showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('You have already created dryed dhool ' +
+                  '${int.parse(_dhoolNum.text)}'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    const Text(
+                        'Please enter a different dryed dhool number !'),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('OK'),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    return;
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }else{
+          _formKeyDrying.currentState.save();
+
+          Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+              listen: false)
+              .addDryingItem(_drying);
+
+          Navigator.of(context).pushNamed('DrierOutputView');
+
+
+
+//        try {
+//          _formKeyDrying.currentState.save();
 //
-//        Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-//                listen: false)
-//            .addDryingItem(_drying);
-//
-//        Navigator.of(context).pushNamed('DrierOutputView');
-//      }
-//    }
-//    else if (_dhoolNum.text == 'BB') {
-//      print('Enter == BB');
-//      if (!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+//          await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
 //              listen: false)
-//          .isFermentedDhoolMade(
-//              int.parse(_batchNum.text), _dhoolNum.text, DateTime.now()))) {
-//        print('Enter == BB and isFermentedDhoolMade No');
-//        showDialog<void>(
-//          context: context,
-//          barrierDismissible: false, // user must tap button!
-//          builder: (BuildContext context) {
-//            return AlertDialog(
-//              title: Text('You have not created fermented dhool ' +
-//                  '${_dhoolNum.text}'),
-//              content: SingleChildScrollView(
-//                child: ListBody(
-//                  children: <Widget>[
-//                    const Text(
-//                        'Please enter a different fermented dhool number !'),
-//                  ],
-//                ),
-//              ),
-//              actions: <Widget>[
-//                TextButton(
-//                  child: const Text('OK'),
-//                  onPressed: () {
-//                    Navigator.pop(context);
-//                    return;
-//                  },
-//                ),
-//              ],
-//            );
-//          },
-//        );
-//      } else {
-//        _formKeyDrying.currentState.save();
+//              .addDryingItem(_drying, authToken);
 //
-//        Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-//                listen: false)
-//            .addDryingItem(_drying);
+//          Navigator.of(context).pushNamed('DryingView');
+//        } catch (e) {
+//          await showDialog<void>(
+//            context: context,
+//            barrierDismissible: false, // user must tap button!
+//            builder: (BuildContext context) {
+//              return SingleChildScrollView(
+//                child: Padding(
+//                  padding: const EdgeInsets.all(20.0),
+//                  child: AlertDialog(
+//                    title: const Text('Warning !'),
+//                    content: ListBody(
+//                      children: <Widget>[
+//                        const Text('Error has occured'),
+//                        Text(e.toString()),
+//                      ],
+//                    ),
+//                    actions: <Widget>[
+//                      TextButton(
+//                        child: const Text('Okay'),
+//                        onPressed: () {
+//                          Navigator.of(context).pop();
+//                        },
+//                      ),
+//                    ],
+//                  ),
+//                ),
+//              );
+//            },
+//          );
+//        }
+      }
+    }    else if (_dhoolNum.text == 'BB') {
+//      print('Enter == BB');
+      if (!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+          listen: false)
+          .isFermentedBigBulkMade(int.parse(_batchNum.text), _dhoolNum.text, DateTime.now()))) {
+//        print('Enter == BB and isDhoolMade NO');
+        showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('You have not created fermented dhool ' +
+                  _dhoolNum.text),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    const Text('Please enter a different fermented dhool number !'),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('OK'),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    return;
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }else if (Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+          listen: false)
+          .isDryedBigBulkMade(int.parse(_batchNum.text),
+          _dhoolNum.text, DateTime.now())) {
+//        print('Enter isFermentedDhoolMade');
+//        print('entered fd num : ' + _dhoolNum.text);
+        showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('You have already created dryed dhool ' +
+                  _dhoolNum.text),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    const Text(
+                        'Please enter a different dryed dhool number !'),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('OK'),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    return;
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }else{
+
+          _formKeyDrying.currentState.save();
+
+          Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+              listen: false)
+              .addDryingItem(_drying);
+
+          Navigator.of(context).pushNamed('DrierOutputView');
+
+
+//        try {
+//          _formKeyDrying.currentState.save();
 //
-//        Navigator.of(context).pushNamed('DrierOutputView');
-//      }
-//    }
+//          await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+//              listen: false)
+//              .addDryingItem(_drying, authToken);
+//
+//          Navigator.of(context).pushNamed('DryingView');
+//        } catch (e) {
+//          await showDialog<void>(
+//            context: context,
+//            barrierDismissible: false, // user must tap button!
+//            builder: (BuildContext context) {
+//              return SingleChildScrollView(
+//                child: Padding(
+//                  padding: const EdgeInsets.all(20.0),
+//                  child: AlertDialog(
+//                    title: const Text('Warning !'),
+//                    content: ListBody(
+//                      children: <Widget>[
+//                        const Text('Error has occured'),
+//                        Text(e.toString()),
+//                      ],
+//                    ),
+//                    actions: <Widget>[
+//                      TextButton(
+//                        child: const Text('Okay'),
+//                        onPressed: () {
+//                          Navigator.of(context).pop();
+//                        },
+//                      ),
+//                    ],
+//                  ),
+//                ),
+//              );
+//            },
+//          );
+//        }
+      }
+    }
     else {
       _formKeyDrying.currentState.save();
 
