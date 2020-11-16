@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_mixing.dart';
 import 'package:provider/provider.dart';
-import 'package:teatrackerappofficer/providers/withering/withering_mixing_provider.dart';
 
 class WitheringMixingScreen extends StatefulWidget {
   @override
@@ -27,7 +27,7 @@ class _WitheringMixingScreenState extends State<WitheringMixingScreen> {
       return;
     }
 
-    if(Provider.of<WitheringMixingProvider>(context, listen: false).isBatchMixingTurnUsed(int.parse(_troughNum.text), int.parse(_turn.text), DateTime.now())){
+    if(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isBatchMixingTurnUsed(int.parse(_troughNum.text), int.parse(_turn.text), DateTime.now())){
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
@@ -53,10 +53,36 @@ class _WitheringMixingScreenState extends State<WitheringMixingScreen> {
           );
         },
       );
+    }else if(!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isTroughStarted(int.parse(_troughNum.text), DateTime.now()))){
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('You have not started trough ' + '${int.parse(_troughNum.text)}'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  const Text('Please enter a different trough number !'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  return;
+                },
+              ),
+            ],
+          );
+        },
+      );
     }else{
       _formKeyWitheringMixing.currentState.save();
       try {
-        await Provider.of<WitheringMixingProvider>(context, listen: false)
+        await Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
             .addWitheringMixingItem(_witheringMixing, authToken);
 
         Navigator.of(context).pushNamed('WitheringMixingView');

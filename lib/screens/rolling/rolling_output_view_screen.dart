@@ -14,7 +14,8 @@ class RollingOutputViewScreen extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.check),
             onPressed: () {
-              Navigator.of(context).pushNamed('MainMenu');
+//              Navigator.of(context).pushNamed('MainMenu');
+              Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
             },
             disabledColor: Colors.white,
             iconSize: 35.0,

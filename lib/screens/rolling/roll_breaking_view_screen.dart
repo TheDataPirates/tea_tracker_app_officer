@@ -27,7 +27,8 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
       print(_bigBulk.bigBulkNumber);
       print(_bigBulk.bigBulkWeight);
 
-      Navigator.of(context).pushNamed('MainMenu');
+//      Navigator.of(context).pushNamed('MainMenu');
+      Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
     } catch (error) {
       await showDialog<void>(
         context: context,
@@ -73,7 +74,8 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
           IconButton(
             icon: const Icon(Icons.check),
             onPressed: () {
-              Navigator.of(context).pushNamed('MainMenu');
+//              Navigator.of(context).pushNamed('MainMenu');
+              Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
             },
             disabledColor: Colors.white,
             iconSize: 35.0,

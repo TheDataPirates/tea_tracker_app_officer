@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
-import 'package:teatrackerappofficer/providers/withering/withering_starting__finishing_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_starting_finishing.dart';
 
 class WitheringFinishingScreen extends StatefulWidget {
@@ -27,7 +27,7 @@ class _WitheringFinishingScreenState extends State<WitheringFinishingScreen> {
       return;
     }
 
-    if(Provider.of<WitheringStartingFinishingProvider>(context, listen: false).isTroughFinished(int.parse(_troughNum.text), DateTime.now())){
+    if(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isTroughFinished(int.parse(_troughNum.text), DateTime.now())){
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
@@ -53,10 +53,36 @@ class _WitheringFinishingScreenState extends State<WitheringFinishingScreen> {
           );
         },
       );
+    }else if(!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isTroughStarted(int.parse(_troughNum.text), DateTime.now()))){
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('You have not started trough ' + '${int.parse(_troughNum.text)}'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  const Text('Please enter a different trough number !'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  return;
+                },
+              ),
+            ],
+          );
+        },
+      );
     }else{
       _formKeyWitheringFinishing.currentState.save();
       try {
-        await Provider.of<WitheringStartingFinishingProvider>(context,
+        await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
             listen: false)
             .addWitheringFinishingItem(_witheringFinishing, authToken);
 

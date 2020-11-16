@@ -4,8 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/bought_leaf/tea_collections_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
-import 'package:teatrackerappofficer/providers/withering/withering_mixing_provider.dart';
-import 'package:teatrackerappofficer/providers/withering/withering_starting__finishing_provider.dart';
 import 'package:teatrackerappofficer/screens/bought_leaf/input_collection_screen.dart';
 import 'package:teatrackerappofficer/screens/bought_leaf/list_tile_lot_screen.dart';
 import 'package:teatrackerappofficer/screens/bought_leaf/lot_list_screen.dart';
@@ -18,9 +16,6 @@ import 'package:teatrackerappofficer/screens/rolling/drier_output_view_screen.da
 import 'package:teatrackerappofficer/screens/rolling/fermenting_view_screen.dart';
 import 'package:teatrackerappofficer/screens/rolling/outturn_report_screen.dart';
 import 'package:teatrackerappofficer/screens/rolling/roll_breaking_view_screen.dart';
-//import 'package:teatrackerappofficer/screens/rolling/rolling_input_screen.dart';
-//import 'package:teatrackerappofficer/screens/rolling/rolling_input_view_screen.dart';
-//import 'package:teatrackerappofficer/screens/rolling/rolling_output_screen.dart';
 import 'package:teatrackerappofficer/screens/rolling/rolling_output_view_screen.dart';
 import 'package:teatrackerappofficer/screens/witheringLoft/withering_finishing_view_screen.dart';
 import 'package:teatrackerappofficer/screens/witheringLoft/withering_unloading_batch_choosing_screen.dart';
@@ -65,13 +60,7 @@ class MyApp extends StatelessWidget {
           value: WitheringLoadingUnloadingRollingProvider(),
         ),
         ChangeNotifierProvider.value(
-          value: WitheringMixingProvider(),
-        ),
-        ChangeNotifierProvider.value(
           value: TeaCollections(),
-        ),
-        ChangeNotifierProvider.value(
-          value: WitheringStartingFinishingProvider(),
         ),
       ],
       child: Consumer<Auth>(
@@ -117,9 +106,6 @@ class MyApp extends StatelessWidget {
                 WitheringUnloadingBatchChoosingScreen(),
             'WitheringUnloadingView': (context) =>
                 WitheringUnloadingViewScreen(),
-//            'RollingInput': (context) => RollingInputScreen(),
-//            'RollingOutput': (context) => RollingOutputScreen(),
-//            'RollingInputView': (context) => RollingInputViewScreen(),
             'RollingOutputView': (context) => RollingOutputViewScreen(),
             'RollBreakingView': (context) => RollBreakingViewScreen(),
             'FermentingView': (context) => FermentingViewScreen(),

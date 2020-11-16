@@ -10,10 +10,343 @@ import 'package:teatrackerappofficer/providers/rolling/rolling.dart';
 import 'package:teatrackerappofficer/providers/withering/batch.dart';
 import 'package:teatrackerappofficer/providers/withering/ended_loading_trough_box.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_mixing.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_starting_finishing.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_unloading.dart';
 import 'package:http/http.dart' as http;
 
 class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
+
+
+  //----------------Withering Starting-------------------
+
+  List<WitheringStartingFinishing> _witheringStartingItems = [];
+  List<WitheringStartingFinishing> get witheringStartingItems {
+    return [..._witheringStartingItems];
+  }
+
+  int get witheringStartingItemCount {
+    return _witheringStartingItems.length;
+  }
+
+  WitheringStartingFinishing findByIdStart(String id) {
+    return _witheringStartingItems
+        .firstWhere((witherStart) => witherStart.id == id);
+  }
+
+  Future<void> addWitheringStartingItem(
+      WitheringStartingFinishing witheringStarting, String authToken) async {
+    final newWitheringStartingItem = WitheringStartingFinishing(
+        id: DateTime.now().toString(),
+        troughNumber: witheringStarting.troughNumber,
+        time: DateTime.now(),
+        temperature: witheringStarting.temperature,
+        humidity: witheringStarting.humidity);
+    const url = 'http://10.0.2.2:8080/loft/starting';
+
+    try {
+      final response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'id': DateTime.now().toIso8601String(),
+          'troughNumber': witheringStarting.troughNumber,
+          'time': DateTime.now().toIso8601String(),
+          'temperature': witheringStarting.temperature,
+          'humidity': witheringStarting.humidity,
+          'process_name': 'starting'
+        }),
+      );
+      if (response.statusCode == 200) {
+        _witheringStartingItems.add(newWitheringStartingItem);
+        notifyListeners();
+      } else {
+        throw Exception('Failed ');
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  Future<void> fetchAndSetWitheringStartingItem(String authToken) async {
+    _witheringStartingItems = [];
+    const url = 'http://10.0.2.2:8080/loft/startings';
+    try {
+      final dataList = await http.get(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+      );
+      final extractedDataList = jsonDecode(dataList.body);
+//      print(extractedDataList);
+      List loadedLots = extractedDataList['startings'];
+      print(loadedLots);
+      for (var i in loadedLots) {
+        _witheringStartingItems.add(
+          WitheringStartingFinishing(
+            id: i['tp_id'] as String,
+            troughNumber: i['TroughTroughId'] as int,
+            time: DateTime.parse(i['date']),
+            temperature: double.parse(i['temperature'].toString()),
+            humidity: double.parse(i['humidity'].toString()),
+          ),
+        );
+      }
+      notifyListeners();
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  bool isTroughStarted (int troughNumber, DateTime dateTime){
+    bool value = false;
+    _witheringStartingItems.forEach((troughStarting) {
+      if ((troughStarting.time.year == dateTime.year) &&
+          (troughStarting.time.month == dateTime.month) &&
+          (troughStarting.time.day == dateTime.day)){
+        if(troughStarting.troughNumber == troughNumber){
+          value = true;
+        }
+      }
+    });
+    return value;
+  }
+
+
+
+  //----------------Withering Mixing-------------------
+
+  List<WitheringMixing> _witheringMixingItems = [];
+  List<WitheringMixing> get witheringMixingItems {
+    return [..._witheringMixingItems];
+  }
+
+  int get witheringMixingItemCount {
+    return _witheringMixingItems.length;
+  }
+
+  WitheringMixing findById(String id) {
+    return _witheringMixingItems.firstWhere((troughMix) => troughMix.id == id);
+  }
+
+  Future<void> addWitheringMixingItem(
+      WitheringMixing witheringMixing, String authToken) async {
+    const url = 'http://10.0.2.2:8080/loft/mixing';
+    final newWitheringMixingItem = WitheringMixing(
+        id: DateTime.now().toString(),
+        troughNumber: witheringMixing.troughNumber,
+        turn: witheringMixing.turn,
+        time: DateTime.now(),
+        temperature: witheringMixing.temperature,
+        humidity: witheringMixing.humidity);
+    try {
+      final response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'id': DateTime.now().toIso8601String(),
+          'troughNumber': witheringMixing.troughNumber,
+          'time': DateTime.now().toIso8601String(),
+          'temperature': witheringMixing.temperature,
+          'humidity': witheringMixing.humidity,
+          'process_name': 'mixing${witheringMixing.turn}'
+        }),
+      );
+      if (response.statusCode == 200) {
+        _witheringMixingItems.add(witheringMixing);
+        notifyListeners();
+      } else {
+        throw Exception('Failed ');
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  Future<void> fetchAndSetWitheringMixingItem(String authToken) async {
+    _witheringMixingItems = [];
+    const url = 'http://10.0.2.2:8080/loft/mixings';
+    try {
+      final dataList = await http.get(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+      );
+      final extractedDataList = jsonDecode(dataList.body);
+//      print(extractedDataList);
+      List loadedLots = extractedDataList['mixings'];
+      print(loadedLots);
+      for (var i in loadedLots) {
+        _witheringMixingItems.add(
+          WitheringMixing(
+            id: i['tp_id'] as String,
+            troughNumber: i['TroughTroughId'] as int,
+            time: DateTime.parse(i['date']),
+            turn: getMixingturn(i['ProcessProcessName']),
+            temperature: double.parse(i['temperature'].toString()),
+            humidity: double.parse(i['humidity'].toString()),
+          ),
+        );
+      }
+      notifyListeners();
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  int getMixingturn(String proc_name) {
+    var mixingTurn = proc_name;
+    switch (mixingTurn) {
+      case 'mixing1':
+        {
+          return int.parse('1');
+        }
+        break;
+      case 'mixing2':
+        {
+          return int.parse('2');
+        }
+        break;
+      case 'mixing3':
+        {
+          return int.parse('3');
+        }
+        break;
+    }
+  }
+
+  bool isBatchMixingTurnUsed (int troughNumber, int turn, DateTime dateTime){
+    bool value = false;
+    _witheringMixingItems.forEach((witheringMixing) {
+      if ((witheringMixing.time.year == dateTime.year) &&
+          (witheringMixing.time.month == dateTime.month) &&
+          (witheringMixing.time.day == dateTime.day)){
+        if(witheringMixing.troughNumber == troughNumber && witheringMixing.turn == turn){
+          value = true;
+        }
+      }
+    });
+    return value;
+  }
+
+  String getCurrentDate() {
+    final now = formatDate(DateTime.now(), [yyyy, '-', mm, '-', dd]);
+
+    return now;
+  }
+
+
+
+
+  //--------------------------- Withering Finishing ----------------------
+
+  List<WitheringStartingFinishing> _witheringFinishingItems = [];
+  List<WitheringStartingFinishing> get witheringFinishingItems {
+    return [..._witheringFinishingItems];
+  }
+
+  int get witheringFinishingItemCount {
+    return _witheringFinishingItems.length;
+  }
+
+  WitheringStartingFinishing findByIdFinish(String id) {
+    return _witheringFinishingItems
+        .firstWhere((witherFinish) => witherFinish.id == id);
+  }
+
+  Future<void> addWitheringFinishingItem(
+      WitheringStartingFinishing witheringFinishing, String authToken) async {
+    final newWitheringFinishingItem = WitheringStartingFinishing(
+        id: DateTime.now().toString(),
+        troughNumber: witheringFinishing.troughNumber,
+        time: DateTime.now(),
+        temperature: witheringFinishing.temperature,
+        humidity: witheringFinishing.humidity);
+    const url = 'http://10.0.2.2:8080/loft/finishing';
+    try {
+      final response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'id': DateTime.now().toIso8601String(),
+          'troughNumber': witheringFinishing.troughNumber,
+          'time': DateTime.now().toIso8601String(),
+          'temperature': witheringFinishing.temperature,
+          'humidity': witheringFinishing.humidity,
+          'process_name': 'finishing'
+        }),
+      );
+      if (response.statusCode == 200) {
+        _witheringFinishingItems.add(witheringFinishing);
+        notifyListeners();
+      } else {
+        throw Exception('Failed ');
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  Future<void> fetchAndSetWitheringFinishingItem(String authToken) async {
+    _witheringFinishingItems = [];
+    const url = 'http://10.0.2.2:8080/loft/finishings';
+    try {
+      final dataList = await http.get(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+      );
+      final extractedDataList = jsonDecode(dataList.body);
+//      print(extractedDataList);
+      List loadedLots = extractedDataList['finishings'];
+      print(loadedLots);
+      for (var i in loadedLots) {
+        _witheringFinishingItems.add(
+          WitheringStartingFinishing(
+            id: i['tp_id'] as String,
+            troughNumber: i['TroughTroughId'] as int,
+            time: DateTime.parse(i['date']),
+            temperature: double.parse(i['temperature'].toString()),
+            humidity: double.parse(i['humidity'].toString()),
+          ),
+        );
+      }
+      notifyListeners();
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  bool isTroughFinished (int troughNumber, DateTime dateTime){
+    bool value = false;
+    _witheringFinishingItems.forEach((troughFinishing) {
+      if ((troughFinishing.time.year == dateTime.year) &&
+          (troughFinishing.time.month == dateTime.month) &&
+          (troughFinishing.time.day == dateTime.day)){
+        if(troughFinishing.troughNumber == troughNumber){
+          value = true;
+        }
+      }
+    });
+    return value;
+  }
+
+
   //----------------Batch -------------------
 
   List<int> _batchNumberItems = [];
@@ -1072,9 +1405,4 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return totOutturn;
   }
 
-  String getCurrentDate() {
-    final now = formatDate(DateTime.now(), [yyyy, '-', mm, '-', dd]);
-
-    return now;
-  }
 }
