@@ -22,6 +22,7 @@ import 'package:teatrackerappofficer/screens/rolling/roll_breaking_view_screen.d
 //import 'package:teatrackerappofficer/screens/rolling/rolling_input_view_screen.dart';
 //import 'package:teatrackerappofficer/screens/rolling/rolling_output_screen.dart';
 import 'package:teatrackerappofficer/screens/rolling/rolling_output_view_screen.dart';
+import 'package:teatrackerappofficer/screens/viewAllSections/vas_rolling_screen.dart';
 import 'package:teatrackerappofficer/screens/witheringLoft/withering_finishing_view_screen.dart';
 import 'package:teatrackerappofficer/screens/witheringLoft/withering_unloading_batch_choosing_screen.dart';
 import 'package:teatrackerappofficer/screens/witheringLoft/withering_unloading_view_screen.dart';
@@ -44,6 +45,17 @@ import 'screens/witheringLoft/withering_unloading_screen.dart';
 import 'screens/witheringLoft/trough_loading_view_screen.dart';
 import 'screens/witheringLoft/withering_mixing_view_screen.dart';
 import 'screens/witheringLoft/withering_starting_view_screen.dart';
+import 'screens/viewAllSections/vas_bought_leaf_screen.dart';
+import 'screens/viewAllSections/vas_withering_loft_screen.dart';
+import 'screens/viewAllSections/vas_withering_starting_screen.dart';
+import 'screens/viewAllSections/vas_withering_mixing_screen.dart';
+import 'screens/viewAllSections/vas_withering_finishing_screen.dart';
+import 'screens/viewAllSections/vas_withering_unloading_screen.dart';
+import 'screens/viewAllSections/vas_rolling_screen.dart';
+import 'screens/viewAllSections/vas_roll_breaking_screen.dart';
+import 'screens/viewAllSections/vas_fermenting_screen.dart';
+import 'screens/viewAllSections/vas_drying_room_screen.dart';
+import 'screens/viewAllSections/vas_drier_output_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // set lock to landscape view only
@@ -133,6 +145,17 @@ class MyApp extends StatelessWidget {
             'DrierOutputView': (context) => DrierOutputViewScreen(),
             'ReMeasuring': (context) => ReMeasuringScreen(),
             'ViewAllSections': (context) => ViewAllSectionsScreen(),
+            'VasBoughtLeaf':(context) => VasBoughtLeafScreen(),
+            'VasWitheringLoft':(context) => VasWitheringLoftScreen(),
+            'VasWitheringStarting':(context) => VasWitheringStartingScreen(),
+            'VasWitheringMixing':(context) => VasWitheringMixingScreen(),
+            'VasWitheringFinishing':(context) => VasWitheringFinishingScreen(),
+            'VasWitheringUnloadingBatchChoosing':(context) => VasWitheringUnloadingScreen(),
+            'VasRollingRoom':(context) => VasRollingScreen(),
+            'VasRollBreakingRoom':(context) => VasRollBreakingScreen(),
+            'VasFermentingRoom':(context) => VasFermentingScreen(),
+            'VasDryingRoom':(context) => VasDryingRoomScreen(),
+            'VasDrierOutput':(context) => VasDrierOutputScreen(),
           },
         ),
       ),
