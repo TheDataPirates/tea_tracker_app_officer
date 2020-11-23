@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 
-class VasDrierOutputScreen extends StatelessWidget {
+class VasShiftingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Drier Output View'),
+        title: const Text('Shifting View'),
       ),
     );
-
   }
 }
-
-

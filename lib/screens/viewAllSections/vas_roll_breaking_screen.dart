@@ -4,12 +4,7 @@ import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/widgets/roll_breaking_item.dart';
 
-class VasRollBreakingScreen extends StatefulWidget {
-  @override
-  _VasRollBreakingScreenState createState() => _VasRollBreakingScreenState();
-}
-
-class _VasRollBreakingScreenState extends State<VasRollBreakingScreen> {
+class VasRollBreakingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final rollBreaking = Provider.of<WitheringLoadingUnloadingRollingProvider>(
@@ -32,7 +27,7 @@ class _VasRollBreakingScreenState extends State<VasRollBreakingScreen> {
             : Consumer<WitheringLoadingUnloadingRollingProvider>(
           child: Center(
             child: const Text(
-                'Got no Withering roll breaking items found yet, start adding some!'),
+                'Got no roll breaking items!'),
           ),
           builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
           WitheringLoadingUnloadingRollingProvider

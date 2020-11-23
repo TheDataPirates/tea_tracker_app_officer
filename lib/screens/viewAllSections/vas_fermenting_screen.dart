@@ -30,7 +30,7 @@ class _VasFermentingScreenState extends State<VasFermentingScreen> {
             : Consumer<WitheringLoadingUnloadingRollingProvider>(
           child: Center(
             child: const Text(
-                'Got no Withering roll breaking items found yet, start adding some!'),
+                'Got no fermenting items!'),
           ),
           builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
           WitheringLoadingUnloadingRollingProvider

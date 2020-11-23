@@ -4,12 +4,7 @@ import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart
 import 'package:teatrackerappofficer/providers/withering/withering_mixing_provider.dart';
 import 'package:teatrackerappofficer/widgets/withering_mixing_item.dart';
 
-class VasWitheringMixingScreen extends StatefulWidget {
-  @override
-  _VasWitheringMixingScreenState createState() => _VasWitheringMixingScreenState();
-}
-
-class _VasWitheringMixingScreenState extends State<VasWitheringMixingScreen> {
+class VasWitheringMixingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);

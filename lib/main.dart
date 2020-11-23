@@ -54,8 +54,11 @@ import 'screens/viewAllSections/vas_withering_unloading_screen.dart';
 import 'screens/viewAllSections/vas_rolling_screen.dart';
 import 'screens/viewAllSections/vas_roll_breaking_screen.dart';
 import 'screens/viewAllSections/vas_fermenting_screen.dart';
-import 'screens/viewAllSections/vas_drying_room_screen.dart';
 import 'screens/viewAllSections/vas_drier_output_screen.dart';
+import 'screens/viewAllSections/vas_shifting_screen.dart';
+import 'screens/viewAllSections/vas_packing_screen.dart';
+import 'screens/viewAllSections/vas_dispatching_screen.dart';
+import 'screens/viewAllSections/vas_remeasuring_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // set lock to landscape view only
@@ -154,8 +157,11 @@ class MyApp extends StatelessWidget {
             'VasRollingRoom':(context) => VasRollingScreen(),
             'VasRollBreakingRoom':(context) => VasRollBreakingScreen(),
             'VasFermentingRoom':(context) => VasFermentingScreen(),
-            'VasDryingRoom':(context) => VasDryingRoomScreen(),
-            'VasDrierOutput':(context) => VasDrierOutputScreen(),
+            'VasDryingRoom':(context) => VasDrierOutputScreen(),
+            'VasShiftingRoom':(context) => VasShiftingScreen(),
+            'VasPackingRoom':(context) => VasPackingScreen(),
+            'VasDispatchingRoom':(context) => VasDispatchingScreen(),
+            'VasReMeasuring':(context) => VasRemeasuringScreen(),
           },
         ),
       ),

@@ -3,12 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/widgets/trough_loading_item.dart';
 
-class VasBoughtLeafScreen extends StatefulWidget {
-  @override
-  _VasBoughtLeafScreenState createState() => _VasBoughtLeafScreenState();
-}
+class VasBoughtLeafScreen extends StatelessWidget {
 
-class _VasBoughtLeafScreenState extends State<VasBoughtLeafScreen> {
   @override
   Widget build(BuildContext context) {
     final troughLoading =

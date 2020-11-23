@@ -4,12 +4,7 @@ import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart
 import 'package:teatrackerappofficer/providers/withering/withering_starting__finishing_provider.dart';
 import 'package:teatrackerappofficer/widgets/withering_starting_finishing_item.dart';
 
-class VasWitheringFinishingScreen extends StatefulWidget {
-  @override
-  _VasWitheringFinishingScreenState createState() => _VasWitheringFinishingScreenState();
-}
-
-class _VasWitheringFinishingScreenState extends State<VasWitheringFinishingScreen> {
+class VasWitheringFinishingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);
