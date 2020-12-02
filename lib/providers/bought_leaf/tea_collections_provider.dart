@@ -148,9 +148,43 @@ class TeaCollections with ChangeNotifier {
     notifyListeners();
   }
 
-  int calDeduct(int water, int cleaf, int other, int gweight) {
+  int calDeduct(int water, int cleaf, int other, int gweight, String contType,
+      int noOfCont) {
     // calculated deductions lot wise
+    double contDeducts;
     int deductPercnt = water + cleaf + other;
+    switch (contType) {
+      case 'A':
+        {
+          contDeducts = 0.5 * noOfCont;
+          gweight = (gweight - contDeducts).toInt();
+        }
+        break;
+      case 'B':
+        {
+          contDeducts = 0.75 * noOfCont;
+          gweight = (gweight - contDeducts).toInt();
+        }
+        break;
+      case 'C':
+        {
+          contDeducts = 0.1 * noOfCont;
+          gweight = (gweight - contDeducts).toInt();
+        }
+        break;
+      case 'D':
+        {
+          contDeducts = 1.25 * noOfCont;
+          gweight = (gweight - contDeducts).toInt();
+        }
+        break;
+      case 'E':
+        {
+          contDeducts = 0.0 * noOfCont;
+          gweight = (gweight - contDeducts).toInt();
+        }
+        break;
+    }
     double deductDouble = ((gweight * deductPercnt) / 100);
     lotTotDeduct = deductDouble.toInt();
     return deductDouble.toInt();
