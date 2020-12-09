@@ -166,6 +166,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   }
 
   void addWitheringUnloadingItem(WitheringUnloading witheringUnloading) {
+
     final newWitheringUnloadingItem = WitheringUnloading(
       id: DateTime.now().toString(),
       batchNumber: witheringUnloading.batchNumber,
@@ -772,7 +773,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return _dryingItems.firstWhere((drying) => drying.id == id);
   }
 
-  void addDryingItem(Drying drying) {
+   void addDryingItem(Drying drying) {
     final newDrierItem = Drying(
       id: DateTime.now().toString(),
       batchNumber: drying.batchNumber,
@@ -781,6 +782,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       drierOutWeight: drying.drierOutWeight,
       time: DateTime.now(),
     );
+
+    const url = 'http://10.0.2.2:8080/rolling/rbreaking';
 
     _dryingItems.add(drying);
     notifyListeners();
