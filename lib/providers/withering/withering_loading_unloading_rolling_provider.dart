@@ -783,10 +783,42 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       time: DateTime.now(),
     );
 
-    const url = 'http://10.0.2.2:8080/rolling/rbreaking';
+    const url = 'http://10.0.2.2:8080/rolling/dryings';
 
     _dryingItems.add(drying);
     notifyListeners();
+  }
+
+  Future<void> fetchAndSetDryingItem(String authtoken) async{
+    _dryingItems = [];
+    const url = 'http://10.0.2.2:8080/rolling/dryings';
+    try {
+      final dataList = await http.get(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authtoken'
+        },
+      );
+      final extractedDataList = jsonDecode(dataList.body);
+      List loadedLots = extractedDataList['dryings'];
+      print(loadedLots);
+      for(var i in loadedLots){
+        _dryingItems.add(Drying(
+            id: i['id'].toString(), 
+            batchNumber: int.parse(i['batch_no'].toString()),
+            time: DateTime.parse(i['drier_out_time']),
+            dhoolNumber: i['rb_turn'].toString(), 
+            drierInWeight: double.parse(i['fd_out_kg'].toString()), 
+            drierOutWeight: double.parse(i['drier_out_kg'].toString())
+
+        ),
+        );
+      }
+      notifyListeners();
+    }catch(error){
+      print(error);
+    }
   }
 
   double drierInputWeight(int batchNumber, DateTime dateTime, dhoolNum) {
