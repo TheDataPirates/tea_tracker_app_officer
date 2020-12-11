@@ -16,7 +16,7 @@ class TeaCollections with ChangeNotifier {
     return [..._lot_items];
   }
 
-  int Bulkid = Random().nextInt(10000);
+  int Bulkid = Random().nextInt(100000000);
   int lotTotDeduct;
 
   Supplier _newSupplier;
@@ -245,5 +245,9 @@ class TeaCollections with ChangeNotifier {
     final now = formatDate(DateTime.now(), [yyyy, '-', mm, '-', dd]);
 
     return now;
+  }
+
+  Lot get lastLotNumberItem {
+    return lot_items[lot_items.length - 1];
   }
 }

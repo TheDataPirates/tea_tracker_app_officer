@@ -54,7 +54,7 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
             .verifySupplier(supplierNoEditingController.text,
                 supplierNameEditingController.text, token, user);
         print('bulk saved');
-        Navigator.of(context).pushNamed('LotListScreen');
+        Navigator.of(context).pushNamed('InputCollectionScreen');
       } catch (error) {
         await showDialog<void>(
           context: context,

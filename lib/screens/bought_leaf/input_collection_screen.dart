@@ -64,7 +64,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
           ),
           provider.calNetWeight(_editedLot.gross_weight),
         );
-        Navigator.of(context).pop();
+        Navigator.of(context).pushNamed('LotListScreen');
       } catch (e) {
         //count should be 0 if not after click okay condition not true
         await showDialog<void>(

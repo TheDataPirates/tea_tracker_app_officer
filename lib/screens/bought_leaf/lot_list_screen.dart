@@ -95,13 +95,12 @@ class _LotListScreenState extends State<LotListScreen> {
             'ID: ${provider.newSupplier.supplierId}    NAME: ${provider.newSupplier.supplierName}'),
         actions: [
           IconButton(
-            tooltip: "printing",
             icon: const Icon(
-              Icons.print,
+              Icons.check,
               size: 40,
             ),
             onPressed: () {
-              Navigator.of(context).pushNamed("PrintScreen");
+              Navigator.of(context).pushNamed("TroughLoading");
             },
           )
         ],
@@ -182,13 +181,13 @@ class _LotListScreenState extends State<LotListScreen> {
                       ),
               ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).accentColor,
-        child: const Icon(Icons.add),
-        onPressed: () {
-          Navigator.pushNamed(context, "InputCollectionScreen");
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: Theme.of(context).accentColor,
+      //   child: const Icon(Icons.add),
+      //   onPressed: () {
+      //     Navigator.pushNamed(context, "InputCollectionScreen");
+      //   },
+      // ),
     );
   }
 }

@@ -19,13 +19,12 @@ class _TroughLoadingViewScreenState extends State<TroughLoadingViewScreen> {
     date: null,
   );
 
-  void _saveEndedLoadingTroughBoxDetails()  {
+  void _saveEndedLoadingTroughBoxDetails() {
+    Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+            listen: false)
+        .addEndedLoadingTroughBoxItem(_endedLoadingTroughBox);
 
-      Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-              listen: false)
-          .addEndedLoadingTroughBoxItem(_endedLoadingTroughBox);
-
-      Navigator.of(context).pop();
+    Navigator.of(context).pop();
   }
 
   @override
@@ -44,8 +43,8 @@ class _TroughLoadingViewScreenState extends State<TroughLoadingViewScreen> {
           IconButton(
             icon: const Icon(Icons.check),
             onPressed: () {
-//              Navigator.of(context).pushNamed('MainMenu');
-              Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
+              Navigator.of(context).pushNamed('PrintScreen');
+//               Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
             },
             disabledColor: Colors.white,
             iconSize: 35.0,
@@ -136,7 +135,7 @@ class _TroughLoadingViewScreenState extends State<TroughLoadingViewScreen> {
                   size: 40.0,
                 ),
                 onPressed: () {
-                  Navigator.of(context).pushNamed('TroughLoading');
+                  Navigator.of(context).pushNamed('InputCollectionScreen');
                 },
                 backgroundColor: Colors.green,
                 heroTag: null,
@@ -175,14 +174,16 @@ class _TroughLoadingViewScreenState extends State<TroughLoadingViewScreen> {
                           // Should add the latest trough number and the box number to a new list endedTroughBoxItems with date
                           _endedLoadingTroughBox = EndedLoadingTroughBox(
                             id: DateTime.now().toString(),
-                            troughNumber:
-                            Provider.of<WitheringLoadingUnloadingRollingProvider>(
-                                context,
-                                listen: false).latestAddedLoadingTroughNumber(),
-                            boxNumber:
-                            Provider.of<WitheringLoadingUnloadingRollingProvider>(
-                                context,
-                                listen: false).latestAddedLoadingBoxNumber(),
+                            troughNumber: Provider.of<
+                                        WitheringLoadingUnloadingRollingProvider>(
+                                    context,
+                                    listen: false)
+                                .latestAddedLoadingTroughNumber(),
+                            boxNumber: Provider.of<
+                                        WitheringLoadingUnloadingRollingProvider>(
+                                    context,
+                                    listen: false)
+                                .latestAddedLoadingBoxNumber(),
                             date: DateTime.now(),
                           );
 

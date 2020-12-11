@@ -7,6 +7,7 @@ class WitheringLoading with ChangeNotifier {
   final String gradeOfGL;
   final double netWeight;
   final DateTime date;
+  final String lotId;
 
   WitheringLoading({
     @required this.id,
@@ -15,5 +16,6 @@ class WitheringLoading with ChangeNotifier {
     @required this.gradeOfGL,
     @required this.netWeight,
     @required this.date,
+    @required this.lotId,
   });
 }
