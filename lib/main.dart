@@ -93,8 +93,16 @@ class MyApp extends StatelessWidget {
         builder: (ctx, auth, _) => MaterialApp(
           theme: ThemeData(
             primarySwatch: Colors.green,
+            appBarTheme: AppBarTheme(
+              color: const Color(0xff099857),
+            ),
             accentColor: Colors.greenAccent,
-            textTheme: TextTheme(bodyText1: TextStyle(color: Colors.white)),
+            textTheme: TextTheme(bodyText1: TextStyle(color: Colors.white),),
+            floatingActionButtonTheme: FloatingActionButtonThemeData(
+              backgroundColor: const Color(0xff099857),
+            ),
+            errorColor: Colors.red,
+
           ),
           home: auth.isAuth
               ? MainMenuScreen()
@@ -126,19 +134,15 @@ class MyApp extends StatelessWidget {
             'TroughLoadingView': (context) => TroughLoadingViewScreen(),
             'WitheringMixingView': (context) => WitheringMixingViewScreen(),
             'WitheringStartingView': (context) => WitheringStartingViewScreen(),
-            'WitheringFinishingView': (context) =>
-                WitheringFinishingViewScreen(),
-            'WitheringUnloadingBatchChoosing': (context) =>
-                WitheringUnloadingBatchChoosingScreen(),
-            'WitheringUnloadingView': (context) =>
-                WitheringUnloadingViewScreen(),
+            'WitheringFinishingView': (context) => WitheringFinishingViewScreen(),
+            'WitheringUnloadingBatchChoosing': (context) => WitheringUnloadingBatchChoosingScreen(),
+            'WitheringUnloadingView': (context) => WitheringUnloadingViewScreen(),
 //            'RollingInput': (context) => RollingInputScreen(),
 //            'RollingOutput': (context) => RollingOutputScreen(),
 //            'RollingInputView': (context) => RollingInputViewScreen(),
             'RollingOutputView': (context) => RollingOutputViewScreen(),
             'RollBreakingView': (context) => RollBreakingViewScreen(),
             'FermentingView': (context) => FermentingViewScreen(),
-            //
             'InputCollectionScreen': (ctx) => InputCollectionScreen(),
             'LotListScreen': (ctx) => LotListScreen(),
             'ListTileLotScreen': (ctx) => ListTileLot(),

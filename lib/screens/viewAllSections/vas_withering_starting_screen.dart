@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_starting__finishing_provider.dart';
 import 'package:teatrackerappofficer/widgets/withering_starting_finishing_item.dart';
+import 'package:teatrackerappofficer/constants.dart';
 
 class VasWitheringStartingScreen extends StatelessWidget {
   @override
@@ -14,47 +15,49 @@ class VasWitheringStartingScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Withering Starting View'),
       ),
-      body: FutureBuilder(
-        future: Provider.of<WitheringStartingFinishingProvider>(context,
-            listen: false)
-            .fetchAndSetWitheringStartingItem(token),
-        builder: (ctx, snapshot) =>
-        snapshot.connectionState ==
-            ConnectionState.waiting
-            ? Center(
-          child: CircularProgressIndicator(),
-        )
-            : Consumer<WitheringStartingFinishingProvider>(
-          child: Center(
-            child: const Text(
-                'Got no Withering starting items!'),
-          ),
-          builder: (ctx, WitheringStartingFinishingProvider, ch) =>
-          WitheringStartingFinishingProvider
-              .witheringStartingItems.length <=
-              0
-              ? ch
-              : ListView.builder(
-            itemCount: WitheringStartingFinishingProvider
-                .witheringStartingItems.length,
-            itemBuilder: (ctx, i) =>
-                WitheringStartingFinishingItem(
-                  id: WitheringStartingFinishingProvider
-                      .witheringStartingItems[i].id,
-                  troughNumber: WitheringStartingFinishingProvider
-                      .witheringStartingItems[i].troughNumber,
-                  time: WitheringStartingFinishingProvider
-                      .witheringStartingItems[i].time,
-                  temperature: WitheringStartingFinishingProvider
-                      .witheringStartingItems[i].temperature,
-                  humidity: WitheringStartingFinishingProvider
-                      .witheringStartingItems[i].humidity,
+      body: Container(
+        decoration: BoxDecoration(gradient: kUIGradient),
+        child: FutureBuilder(
+          future: Provider.of<WitheringStartingFinishingProvider>(context,
+                  listen: false)
+              .fetchAndSetWitheringStartingItem(token),
+          builder: (ctx, snapshot) => snapshot.connectionState ==
+                  ConnectionState.waiting
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Consumer<WitheringStartingFinishingProvider>(
+                  child: Center(
+                    child: const Text(
+                      'Got no Withering starting items!',
+                      style: kEmptyViewText,
+                    ),
+                  ),
+                  builder: (ctx, WitheringStartingFinishingProvider, ch) =>
+                      WitheringStartingFinishingProvider
+                                  .witheringStartingItems.length <=
+                              0
+                          ? ch
+                          : ListView.builder(
+                              itemCount: WitheringStartingFinishingProvider
+                                  .witheringStartingItems.length,
+                              itemBuilder: (ctx, i) =>
+                                  WitheringStartingFinishingItem(
+                                id: WitheringStartingFinishingProvider
+                                    .witheringStartingItems[i].id,
+                                troughNumber: WitheringStartingFinishingProvider
+                                    .witheringStartingItems[i].troughNumber,
+                                time: WitheringStartingFinishingProvider
+                                    .witheringStartingItems[i].time,
+                                temperature: WitheringStartingFinishingProvider
+                                    .witheringStartingItems[i].temperature,
+                                humidity: WitheringStartingFinishingProvider
+                                    .witheringStartingItems[i].humidity,
+                              ),
+                            ),
                 ),
-          ),
         ),
       ),
-
     );
   }
 }
-

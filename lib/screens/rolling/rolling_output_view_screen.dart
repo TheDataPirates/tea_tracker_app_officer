@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/widgets/rolling_item.dart';
+import 'package:teatrackerappofficer/constants.dart';
 
 class RollingOutputViewScreen extends StatelessWidget {
   @override
@@ -21,22 +22,27 @@ class RollingOutputViewScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-              child: ListView.builder(
-                itemCount: rollingOutput.rollingOutputItems.length,
-                itemBuilder: (ctx, i) => RollingItem(
-                  id: rollingOutput.rollingOutputItems[i].id,
-                  batchNumber: rollingOutput.rollingOutputItems[i].batchNumber,
-                  rollingTurn: rollingOutput.rollingOutputItems[i].rollingTurn,
-                  time: rollingOutput.rollingOutputItems[i].time,
-                  rollerNumber: rollingOutput.rollingOutputItems[i].rollerNumber,
-                  weightIn: rollingOutput.rollingOutputItems[i].weightIn,
-                  weightOut: rollingOutput.rollingOutputItems[i].weightOut,
-                ),
-              ))
-        ],
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: kUIGradient,
+        ),
+        child: Column(
+          children: [
+            Expanded(
+                child: ListView.builder(
+                  itemCount: rollingOutput.rollingOutputItems.length,
+                  itemBuilder: (ctx, i) => RollingItem(
+                    id: rollingOutput.rollingOutputItems[i].id,
+                    batchNumber: rollingOutput.rollingOutputItems[i].batchNumber,
+                    rollingTurn: rollingOutput.rollingOutputItems[i].rollingTurn,
+                    time: rollingOutput.rollingOutputItems[i].time,
+                    rollerNumber: rollingOutput.rollingOutputItems[i].rollerNumber,
+                    weightIn: rollingOutput.rollingOutputItems[i].weightIn,
+                    weightOut: rollingOutput.rollingOutputItems[i].weightOut,
+                  ),
+                ))
+          ],
+        ),
       ),
       floatingActionButton: Container(
         height: 70.0,
@@ -47,7 +53,6 @@ class RollingOutputViewScreen extends StatelessWidget {
             onPressed: (){
               Navigator.of(context).pushNamed('RollingRoom');
             },
-            backgroundColor: Colors.green,
           ),
         ),
       ),

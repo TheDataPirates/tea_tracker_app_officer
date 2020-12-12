@@ -10,6 +10,7 @@ class MainMenuFlatButtonContainer extends StatelessWidget {
     @required this.name,
     @required this.destination,
     @required this.iconString,
+    @required this.icon,
   })  : _height = height,
         _width = width,
         super(key: key);
@@ -19,6 +20,7 @@ class MainMenuFlatButtonContainer extends StatelessWidget {
   final String name;
   final String destination;
   final String iconString;
+  final IconData icon;
 
 
 
@@ -30,7 +32,7 @@ class MainMenuFlatButtonContainer extends StatelessWidget {
         minWidth: _width * 0.3,
         child: RaisedButton(
           elevation: 30.0,
-          color: Colors.black.withOpacity(0.5),
+          color: Colors.black.withOpacity(0.6),
           onPressed: () {
             Navigator.of(context).pushNamed(destination);
           },
@@ -47,7 +49,7 @@ class MainMenuFlatButtonContainer extends StatelessWidget {
                   ),
                 ),
               ),
-              IconButton(icon: FaIcon(FontAwesomeIcons.leaf, color: Colors.greenAccent, size: 50.0,), onPressed: (){},),
+              IconButton(icon: FaIcon(icon, color: Colors.greenAccent, size: 50.0,), onPressed: (){},),
             ],
           ),
           shape: RoundedRectangleBorder(

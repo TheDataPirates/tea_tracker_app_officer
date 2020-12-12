@@ -1,8 +1,8 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
+import 'package:teatrackerappofficer/constants.dart';
 
 class WitheringUnloadingBatchChoosingScreen extends StatefulWidget {
   @override
@@ -101,50 +101,58 @@ class _WitheringUnloadingBatchChoosingScreenState
           )
         ],
       ),
-      body: SafeArea(
-        child: Form(
-          key: _formKeyWitheringUnloadingBatchChoosing,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    height: _height * 0.2,
-                    width: _width * 0.4,
-                    child: TextFormField(
-                      controller: _batchNum,
-                      decoration: const InputDecoration(
-                          labelText: 'Batch Number : ',
-                          errorStyle: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17.0),
-                          contentPadding: const EdgeInsets.all(30.0),
-                          border: const OutlineInputBorder(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(50.0)))),
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.number,
-                      style: const TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
-                      validator: (value) {
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: kUIGradient,
+        ),
+        child: SafeArea(
+          child: Form(
+            key: _formKeyWitheringUnloadingBatchChoosing,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: _height * 0.2,
+                      width: _width * 0.4,
+                      child: TextFormField(
+                        controller: _batchNum,
+                        decoration: const InputDecoration(
+                            labelText: 'Batch Number : ',
+                            labelStyle: kTextFormFieldLabelStyle,
+                            errorStyle: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 17.0),
+                            contentPadding: const EdgeInsets.all(30.0),
+                            enabledBorder: kEnabledBorder,
+                            focusedBorder: kFocusedBorder,
+                            focusedErrorBorder: kFocusedErrorBorder,
+                            errorBorder: kErrorBorder,
+                        ),
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.number,
+                        style: const TextStyle(
+                            fontSize: 30.0, fontWeight: FontWeight.bold),
+                        validator: (value) {
 //                        batchNum = int.parse(value);
-                        if (value.isEmpty) {
-                          return 'Please Enter Batch Number !';
-                        }
-                        if (int.parse(value) >= 31 || int.parse(value) <= 0) {
-                          return 'Please Enter A Valid Batch Number !';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        batchNumberItem = int.parse(value);
-                      },
+                          if (value.isEmpty) {
+                            return 'Please Enter Batch Number !';
+                          }
+                          if (int.parse(value) >= 31 || int.parse(value) <= 0) {
+                            return 'Please Enter A Valid Batch Number !';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          batchNumberItem = int.parse(value);
+                        },
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

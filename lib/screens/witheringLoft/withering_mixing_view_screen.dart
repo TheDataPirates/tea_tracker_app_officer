@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:teatrackerappofficer/constants.dart';
 import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_mixing_provider.dart';
 import 'package:teatrackerappofficer/widgets/withering_mixing_item.dart';
@@ -23,41 +24,46 @@ class WitheringMixingViewScreen extends StatelessWidget {
           )
         ],
       ),
-      body: FutureBuilder(
-        future: Provider.of<WitheringMixingProvider>(context, listen: false)
-            .fetchAndSetWitheringMixingItem(token),
-        builder: (ctx, snapshot) =>
-            snapshot.connectionState == ConnectionState.waiting
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : Consumer<WitheringMixingProvider>(
-                    child: Center(
-                      child: const Text(
-                          'Got no Withering mixing items found yet, start adding some!'),
-                    ),
-                    builder: (ctx, WitheringMixingProvider, ch) =>
-                        WitheringMixingProvider.witheringMixingItems.length <= 0
-                            ? ch
-                            : ListView.builder(
-                                itemCount: WitheringMixingProvider
-                                    .witheringMixingItems.length,
-                                itemBuilder: (ctx, i) => WitheringMixingItem(
-                                  id: WitheringMixingProvider
-                                      .witheringMixingItems[i].id,
-                                  troughNumber: WitheringMixingProvider
-                                      .witheringMixingItems[i].troughNumber,
-                                  turn: WitheringMixingProvider
-                                      .witheringMixingItems[i].turn,
-                                  time: WitheringMixingProvider
-                                      .witheringMixingItems[i].time,
-                                  temperature: WitheringMixingProvider
-                                      .witheringMixingItems[i].temperature,
-                                  humidity: WitheringMixingProvider
-                                      .witheringMixingItems[i].humidity,
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: kUIGradient,
+        ),
+        child: FutureBuilder(
+          future: Provider.of<WitheringMixingProvider>(context, listen: false)
+              .fetchAndSetWitheringMixingItem(token),
+          builder: (ctx, snapshot) =>
+              snapshot.connectionState == ConnectionState.waiting
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Consumer<WitheringMixingProvider>(
+                      child: Center(
+                        child: const Text(
+                            'Got no Withering mixing items found yet, start adding some!'),
+                      ),
+                      builder: (ctx, WitheringMixingProvider, ch) =>
+                          WitheringMixingProvider.witheringMixingItems.length <= 0
+                              ? ch
+                              : ListView.builder(
+                                  itemCount: WitheringMixingProvider
+                                      .witheringMixingItems.length,
+                                  itemBuilder: (ctx, i) => WitheringMixingItem(
+                                    id: WitheringMixingProvider
+                                        .witheringMixingItems[i].id,
+                                    troughNumber: WitheringMixingProvider
+                                        .witheringMixingItems[i].troughNumber,
+                                    turn: WitheringMixingProvider
+                                        .witheringMixingItems[i].turn,
+                                    time: WitheringMixingProvider
+                                        .witheringMixingItems[i].time,
+                                    temperature: WitheringMixingProvider
+                                        .witheringMixingItems[i].temperature,
+                                    humidity: WitheringMixingProvider
+                                        .witheringMixingItems[i].humidity,
+                                  ),
                                 ),
-                              ),
-                  ),
+                    ),
+        ),
       ),
       floatingActionButton: Container(
         height: 70.0,
@@ -72,7 +78,6 @@ class WitheringMixingViewScreen extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).pushNamed('WitheringMixing');
             },
-            backgroundColor: Colors.green,
           ),
         ),
       ),

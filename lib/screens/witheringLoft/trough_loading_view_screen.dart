@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/withering/ended_loading_trough_box.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/widgets/trough_loading_item.dart';
+import 'package:teatrackerappofficer/constants.dart';
 
 class TroughLoadingViewScreen extends StatefulWidget {
   @override
@@ -44,25 +45,30 @@ class _TroughLoadingViewScreenState extends State<TroughLoadingViewScreen> {
           )
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-              child: ListView.builder(
-            itemCount: troughLoading.troughLoadingItems.length,
-            itemBuilder: (ctx, i) => TroughLoadingItem(
-              id: troughLoading.troughLoadingItems[i].id,
-              troughNumber: troughLoading.troughLoadingItems[i].troughNumber,
-              boxNumber: troughLoading.troughLoadingItems[i].boxNumber,
-              gradeGL: troughLoading.troughLoadingItems[i].gradeOfGL,
-              recentWeight: troughLoading.troughLoadingItems[i].netWeight,
-              netWeight: troughLoading.totalTroughBoxWeight(
-                  troughLoading.troughLoadingItems[i].troughNumber,
-                  troughLoading.troughLoadingItems[i].boxNumber,
-                  DateTime
-                      .now()), //A function should be written to todays whole weight of trough number box number
-            ),
-          ))
-        ],
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: kUIGradient,
+        ),
+        child: Column(
+          children: [
+            Expanded(
+                child: ListView.builder(
+              itemCount: troughLoading.troughLoadingItems.length,
+              itemBuilder: (ctx, i) => TroughLoadingItem(
+                id: troughLoading.troughLoadingItems[i].id,
+                troughNumber: troughLoading.troughLoadingItems[i].troughNumber,
+                boxNumber: troughLoading.troughLoadingItems[i].boxNumber,
+                gradeGL: troughLoading.troughLoadingItems[i].gradeOfGL,
+                recentWeight: troughLoading.troughLoadingItems[i].netWeight,
+                netWeight: troughLoading.totalTroughBoxWeight(
+                    troughLoading.troughLoadingItems[i].troughNumber,
+                    troughLoading.troughLoadingItems[i].boxNumber,
+                    DateTime
+                        .now()), //A function should be written to todays whole weight of trough number box number
+              ),
+            ))
+          ],
+        ),
       ),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -80,7 +86,6 @@ class _TroughLoadingViewScreenState extends State<TroughLoadingViewScreen> {
                 onPressed: () {
                   Navigator.of(context).pushNamed('TroughLoading');
                 },
-                backgroundColor: Colors.green,
                 heroTag: null,
               ),
             ),
@@ -136,7 +141,6 @@ class _TroughLoadingViewScreenState extends State<TroughLoadingViewScreen> {
                 },
               );
             },
-            backgroundColor: Colors.green,
             heroTag: null,
           ),
         ],

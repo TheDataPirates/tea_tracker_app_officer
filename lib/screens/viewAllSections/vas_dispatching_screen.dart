@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teatrackerappofficer/constants.dart';
 
 class VasDispatchingScreen extends StatelessWidget {
   @override
@@ -6,6 +7,11 @@ class VasDispatchingScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dispatching View'),
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient:kUIGradient
+        ),
       ),
     );
   }
