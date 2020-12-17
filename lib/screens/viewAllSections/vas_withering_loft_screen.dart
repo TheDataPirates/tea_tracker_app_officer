@@ -3,7 +3,12 @@ import 'package:teatrackerappofficer/constants.dart';
 import 'package:teatrackerappofficer/widgets/main_menu_button_container.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class WitheringLoftScreen extends StatelessWidget {
+class VasWitheringLoftScreen extends StatefulWidget {
+  @override
+  _VasWitheringLoftScreenState createState() => _VasWitheringLoftScreenState();
+}
+
+class _VasWitheringLoftScreenState extends State<VasWitheringLoftScreen> {
   @override
   Widget build(BuildContext context) {
     final _height =
@@ -34,14 +39,14 @@ class WitheringLoftScreen extends StatelessWidget {
                     height: _height,
                     width: _width,
                     name: 'Withering Start',
-                    destination: 'WitheringStarting',
+                    destination: 'VasWitheringStarting',
                     icon: FontAwesomeIcons.leaf,
                   ),
                   MainMenuFlatButtonContainer(
                     height: _height,
                     width: _width,
                     name: 'Withering Mixing',
-                    destination: 'WitheringMixing',
+                    destination: 'VasWitheringMixing',
                     icon: FontAwesomeIcons.leaf,
                   ),
                 ],
@@ -53,14 +58,14 @@ class WitheringLoftScreen extends StatelessWidget {
                     height: _height,
                     width: _width,
                     name: 'Withering Finish',
-                    destination: 'WitheringFinishing',
+                    destination: 'VasWitheringFinishing',
                     icon: FontAwesomeIcons.leaf,
                   ),
                   MainMenuFlatButtonContainer(
                     height: _height,
                     width: _width,
                     name: 'Withering Unloading',
-                    destination: 'WitheringUnloadingBatchChoosing',
+                    destination: 'VasWitheringUnloadingBatchChoosing',
                     icon: FontAwesomeIcons.leaf,
                   ),
                 ],

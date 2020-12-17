@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/rolling/rolling.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
-//import 'package:teatrackerappofficer/widgets/main_menu_button_container.dart';
+import 'package:teatrackerappofficer/constants.dart';
 
 class RollingRoomScreen extends StatefulWidget {
   @override
@@ -155,209 +155,214 @@ class _RollingRoomScreenState extends State<RollingRoomScreen> {
           ),
         ],
       ),
-      body: SafeArea(
-        child: Form(
-          key: _formKeyRollingOutput,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    height: _height * 0.2,
-                    width: _width * 0.4,
-                    child: TextFormField(
-                      controller: _batchNum,
-                      decoration: const InputDecoration(
-                        labelText: 'Batch Number : ',
-                        errorStyle: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17.0,
-                        ),
-                        contentPadding: const EdgeInsets.all(30.0),
-                        border: const OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(50.0),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: kUIGradient,
+        ),
+        child: SafeArea(
+          child: Form(
+            key: _formKeyRollingOutput,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: _height * 0.2,
+                      width: _width * 0.4,
+                      child: TextFormField(
+                        controller: _batchNum,
+                        decoration: const InputDecoration(
+                          labelText: 'Batch Number : ',
+                          labelStyle: kTextFormFieldLabelStyle,
+                          errorStyle: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0,
                           ),
+                          contentPadding: const EdgeInsets.all(30.0),
+                          enabledBorder: kEnabledBorder,
+                          focusedBorder: kFocusedBorder,
+                          focusedErrorBorder: kFocusedErrorBorder,
+                          errorBorder: kErrorBorder,
                         ),
-                      ),
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.number,
-                      style: const TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please Enter Batch Number !';
-                        }
-                        if (int.parse(value) >= 31 || int.parse(value) <= 0) {
-                          return 'Please Enter A Valid Batch Number !';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _rollingOutput = Rolling(
-                          id: null,
-                          batchNumber: int.parse(value),
-                          rollingTurn: _rollingOutput.rollingTurn,
-                          time: null,
-                          rollerNumber: _rollingOutput.rollerNumber,
-                          weightIn: null,
-                          weightOut: _rollingOutput.weightOut,
-                        );
-                      },
-                    ),
-                  ),
-                  Container(
-                    height: _height * 0.2,
-                    width: _width * 0.4,
-                    child: TextFormField(
-                      controller: _rollingTurn,
-                      decoration: const InputDecoration(
-                        labelText: 'Rolling Turn : ',
-                        errorStyle: const TextStyle(
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.number,
+                        style: const TextStyle(
+                          fontSize: 30.0,
                           fontWeight: FontWeight.bold,
-                          fontSize: 17.0,
                         ),
-                        contentPadding: const EdgeInsets.all(30.0),
-                        border: const OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(50.0),
-                          ),
-                        ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please Enter Batch Number !';
+                          }
+                          if (int.parse(value) >= 31 || int.parse(value) <= 0) {
+                            return 'Please Enter A Valid Batch Number !';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _rollingOutput = Rolling(
+                            id: null,
+                            batchNumber: int.parse(value),
+                            rollingTurn: _rollingOutput.rollingTurn,
+                            time: null,
+                            rollerNumber: _rollingOutput.rollerNumber,
+                            weightIn: null,
+                            weightOut: _rollingOutput.weightOut,
+                          );
+                        },
                       ),
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.number,
-                      style: const TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please Enter Rolling Turn !';
-                        }
-                        if (int.parse(value) >= 6 || int.parse(value) <= 0) {
-                          return 'Please Enter A Valid Rolling Turn !';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _rollingOutput = Rolling(
-                          id: null,
-                          batchNumber: _rollingOutput.batchNumber,
-                          rollingTurn: int.parse(value),
-                          time: null,
-                          rollerNumber: _rollingOutput.rollerNumber,
-                          weightIn: null,
-                          weightOut: _rollingOutput.weightOut,
-                        );
-                      },
                     ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    height: _height * 0.2,
-                    width: _width * 0.4,
-                    child: TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: 'Roller Number : ',
-                        errorStyle: const TextStyle(
+                    Container(
+                      height: _height * 0.2,
+                      width: _width * 0.4,
+                      child: TextFormField(
+                        controller: _rollingTurn,
+                        decoration: const InputDecoration(
+                          labelText: 'Rolling Turn : ',
+                          labelStyle: kTextFormFieldLabelStyle,
+                          errorStyle: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0,
+                          ),
+                          contentPadding: const EdgeInsets.all(30.0),
+                          enabledBorder: kEnabledBorder,
+                          focusedBorder: kFocusedBorder,
+                          focusedErrorBorder: kFocusedErrorBorder,
+                          errorBorder: kErrorBorder,
+                        ),
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.number,
+                        style: const TextStyle(
+                          fontSize: 30.0,
                           fontWeight: FontWeight.bold,
-                          fontSize: 17.0,
                         ),
-                        contentPadding: const EdgeInsets.all(30.0),
-                        border: const OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(50.0),
-                          ),
-                        ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please Enter Rolling Turn !';
+                          }
+                          if (int.parse(value) >= 6 || int.parse(value) <= 0) {
+                            return 'Please Enter A Valid Rolling Turn !';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _rollingOutput = Rolling(
+                            id: null,
+                            batchNumber: _rollingOutput.batchNumber,
+                            rollingTurn: int.parse(value),
+                            time: null,
+                            rollerNumber: _rollingOutput.rollerNumber,
+                            weightIn: null,
+                            weightOut: _rollingOutput.weightOut,
+                          );
+                        },
                       ),
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.number,
-                      style: const TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please Enter Roller Number !';
-                        }
-                        if (int.parse(value) <= 0 || int.parse(value) >= 5) {
-                          return 'Please Enter A Valid Roller Number !';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _rollingOutput = Rolling(
-                          id: null,
-                          batchNumber: _rollingOutput.batchNumber,
-                          rollingTurn: _rollingOutput.rollingTurn,
-                          time: DateTime.now(),
-                          rollerNumber: int.parse(value),
-                          weightIn: null,
-                          weightOut: _rollingOutput.weightOut, //In here need to create a method that will return the weight of the batch.
-                        );
-                      },
                     ),
-                  ),
-                  Container(
-                    height: _height * 0.2,
-                    width: _width * 0.4,
-                    child: TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: 'Roller Output Weight : ',
-                        errorStyle: const TextStyle(
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: _height * 0.2,
+                      width: _width * 0.4,
+                      child: TextFormField(
+                        decoration: const InputDecoration(
+                          labelText: 'Roller Number : ',
+                          labelStyle: kTextFormFieldLabelStyle,
+                          errorStyle: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0,
+                          ),
+                          contentPadding: const EdgeInsets.all(30.0),
+                          enabledBorder: kEnabledBorder,
+                          focusedBorder: kFocusedBorder,
+                          focusedErrorBorder: kFocusedErrorBorder,
+                          errorBorder: kErrorBorder,
+                        ),
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.number,
+                        style: const TextStyle(
+                          fontSize: 30.0,
                           fontWeight: FontWeight.bold,
-                          fontSize: 17.0,
                         ),
-                        contentPadding: const EdgeInsets.all(30.0),
-                        border: const OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(50.0),
-                          ),
-                        ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please Enter Roller Number !';
+                          }
+                          if (int.parse(value) <= 0 || int.parse(value) >= 5) {
+                            return 'Please Enter A Valid Roller Number !';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _rollingOutput = Rolling(
+                            id: null,
+                            batchNumber: _rollingOutput.batchNumber,
+                            rollingTurn: _rollingOutput.rollingTurn,
+                            time: DateTime.now(),
+                            rollerNumber: int.parse(value),
+                            weightIn: null,
+                            weightOut: _rollingOutput.weightOut, //In here need to create a method that will return the weight of the batch.
+                          );
+                        },
                       ),
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.number,
-                      style: const TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please Enter Roller Output Weight !';
-                        }
-                        if (int.parse(value) <= 0 || int.parse(value) >= 351) {
-                          return 'Please Enter A Valid Roller Output Weight !';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _rollingOutput = Rolling(
-                          id: null,
-                          batchNumber: _rollingOutput.batchNumber,
-                          rollingTurn: _rollingOutput.rollingTurn,
-                          time: DateTime.now(),
-                          rollerNumber: _rollingOutput.rollerNumber,
-                          weightIn: _rollingProvider.batchWeight(
-                              _rollingOutput.batchNumber,
-                              DateTime.now(),
-                              _rollingOutput
-                                  .rollingTurn),
-                          weightOut: double.parse(value), //In here need to create a method that will return the weight of the batch.
-                        );
-                      },
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    Container(
+                      height: _height * 0.2,
+                      width: _width * 0.4,
+                      child: TextFormField(
+                        decoration: const InputDecoration(
+                          labelText: 'Roller Output Weight : ',
+                          labelStyle: kTextFormFieldLabelStyle,
+                          errorStyle: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0,
+                          ),
+                          contentPadding: const EdgeInsets.all(30.0),
+                          enabledBorder: kEnabledBorder,
+                          focusedBorder: kFocusedBorder,
+                          focusedErrorBorder: kFocusedErrorBorder,
+                          errorBorder: kErrorBorder,
+                        ),
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.number,
+                        style: const TextStyle(
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please Enter Roller Output Weight !';
+                          }
+                          if (int.parse(value) <= 0 || int.parse(value) >= 351) {
+                            return 'Please Enter A Valid Roller Output Weight !';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _rollingOutput = Rolling(
+                            id: null,
+                            batchNumber: _rollingOutput.batchNumber,
+                            rollingTurn: _rollingOutput.rollingTurn,
+                            time: DateTime.now(),
+                            rollerNumber: _rollingOutput.rollerNumber,
+                            weightIn: _rollingProvider.batchWeight(
+                                _rollingOutput.batchNumber,
+                                DateTime.now(),
+                                _rollingOutput
+                                    .rollingTurn),
+                            weightOut: double.parse(value), //In here need to create a method that will return the weight of the batch.
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

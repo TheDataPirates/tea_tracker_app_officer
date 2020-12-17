@@ -14,12 +14,13 @@ class OutturnItem extends StatelessWidget {
         horizontal: 10,
         vertical: 4,
       ),
+      color: Colors.black54,
       child: Padding(
         padding: const EdgeInsets.all(5.0),
         child: ListTile(
           leading: const Text(
             'Batch Number : ',
-            style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold, color: Colors.white,),
           ),
           title: CircleAvatar(
             child: Text(batchNumber.toString(),
@@ -27,13 +28,14 @@ class OutturnItem extends StatelessWidget {
                   fontSize: 40.0,
                 )),
             radius: 50.0,
+            backgroundColor: Colors.greenAccent.shade700,
           ),
           trailing: Chip(
             label: Text(
               '${outturn.toStringAsFixed(4)}' + ' %',
               style: TextStyle(fontSize: 20.0, color: Colors.white),
             ),
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: Colors.greenAccent.shade700,
           ),
         ),
       ),

@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:teatrackerappofficer/constants.dart';
 
-class ShiftingRoomScreen extends StatelessWidget {
+class VasRemeasuringScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Shifting Room'),
+        title: const Text('Remeasuring View'),
       ),
       body: Container(
-        decoration: BoxDecoration(
-            gradient: kUIGradient,
-        ),
+        decoration: BoxDecoration(gradient: kUIGradient),
       ),
     );
   }

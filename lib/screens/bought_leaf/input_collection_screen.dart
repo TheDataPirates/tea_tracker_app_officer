@@ -5,6 +5,7 @@ import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart
 import 'package:teatrackerappofficer/providers/bought_leaf/lot.dart';
 import 'package:teatrackerappofficer/providers/bought_leaf/tea_collections_provider.dart';
 import 'package:teatrackerappofficer/widgets/tea_acquiring_input.dart';
+import 'package:teatrackerappofficer/constants.dart';
 
 class InputCollectionScreen extends StatefulWidget {
   @override
@@ -99,47 +100,54 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context).size;
     return Scaffold(
-      body: FormBuilder(
-        key: _fbkey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Column(
-                    children: <Widget>[
-                      Container(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: kUIGradient,
+        ),
+        child: FormBuilder(
+          key: _fbkey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      children: <Widget>[
+                        Container(
 //                      color: Colors.amber,
-                        height: mediaQuery.height * 0.4,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Card(
-                              elevation: 10,
-                              child: Container(
-                                width: mediaQuery.width * width,
-                                child: FormBuilderDropdown(
-                                  attribute: "Container Type",
-                                  decoration: InputDecoration(
-                                    labelText: "Container Type",
-                                    errorStyle: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                        vertical: 40.0),
-                                    labelStyle: TextStyle(
-                                        color: Colors.green,
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.w700),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(13.0),
-                                      ),
-                                      borderSide: BorderSide.none,
-                                    ),
+                          height: mediaQuery.height * 0.4,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Card(
+                                elevation: 10,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(13.0),
+                                ),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.circular(13),
                                   ),
+                                  width: mediaQuery.width * width,
+                                  child: FormBuilderDropdown(
+                                    attribute: "Container Type",
+                                    decoration: InputDecoration(
+                                      labelText: "  Container Type",
+                                      errorStyle: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w700),
+                                      contentPadding: const EdgeInsets.symmetric(
+                                          vertical: 40.0),
+                                      labelStyle: kInputScreenContainerDisplayText,
+                                      enabledBorder: kEnabledBorder2,
+                                      focusedBorder: kFocusedBorder2,
+                                      focusedErrorBorder:  kFocusedErrorBorder2,
+                                      errorBorder: kErrorBorder2,
+                                    ),
+
                                   style: TextStyle(
                                       fontSize: 40,
                                       color: Colors.black,
@@ -175,7 +183,14 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                             ),
                             Card(
                               elevation: 10,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(13.0),
+                              ),
                               child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.circular(13),
+                                ),
                                 width: mediaQuery.width * width,
                                 child: FormBuilderDropdown(
                                   attribute: "No of Containers",
@@ -186,238 +201,232 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                         fontWeight: FontWeight.w700),
                                     contentPadding: const EdgeInsets.symmetric(
                                         vertical: 40.0),
-                                    labelStyle: TextStyle(
-                                        color: Colors.green,
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.w700),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(13.0),
-                                      ),
-                                      borderSide: BorderSide.none,
+                                    labelStyle: kInputScreenContainerDisplayText,
+                                    enabledBorder: kEnabledBorder2,
+                                    focusedBorder: kFocusedBorder2,
+                                    focusedErrorBorder:  kFocusedErrorBorder2,
+                                    errorBorder: kErrorBorder2,
                                     ),
-                                  ),
-                                  style: TextStyle(
-                                      fontSize: 40,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
-                                  // initialValue:
+                                    style: TextStyle(
+                                        fontSize: 40,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                    // initialValue:
 
-                                  validators: [
-                                    FormBuilderValidators.required(),
-                                    // ignore: missing_retur
-                                  ],
-                                  items: ['1', '2', '3', '4', '5']
-                                      .map((container) => DropdownMenuItem(
-                                          value: container,
-                                          child: Text("$container")))
-                                      .toList(),
-                                  onSaved: (value) {
-                                    _editedLot = Lot(
-                                      container_type: _editedLot.container_type,
-                                      no_of_containers: int.parse(value),
-                                      gross_weight: _editedLot.gross_weight,
-                                      leaf_grade: _editedLot.leaf_grade,
-                                      water: _editedLot.water,
-                                      course_leaf: _editedLot.course_leaf,
-                                      other: _editedLot.other,
-                                    );
-                                  },
+                                    validators: [
+                                      FormBuilderValidators.required(),
+                                    ],
+                                    items: ['1', '2', '3', '4', '5']
+                                        .map((container) => DropdownMenuItem(
+                                            value: container,
+                                            child: Text("$container")))
+                                        .toList(),
+                                    onSaved: (value) {
+                                      _editedLot = Lot(
+                                        container_type: _editedLot.container_type,
+                                        no_of_containers: int.parse(value),
+                                        gross_weight: _editedLot.gross_weight,
+                                        leaf_grade: _editedLot.leaf_grade,
+                                        water: _editedLot.water,
+                                        course_leaf: _editedLot.course_leaf,
+                                        other: _editedLot.other,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: mediaQuery.width * 0.005,
+                              ),
+                              InputField(
+                                labelText: '  Gross weight',
+                                width: width,
+                                validator: [FormBuilderValidators.required()],
+                                onSave: (value) {
+                                  _editedLot = Lot(
+                                    container_type: _editedLot.container_type,
+                                    no_of_containers: _editedLot.no_of_containers,
+                                    gross_weight: int.parse(value),
+                                    leaf_grade: _editedLot.leaf_grade,
+                                    water: _editedLot.water,
+                                    course_leaf: _editedLot.course_leaf,
+                                    other: _editedLot.other,
+                                  );
+                                },
+                                keytype: TextInputType.number,
+                              ),
+                              SizedBox(
+                                width: mediaQuery.width * 0.005,
+                              ),
+                              Card(
+                                elevation: 10,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(13.0),
+                                ),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.circular(13),
+                                  ),
+                                  width: mediaQuery.width * width,
+                                  child: FormBuilderDropdown(
+                                    attribute: "Grade of GL",
+                                    decoration: InputDecoration(
+                                      labelText: "  Grade of GL",
+                                      labelStyle: kInputScreenContainerDisplayText,
+                                      errorStyle: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w700),
+                                      contentPadding: const EdgeInsets.symmetric(
+                                          vertical: 40.0),
+                                      enabledBorder: kEnabledBorder2,
+                                      focusedBorder: kFocusedBorder2,
+                                      focusedErrorBorder:  kFocusedErrorBorder2,
+                                      errorBorder: kErrorBorder2,
+                                    ),
+                                    style: TextStyle(
+                                        fontSize: 40,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                    validators: [
+                                      FormBuilderValidators.required(),
+                                    ],
+                                    items: ['A', 'B', 'C']
+                                        .map((container) => DropdownMenuItem(
+                                            value: container,
+                                            child: Text("$container")))
+                                        .toList(),
+                                    onSaved: (value) {
+                                      _editedLot = Lot(
+                                        container_type: _editedLot.container_type,
+                                        no_of_containers:
+                                            _editedLot.no_of_containers,
+                                        gross_weight: _editedLot.gross_weight,
+                                        leaf_grade: value,
+                                        water: _editedLot.water,
+                                        course_leaf: _editedLot.course_leaf,
+                                        other: _editedLot.other,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: mediaQuery.width * 0.005,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          height: mediaQuery.height * 0.2,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 30),
+                              child: const Text(
+                                'DEDUCTIONS',
+                                style: const TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 10,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              width: mediaQuery.width * 0.005,
-                            ),
-                            InputField(
-                              labelText: 'Gross weight',
-                              width: width,
-                              validator: [FormBuilderValidators.required()],
-                              onSave: (value) {
-                                _editedLot = Lot(
-                                  container_type: _editedLot.container_type,
-                                  no_of_containers: _editedLot.no_of_containers,
-                                  gross_weight: int.parse(value),
-                                  leaf_grade: _editedLot.leaf_grade,
-                                  water: _editedLot.water,
-                                  course_leaf: _editedLot.course_leaf,
-                                  other: _editedLot.other,
-                                );
-                              },
-                              keytype: TextInputType.number,
-                            ),
-                            SizedBox(
-                              width: mediaQuery.width * 0.005,
-                            ),
-                            Card(
-                              elevation: 10,
-                              child: Container(
-                                width: mediaQuery.width * width,
-                                child: FormBuilderDropdown(
-                                  attribute: "Grade of GL",
-                                  decoration: InputDecoration(
-                                    labelText: "Grade of GL",
-                                    errorStyle: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                        vertical: 40.0),
-                                    labelStyle: TextStyle(
-                                        color: Colors.green,
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.w700),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(13.0),
-                                      ),
-                                      borderSide: BorderSide.none,
-                                    ),
-                                  ),
-                                  style: TextStyle(
-                                      fontSize: 40,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
-                                  // initialValue:
-
-                                  validators: [
-                                    FormBuilderValidators.required(),
-                                    // ignore: missing_retur
-                                  ],
-                                  items: ['A', 'B', 'C']
-                                      .map((container) => DropdownMenuItem(
-                                          value: container,
-                                          child: Text("$container")))
-                                      .toList(),
-                                  onSaved: (value) {
+                          ),
+                        ),
+                        Container(
+                          height: mediaQuery.height * 0.2,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                InputField(
+                                  labelText: '  Water %',
+                                  width: deduct_width,
+                                  validator: [FormBuilderValidators.required()],
+                                  onSave: (value) {
                                     _editedLot = Lot(
                                       container_type: _editedLot.container_type,
                                       no_of_containers:
                                           _editedLot.no_of_containers,
                                       gross_weight: _editedLot.gross_weight,
-                                      leaf_grade: value,
-                                      water: _editedLot.water,
+                                      leaf_grade: _editedLot.leaf_grade,
+                                      water: int.parse(value),
                                       course_leaf: _editedLot.course_leaf,
                                       other: _editedLot.other,
                                     );
                                   },
+                                  keytype: TextInputType.number,
                                 ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: mediaQuery.width * 0.005,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: mediaQuery.height * 0.2,
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 30),
-                            child: const Text(
-                              'DEDUCTIONS',
-                              style: const TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 10,
-                              ),
+                                SizedBox(
+                                  width: mediaQuery.width * 0.05,
+                                ),
+                                InputField(
+                                  labelText: '  Course Leaf %',
+                                  width: deduct_width,
+                                  validator: [FormBuilderValidators.required()],
+                                  onSave: (value) {
+                                    _editedLot = Lot(
+                                      container_type: _editedLot.container_type,
+                                      no_of_containers:
+                                          _editedLot.no_of_containers,
+                                      gross_weight: _editedLot.gross_weight,
+                                      leaf_grade: _editedLot.leaf_grade,
+                                      water: _editedLot.water,
+                                      course_leaf: int.parse(value),
+                                      other: _editedLot.other,
+                                    );
+                                  },
+                                  keytype: TextInputType.number,
+                                ),
+                                SizedBox(
+                                  width: mediaQuery.width * 0.05,
+                                ),
+                                InputField(
+                                  labelText: '  Other %',
+                                  width: deduct_width,
+                                  validator: [FormBuilderValidators.required()],
+                                  onSave: (value) {
+                                    _editedLot = Lot(
+                                      container_type: _editedLot.container_type,
+                                      no_of_containers:
+                                          _editedLot.no_of_containers,
+                                      gross_weight: _editedLot.gross_weight,
+                                      leaf_grade: _editedLot.leaf_grade,
+                                      water: _editedLot.water,
+                                      course_leaf: _editedLot.course_leaf,
+                                      other: int.parse(value),
+                                    );
+                                  },
+                                  keytype: TextInputType.number,
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                      ),
-                      Container(
-//                      color: Colors.blue,
-                        height: mediaQuery.height * 0.2,
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              InputField(
-                                labelText: 'Water %',
-                                width: deduct_width,
-                                validator: [FormBuilderValidators.required()],
-                                onSave: (value) {
-                                  _editedLot = Lot(
-                                    container_type: _editedLot.container_type,
-                                    no_of_containers:
-                                        _editedLot.no_of_containers,
-                                    gross_weight: _editedLot.gross_weight,
-                                    leaf_grade: _editedLot.leaf_grade,
-                                    water: int.parse(value),
-                                    course_leaf: _editedLot.course_leaf,
-                                    other: _editedLot.other,
-                                  );
-                                },
-                                keytype: TextInputType.number,
-                              ),
-                              SizedBox(
-                                width: mediaQuery.width * 0.05,
-                              ),
-                              InputField(
-                                labelText: 'Course Leaf %',
-                                width: deduct_width,
-                                validator: [FormBuilderValidators.required()],
-                                onSave: (value) {
-                                  _editedLot = Lot(
-                                    container_type: _editedLot.container_type,
-                                    no_of_containers:
-                                        _editedLot.no_of_containers,
-                                    gross_weight: _editedLot.gross_weight,
-                                    leaf_grade: _editedLot.leaf_grade,
-                                    water: _editedLot.water,
-                                    course_leaf: int.parse(value),
-                                    other: _editedLot.other,
-                                  );
-                                },
-                                keytype: TextInputType.number,
-                              ),
-                              SizedBox(
-                                width: mediaQuery.width * 0.05,
-                              ),
-                              InputField(
-                                labelText: 'Other %',
-                                width: deduct_width,
-                                validator: [FormBuilderValidators.required()],
-                                onSave: (value) {
-                                  _editedLot = Lot(
-                                    container_type: _editedLot.container_type,
-                                    no_of_containers:
-                                        _editedLot.no_of_containers,
-                                    gross_weight: _editedLot.gross_weight,
-                                    leaf_grade: _editedLot.leaf_grade,
-                                    water: _editedLot.water,
-                                    course_leaf: _editedLot.course_leaf,
-                                    other: int.parse(value),
-                                  );
-                                },
-                                keytype: TextInputType.number,
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            Container(
-              height: mediaQuery.height * 0.05,
-              child: RaisedButton.icon(
-                onPressed: saveLot,
-                icon: const Icon(Icons.add),
-                label: const Text(
-                  'SAVE',
-                  style: const TextStyle(fontSize: 20),
+              Container(
+                height: mediaQuery.height * 0.05,
+                child: RaisedButton.icon(
+                  onPressed: saveLot,
+                  icon: const Icon(Icons.add, color: Colors.white,),
+                  label: const Text(
+                    'SAVE',
+                    style: const TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  color: const Color(0xff099857),
                 ),
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                color: Colors.amber,
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

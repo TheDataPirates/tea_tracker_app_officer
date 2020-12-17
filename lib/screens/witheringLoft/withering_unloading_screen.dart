@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_unloading.dart';
+import 'package:teatrackerappofficer/constants.dart';
 
 class WitheringUnloadingScreen extends StatefulWidget {
   @override
@@ -137,139 +138,153 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
           )
         ],
       ),
-      body: SafeArea(
-        child: Form(
-          key: _formKeyWitheringUnloading,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    height: _height * 0.2,
-                    width: _width * 0.4,
-                    child: TextFormField(
-                      controller: _troughNum,
-                      decoration: const InputDecoration(
-                          labelText: 'Trough Number : ',
-                          errorStyle: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17.0),
-                          contentPadding: const EdgeInsets.all(30.0),
-                          border: const OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(
-                                  Radius.circular(50.0)))),
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.number,
-                      style: const TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please Enter Trough Number !';
-                        }
-                        if (int.parse(value) >= 6 || int.parse(value) <= 0) {
-                          return 'Please Enter A Valid Trough Number !';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _witheringUnloading = WitheringUnloading(
-                          id: null,
-                          batchNumber: null,
-                          troughNumber: int.parse(value),
-                          date: null,
-                          boxNumber: _witheringUnloading.boxNumber,
-                          lotWeight: _witheringUnloading.lotWeight,
-                        );
-                      },
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: kUIGradient,
+        ),
+        child: SafeArea(
+          child: Form(
+            key: _formKeyWitheringUnloading,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: _height * 0.2,
+                      width: _width * 0.4,
+                      child: TextFormField(
+                        controller: _troughNum,
+                        decoration: const InputDecoration(
+                            labelText: 'Trough Number : ',
+                            labelStyle: kTextFormFieldLabelStyle,
+                            errorStyle: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 17.0),
+                            contentPadding: const EdgeInsets.all(30.0),
+                            enabledBorder: kEnabledBorder,
+                            focusedBorder: kFocusedBorder,
+                            focusedErrorBorder: kFocusedErrorBorder,
+                            errorBorder: kErrorBorder,
+                        ),
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.number,
+                        style: const TextStyle(
+                            fontSize: 30.0, fontWeight: FontWeight.bold),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please Enter Trough Number !';
+                          }
+                          if (int.parse(value) >= 6 || int.parse(value) <= 0) {
+                            return 'Please Enter A Valid Trough Number !';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _witheringUnloading = WitheringUnloading(
+                            id: null,
+                            batchNumber: null,
+                            troughNumber: int.parse(value),
+                            date: null,
+                            boxNumber: _witheringUnloading.boxNumber,
+                            lotWeight: _witheringUnloading.lotWeight,
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    height: _height * 0.2,
-                    width: _width * 0.4,
-                    child: TextFormField(
-                      controller: _boxNum,
-                      decoration: const InputDecoration(
-                          labelText: 'Box Number : ',
-                          errorStyle: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17.0),
-                          contentPadding: const EdgeInsets.all(30.0),
-                          border: const OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(
-                                  Radius.circular(50.0)))),
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.number,
-                      style: const TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please Enter Box Number !';
-                        }
-                        if (double.parse(value) <= 0 ||
-                            double.parse(value) >= 11) {
-                          return 'Please Enter A Valid Box Number !';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _witheringUnloading = WitheringUnloading(
-                          id: null,
-                          batchNumber: null,
-                          troughNumber: _witheringUnloading.troughNumber,
-                          date: null,
-                          boxNumber: int.parse(value),
-                          lotWeight: _witheringUnloading.lotWeight,
-                        );
-                      },
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: _height * 0.2,
+                      width: _width * 0.4,
+                      child: TextFormField(
+                        controller: _boxNum,
+                        decoration: const InputDecoration(
+                            labelText: 'Box Number : ',
+                            labelStyle: kTextFormFieldLabelStyle,
+                            errorStyle: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 17.0),
+                            contentPadding: const EdgeInsets.all(30.0),
+                            enabledBorder: kEnabledBorder,
+                            focusedBorder: kFocusedBorder,
+                            focusedErrorBorder: kFocusedErrorBorder,
+                            errorBorder: kErrorBorder,
+                        ),
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.number,
+                        style: const TextStyle(
+                            fontSize: 30.0, fontWeight: FontWeight.bold),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please Enter Box Number !';
+                          }
+                          if (double.parse(value) <= 0 ||
+                              double.parse(value) >= 11) {
+                            return 'Please Enter A Valid Box Number !';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _witheringUnloading = WitheringUnloading(
+                            id: null,
+                            batchNumber: null,
+                            troughNumber: _witheringUnloading.troughNumber,
+                            date: null,
+                            boxNumber: int.parse(value),
+                            lotWeight: _witheringUnloading.lotWeight,
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                  Container(
-                    height: _height * 0.2,
-                    width: _width * 0.4,
-                    child: TextFormField(
-                      decoration: const InputDecoration(
-                          labelText: 'Lot Weight : ',
-                          errorStyle: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17.0),
-                          contentPadding: const EdgeInsets.all(30.0),
-                          border: const OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(
-                                  Radius.circular(50.0)))),
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.number,
-                      style: const TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please Enter Lot Weight !';
-                        }
-                        if (double.parse(value) <= 0 ||
-                            double.parse(value) >= 351) {
-                          return 'Please Enter A Valid Lot Weight !';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _witheringUnloading = WitheringUnloading(
-                          id: null,
-                          batchNumber:
-                              witheringUnloadingBatchNumber.lastBatchNumberItem,
-                          troughNumber: _witheringUnloading.troughNumber,
-                          date: DateTime.now(),
-                          boxNumber: _witheringUnloading.boxNumber,
-                          lotWeight: double.parse(value),
-                        );
-                      },
-                    ),
-                  )
-                ],
-              ),
-            ],
+                    Container(
+                      height: _height * 0.2,
+                      width: _width * 0.4,
+                      child: TextFormField(
+                        decoration: const InputDecoration(
+                            labelText: 'Lot Weight : ',
+                            labelStyle: kTextFormFieldLabelStyle,
+                            errorStyle: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 17.0),
+                            contentPadding: const EdgeInsets.all(30.0),
+                            enabledBorder: kEnabledBorder,
+                            focusedBorder: kFocusedBorder,
+                            focusedErrorBorder: kFocusedErrorBorder,
+                            errorBorder: kErrorBorder,
+                        ),
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.number,
+                        style: const TextStyle(
+                            fontSize: 30.0, fontWeight: FontWeight.bold),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please Enter Lot Weight !';
+                          }
+                          if (double.parse(value) <= 0 ||
+                              double.parse(value) >= 351) {
+                            return 'Please Enter A Valid Lot Weight !';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _witheringUnloading = WitheringUnloading(
+                            id: null,
+                            batchNumber:
+                            witheringUnloadingBatchNumber.lastBatchNumberItem,
+                            troughNumber: _witheringUnloading.troughNumber,
+                            date: DateTime.now(),
+                            boxNumber: _witheringUnloading.boxNumber,
+                            lotWeight: double.parse(value),
+                          );
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

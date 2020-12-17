@@ -1,9 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/bought_leaf/tea_collections_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:teatrackerappofficer/constants.dart';
+
 
 class TroughLoadingScreen extends StatefulWidget {
   @override
@@ -138,6 +141,8 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
         );
       }
     }
+
+
   }
 
   final _troughNum = TextEditingController();
@@ -174,33 +179,37 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
           )
         ],
       ),
-      body: SafeArea(
-        child: Form(
-          key: _formKeyTroughLoading,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    height: _height * 0.2,
-                    width: _width * 0.4,
-                    child: TextFormField(
-                      controller: _troughNum,
-                      decoration: const InputDecoration(
-                        labelText: 'Trough Number : ',
-                        errorStyle: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17.0,
-                        ),
-                        contentPadding: const EdgeInsets.all(30.0),
-                        border: const OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(50.0),
+      body: Container(
+      decoration: BoxDecoration(
+        gradient: kUIGradient,
+    ),
+        child: SafeArea(
+          child: Form(
+            key: _formKeyTroughLoading,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: _height * 0.2,
+                      width: _width * 0.4,
+                      child: TextFormField(
+                        controller: _troughNum,
+                        decoration: const InputDecoration(
+                          labelText: 'Trough Number : ',
+                          labelStyle: kTextFormFieldLabelStyle,
+                          errorStyle: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0,
                           ),
+                          contentPadding: const EdgeInsets.all(30.0),
+                          enabledBorder: kEnabledBorder,
+                          focusedBorder: kFocusedBorder,
+                          focusedErrorBorder: kFocusedErrorBorder,
+                          errorBorder: kErrorBorder,
                         ),
-                      ),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
                       style: const TextStyle(
@@ -237,19 +246,21 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                   Container(
                     height: _height * 0.2,
                     width: _width * 0.4,
-                    child: TextFormField(
-                      controller: _boxNum,
-                      decoration: const InputDecoration(
-                        labelText: 'Box Number : ',
-                        errorStyle: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 17.0),
-                        contentPadding: const EdgeInsets.all(30.0),
-                        border: const OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(50.0),
+                      child: TextFormField(
+                        controller: _boxNum,
+                        decoration: const InputDecoration(
+                          labelText: 'Box Number : ',
+                          labelStyle: kTextFormFieldLabelStyle,
+                          errorStyle: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0,
                           ),
+                          contentPadding: const EdgeInsets.all(30.0),
+                          enabledBorder: kEnabledBorder,
+                          focusedBorder: kFocusedBorder,
+                          focusedErrorBorder: kFocusedErrorBorder,
+                          errorBorder: kErrorBorder,
                         ),
-                      ),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
                       style: const TextStyle(
@@ -287,6 +298,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
             ],
           ),
         ),
+      ),
       ),
     );
   }

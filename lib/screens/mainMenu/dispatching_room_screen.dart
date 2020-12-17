@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teatrackerappofficer/constants.dart';
 
 class DispatchingRoomScreen extends StatelessWidget {
   @override
@@ -6,6 +7,11 @@ class DispatchingRoomScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dispatching Room'),
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient:kUIGradient,
+        ),
       ),
     );
   }

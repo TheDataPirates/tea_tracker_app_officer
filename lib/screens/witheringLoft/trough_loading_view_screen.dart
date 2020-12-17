@@ -4,6 +4,7 @@ import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart
 import 'package:teatrackerappofficer/providers/withering/ended_loading_trough_box.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/widgets/trough_loading_item.dart';
+import 'package:teatrackerappofficer/constants.dart';
 
 class TroughLoadingViewScreen extends StatefulWidget {
   @override
@@ -137,7 +138,6 @@ class _TroughLoadingViewScreenState extends State<TroughLoadingViewScreen> {
                 onPressed: () {
                   Navigator.of(context).pushNamed('InputCollectionScreen');
                 },
-                backgroundColor: Colors.green,
                 heroTag: null,
               ),
             ),
@@ -201,7 +201,6 @@ class _TroughLoadingViewScreenState extends State<TroughLoadingViewScreen> {
                 },
               );
             },
-            backgroundColor: Colors.green,
             heroTag: null,
           ),
         ],

@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 //import 'package:teatrackerappofficer/widgets/main_menu_button_container.dart';
+import 'package:teatrackerappofficer/constants.dart';
+
 
 class MainMenuScreen extends StatefulWidget {
   @override
@@ -23,11 +25,13 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-        image: AssetImage("images/bg1.jpg"),
-        fit: BoxFit.cover,
-        colorFilter: new ColorFilter.mode(
-            Colors.black.withOpacity(0.8), BlendMode.dstATop),
-      )),
+          image: AssetImage("images/bg1.jpg"),
+          fit: BoxFit.cover,
+          /*colorFilter: new ColorFilter.mode(
+            Colors.black.withOpacity(0.8), BlendMode.dstATop),*/
+        ),
+        gradient: kUIGradient,
+        ),
       child: Scaffold(
         appBar: AppBar(
           title: Text('Main menu'),

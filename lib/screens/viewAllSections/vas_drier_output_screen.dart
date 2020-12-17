@@ -4,31 +4,17 @@ import 'package:teatrackerappofficer/providers/withering/withering_loading_unloa
 import 'package:teatrackerappofficer/widgets/drying_item.dart';
 import 'package:teatrackerappofficer/constants.dart';
 
-class DrierOutputViewScreen extends StatelessWidget {
+class VasDrierOutputScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final drying =
         Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Drier Output View'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.check),
-            onPressed: () {
-//              Navigator.of(context).pushNamed('MainMenu');
-              Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
-            },
-            disabledColor: Colors.white,
-            iconSize: 35.0,
-          )
-        ],
       ),
       body: Container(
-        decoration: BoxDecoration(
-            gradient: kUIGradient,
-        ),
+        decoration: BoxDecoration(gradient: kUIGradient),
         child: Column(
           children: [
             Expanded(
@@ -46,23 +32,6 @@ class DrierOutputViewScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: Container(
-        height: 70.0,
-        width: 70.0,
-        child: FittedBox(
-          child: FloatingActionButton(
-            child: const Icon(
-              Icons.add,
-              color: Colors.white,
-              size: 40.0,
-            ),
-            onPressed: () {
-              Navigator.of(context).pushNamed('DrierOutput');
-            },
-          ),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-
 import '../constants.dart';
 
 class InputField extends StatelessWidget {
@@ -27,23 +26,26 @@ class InputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 10,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(13.0),
+      ),
       child: Container(
         width: MediaQuery.of(context).size.width * width,
+        decoration: BoxDecoration(
+          color: Colors.green,
+          borderRadius: BorderRadius.circular(13),
+        ),
         child: FormBuilderTextField(
           attribute: labelText,
           decoration: InputDecoration(
             errorStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
             contentPadding: const EdgeInsets.symmetric(vertical: 40.0),
-//            filled: true,/**/
-//          fillColor: Colors.lightGreen,
             labelText: labelText,
-            labelStyle: TextStyle(color: Colors.green, fontSize: 30),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(13.0),
-              ),
-              borderSide: BorderSide.none,
-            ),
+              labelStyle: kInputScreenContainerDisplayText,
+            enabledBorder: kEnabledBorder2,
+            focusedBorder: kFocusedBorder2,
+            focusedErrorBorder:  kFocusedErrorBorder2,
+            errorBorder: kErrorBorder2,
           ),
           validators: validator,
           controller: _editingController,
