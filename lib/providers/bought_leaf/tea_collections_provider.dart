@@ -67,6 +67,7 @@ class TeaCollections with ChangeNotifier {
           'lot_id': lotid,
           'grade_GL': newLot.leaf_grade,
           'gross_weight': newLot.gross_weight,
+          'container_type': newLot.container_type,
           'no_of_container': newLot.no_of_containers,
           'water': newLot.water,
           'course_leaf': newLot.course_leaf,
@@ -104,16 +105,16 @@ class TeaCollections with ChangeNotifier {
       for (var i in loadedLots) {
         _lot_items.add(
           Lot(
-            lotId: i['lot_id'],
-            no_of_containers: i['no_of_container'],
-            leaf_grade: i['grade_GL'],
-            gross_weight: i['gross_weight'],
-            water: i['water'],
-            course_leaf: i['course_leaf'],
-            other: i['other'],
-            net_weight: i['net_weight'],
-            deductions: i['deduction'],
-          ),
+              lotId: i['lot_id'],
+              no_of_containers: i['no_of_container'],
+              leaf_grade: i['grade_GL'],
+              gross_weight: i['gross_weight'],
+              water: i['water'],
+              course_leaf: i['course_leaf'],
+              other: i['other'],
+              net_weight: i['net_weight'],
+              deductions: i['deduction'],
+              container_type: i['container_type']),
         );
       }
 
@@ -168,7 +169,7 @@ class TeaCollections with ChangeNotifier {
         break;
       case 'C':
         {
-          contDeducts = 0.1 * noOfCont;
+          contDeducts = 1.0 * noOfCont;
           gweight = (gweight - contDeducts).toInt();
         }
         break;
