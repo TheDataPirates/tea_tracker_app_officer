@@ -4,7 +4,12 @@ import 'package:teatrackerappofficer/providers/withering/withering_loading_unloa
 import 'package:teatrackerappofficer/widgets/rolling_item.dart';
 import 'package:teatrackerappofficer/constants.dart';
 
-class VasRollingScreen extends StatelessWidget {
+class VasRollingScreen extends StatefulWidget {
+  @override
+  _VasRollingScreenState createState() => _VasRollingScreenState();
+}
+
+class _VasRollingScreenState extends State<VasRollingScreen> {
   @override
   Widget build(BuildContext context) {
     final rollingOutput =

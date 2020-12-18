@@ -4,7 +4,12 @@ import 'package:teatrackerappofficer/providers/withering/withering_loading_unloa
 import 'package:teatrackerappofficer/widgets/drying_item.dart';
 import 'package:teatrackerappofficer/constants.dart';
 
-class VasDrierOutputScreen extends StatelessWidget {
+class VasDrierOutputScreen extends StatefulWidget {
+  @override
+  _VasDrierOutputScreenState createState() => _VasDrierOutputScreenState();
+}
+
+class _VasDrierOutputScreenState extends State<VasDrierOutputScreen> {
   @override
   Widget build(BuildContext context) {
     final drying =
