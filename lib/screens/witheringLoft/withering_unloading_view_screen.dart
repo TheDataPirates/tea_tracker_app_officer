@@ -22,7 +22,8 @@ class _WitheringUnloadingViewScreenState extends State<WitheringUnloadingViewScr
 //    print(_batch.batchNumber);
 //    print(_batch.batchWeight);
 
-    Navigator.of(context).pushNamed('MainMenu');
+//    Navigator.of(context).pushNamed('MainMenu');
+    Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
   }
 
   @override

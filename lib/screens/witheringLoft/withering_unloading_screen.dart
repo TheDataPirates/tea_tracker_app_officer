@@ -21,20 +21,26 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
     lotWeight: null,
   );
 
-  void _saveWitheringUnloadingProviderDetails(int troughN, int boxN) {
+  void _saveWitheringUnloadingProviderDetails() {
     final isValid = _formKeyWitheringUnloading.currentState.validate();
 
     if (!isValid) {
       return;
     }
 
-    if(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isTroughBoxUsed(troughN, boxN, DateTime.now())){
+    if (Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+            listen: false)
+        .isTroughBoxUsed(int.parse(_troughNum.text), int.parse(_boxNum.text),
+            DateTime.now())) {
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('You have already entered trough ' + '$troughN' + ' and box ' + '$boxN'),
+            title: Text('You have already entered trough ' +
+                '${int.parse(_troughNum.text)}' +
+                ' and box ' +
+                '${int.parse(_boxNum.text)}'),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
@@ -54,13 +60,19 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
           );
         },
       );
-    }else if(!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isTroughBoxLoaded(troughN, boxN, DateTime.now()))){
+    } else if (!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+            listen: false)
+        .isTroughBoxLoaded(int.parse(_troughNum.text), int.parse(_boxNum.text),
+            DateTime.now()))) {
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('You have not loaded trough ' + '$troughN' + ' box ' + '$boxN'),
+            title: Text('You have not loaded trough ' +
+                '${int.parse(_troughNum.text)}' +
+                ' box ' +
+                '${int.parse(_boxNum.text)}'),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
@@ -80,16 +92,15 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
           );
         },
       );
-    }
-    else{
+    } else {
       _formKeyWitheringUnloading.currentState.save();
 
-      Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
+      Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+              listen: false)
           .addWitheringUnloadingItem(_witheringUnloading);
 
       Navigator.of(context).pushNamed('WitheringUnloadingView');
     }
-
   }
 
   final _troughNum = TextEditingController();
@@ -101,11 +112,11 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
-
-    final witheringUnloadingBatchNumber = Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
+    final witheringUnloadingBatchNumber =
+        Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+            listen: false);
 
     final _height =
         MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
@@ -118,8 +129,8 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.check),
-            onPressed: (){
-              _saveWitheringUnloadingProviderDetails(int.parse(_troughNum.text), int.parse(_boxNum.text));
+            onPressed: () {
+              _saveWitheringUnloadingProviderDetails();
             },
             disabledColor: Colors.white,
             iconSize: 35.0,
@@ -146,8 +157,8 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
                               fontWeight: FontWeight.bold, fontSize: 17.0),
                           contentPadding: const EdgeInsets.all(30.0),
                           border: const OutlineInputBorder(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(50.0)))),
+                              borderRadius: const BorderRadius.all(
+                                  Radius.circular(50.0)))),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
                       style: const TextStyle(
@@ -189,8 +200,8 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
                               fontWeight: FontWeight.bold, fontSize: 17.0),
                           contentPadding: const EdgeInsets.all(30.0),
                           border: const OutlineInputBorder(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(50.0)))),
+                              borderRadius: const BorderRadius.all(
+                                  Radius.circular(50.0)))),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
                       style: const TextStyle(
@@ -227,8 +238,8 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
                               fontWeight: FontWeight.bold, fontSize: 17.0),
                           contentPadding: const EdgeInsets.all(30.0),
                           border: const OutlineInputBorder(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(50.0)))),
+                              borderRadius: const BorderRadius.all(
+                                  Radius.circular(50.0)))),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
                       style: const TextStyle(
@@ -237,7 +248,8 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
                         if (value.isEmpty) {
                           return 'Please Enter Lot Weight !';
                         }
-                        if (double.parse(value) <= 0 || double.parse(value) >= 201) {
+                        if (double.parse(value) <= 0 ||
+                            double.parse(value) >= 351) {
                           return 'Please Enter A Valid Lot Weight !';
                         }
                         return null;
@@ -245,7 +257,8 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
                       onSaved: (value) {
                         _witheringUnloading = WitheringUnloading(
                           id: null,
-                          batchNumber: witheringUnloadingBatchNumber.lastBatchNumberItem,
+                          batchNumber:
+                              witheringUnloadingBatchNumber.lastBatchNumberItem,
                           troughNumber: _witheringUnloading.troughNumber,
                           date: DateTime.now(),
                           boxNumber: _witheringUnloading.boxNumber,

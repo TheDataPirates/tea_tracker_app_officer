@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
-import 'package:teatrackerappofficer/providers/withering/withering_starting__finishing_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/widgets/withering_starting_finishing_item.dart';
 
 class WitheringFinishingViewScreen extends StatelessWidget {
@@ -16,7 +16,8 @@ class WitheringFinishingViewScreen extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.check),
             onPressed: () {
-              Navigator.of(context).pushNamed('MainMenu');
+//              Navigator.of(context).pushNamed('MainMenu');
+              Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
             },
             disabledColor: Colors.white,
             iconSize: 35.0,
@@ -24,7 +25,7 @@ class WitheringFinishingViewScreen extends StatelessWidget {
         ],
       ),
       body: FutureBuilder(
-        future: Provider.of<WitheringStartingFinishingProvider>(context,
+        future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
                 listen: false)
             .fetchAndSetWitheringFinishingItem(token),
         builder: (ctx, snapshot) => snapshot.connectionState ==
@@ -32,7 +33,7 @@ class WitheringFinishingViewScreen extends StatelessWidget {
             ? Center(
                 child: CircularProgressIndicator(),
               )
-            : Consumer<WitheringStartingFinishingProvider>(
+            : Consumer<WitheringLoadingUnloadingRollingProvider>(
                 child: Center(
                   child: const Text(
                       'Got no Withering finishing items found yet, start adding some!'),

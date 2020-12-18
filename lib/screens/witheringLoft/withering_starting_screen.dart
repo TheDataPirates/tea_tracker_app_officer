@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_starting_finishing.dart';
-import 'package:teatrackerappofficer/providers/withering/withering_starting__finishing_provider.dart';
 
 class WitheringStartScreen extends StatefulWidget {
   @override
@@ -17,7 +16,7 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
       troughNumber: null,
       time: null,
       temperature: null,
-      humidity: null);
+      humidity: null,);
 
   Future<void> _saveWitheringStartingProviderDetails() async {
     final authToken = Provider.of<Auth>(context, listen: false).token;
@@ -28,43 +27,79 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
       return;
     }
 
-    _formKeyWitheringStarting.currentState.save();
-    try {
-      await Provider.of<WitheringStartingFinishingProvider>(context,
-              listen: false)
-          .addWitheringStartingItem(_witheringStarting, authToken);
-
-      Navigator.of(context).pushNamed('WitheringStartingView');
-    } catch (e) {
-      await showDialog<void>(
+    if(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isTroughStarted(int.parse(_troughNum.text), DateTime.now())){
+      showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: AlertDialog(
-                title: const Text('Warning !'),
-                content: ListBody(
-                  children: <Widget>[
-                    const Text('Error has occured'),
-                    Text(e.toString()),
-                  ],
-                ),
-                actions: <Widget>[
-                  TextButton(
-                    child: const Text('Okay'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
+          return AlertDialog(
+            title: Text('You have already started trough ' + '${int.parse(_troughNum.text)}'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  const Text('Please enter a different trough number !'),
                 ],
               ),
             ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  return;
+                },
+              ),
+            ],
           );
         },
       );
+    }else{
+      _formKeyWitheringStarting.currentState.save();
+      try {
+        await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+            listen: false)
+            .addWitheringStartingItem(_witheringStarting, authToken);
+
+        Navigator.of(context).pushNamed('WitheringStartingView');
+      } catch (e) {
+        await showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: AlertDialog(
+                  title: const Text('Warning !'),
+                  content: ListBody(
+                    children: <Widget>[
+                      const Text('Error has occured'),
+                      Text(e.toString()),
+                    ],
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      child: const Text('Okay'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      }
     }
+
+  }
+
+  final _troughNum = TextEditingController();
+
+  void dispose() {
+    _troughNum.dispose();
+    super.dispose();
   }
 
   @override
@@ -79,7 +114,9 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.check),
-            onPressed: _saveWitheringStartingProviderDetails,
+            onPressed: (){
+              _saveWitheringStartingProviderDetails();
+            },
             disabledColor: Colors.white,
             iconSize: 35.0,
           )
@@ -98,6 +135,7 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
                   height: _height * 0.4,
                   child: Center(
                     child: TextFormField(
+                      controller: _troughNum,
                       decoration: const InputDecoration(
                           labelText: 'Trough Number : ',
                           errorStyle: const TextStyle(

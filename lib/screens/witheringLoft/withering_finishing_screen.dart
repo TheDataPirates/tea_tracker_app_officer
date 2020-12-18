@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
-import 'package:teatrackerappofficer/providers/withering/withering_starting__finishing_provider.dart';
+import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_starting_finishing.dart';
 
 class WitheringFinishingScreen extends StatefulWidget {
@@ -27,43 +27,104 @@ class _WitheringFinishingScreenState extends State<WitheringFinishingScreen> {
       return;
     }
 
-    _formKeyWitheringFinishing.currentState.save();
-    try {
-      await Provider.of<WitheringStartingFinishingProvider>(context,
-              listen: false)
-          .addWitheringFinishingItem(_witheringFinishing, authToken);
-
-      Navigator.of(context).pushNamed('WitheringFinishingView');
-    } catch (error) {
-      await showDialog<void>(
+    if(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isTroughFinished(int.parse(_troughNum.text), DateTime.now())){
+      showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: AlertDialog(
-                title: const Text('Warning !'),
-                content: ListBody(
-                  children: <Widget>[
-                    const Text('Error has occured'),
-                    Text(error.toString()),
-                  ],
-                ),
-                actions: <Widget>[
-                  TextButton(
-                    child: const Text('Okay'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
+          return AlertDialog(
+            title: Text('You have already finished trough ' + '${int.parse(_troughNum.text)}'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  const Text('Please enter a different trough number !'),
                 ],
               ),
             ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  return;
+                },
+              ),
+            ],
           );
         },
       );
+    }else if(!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isTroughStarted(int.parse(_troughNum.text), DateTime.now()))){
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('You have not started trough ' + '${int.parse(_troughNum.text)}'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  const Text('Please enter a different trough number !'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  return;
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }else{
+      _formKeyWitheringFinishing.currentState.save();
+      try {
+        await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+            listen: false)
+            .addWitheringFinishingItem(_witheringFinishing, authToken);
+
+        Navigator.of(context).pushNamed('WitheringFinishingView');
+      } catch (error) {
+        await showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: AlertDialog(
+                  title: const Text('Warning !'),
+                  content: ListBody(
+                    children: <Widget>[
+                      const Text('Error has occured'),
+                      Text(error.toString()),
+                    ],
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      child: const Text('Okay'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      }
     }
+  }
+
+  final _troughNum = TextEditingController();
+
+  void dispose() {
+    _troughNum.dispose();
+    super.dispose();
   }
 
   @override
@@ -98,6 +159,7 @@ class _WitheringFinishingScreenState extends State<WitheringFinishingScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
+                      controller: _troughNum,
                       decoration: const InputDecoration(
                         labelText: 'Trough Number : ',
                         errorStyle: const TextStyle(

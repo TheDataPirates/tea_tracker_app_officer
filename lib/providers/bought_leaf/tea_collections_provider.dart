@@ -16,7 +16,7 @@ class TeaCollections with ChangeNotifier {
     return [..._lot_items];
   }
 
-  int Bulkid = Random().nextInt(10000);
+  int Bulkid = Random().nextInt(100000000);
   int lotTotDeduct;
 
   Supplier _newSupplier;
@@ -67,6 +67,7 @@ class TeaCollections with ChangeNotifier {
           'lot_id': lotid,
           'grade_GL': newLot.leaf_grade,
           'gross_weight': newLot.gross_weight,
+          'container_type': newLot.container_type,
           'no_of_container': newLot.no_of_containers,
           'water': newLot.water,
           'course_leaf': newLot.course_leaf,
@@ -104,16 +105,16 @@ class TeaCollections with ChangeNotifier {
       for (var i in loadedLots) {
         _lot_items.add(
           Lot(
-            lotId: i['lot_id'],
-            no_of_containers: i['no_of_container'],
-            leaf_grade: i['grade_GL'],
-            gross_weight: i['gross_weight'],
-            water: i['water'],
-            course_leaf: i['course_leaf'],
-            other: i['other'],
-            net_weight: i['net_weight'],
-            deductions: i['deduction'],
-          ),
+              lotId: i['lot_id'],
+              no_of_containers: i['no_of_container'],
+              leaf_grade: i['grade_GL'],
+              gross_weight: i['gross_weight'],
+              water: i['water'],
+              course_leaf: i['course_leaf'],
+              other: i['other'],
+              net_weight: i['net_weight'],
+              deductions: i['deduction'],
+              container_type: i['container_type']),
         );
       }
 
@@ -148,9 +149,43 @@ class TeaCollections with ChangeNotifier {
     notifyListeners();
   }
 
-  int calDeduct(int water, int cleaf, int other, int gweight) {
+  int calDeduct(int water, int cleaf, int other, int gweight, String contType,
+      int noOfCont) {
     // calculated deductions lot wise
+    double contDeducts;
     int deductPercnt = water + cleaf + other;
+    switch (contType) {
+      case 'A':
+        {
+          contDeducts = 0.5 * noOfCont;
+          gweight = (gweight - contDeducts).toInt();
+        }
+        break;
+      case 'B':
+        {
+          contDeducts = 0.75 * noOfCont;
+          gweight = (gweight - contDeducts).toInt();
+        }
+        break;
+      case 'C':
+        {
+          contDeducts = 1.0 * noOfCont;
+          gweight = (gweight - contDeducts).toInt();
+        }
+        break;
+      case 'D':
+        {
+          contDeducts = 1.25 * noOfCont;
+          gweight = (gweight - contDeducts).toInt();
+        }
+        break;
+      case 'E':
+        {
+          contDeducts = 0.0 * noOfCont;
+          gweight = (gweight - contDeducts).toInt();
+        }
+        break;
+    }
     double deductDouble = ((gweight * deductPercnt) / 100);
     lotTotDeduct = deductDouble.toInt();
     return deductDouble.toInt();
@@ -211,5 +246,9 @@ class TeaCollections with ChangeNotifier {
     final now = formatDate(DateTime.now(), [yyyy, '-', mm, '-', dd]);
 
     return now;
+  }
+
+  Lot get lastLotNumberItem {
+    return lot_items[lot_items.length - 1];
   }
 }

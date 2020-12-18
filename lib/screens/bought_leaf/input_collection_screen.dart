@@ -54,11 +54,17 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
           _editedLot.water,
           _editedLot.course_leaf,
           _editedLot.other,
-          provider.calDeduct(_editedLot.water, _editedLot.course_leaf,
-              _editedLot.other, _editedLot.gross_weight),
+          provider.calDeduct(
+            _editedLot.water,
+            _editedLot.course_leaf,
+            _editedLot.other,
+            _editedLot.gross_weight,
+            _editedLot.container_type,
+            _editedLot.no_of_containers,
+          ),
           provider.calNetWeight(_editedLot.gross_weight),
         );
-        Navigator.of(context).pop();
+        Navigator.of(context).pushNamed('LotListScreen');
       } catch (e) {
         //count should be 0 if not after click okay condition not true
         await showDialog<void>(
@@ -144,7 +150,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                     FormBuilderValidators.required(),
                                     // ignore: missing_retur
                                   ],
-                                  items: ['a', 'b', 'c', 'd', 'e']
+                                  items: ['A', 'B', 'C', 'D', 'E']
                                       .map((container) => DropdownMenuItem(
                                           value: container,
                                           child: Text("$container")))

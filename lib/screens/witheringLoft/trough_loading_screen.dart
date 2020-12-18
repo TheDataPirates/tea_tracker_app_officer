@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
+import 'package:teatrackerappofficer/providers/bought_leaf/tea_collections_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:provider/provider.dart';
@@ -17,22 +19,32 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
     gradeOfGL: null,
     netWeight: null,
     date: null,
+    lotId: null,
   );
 
-  void _saveTroughArrangementDetails() {//int troughN, int boxN, String leafG
+  Future<void> _saveTroughArrangementDetails() async {
+    //int troughN, int boxN, String leafG
+
+    final authToken = Provider.of<Auth>(context, listen: false).token;
     final isValid = _formKeyTroughLoading.currentState.validate();
 
     if (!isValid) {
       return;
     }
 
-    if(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isTroughBoxEnded(int.parse(_troughNum.text), int.parse(_boxNum.text), DateTime.now())){
+    if (Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+            listen: false)
+        .isTroughBoxEnded(int.parse(_troughNum.text), int.parse(_boxNum.text),
+            DateTime.now())) {
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('You have already ended trough ' + '${int.parse(_troughNum.text)}' + ' box ' + '${int.parse(_boxNum.text)}'),
+            title: Text('You have already ended trough ' +
+                '${int.parse(_troughNum.text)}' +
+                ' box ' +
+                '${int.parse(_boxNum.text)}'),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
@@ -54,13 +66,20 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
       );
 //    print(batchNo);
 //    return;
-    }else if(!Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isTroughBoxLeafGradeCorrect(int.parse(_troughNum.text), int.parse(_boxNum.text), _leafGrade.text, DateTime.now())){
+    } else if (!Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+            listen: false)
+        .isTroughBoxLeafGradeCorrect(int.parse(_troughNum.text),
+            int.parse(_boxNum.text), _leafGrade.text, DateTime.now())) {
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('You have already entered different leaf grade in trough ' + '${int.parse(_troughNum.text)}' + ' box ' + '${int.parse(_boxNum.text)}'),
+            title: Text(
+                'You have already entered different leaf grade in trough ' +
+                    '${int.parse(_troughNum.text)}' +
+                    ' box ' +
+                    '${int.parse(_boxNum.text)}'),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
@@ -80,22 +99,45 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
           );
         },
       );
-    }else{
+    } else {
       _formKeyTroughLoading.currentState.save();
+      try {
+        await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+                listen: false)
+            .addTroughLoadingItem(_troughLoading, authToken);
 
-//    print(_troughLoading.troughNumber);
-//    print(_troughLoading.boxNumber);
-//    print(_troughLoading.gradeOfGL);
-//    print(_troughLoading.netWeight);
-
-      Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-          listen: false)
-          .addTroughLoadingItem(_troughLoading);
-
-      Navigator.of(context).pushNamed('TroughLoadingView');
+        Navigator.of(context).pushNamed('TroughLoadingView');
+      } catch (error) {
+        await showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: AlertDialog(
+                  title: const Text('Warning !'),
+                  content: ListBody(
+                    children: <Widget>[
+                      const Text('Error has occured'),
+                      Text(error.toString()),
+                    ],
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      child: const Text('Okay'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      }
     }
-
-
   }
 
   final _troughNum = TextEditingController();
@@ -111,6 +153,8 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final tea_collection_provider =
+        Provider.of<TeaCollections>(context, listen: false);
     final _height =
         MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
 
@@ -122,8 +166,8 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.check),
-            onPressed: (){
-              _saveTroughArrangementDetails();//int.parse(_troughNum.text), int.parse(_boxNum.text), _leafGrade.text
+            onPressed: () {
+              _saveTroughArrangementDetails(); //int.parse(_troughNum.text), int.parse(_boxNum.text), _leafGrade.text
             },
             disabledColor: Colors.white,
             iconSize: 35.0,
@@ -180,10 +224,16 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                           gradeOfGL: _troughLoading.gradeOfGL,
                           netWeight: _troughLoading.netWeight,
                           date: null,
+                          lotId: _troughLoading.lotId,
                         );
                       },
                     ),
                   ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
                   Container(
                     height: _height * 0.2,
                     width: _width * 0.4,
@@ -220,108 +270,14 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                           id: null,
                           troughNumber: _troughLoading.troughNumber,
                           boxNumber: int.parse(value),
-                          gradeOfGL: _troughLoading.gradeOfGL,
-                          netWeight: _troughLoading.netWeight,
+                          gradeOfGL: tea_collection_provider
+                              .lastLotNumberItem.leaf_grade,
+                          netWeight: tea_collection_provider
+                              .lastLotNumberItem.net_weight
+                              .toDouble(),
                           date: null,
-                        );
-                      },
-                    ),
-                  )
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    height: _height * 0.2,
-                    width: _width * 0.4,
-                    child: TextFormField(
-                      controller: _leafGrade,
-                      decoration: const InputDecoration(
-                        labelText: 'Grade of GL : ',
-                        errorStyle: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 17.0),
-                        contentPadding: const EdgeInsets.all(30.0),
-                        border: const OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(50.0),
-                          ),
-                        ),
-                      ),
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.text,
-                      style: const TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please Enter Leaf Grade !';
-                        }
-                        if (value.length >= 2) {
-                          return 'Please Enter A Valid Leaf Grade !';
-                        }
-                        if ((value != 'A') &&
-                            (value != 'B') &&
-                            (value != 'C') &&
-                            (value != 'a') &&
-                            (value != 'b') &&
-                            (value != 'c')) {
-                          return 'Please Enter A Valid Leaf Grade !';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _troughLoading = WitheringLoading(
-                          id: null,
-                          troughNumber: _troughLoading.troughNumber,
-                          boxNumber: _troughLoading.boxNumber,
-                          gradeOfGL: value,
-                          netWeight: _troughLoading.netWeight,
-                          date: null,
-                        );
-                      },
-                    ),
-                  ),
-                  Container(
-                    height: _height * 0.2,
-                    width: _width * 0.4,
-                    child: TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: 'Net Weight : ',
-                        errorStyle: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 17.0),
-                        contentPadding: const EdgeInsets.all(30.0),
-                        border: const OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(50.0),
-                          ),
-                        ),
-                      ),
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.number,
-                      style: const TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please Enter Net Weight !';
-                        }
-                        if (double.parse(value) >= 201 ||
-                            double.parse(value) <= 0) {
-                          return 'Please Enter A Valid Net Weight !';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _troughLoading = WitheringLoading(
-                          id: null,
-                          troughNumber: _troughLoading.troughNumber,
-                          boxNumber: _troughLoading.boxNumber,
-                          gradeOfGL: _troughLoading.gradeOfGL,
-                          netWeight: double.parse(value),
-                          date: DateTime.now(),
+                          lotId:
+                              tea_collection_provider.lastLotNumberItem.lotId,
                         );
                       },
                     ),

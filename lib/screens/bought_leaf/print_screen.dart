@@ -129,7 +129,8 @@ class _PrintScreenState extends State<PrintScreen> {
             width: double.infinity,
             child: RaisedButton.icon(
               onPressed: () {
-                Navigator.of(context).pushNamed("TroughLoading");
+                // Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
+                Navigator.of(context).pushNamed("MainMenu");
               },
               icon: const Icon(Icons.print),
               label: const Text(

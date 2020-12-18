@@ -27,43 +27,134 @@ class _RollBreakingRoomScreenState extends State<RollBreakingRoomScreen> {
       return;
     }
 
-    _formKeyRollBreaking.currentState.save();
-    try {
-      await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-              listen: false)
-          .addRollBreakingItem(_rollBreaking, authToken);
-
-      Navigator.of(context).pushNamed('RollBreakingView');
-    } catch (e) {
-      await showDialog<void>(
+    if(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isBatchRollBreakingTurnAlreadyUsed(int.parse(_batchNum.text), int.parse(_rollBreakingTurn.text), DateTime.now())){
+      showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: AlertDialog(
-                title: const Text('Warning !'),
-                content: ListBody(
-                  children: <Widget>[
-                    const Text('Error has occured'),
-                    Text(e.toString()),
-                  ],
-                ),
-                actions: <Widget>[
-                  TextButton(
-                    child: const Text('Okay'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
+          return AlertDialog(
+            title: Text('You have already used rollbreaking turn ' + '${int.parse(_rollBreakingTurn.text)}' + ' on batch ' + '${int.parse(_batchNum.text)}'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  const Text('Please enter a different rollbreaking turn !'),
                 ],
               ),
             ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  return;
+                },
+              ),
+            ],
           );
         },
       );
+    }else if (Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isBatchEnded(int.parse(_batchNum.text), DateTime.now())){
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('You have already ended batch ' + '${int.parse(_batchNum.text)}'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  const Text('Please try a different batch number !'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  return;
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }else if(!(Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false).isBatchMade(int.parse(_batchNum.text), DateTime.now()))){
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('You have not created batch ' + '${int.parse(_batchNum.text)}'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  const Text('Please enter a different batch number !'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  return;
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }else{
+      _formKeyRollBreaking.currentState.save();
+      try {
+        await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+            listen: false)
+            .addRollBreakingItem(_rollBreaking, authToken);
+
+        Navigator.of(context).pushNamed('RollBreakingView');
+      } catch (e) {
+        await showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: AlertDialog(
+                  title: const Text('Warning !'),
+                  content: ListBody(
+                    children: <Widget>[
+                      const Text('Error has occured'),
+                      Text(e.toString()),
+                    ],
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      child: const Text('Okay'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      }
     }
+
+  }
+
+  final _batchNum = TextEditingController();
+  final _rollBreakingTurn = TextEditingController();
+
+
+  void dispose() {
+    _batchNum.dispose();
+    _rollBreakingTurn.dispose();
+    super.dispose();
   }
 
   @override
@@ -98,6 +189,7 @@ class _RollBreakingRoomScreenState extends State<RollBreakingRoomScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
+                      controller: _batchNum,
                       decoration: const InputDecoration(
                         labelText: 'Batch Number : ',
                         errorStyle: const TextStyle(
@@ -142,6 +234,7 @@ class _RollBreakingRoomScreenState extends State<RollBreakingRoomScreen> {
                     height: _height * 0.2,
                     width: _width * 0.4,
                     child: TextFormField(
+                      controller: _rollBreakingTurn,
                       decoration: const InputDecoration(
                         labelText: 'Roll Breaking Turn : ',
                         errorStyle: const TextStyle(
