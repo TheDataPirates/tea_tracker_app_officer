@@ -372,7 +372,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
           'id': DateTime.now().toIso8601String(),
           'batchNumber': batch.batchNumber,
           'time': DateTime.now().toIso8601String(),
-          'batchWeigh': batch.batchWeight,
+          'batchWeight': batch.batchWeight,
         }),
       );
       if (response.statusCode == 200) {

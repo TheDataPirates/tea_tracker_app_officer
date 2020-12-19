@@ -23,6 +23,7 @@ class _WitheringUnloadingViewScreenState extends State<WitheringUnloadingViewScr
     Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
         .addBatchItem(_batch,authToken);
 
+
 //    print(_batch.batchNumber);
 //    print(_batch.batchWeight);
 
@@ -47,7 +48,6 @@ class _WitheringUnloadingViewScreenState extends State<WitheringUnloadingViewScr
                   batchWeight: witheringLoadingUnloading.latestBatchTotalWeight,
                   time: DateTime.now(),
               );
-
               _saveBatchWeightAndNavigate();
             },
             disabledColor: Colors.white,
