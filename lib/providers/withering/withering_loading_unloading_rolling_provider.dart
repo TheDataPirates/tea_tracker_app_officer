@@ -350,16 +350,70 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return [..._batchItems];
   }
 
-  void addBatchItem(Batch batch) {
-    final newBatchItem = Batch(
+
+  Future<void> addBatchItem(
+  Batch batch,String authToken) async {
+    final newBatchItem=  Batch(
       id: DateTime.now().toString(),
       batchNumber: batch.batchNumber,
       batchWeight: batch.batchWeight,
       time: DateTime.now(),
     );
+    const url = 'http://10.0.2.2:8080/loft/batch';
 
-    _batchItems.add(batch);
-    notifyListeners();
+    try {
+      final response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'id': DateTime.now().toIso8601String(),
+          'batchNumber': batch.batchNumber,
+          'time': DateTime.now().toIso8601String(),
+          'batchWeigh': batch.batchWeight,
+        }),
+      );
+      if (response.statusCode == 200) {
+        _batchItems.add(batch);
+        notifyListeners();
+      } else {
+        throw Exception('Failed ');
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  Future<void> fetchAndSetBatchItem(String authToken) async {
+    _batchItems = [];
+    const url = 'http://10.0.2.2:8080/loft/batches';
+    try {
+      final dataList = await http.get(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+      );
+      final extractedDataList = jsonDecode(dataList.body);
+//      print(extractedDataList);
+      List Batches = extractedDataList['batches'];
+      print(Batches);
+      for (var i in Batches) {
+        _batchItems.add(
+         Batch(
+           batchNumber: i['batch_no'] as int,
+            time: DateTime.parse(i['batch_date']),
+            batchWeight: double.parse(i['weight'].toString()),
+          ),
+        );
+      }
+      notifyListeners();
+    } catch (error) {
+      print(error);
+    }
   }
 
   bool isBatchNumberUsed(int batchNumber, DateTime dateTime) {
