@@ -156,7 +156,7 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
                         style: const TextStyle(
-                            fontSize: 30.0, fontWeight: FontWeight.bold),
+                            fontSize: 30.0, fontWeight: FontWeight.bold, color:kTextInputColor),
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please Enter Trough Number !';
@@ -199,7 +199,7 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
                         style: const TextStyle(
-                            fontSize: 30.0, fontWeight: FontWeight.bold),
+                            fontSize: 30.0, fontWeight: FontWeight.bold, color:kTextInputColor),
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please Enter Temperature !';
@@ -243,6 +243,7 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
                         style: const TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold,
+                            color:kTextInputColor,
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
