@@ -350,10 +350,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return [..._batchItems];
   }
 
-
-  Future<void> addBatchItem(
-  Batch batch,String authToken) async {
-    final newBatchItem=  Batch(
+  Future<void> addBatchItem(Batch batch, String authToken) async {
+    final newBatchItem = Batch(
       id: DateTime.now().toString(),
       batchNumber: batch.batchNumber,
       batchWeight: batch.batchWeight,
@@ -382,6 +380,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         throw Exception('Failed ');
       }
     } catch (error) {
+//      print(error);
       throw error;
     }
   }
@@ -403,8 +402,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       print(Batches);
       for (var i in Batches) {
         _batchItems.add(
-         Batch(
-           batchNumber: i['batch_no'] as int,
+          Batch(
+            batchNumber: i['batch_no'] as int,
             time: DateTime.parse(i['batch_date']),
             batchWeight: double.parse(i['weight'].toString()),
           ),
@@ -897,7 +896,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return _rollingOutputItems.firstWhere((rolling) => rolling.id == id);
   }
 
-  void addRollingOutputItem(Rolling rolling) {
+
+  Future<void> addRollingOutputItem(Rolling rolling, String authToken) async {
     final newRollingOutputItem = Rolling(
       id: DateTime.now().toString(),
       batchNumber: rolling.batchNumber,
@@ -907,9 +907,67 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       weightOut: rolling.weightOut,
       time: DateTime.now(),
     );
+    const url = 'http://10.0.2.2:8080/rolling/rolling';
+    try {
+      final response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'id': DateTime.now().toIso8601String(),
+          'batchNumber': rolling.batchNumber,
+          'time': DateTime.now().toIso8601String(),
+          'rollingTurn': rolling.rollingTurn,
+          'rollerNumber': rolling.rollerNumber,
+          'weightIn': rolling.weightIn,
+          'weightOut': rolling.weightOut,
+        }),
+      );
+      if (response.statusCode == 200) {
+        _rollingOutputItems.add(rolling);
+        notifyListeners();
+      } else {
+        throw Exception('Failed ');
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
 
-    _rollingOutputItems.add(rolling);
-    notifyListeners();
+  Future<void> fetchAndSetRollingOutputItem(String authToken) async {
+    _rollingOutputItems = [];
+    const url = 'http://10.0.2.2:8080/rolling/rollings';
+    try {
+      final dataList = await http.get(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+      );
+      final extractedDataList = jsonDecode(dataList.body);
+//      print(extractedDataList);
+      List rollings = extractedDataList['rollings'];
+      print(rollings);
+      for (var i in rollings) {
+        _rollingOutputItems.add(
+          Rolling(
+            id: i['id'] as String,
+            batchNumber: int.parse(i['BatchBatchNo'].toString()),
+            time: DateTime.parse(i['rolling_out_time']),
+            rollerNumber: int.parse(i['RollerRollerId'].toString()),
+            rollingTurn: int.parse(i['rolling_turn'].toString()),
+            weightIn: double.parse(i['rolling_in_kg'].toString()),
+            weightOut: double.parse(i['rolling_out_kg'].toString()),
+          ),
+        );
+      }
+      notifyListeners();
+    } catch (error) {
+      print(error);
+    }
   }
 
   bool isBatchRollingTurnAlreadyUsed(

@@ -48,6 +48,7 @@ class _WitheringUnloadingViewScreenState extends State<WitheringUnloadingViewScr
                   batchWeight: witheringLoadingUnloading.latestBatchTotalWeight,
                   time: DateTime.now(),
               );
+//              print('Entering Save function of batch');
               _saveBatchWeightAndNavigate();
             },
             disabledColor: Colors.white,

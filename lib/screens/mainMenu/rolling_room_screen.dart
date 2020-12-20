@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/rolling/rolling.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/constants.dart';
@@ -22,7 +23,8 @@ class _RollingRoomScreenState extends State<RollingRoomScreen> {
       weightIn: null,
   weightOut: null,);
 
-  void _saveRollingOutputProviderDetails() {
+  Future<void> _saveRollingOutputProviderDetails() async{
+    final authToken = Provider.of<Auth>(context, listen: false).token;
     final isValid = _formKeyRollingOutput.currentState.validate();
 
     if (!isValid) {
@@ -113,7 +115,7 @@ class _RollingRoomScreenState extends State<RollingRoomScreen> {
 
       Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
           listen: false)
-          .addRollingOutputItem(_rollingOutput);
+          .addRollingOutputItem(_rollingOutput, authToken);
 
       Navigator.of(context).pushNamed('RollingOutputView');
     }
