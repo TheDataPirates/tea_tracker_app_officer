@@ -1138,10 +1138,10 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         _rollBreakingItems.add(
           RollBreaking(
             id: i['id'] as String,
-            batchNumber: int.parse(i['batch_no'].toString()),
+            batchNumber: int.parse(i['BatchBatchNo'].toString()),
             time: DateTime.parse(i['rb_out_time']),
-            rollBreakerNumber: int.parse(i['rb_id'].toString()),
-            rollBreakingTurn: int.parse(i['rb_turn'].toString()),
+            rollBreakerNumber: int.parse(i['RollBreakerRollBreakerId'].toString()),
+            rollBreakingTurn: int.parse(i['rolling_turn'].toString()),
             weight: double.parse(i['dhool_out_weight'].toString()),
           ),
         );
@@ -1225,7 +1225,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     );
     const url = 'http://10.0.2.2:8080/rolling/fermenting';
     try {
-      final response = await http.patch(
+      final response = await http.post(
         url,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -1270,10 +1270,10 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         _fermentingItems.add(
           Fermenting(
             id: i['id'].toString(),
-            batchNumber: int.parse(i['batch_no'].toString()),
+            batchNumber: int.parse(i['BatchBatchNo'].toString()),
             time: DateTime.parse(i['fd_time_out']),
             dhoolInWeight: double.parse(i['dhool_out_weight'].toString()),
-            dhoolNumber: i['rb_turn'].toString(),
+            dhoolNumber: i['rolling_turn'].toString(),
             dhoolOutWeight: double.parse(i['fd_out_kg'].toString()),
           ),
         );
