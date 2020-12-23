@@ -13,7 +13,7 @@ class RollingOutputViewScreen extends StatefulWidget {
 class _RollingOutputViewScreenState extends State<RollingOutputViewScreen> {
   @override
   Widget build(BuildContext context) {
-    final rollingOutput = Provider.of<WitheringLoadingUnloadingRollingProvider>(context,listen: false);
+//    final rollingOutput = Provider.of<WitheringLoadingUnloadingRollingProvider>(context,listen: false);
     final token = Provider.of<Auth>(context, listen: false).token;
     return Scaffold(
       appBar: AppBar(

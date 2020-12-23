@@ -1093,7 +1093,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     );
     const url = 'http://10.0.2.2:8080/rolling/rbreaking';
     try {
-      final response = await http.post(
+      final response = await http.patch(
         url,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -1225,7 +1225,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     );
     const url = 'http://10.0.2.2:8080/rolling/fermenting';
     try {
-      final response = await http.post(
+      final response = await http.patch(
         url,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -1390,7 +1390,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     );
     const url = 'http://10.0.2.2:8080/rolling/drying';
     try {
-      final response = await http.post(
+      final response = await http.patch(
         url,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',

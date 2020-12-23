@@ -113,7 +113,7 @@ class _RollingRoomScreenState extends State<RollingRoomScreen> {
     else{
       _formKeyRollingOutput.currentState.save();
 
-      Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+      await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
           listen: false)
           .addRollingOutputItem(_rollingOutput, authToken);
 

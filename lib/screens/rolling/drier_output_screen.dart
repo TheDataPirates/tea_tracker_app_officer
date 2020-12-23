@@ -347,7 +347,7 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
   @override
   Widget build(BuildContext context) {
     final drying =
-        Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
+        Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false);
 
     final _height =
         MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
