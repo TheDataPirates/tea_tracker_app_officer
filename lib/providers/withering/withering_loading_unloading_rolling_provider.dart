@@ -1378,7 +1378,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return _dryingItems.firstWhere((drying) => drying.id == id);
   }
 
-  void addDryingItem(Drying drying) {
+  Future<void> addDryingItem(
+      Drying drying, String authToken) async {
     final newDrierItem = Drying(
       id: DateTime.now().toString(),
       batchNumber: drying.batchNumber,
@@ -1387,9 +1388,65 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       drierOutWeight: drying.drierOutWeight,
       time: DateTime.now(),
     );
+    const url = 'http://10.0.2.2:8080/rolling/drying';
+    try {
+      final response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'id': DateTime.now().toIso8601String(),
+          'batchNumber': newDrierItem.batchNumber,
+          'time': DateTime.now().toIso8601String(),
+          'dhoolNumber': newDrierItem.dhoolNumber.toString(),
+          'drierInWeight': newDrierItem.drierInWeight,
+          'drierOutWeight': newDrierItem.drierOutWeight,
+        }),
+      );
+      if (response.statusCode == 200) {
+        _dryingItems.add(newDrierItem);
+        notifyListeners();
+      } else {
+        throw Exception('Failed ');
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
 
-    _dryingItems.add(drying);
-    notifyListeners();
+  Future<void> fetchAndSetDryingItem(String authToken) async {
+    _dryingItems = [];
+    const url = 'http://10.0.2.2:8080/rolling/dryings';
+    try {
+      final dataList = await http.get(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+      );
+      final extractedDataList = jsonDecode(dataList.body);
+//      print(extractedDataList);
+      List dryings = extractedDataList['dryings'];
+      print(dryings);
+      for (var i in dryings) {
+        _dryingItems.add(
+          Drying(
+            id: i['id'].toString(),
+            batchNumber: int.parse(i['BatchBatchNo'].toString()),
+            time: DateTime.parse(i['drier_out_time']),
+            drierInWeight: double.parse(i['fd_out_kg'].toString()),
+            dhoolNumber: i['rolling_turn'].toString(),
+            drierOutWeight: double.parse(i['drier_out_kg'].toString()),
+          ),
+        );
+      }
+      notifyListeners();
+    } catch (error) {
+      print(error);
+    }
   }
 
   double drierInputWeight(int batchNumber, DateTime dateTime, dhoolNum) {

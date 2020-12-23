@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/widgets/drying_item.dart';
 import 'package:teatrackerappofficer/constants.dart';
 
-class DrierOutputViewScreen extends StatelessWidget {
+class DrierOutputViewScreen extends StatefulWidget {
+  @override
+  _DrierOutputViewScreenState createState() => _DrierOutputViewScreenState();
+}
+
+class _DrierOutputViewScreenState extends State<DrierOutputViewScreen> {
   @override
   Widget build(BuildContext context) {
-    final drying =
-        Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
+    final token = Provider.of<Auth>(context, listen: false).token;
+//    final drying =
+//        Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(
@@ -27,23 +34,50 @@ class DrierOutputViewScreen extends StatelessWidget {
       ),
       body: Container(
         decoration: BoxDecoration(
-            gradient: kUIGradient,
+          gradient: kUIGradient,
         ),
-        child: Column(
-          children: [
-            Expanded(
-                child: ListView.builder(
-              itemCount: drying.dryingItems.length,
+        child: FutureBuilder(
+          future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+              listen: false)
+              .fetchAndSetDryingItem(token),
+          builder: (ctx, snapshot) => snapshot.connectionState ==
+              ConnectionState.waiting
+              ? Center(
+            child: CircularProgressIndicator(),
+          )
+              : Consumer<WitheringLoadingUnloadingRollingProvider>(
+            child: Center(
+              child: const Text(
+                  'Got no drying items found yet, start adding some!'),
+            ),
+            builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
+            WitheringLoadingUnloadingRollingProvider
+                .dryingItems.length <=
+                0
+                ? ch
+                : ListView.builder(
+              itemCount: WitheringLoadingUnloadingRollingProvider
+                  .dryingItems.length,
               itemBuilder: (ctx, i) => DryingItem(
-                id: drying.dryingItems[i].id,
-                batchNumber: drying.dryingItems[i].batchNumber,
-                dhoolNumber: drying.dryingItems[i].dhoolNumber,
-                time: drying.dryingItems[i].time,
-                drierInWeight: drying.dryingItems[i].drierInWeight,
-                drierOutWeight: drying.dryingItems[i].drierOutWeight,
+                id: WitheringLoadingUnloadingRollingProvider
+                    .dryingItems[i].id,
+                batchNumber:
+                WitheringLoadingUnloadingRollingProvider
+                    .dryingItems[i].batchNumber,
+                dhoolNumber:
+                WitheringLoadingUnloadingRollingProvider
+                    .dryingItems[i].dhoolNumber,
+                time: WitheringLoadingUnloadingRollingProvider
+                    .dryingItems[i].time,
+                drierInWeight:
+                WitheringLoadingUnloadingRollingProvider
+                    .dryingItems[i].drierInWeight,
+                drierOutWeight:
+                WitheringLoadingUnloadingRollingProvider
+                    .dryingItems[i].drierOutWeight,
               ),
-            ))
-          ],
+            ),
+          ),
         ),
       ),
       floatingActionButton: Container(

@@ -5,7 +5,12 @@ import 'package:teatrackerappofficer/providers/withering/withering_loading_unloa
 import 'package:teatrackerappofficer/widgets/fermenting_item.dart';
 import 'package:teatrackerappofficer/constants.dart';
 
-class FermentingViewScreen extends StatelessWidget {
+class FermentingViewScreen extends StatefulWidget {
+  @override
+  _FermentingViewScreenState createState() => _FermentingViewScreenState();
+}
+
+class _FermentingViewScreenState extends State<FermentingViewScreen> {
   @override
   Widget build(BuildContext context) {
     final token = Provider.of<Auth>(context, listen: false).token;
