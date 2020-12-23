@@ -800,33 +800,34 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   //----------------Rolling Input -------------------
 
-//  List<Rolling> _rollingInputItems = [];
-//
-//  List<Rolling> get rollingInputItems {
-//    return [..._rollingInputItems];
-//  }
-//
-//  int get rollingInputItemCount {
-//    return _rollingInputItems.length;
-//  }
-//
-//  Rolling findById(String id) {
-//    return _rollingInputItems.firstWhere((rolling) => rolling.id == id);
-//  }
-//
-//  void addRollingInputItem(Rolling rolling) {
-//    final newRollingInputItem = Rolling(
-//      id: DateTime.now().toString(),
-//      batchNumber: rolling.batchNumber,
-//      rollingTurn: rolling.rollingTurn,
-//      rollerNumber: rolling.rollerNumber,
-//      weightIn: rolling.weightIn,
-//      time: DateTime.now(),
-//    );
-//
-//    _rollingInputItems.add(rolling);
-//    notifyListeners();
-//  }
+ List<Rolling> _rollingInputItems = [];
+
+ List<Rolling> get rollingInputItems {
+   return [..._rollingInputItems];
+ }
+
+ int get rollingInputItemCount {
+   return _rollingInputItems.length;
+ }
+
+ Rolling findByIdInput(String id) {
+   return _rollingInputItems.firstWhere((rolling) => rolling.id == id);
+ }
+
+ void addRollingInputItem(Rolling rolling) {
+   final newRollingInputItem = Rolling(
+     id: DateTime.now().toString(),
+     batchNumber: rolling.batchNumber,
+     rollingTurn: rolling.rollingTurn,
+     rollerNumber: rolling.rollerNumber,
+     weightIn: rolling.weightIn,
+     weightOut: rolling.weightOut,
+     time: DateTime.now(),
+   );
+
+   _rollingInputItems.add(rolling);
+   notifyListeners();
+ }
 
   //----------------Rolling Output -------------------
 
@@ -903,55 +904,55 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return value;
   }
 
-//  int inputedBatchRollingTurn(int batchNumber, DateTime dateTime){
-//    int rollingTurn = 0;
-//    _rollingInputItems.forEach((rollingInput) {
-//      if ((rollingInput.time.year == dateTime.year) &&
-//          (rollingInput.time.month == dateTime.month) &&
-//          (rollingInput.time.day == dateTime.day)){
-//        if(rollingInput.batchNumber == batchNumber){
-//          rollingTurn = rollingInput.rollingTurn;
-//        }
-//      }
-//    });
-//    return rollingTurn;
-//  }
-//
-//  int inputedBatchRollerNumber(int batchNumber, DateTime dateTime){
-//    int rollerNumber = 0;
-//    _rollingInputItems.forEach((rollingInput) {
-//      if ((rollingInput.time.year == dateTime.year) &&
-//          (rollingInput.time.month == dateTime.month) &&
-//          (rollingInput.time.day == dateTime.day)){
-//        if(rollingInput.batchNumber == batchNumber){
-//          rollerNumber = rollingInput.rollerNumber;
-//        }
-//      }
-//    });
-//    return rollerNumber;
-//  }
-//
-//  bool isBatchInputedForAParticularTurn(int batchNumber, int rollingTurn, DateTime dateTime){
-//    bool value = false;
-//    _rollingInputItems.forEach((rollingInput) {
-//      if ((rollingInput.time.year == dateTime.year) &&
-//          (rollingInput.time.month == dateTime.month) &&
-//          (rollingInput.time.day == dateTime.day)){
-//        if(rollingInput.batchNumber == batchNumber && rollingInput.rollingTurn == rollingTurn){
-//          _rollingOutputItems.forEach((rollingOutput) {
-//            if ((rollingOutput.time.year == dateTime.year) &&
-//                (rollingOutput.time.month == dateTime.month) &&
-//                (rollingOutput.time.day == dateTime.day)){
-//              if(rollingOutput.batchNumber != batchNumber && rollingOutput.rollingTurn != rollingTurn){
-//                value = true;
-//              }
-//            }
-//          });
-//        }
-//      }
-//    });
-//    return value;
-//  }
+ int inputedBatchRollingTurn(int batchNumber, DateTime dateTime){
+   int rollingTurn = 0;
+   _rollingInputItems.forEach((rollingInput) {
+     if ((rollingInput.time.year == dateTime.year) &&
+         (rollingInput.time.month == dateTime.month) &&
+         (rollingInput.time.day == dateTime.day)){
+       if(rollingInput.batchNumber == batchNumber){
+         rollingTurn = rollingInput.rollingTurn;
+       }
+     }
+   });
+   return rollingTurn;
+ }
+
+ int inputedBatchRollerNumber(int batchNumber, DateTime dateTime){
+   int rollerNumber = 0;
+   _rollingInputItems.forEach((rollingInput) {
+     if ((rollingInput.time.year == dateTime.year) &&
+         (rollingInput.time.month == dateTime.month) &&
+         (rollingInput.time.day == dateTime.day)){
+       if(rollingInput.batchNumber == batchNumber){
+         rollerNumber = rollingInput.rollerNumber;
+       }
+     }
+   });
+   return rollerNumber;
+ }
+
+ bool isBatchInputedForAParticularTurn(int batchNumber, int rollingTurn, DateTime dateTime){
+   bool value = false;
+   _rollingInputItems.forEach((rollingInput) {
+     if ((rollingInput.time.year == dateTime.year) &&
+         (rollingInput.time.month == dateTime.month) &&
+         (rollingInput.time.day == dateTime.day)){
+       if(rollingInput.batchNumber == batchNumber && rollingInput.rollingTurn == rollingTurn){
+         _rollingOutputItems.forEach((rollingOutput) {
+           if ((rollingOutput.time.year == dateTime.year) &&
+               (rollingOutput.time.month == dateTime.month) &&
+               (rollingOutput.time.day == dateTime.day)){
+             if(rollingOutput.batchNumber != batchNumber && rollingOutput.rollingTurn != rollingTurn){
+               value = true;
+             }
+           }
+         });
+       }
+     }
+   });
+   return value;
+ }
 
 //----------------Roll Breaking -------------------
 
@@ -1267,7 +1268,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return _dryingItems.firstWhere((drying) => drying.id == id);
   }
 
-   void addDryingItem(Drying drying) {
+  Future<void> addDryingItem(Drying drying, String authToken)async {
     final newDrierItem = Drying(
       id: DateTime.now().toString(),
       batchNumber: drying.batchNumber,
@@ -1278,9 +1279,31 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     );
 
     const url = 'http://10.0.2.2:8080/rolling/dryings';
-
-    _dryingItems.add(drying);
-    notifyListeners();
+    try {
+      final response = await http.patch(
+          url,
+        headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'id': DateTime.now().toIso8601String(),
+          'batchNumber': newDrierItem.batchNumber,
+          'time': DateTime.now().toIso8601String(),
+          'dhoolNumber': newDrierItem.drierInWeight,
+          'drierOutWeight': newDrierItem.drierOutWeight,
+        }),
+      );
+      if (response.statusCode == 200) {
+        _dryingItems.add(newDrierItem);
+        notifyListeners();
+      }
+      else {
+        throw Exception('Failed ');
+      }
+    }catch (error) {
+      throw error;
+    }
   }
 
   Future<void> fetchAndSetDryingItem(String authtoken) async{
@@ -1295,14 +1318,14 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         },
       );
       final extractedDataList = jsonDecode(dataList.body);
-      List loadedLots = extractedDataList['dryings'];
-      print(loadedLots);
-      for(var i in loadedLots){
+      List dryings = extractedDataList['dryings'];
+      print(dryings);
+      for(var i in dryings){
         _dryingItems.add(Drying(
             id: i['id'].toString(), 
             batchNumber: int.parse(i['batch_no'].toString()),
             time: DateTime.parse(i['drier_out_time']),
-            dhoolNumber: i['rb_turn'].toString(), 
+            dhoolNumber: i['rolling_turn'].toString(),
             drierInWeight: double.parse(i['fd_out_kg'].toString()), 
             drierOutWeight: double.parse(i['drier_out_kg'].toString())
 

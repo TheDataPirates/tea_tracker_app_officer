@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/rolling/drying.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 
@@ -19,6 +20,7 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
       drierOutWeight: null);
 
   void _saveDryingProviderDetails() {
+    final token = Provider.of<Auth>(context, listen: false).token;
     final isValid = _formKeyDrying.currentState.validate();
 
     if (!isValid) {
@@ -126,7 +128,7 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
 
           Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
               listen: false)
-              .addDryingItem(_drying);
+              .addDryingItem(_drying, token);
 
           Navigator.of(context).pushNamed('DrierOutputView');
 
@@ -242,7 +244,7 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
 
           Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
               listen: false)
-              .addDryingItem(_drying);
+              .addDryingItem(_drying, token);
 
           Navigator.of(context).pushNamed('DrierOutputView');
 
@@ -292,7 +294,7 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
 
       Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
               listen: false)
-          .addDryingItem(_drying);
+          .addDryingItem(_drying, token);
 
       Navigator.of(context).pushNamed('DrierOutputView');
     }

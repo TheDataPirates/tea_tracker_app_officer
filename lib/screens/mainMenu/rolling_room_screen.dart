@@ -20,7 +20,7 @@ class _RollingRoomScreenState extends State<RollingRoomScreen> {
       time: null,
       rollerNumber: null,
       weightIn: null,
-  weightOut: null,);
+      weightOut: null,);
 
   void _saveRollingOutputProviderDetails() {
     final isValid = _formKeyRollingOutput.currentState.validate();
