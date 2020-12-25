@@ -10,6 +10,9 @@ import 'package:teatrackerappofficer/screens/bought_leaf/lot_list_screen.dart';
 import 'package:teatrackerappofficer/screens/bought_leaf/print_screen.dart';
 import 'package:teatrackerappofficer/screens/login_screen.dart';
 import 'package:teatrackerappofficer/screens/mainMenu/re_measuring.dart';
+import 'package:teatrackerappofficer/screens/Remeasuring/Re_input_collection_screen.dart';
+import 'package:teatrackerappofficer/screens/Remeasuring/Re_lot_list_screen.dart';
+import 'package:teatrackerappofficer/screens/Remeasuring/Re_list_tile_lot_screen.dart';
 import 'package:teatrackerappofficer/screens/mainMenu/view_all_sections.dart';
 import 'package:teatrackerappofficer/screens/rolling/drier_output_screen.dart';
 import 'package:teatrackerappofficer/screens/rolling/drier_output_view_screen.dart';
@@ -21,6 +24,8 @@ import 'package:teatrackerappofficer/screens/viewAllSections/vas_rolling_screen.
 import 'package:teatrackerappofficer/screens/witheringLoft/withering_finishing_view_screen.dart';
 import 'package:teatrackerappofficer/screens/witheringLoft/withering_unloading_batch_choosing_screen.dart';
 import 'package:teatrackerappofficer/screens/witheringLoft/withering_unloading_view_screen.dart';
+import 'screens/Remeasuring/Re_trough_loading.dart';
+import 'screens/Remeasuring/Re_trough_loading_view.dart';
 import 'screens/main_menu_screen.dart';
 import 'screens/mainMenu/bought_leaf_screen.dart';
 import 'screens/mainMenu/withering_loft_screen.dart';
@@ -140,7 +145,12 @@ class MyApp extends StatelessWidget {
             'DrierOutput': (context) => DrierOutputScreen(),
             'OutturnReport': (context) => OutturnReportScreen(),
             'DrierOutputView': (context) => DrierOutputViewScreen(),
-            'ReMeasuring': (context) => ReMeasuringScreen(),
+            'ReMeasuring': (context) => ReMeasuring(),
+            'ReInputcollectionScreen': (context) => RemeasuringInputCollectionScreen(),
+            'RemeasureLotListScreen': (context) => RemeasureLotListScreen(),
+            'RemeasureTroughLoadingScreen': (context) =>RemeasureTroughLoadingScreen(),
+            'RemeasureTroughLoadingViewScreen': (context) => RemeasureTroughLoadingViewScreen(),
+            'RemeasureListTileLot': (context) =>RemeasureListTileLot(),
             'ViewAllSections': (context) => ViewAllSectionsScreen(),
             'VasBoughtLeaf':(context) => VasBoughtLeafScreen(),
             'VasWitheringLoft':(context) => VasWitheringLoftScreen(),
