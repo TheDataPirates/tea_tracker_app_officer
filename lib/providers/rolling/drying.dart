@@ -7,6 +7,7 @@ class Drying with ChangeNotifier {
   final double drierInWeight;
   final double drierOutWeight;
   final DateTime time;
+  final double outturn;
 
   Drying({
     @required this.id,
@@ -15,5 +16,6 @@ class Drying with ChangeNotifier {
     @required this.drierInWeight,
     @required this.drierOutWeight,
     @required this.time,
+    @required this.outturn,
   });
 }

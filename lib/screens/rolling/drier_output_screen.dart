@@ -19,7 +19,8 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
       dhoolNumber: null,
       time: null,
       drierInWeight: null,
-      drierOutWeight: null);
+      drierOutWeight: null,
+      outturn: null);
 
   Future<void> _saveDryingProviderDetails() async{
     final isValid = _formKeyDrying.currentState.validate();
@@ -297,6 +298,9 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
       try {
         _formKeyDrying.currentState.save();
 
+//        print("Outturn in the input screen");
+//        print(_drying.outturn);
+
         await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
             listen: false)
             .addDryingItem(_drying, authToken);
@@ -425,6 +429,7 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
                             time: null,
                             drierInWeight: null,
                             drierOutWeight: _drying.drierOutWeight,
+                            outturn: _drying.outturn,
                           );
                         },
                       ),
@@ -486,6 +491,7 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
                             time: null,
                             drierInWeight: null,
                             drierOutWeight: _drying.drierOutWeight,
+                            outturn: _drying.outturn,
                           );
                         },
                       ),
@@ -529,6 +535,8 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
                           return null;
                         },
                         onSaved: (value) {
+//                          print("Batch number in drier");
+//                          print(int.parse(_batchNum.text));
                           _drying = Drying(
                             id: null,
                             batchNumber: _drying.batchNumber,
@@ -540,7 +548,9 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
                                 _drying
                                     .dhoolNumber), //In here have to build a method to return the drier input weight
                             drierOutWeight: double.parse(value),
+                            outturn: drying.batchOutturnWithDrierWeight(int.parse(_batchNum.text), DateTime.now(), double.parse(value)),
                           );
+
                         },
                       ),
                     ),

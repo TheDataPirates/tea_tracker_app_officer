@@ -1387,7 +1387,10 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       drierInWeight: drying.drierInWeight,
       drierOutWeight: drying.drierOutWeight,
       time: DateTime.now(),
+      outturn: drying.outturn,
     );
+//    print('Outturn');
+//    print(newDrierItem.outturn);
     const url = 'http://10.0.2.2:8080/rolling/drying';
     try {
       final response = await http.patch(
@@ -1403,6 +1406,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
           'dhoolNumber': newDrierItem.dhoolNumber.toString(),
           'drierInWeight': newDrierItem.drierInWeight,
           'drierOutWeight': newDrierItem.drierOutWeight,
+          'outturn': newDrierItem.outturn,
         }),
       );
       if (response.statusCode == 200) {
@@ -1539,6 +1543,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   }
 
   double batchOutturn(int batchNum, DateTime dateTime) {
+//    print("Inside Outturn fuunc");
+//    print(batchNum);
     double totOutturn = 0;
     double totIn = 0;
     double totOut = 0;
@@ -1571,6 +1577,39 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
           (dryingItem.time.day == dateTime.day)) {
         if (dryingItem.batchNumber == batchNum) {
           totOut += dryingItem.drierOutWeight;
+        }
+      }
+    });
+    totOutturn = (totOut / totIn) * 100.0;
+    return totOutturn;
+  }
+
+  double batchOutturnWithDrierWeight(int batchNum, DateTime dateTime, double drierOutWeight) {
+//    print("Inside Outturn fuunc");
+//    print(batchNum);
+    double totOutturn = 0;
+    double totIn = 0;
+    double totOut = drierOutWeight;
+    int batchTrough = 0;
+    int batchBox = 0;
+    _witheringUnloadingItems.forEach((witheringUnloading) {
+      if ((witheringUnloading.date.year == dateTime.year) &&
+          (witheringUnloading.date.month == dateTime.month) &&
+          (witheringUnloading.date.day == dateTime.day)) {
+        if (witheringUnloading.batchNumber == batchNum) {
+          batchTrough = witheringUnloading.troughNumber;
+          batchBox = witheringUnloading.boxNumber;
+          _troughLoadingItems.forEach((troughLoading) {
+            if ((troughLoading.date.year == dateTime.year) &&
+                (troughLoading.date.month == dateTime.month) &&
+                ((troughLoading.date.day == dateTime.day) ||
+                    (troughLoading.date.day == dateTime.day - 1))) {
+              if (troughLoading.troughNumber == batchTrough &&
+                  troughLoading.boxNumber == batchBox) {
+                totIn += troughLoading.netWeight;
+              }
+            }
+          });
         }
       }
     });

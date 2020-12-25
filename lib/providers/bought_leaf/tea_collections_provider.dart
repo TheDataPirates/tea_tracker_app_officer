@@ -159,36 +159,48 @@ class TeaCollections with ChangeNotifier {
         {
           contDeducts = 0.5 * noOfCont;
           gweight = (gweight - contDeducts).toInt();
+          double deductDouble = ((gweight * deductPercnt) / 100) + (0.5 * noOfCont);
+          lotTotDeduct = deductDouble.toInt();
+          return deductDouble.toInt();
         }
         break;
       case 'B':
         {
           contDeducts = 0.75 * noOfCont;
           gweight = (gweight - contDeducts).toInt();
+          double deductDouble = ((gweight * deductPercnt) / 100) + (0.75 * noOfCont);
+          lotTotDeduct = deductDouble.toInt();
+          return deductDouble.toInt();
         }
         break;
       case 'C':
         {
           contDeducts = 1.0 * noOfCont;
           gweight = (gweight - contDeducts).toInt();
+          double deductDouble = ((gweight * deductPercnt) / 100) + (1.0 * noOfCont);
+          lotTotDeduct = deductDouble.toInt();
+          return deductDouble.toInt();
         }
         break;
       case 'D':
         {
           contDeducts = 1.25 * noOfCont;
           gweight = (gweight - contDeducts).toInt();
+          double deductDouble = ((gweight * deductPercnt) / 100) + (1.25 * noOfCont);
+          lotTotDeduct = deductDouble.toInt();
+          return deductDouble.toInt();
         }
         break;
       case 'E':
         {
           contDeducts = 0.0 * noOfCont;
           gweight = (gweight - contDeducts).toInt();
+          double deductDouble = ((gweight * deductPercnt) / 100) + (0.0 * noOfCont);
+          lotTotDeduct = deductDouble.toInt();
+          return deductDouble.toInt();
         }
         break;
     }
-    double deductDouble = ((gweight * deductPercnt) / 100);
-    lotTotDeduct = deductDouble.toInt();
-    return deductDouble.toInt();
   }
 
   int calNetWeight(int gWeight) {
@@ -201,7 +213,6 @@ class TeaCollections with ChangeNotifier {
     try {
       int total = 0;
       lot_items.forEach((item) => total += item.deductions);
-      print(total);
       return total;
     } catch (e) {
       print(e);
