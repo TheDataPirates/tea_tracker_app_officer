@@ -236,7 +236,9 @@ class TeaCollections with ChangeNotifier {
         body: jsonEncode(<String, dynamic>{
           'bulk_id': Bulkid,
           'user_id': userId,
-          'supplier_id': supId
+          'supplier_id': supId,
+          'method': 'Original',
+          'date': getCurrentDate(),
         }),
       );
       print(response.statusCode);
