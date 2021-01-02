@@ -16,7 +16,8 @@ class TeaCollections with ChangeNotifier {
     return [..._lot_items];
   }
 
-  int Bulkid = Random().nextInt(100000000);
+  int Bulkid;
+  int reportId;
   int lotTotDeduct;
 
   Supplier _newSupplier;
@@ -220,9 +221,13 @@ class TeaCollections with ChangeNotifier {
   }
 
   Future<void> verifySupplier(
-      String supId, String supName, String authToken, String userId) async {
+      String supId, String supName, String authToken, String userId, String method) async {
     //when use async await whole func wrap into future. so no need to must return.
     const url = 'http://10.0.2.2:8080/bleaf/bulk';
+    const url2 = 'http://10.0.2.2:8080/diff/dreport';
+
+    Bulkid = Random().nextInt(100000000);
+    reportId = Random().nextInt(100000000);
 
     try {
       final response = await http.post(
@@ -237,7 +242,7 @@ class TeaCollections with ChangeNotifier {
           'bulk_id': Bulkid,
           'user_id': userId,
           'supplier_id': supId,
-          'method': 'Original',
+          'method': method,
           'date': getCurrentDate(),
         }),
       );
@@ -248,6 +253,21 @@ class TeaCollections with ChangeNotifier {
       } else if (response.statusCode == 200) {
         // respond okay. without having else part this future not return anything, not worked calling placed.
         _newSupplier = Supplier(supId, supName);
+
+        final response = await http.post(
+          //
+          //creates a bulk record on the mysql
+          url2,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer $authToken'
+          },
+          body: jsonEncode(<String, dynamic>{
+            'report_id': reportId,
+            'bulk_id': Bulkid,
+          }),
+        );
+
       }
     } catch (err) {
       print(err);

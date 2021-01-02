@@ -51,7 +51,7 @@ class _ReMeasuringScreen extends State<ReMeasuring> {
       try {
         await Provider.of<TeaCollections>(context, listen: false)
             .verifySupplier(supplierNoEditingController.text,
-            supplierNameEditingController.text, token, user);
+            supplierNameEditingController.text, token, user, "Remeasuring");
         print('bulk saved');
         Navigator.of(context).pushNamed('ReInputcollectionScreen');
       } catch (error) {

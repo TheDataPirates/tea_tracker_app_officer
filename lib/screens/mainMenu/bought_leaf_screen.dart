@@ -51,7 +51,7 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
       try {
         await Provider.of<TeaCollections>(context, listen: false)
             .verifySupplier(supplierNoEditingController.text,
-                supplierNameEditingController.text, token, user);
+                supplierNameEditingController.text, token, user, "OfficerOriginal");
         print('bulk saved');
         Navigator.of(context).pushNamed('InputCollectionScreen');
       } catch (error) {

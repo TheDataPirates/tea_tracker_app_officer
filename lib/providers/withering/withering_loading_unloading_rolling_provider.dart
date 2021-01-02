@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
+import 'package:teatrackerappofficer/providers/difference_report/difference_report.dart';
 import 'package:teatrackerappofficer/providers/rolling/big_bulk.dart';
 import 'package:teatrackerappofficer/providers/rolling/drying.dart';
 import 'package:teatrackerappofficer/providers/rolling/fermenting.dart';
@@ -1615,5 +1616,65 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     });
     totOutturn = (totOut / totIn) * 100.0;
     return totOutturn;
+  }
+
+
+//----------------Difference Report -------------------
+
+  List<DifferenceReport> _differenceReportItems = [];
+
+  List<DifferenceReport> get differenceReportItems {
+    return [..._differenceReportItems];
+  }
+
+  int get differenceReportItemsCount {
+    return _differenceReportItems.length;
+  }
+
+  Future<void> fetchAndSetDifferenceReportItem(String authToken) async {
+    _differenceReportItems = [];
+    const url = 'http://10.0.2.2:8080/diff/dreports';
+    const url2 = 'http://10.0.2.2:8080/diff/dreport';
+    try {
+
+      final response = await http.patch(
+        url2,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+        body: jsonEncode(<String, dynamic>{
+
+        }),
+      );
+      if (response.statusCode == 200) {
+        final dataList = await http.get(
+          url,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer $authToken'
+          },
+        );
+        final extractedDataList = jsonDecode(dataList.body);
+//      print(extractedDataList);
+        List differenceReport = extractedDataList['dreports'];
+        print(differenceReport);
+        for (var i in differenceReport) {
+          _differenceReportItems.add(
+            DifferenceReport(
+              reportId: i['report_id'].toString(),
+              originalWeight: double.parse(i['original_weight'].toString()),
+              remeasuringWeight: double.parse(i['remeasuring_weight'].toString()),
+              weightDifference: double.parse(i['weight_difference'].toString()),
+            ),
+          );
+        }
+        notifyListeners();
+      } else {
+        throw Exception('Failed ');
+      }
+    } catch (error) {
+      throw error;
+    }
   }
 }
