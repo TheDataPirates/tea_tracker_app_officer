@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/batch.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/widgets/withering_unloading_item.dart';
@@ -15,10 +16,13 @@ class _WitheringUnloadingViewScreenState extends State<WitheringUnloadingViewScr
 
   var _batch = Batch(id: null, batchNumber: null, batchWeight: null, time: null);
 
-  void _saveBatchWeightAndNavigate (){
+ Future<void>_saveBatchWeightAndNavigate() async{
+
+    final authToken = Provider.of<Auth>(context, listen: false).token;
 
     Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
-        .addBatchItem(_batch);
+        .addBatchItem(_batch,authToken);
+
 
 //    print(_batch.batchNumber);
 //    print(_batch.batchWeight);
@@ -44,7 +48,7 @@ class _WitheringUnloadingViewScreenState extends State<WitheringUnloadingViewScr
                   batchWeight: witheringLoadingUnloading.latestBatchTotalWeight,
                   time: DateTime.now(),
               );
-
+//              print('Entering Save function of batch');
               _saveBatchWeightAndNavigate();
             },
             disabledColor: Colors.white,

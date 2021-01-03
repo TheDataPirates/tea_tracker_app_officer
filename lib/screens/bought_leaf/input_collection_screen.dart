@@ -139,73 +139,77 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                       errorStyle: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w700),
-                                      contentPadding: const EdgeInsets.symmetric(
-                                          vertical: 40.0),
-                                      labelStyle: kInputScreenContainerDisplayText,
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              vertical: 40.0),
+                                      labelStyle:
+                                          kInputScreenContainerDisplayText,
                                       enabledBorder: kEnabledBorder2,
                                       focusedBorder: kFocusedBorder2,
-                                      focusedErrorBorder:  kFocusedErrorBorder2,
+                                      focusedErrorBorder: kFocusedErrorBorder2,
                                       errorBorder: kErrorBorder2,
                                     ),
 
-                                  style: TextStyle(
-                                      fontSize: 40,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
-                                  // initialValue:
+                                    style: TextStyle(
+                                        fontSize: 40,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                    // initialValue:
 
-                                  validators: [
-                                    FormBuilderValidators.required(),
-                                    // ignore: missing_retur
-                                  ],
-                                  items: ['A', 'B', 'C', 'D', 'E']
-                                      .map((container) => DropdownMenuItem(
-                                          value: container,
-                                          child: Text("$container")))
-                                      .toList(),
-                                  onSaved: (value) {
-                                    _editedLot = Lot(
-                                      container_type: value,
-                                      no_of_containers:
-                                          _editedLot.no_of_containers,
-                                      gross_weight: _editedLot.gross_weight,
-                                      leaf_grade: _editedLot.leaf_grade,
-                                      water: _editedLot.water,
-                                      course_leaf: _editedLot.course_leaf,
-                                      other: _editedLot.other,
-                                    );
-                                  },
+                                    validators: [
+                                      FormBuilderValidators.required(),
+                                      // ignore: missing_retur
+                                    ],
+                                    items: ['A', 'B', 'C', 'D', 'E']
+                                        .map((container) => DropdownMenuItem(
+                                            value: container,
+                                            child: Text("$container")))
+                                        .toList(),
+                                    onSaved: (value) {
+                                      _editedLot = Lot(
+                                        container_type: value,
+                                        no_of_containers:
+                                            _editedLot.no_of_containers,
+                                        gross_weight: _editedLot.gross_weight,
+                                        leaf_grade: _editedLot.leaf_grade,
+                                        water: _editedLot.water,
+                                        course_leaf: _editedLot.course_leaf,
+                                        other: _editedLot.other,
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              width: mediaQuery.width * 0.005,
-                            ),
-                            Card(
-                              elevation: 10,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(13.0),
+                              SizedBox(
+                                width: mediaQuery.width * 0.005,
                               ),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.green,
-                                  borderRadius: BorderRadius.circular(13),
+                              Card(
+                                elevation: 10,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(13.0),
                                 ),
-                                width: mediaQuery.width * width,
-                                child: FormBuilderDropdown(
-                                  attribute: "No of Containers",
-                                  decoration: InputDecoration(
-                                    labelText: "No of Containers",
-                                    errorStyle: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                        vertical: 40.0),
-                                    labelStyle: kInputScreenContainerDisplayText,
-                                    enabledBorder: kEnabledBorder2,
-                                    focusedBorder: kFocusedBorder2,
-                                    focusedErrorBorder:  kFocusedErrorBorder2,
-                                    errorBorder: kErrorBorder2,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.circular(13),
+                                  ),
+                                  width: mediaQuery.width * width,
+                                  child: FormBuilderDropdown(
+                                    attribute: "No of Containers",
+                                    decoration: InputDecoration(
+                                      labelText: "No of Containers",
+                                      errorStyle: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w700),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              vertical: 40.0),
+                                      labelStyle:
+                                          kInputScreenContainerDisplayText,
+                                      enabledBorder: kEnabledBorder2,
+                                      focusedBorder: kFocusedBorder2,
+                                      focusedErrorBorder: kFocusedErrorBorder2,
+                                      errorBorder: kErrorBorder2,
                                     ),
                                     style: TextStyle(
                                         fontSize: 40,
@@ -223,7 +227,8 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                         .toList(),
                                     onSaved: (value) {
                                       _editedLot = Lot(
-                                        container_type: _editedLot.container_type,
+                                        container_type:
+                                            _editedLot.container_type,
                                         no_of_containers: int.parse(value),
                                         gross_weight: _editedLot.gross_weight,
                                         leaf_grade: _editedLot.leaf_grade,
@@ -234,26 +239,6 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                     },
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                width: mediaQuery.width * 0.005,
-                              ),
-                              InputField(
-                                labelText: '  Gross weight',
-                                width: width,
-                                validator: [FormBuilderValidators.required()],
-                                onSave: (value) {
-                                  _editedLot = Lot(
-                                    container_type: _editedLot.container_type,
-                                    no_of_containers: _editedLot.no_of_containers,
-                                    gross_weight: int.parse(value),
-                                    leaf_grade: _editedLot.leaf_grade,
-                                    water: _editedLot.water,
-                                    course_leaf: _editedLot.course_leaf,
-                                    other: _editedLot.other,
-                                  );
-                                },
-                                keytype: TextInputType.number,
                               ),
                               SizedBox(
                                 width: mediaQuery.width * 0.005,
@@ -273,15 +258,17 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                     attribute: "Grade of GL",
                                     decoration: InputDecoration(
                                       labelText: "  Grade of GL",
-                                      labelStyle: kInputScreenContainerDisplayText,
+                                      labelStyle:
+                                          kInputScreenContainerDisplayText,
                                       errorStyle: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w700),
-                                      contentPadding: const EdgeInsets.symmetric(
-                                          vertical: 40.0),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              vertical: 40.0),
                                       enabledBorder: kEnabledBorder2,
                                       focusedBorder: kFocusedBorder2,
-                                      focusedErrorBorder:  kFocusedErrorBorder2,
+                                      focusedErrorBorder: kFocusedErrorBorder2,
                                       errorBorder: kErrorBorder2,
                                     ),
                                     style: TextStyle(
@@ -298,7 +285,8 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                         .toList(),
                                     onSaved: (value) {
                                       _editedLot = Lot(
-                                        container_type: _editedLot.container_type,
+                                        container_type:
+                                            _editedLot.container_type,
                                         no_of_containers:
                                             _editedLot.no_of_containers,
                                         gross_weight: _editedLot.gross_weight,
@@ -310,6 +298,27 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                     },
                                   ),
                                 ),
+                              ),
+                              SizedBox(
+                                width: mediaQuery.width * 0.005,
+                              ),
+                              InputField(
+                                labelText: '  Gross weight',
+                                width: width,
+                                validator: [FormBuilderValidators.required()],
+                                onSave: (value) {
+                                  _editedLot = Lot(
+                                    container_type: _editedLot.container_type,
+                                    no_of_containers:
+                                        _editedLot.no_of_containers,
+                                    gross_weight: int.parse(value),
+                                    leaf_grade: _editedLot.leaf_grade,
+                                    water: _editedLot.water,
+                                    course_leaf: _editedLot.course_leaf,
+                                    other: _editedLot.other,
+                                  );
+                                },
+                                keytype: TextInputType.number,
                               ),
                               SizedBox(
                                 width: mediaQuery.width * 0.005,
@@ -416,7 +425,10 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                 height: mediaQuery.height * 0.05,
                 child: RaisedButton.icon(
                   onPressed: saveLot,
-                  icon: const Icon(Icons.add, color: Colors.white,),
+                  icon: const Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  ),
                   label: const Text(
                     'SAVE',
                     style: const TextStyle(fontSize: 20, color: Colors.white),

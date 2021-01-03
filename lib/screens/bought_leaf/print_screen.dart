@@ -69,23 +69,24 @@ class _PrintScreenState extends State<PrintScreen> {
                 ),
               ),
             ),
-            /*Container(
+            Container(
               child: Text(
                 'DEDUCTIONS',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 15,
+                  color: Colors.white,
                 ),
               ),
-            ),*/
+            ),
             Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 20.0, horizontal: 40.0),
               child: Container(
                 height: mediaQuery.height * 0.2,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
                       width: mediaQuery.width * 0.2,
@@ -104,10 +105,9 @@ class _PrintScreenState extends State<PrintScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 400,),
                     Text(
-                      'Total deductions: ',
-                      style: TextStyle(color: Colors.white, fontSize: 35),
+                      'Total deductions',
+                      style: TextStyle(color: Colors.white, fontSize: 35, fontStyle: FontStyle.italic),
                     ),
                     // SizedBox(width: 0.05,),
                     Container(
