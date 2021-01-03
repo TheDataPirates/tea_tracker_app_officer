@@ -46,7 +46,7 @@ class _FermentingViewScreenState extends State<FermentingViewScreen> {
               : Consumer<WitheringLoadingUnloadingRollingProvider>(
                   child: Center(
                     child: const Text(
-                        'Got no Withering roll breaking items found yet, start adding some!'),
+                        'Got no Withering roll breaking items found yet, start adding some!', style: kEmptyViewText,),
                   ),
                   builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
                       WitheringLoadingUnloadingRollingProvider

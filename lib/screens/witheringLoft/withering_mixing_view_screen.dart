@@ -40,7 +40,7 @@ class WitheringMixingViewScreen extends StatelessWidget {
                   : Consumer<WitheringLoadingUnloadingRollingProvider>(
                       child: Center(
                         child: const Text(
-                            'Got no Withering mixing items found yet, start adding some!'),
+                            'Got no Withering mixing items found yet, start adding some!', style: kEmptyViewText,),
                       ),
                       builder: (ctx, WitheringMixingProvider, ch) =>
                           WitheringMixingProvider.witheringMixingItems.length <= 0
