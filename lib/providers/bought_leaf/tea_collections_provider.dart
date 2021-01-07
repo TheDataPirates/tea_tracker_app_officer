@@ -160,7 +160,8 @@ class TeaCollections with ChangeNotifier {
         {
           contDeducts = 0.5 * noOfCont;
           gweight = (gweight - contDeducts).toInt();
-          double deductDouble = ((gweight * deductPercnt) / 100) + (0.5 * noOfCont);
+          double deductDouble =
+              ((gweight * deductPercnt) / 100) + (0.5 * noOfCont);
           lotTotDeduct = deductDouble.toInt();
           return deductDouble.toInt();
         }
@@ -169,7 +170,8 @@ class TeaCollections with ChangeNotifier {
         {
           contDeducts = 0.75 * noOfCont;
           gweight = (gweight - contDeducts).toInt();
-          double deductDouble = ((gweight * deductPercnt) / 100) + (0.75 * noOfCont);
+          double deductDouble =
+              ((gweight * deductPercnt) / 100) + (0.75 * noOfCont);
           lotTotDeduct = deductDouble.toInt();
           return deductDouble.toInt();
         }
@@ -178,7 +180,8 @@ class TeaCollections with ChangeNotifier {
         {
           contDeducts = 1.0 * noOfCont;
           gweight = (gweight - contDeducts).toInt();
-          double deductDouble = ((gweight * deductPercnt) / 100) + (1.0 * noOfCont);
+          double deductDouble =
+              ((gweight * deductPercnt) / 100) + (1.0 * noOfCont);
           lotTotDeduct = deductDouble.toInt();
           return deductDouble.toInt();
         }
@@ -187,7 +190,8 @@ class TeaCollections with ChangeNotifier {
         {
           contDeducts = 1.25 * noOfCont;
           gweight = (gweight - contDeducts).toInt();
-          double deductDouble = ((gweight * deductPercnt) / 100) + (1.25 * noOfCont);
+          double deductDouble =
+              ((gweight * deductPercnt) / 100) + (1.25 * noOfCont);
           lotTotDeduct = deductDouble.toInt();
           return deductDouble.toInt();
         }
@@ -196,7 +200,8 @@ class TeaCollections with ChangeNotifier {
         {
           contDeducts = 0.0 * noOfCont;
           gweight = (gweight - contDeducts).toInt();
-          double deductDouble = ((gweight * deductPercnt) / 100) + (0.0 * noOfCont);
+          double deductDouble =
+              ((gweight * deductPercnt) / 100) + (0.0 * noOfCont);
           lotTotDeduct = deductDouble.toInt();
           return deductDouble.toInt();
         }
@@ -220,8 +225,8 @@ class TeaCollections with ChangeNotifier {
     }
   }
 
-  Future<void> verifySupplier(
-      String supId, String supName, String authToken, String userId, String method) async {
+  Future<void> verifySupplier(String supId, String supName, String authToken,
+      String userId, String method) async {
     //when use async await whole func wrap into future. so no need to must return.
     const url = 'http://10.0.2.2:8080/bleaf/bulk';
     const url2 = 'http://10.0.2.2:8080/diff/dreport';
@@ -246,15 +251,31 @@ class TeaCollections with ChangeNotifier {
           'date': getCurrentDate(),
         }),
       );
-      print(response.statusCode);
+
       if (response.statusCode == 500 || response.statusCode == 404) {
         // check whether server sent bad respond
         throw Exception('Failed ');
-      } else if (response.statusCode == 200 && method == 'Remeasuring') {
+      } else if (response.statusCode == 200 && method == 'OfficerOriginal') {
         // respond okay. without having else part this future not return anything, not worked calling placed.
         _newSupplier = Supplier(supId, supName);
 
-        final response = await http.post(
+        // await http.post(
+        //   //
+        //   //creates a bulk record on the mysql
+        //   url2,
+        //   headers: <String, String>{
+        //     'Content-Type': 'application/json; charset=UTF-8',
+        //     'Authorization': 'Bearer $authToken'
+        //   },
+        //   body: jsonEncode(<String, dynamic>{
+        //     'report_id': reportId,
+        //     'bulk_id': Bulkid,
+        //   }),
+        // );
+      } else if (response.statusCode == 200 && method == 'Remeasuring') {
+        _newSupplier = Supplier(supId, supName);
+
+        await http.post(
           //
           //creates a bulk record on the mysql
           url2,
@@ -267,7 +288,6 @@ class TeaCollections with ChangeNotifier {
             'bulk_id': Bulkid,
           }),
         );
-
       }
     } catch (err) {
       print(err);
