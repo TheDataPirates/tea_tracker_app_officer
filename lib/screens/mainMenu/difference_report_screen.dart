@@ -24,7 +24,7 @@ class _DifferenceReportScreenState extends State<DifferenceReportScreen> {
             icon: const Icon(Icons.check),
             onPressed: () {
 //              Navigator.of(context).pushNamed('MainMenu');
-              Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
+              Navigator.of(context).pop();
             },
             disabledColor: Colors.white,
             iconSize: 35.0,
@@ -37,40 +37,50 @@ class _DifferenceReportScreenState extends State<DifferenceReportScreen> {
         ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-              listen: false)
+                  listen: false)
               .fetchAndSetDifferenceReportItem(token),
-          builder: (ctx, snapshot) => snapshot.connectionState ==
-              ConnectionState.waiting
-              ? Center(
-            child: CircularProgressIndicator(),
-          )
-              : Consumer<WitheringLoadingUnloadingRollingProvider>(
-            child: Center(
-              child: const Text(
-                  'No difference report items.'),
-            ),
-            builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
-            WitheringLoadingUnloadingRollingProvider
-                .differenceReportItems.length <=
-                0
-                ? ch
-                : ListView.builder(
-              itemCount: WitheringLoadingUnloadingRollingProvider
-                  .differenceReportItems.length,
-              itemBuilder: (ctx, i) => DifferenceReportItem(
-                reportId: WitheringLoadingUnloadingRollingProvider
-                    .differenceReportItems[i].reportId,
-                originalWeight:
-                WitheringLoadingUnloadingRollingProvider
-                    .differenceReportItems[i].originalWeight,
-                remeasuringWeight:
-                WitheringLoadingUnloadingRollingProvider
-                    .differenceReportItems[i].remeasuringWeight,
-                weightDifference: WitheringLoadingUnloadingRollingProvider
-                    .differenceReportItems[i].weightDifference,
-              ),
-            ),
-          ),
+          builder: (ctx, snapshot) =>
+              snapshot.connectionState == ConnectionState.waiting
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Consumer<WitheringLoadingUnloadingRollingProvider>(
+                      child: Center(
+                        child: const Text('No difference report items.'),
+                      ),
+                      builder: (ctx, WitheringLoadingUnloadingRollingProvider,
+                              ch) =>
+                          WitheringLoadingUnloadingRollingProvider
+                                      .differenceReportItems.length <=
+                                  0
+                              ? ch
+                              : ListView.builder(
+                                  itemCount:
+                                      WitheringLoadingUnloadingRollingProvider
+                                          .differenceReportItems.length,
+                                  itemBuilder: (ctx, i) => DifferenceReportItem(
+                                    reportId:
+                                        WitheringLoadingUnloadingRollingProvider
+                                            .differenceReportItems[i].reportId,
+                                    originalWeight:
+                                        WitheringLoadingUnloadingRollingProvider
+                                            .differenceReportItems[i]
+                                            .originalWeight,
+                                    remeasuringWeight:
+                                        WitheringLoadingUnloadingRollingProvider
+                                            .differenceReportItems[i]
+                                            .remeasuringWeight,
+                                    weightDifference:
+                                        WitheringLoadingUnloadingRollingProvider
+                                            .differenceReportItems[i]
+                                            .weightDifference,
+                                    supplierId:
+                                        WitheringLoadingUnloadingRollingProvider
+                                            .differenceReportItems[i]
+                                            .supplierId,
+                                  ),
+                                ),
+                    ),
         ),
       ),
       floatingActionButton: Container(

@@ -20,6 +20,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   //----------------Withering Starting-------------------
 
   List<WitheringStartingFinishing> _witheringStartingItems = [];
+
   List<WitheringStartingFinishing> get witheringStartingItems {
     return [..._witheringStartingItems];
   }
@@ -119,6 +120,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   //----------------Withering Mixing-------------------
 
   List<WitheringMixing> _witheringMixingItems = [];
+
   List<WitheringMixing> get witheringMixingItems {
     return [..._witheringMixingItems];
   }
@@ -246,6 +248,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   //--------------------------- Withering Finishing ----------------------
 
   List<WitheringStartingFinishing> _witheringFinishingItems = [];
+
   List<WitheringStartingFinishing> get witheringFinishingItems {
     return [..._witheringFinishingItems];
   }
@@ -668,22 +671,37 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       print(loadedLots);
 //      loadedLots = [];
       for (var i in loadedLots) {
-        var TNum = i['BoxBoxId'].toString();
-        var T_Num = TNum[1];
-        var BNum = i['BoxBoxId'].toString();
-        var B_Num = BNum[3];
+        if (i['BoxBoxId'] == null) {
+          _troughLoadingItems.add(
+            WitheringLoading(
+              id: i['lot_id'].toString(),
+              lotId: i['lot_id'].toString(),
+              troughNumber: 0,
+              date: DateTime.now(),
+              netWeight: double.parse(i['net_weight'].toString()),
+              boxNumber: 0,
+              gradeOfGL: i['grade_GL'].toString(),
+            ),
+          );
+        } else {
+          var TNum = i['BoxBoxId'].toString();
+          var T_Num = TNum[1];
+          var BNum = i['BoxBoxId'].toString();
+          var B_Num = BNum[3];
 
-        _troughLoadingItems.add(
-          WitheringLoading(
-            id: i['lot_id'].toString(),
-            lotId: i['lot_id'].toString(),
-            troughNumber: int.parse(T_Num),
-            date: DateTime.now(),
-            netWeight: double.parse(i['net_weight'].toString()),
-            boxNumber: int.parse(B_Num),
-            gradeOfGL: i['grade_GL'].toString(),
-          ),
-        );
+          _troughLoadingItems.add(
+            WitheringLoading(
+              id: i['lot_id'].toString(),
+              lotId: i['lot_id'].toString(),
+              troughNumber: int.parse(T_Num),
+              date: DateTime.now(),
+              netWeight: double.parse(i['net_weight'].toString()),
+              boxNumber: int.parse(B_Num),
+              gradeOfGL: i['grade_GL'].toString(),
+            ),
+          );
+        }
+
 //        print(i);
       }
 //      print(troughLoadingItemCount);
@@ -718,19 +736,29 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   bool isTroughBoxLeafGradeCorrect(
       int troughNumber, int boxNumber, String leafGrade, DateTime dateTime) {
+    // print('Trough Loading Items');
+
     bool value = false;
     int troughBoxCount = 0;
     if (_troughLoadingItems.length == 0) {
       value = true;
     } else {
       _troughLoadingItems.forEach((troughLoadingItems) {
+        print(troughLoadingItems.date);
         if ((troughLoadingItems.date.year == dateTime.year) &&
             (troughLoadingItems.date.month == dateTime.month) &&
             (troughLoadingItems.date.day == dateTime.day)) {
           if (troughLoadingItems.troughNumber == troughNumber &&
               troughLoadingItems.boxNumber == boxNumber) {
+            // print(troughLoadingItems.troughNumber);
+            // print(troughLoadingItems.boxNumber);
+            // print('Existing grade');
+            // print(troughLoadingItems.gradeOfGL);
+            // print('Input grade');
+            // print(leafGrade);
             troughBoxCount++;
             if (troughLoadingItems.gradeOfGL == leafGrade) {
+              // print(troughLoadingItems.gradeOfGL);
               value = true;
             }
           }
@@ -896,7 +924,6 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   Rolling findByIdOutput(String id) {
     return _rollingOutputItems.firstWhere((rolling) => rolling.id == id);
   }
-
 
   Future<void> addRollingOutputItem(Rolling rolling, String authToken) async {
     final newRollingOutputItem = Rolling(
@@ -1141,7 +1168,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
             id: i['id'] as String,
             batchNumber: int.parse(i['BatchBatchNo'].toString()),
             time: DateTime.parse(i['rb_out_time']),
-            rollBreakerNumber: int.parse(i['RollBreakerRollBreakerId'].toString()),
+            rollBreakerNumber:
+                int.parse(i['RollBreakerRollBreakerId'].toString()),
             rollBreakingTurn: int.parse(i['rolling_turn'].toString()),
             weight: double.parse(i['dhool_out_weight'].toString()),
           ),
@@ -1379,8 +1407,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return _dryingItems.firstWhere((drying) => drying.id == id);
   }
 
-  Future<void> addDryingItem(
-      Drying drying, String authToken) async {
+  Future<void> addDryingItem(Drying drying, String authToken) async {
     final newDrierItem = Drying(
       id: DateTime.now().toString(),
       batchNumber: drying.batchNumber,
@@ -1585,7 +1612,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return totOutturn;
   }
 
-  double batchOutturnWithDrierWeight(int batchNum, DateTime dateTime, double drierOutWeight) {
+  double batchOutturnWithDrierWeight(
+      int batchNum, DateTime dateTime, double drierOutWeight) {
 //    print("Inside Outturn fuunc");
 //    print(batchNum);
     double totOutturn = 0;
@@ -1618,7 +1646,6 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return totOutturn;
   }
 
-
 //----------------Difference Report -------------------
 
   List<DifferenceReport> _differenceReportItems = [];
@@ -1636,16 +1663,13 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     const url = 'http://10.0.2.2:8080/diff/dreports';
     const url2 = 'http://10.0.2.2:8080/diff/dreport';
     try {
-
       final response = await http.patch(
         url2,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $authToken'
         },
-        body: jsonEncode(<String, dynamic>{
-
-        }),
+        body: jsonEncode(<String, dynamic>{}),
       );
       if (response.statusCode == 200) {
         final dataList = await http.get(
@@ -1664,8 +1688,10 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
             DifferenceReport(
               reportId: i['report_id'].toString(),
               originalWeight: double.parse(i['original_weight'].toString()),
-              remeasuringWeight: double.parse(i['remeasuring_weight'].toString()),
+              remeasuringWeight:
+                  double.parse(i['remeasuring_weight'].toString()),
               weightDifference: double.parse(i['weight_difference'].toString()),
+              supplierId: i['supplier_id'].toString(),
             ),
           );
         }

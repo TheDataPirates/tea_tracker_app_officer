@@ -7,13 +7,14 @@ import 'package:teatrackerappofficer/providers/withering/withering_loading_unloa
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/constants.dart';
 
-
 class RemeasureTroughLoadingScreen extends StatefulWidget {
   @override
-  _RemeasureTroughLoadingScreenState createState() => _RemeasureTroughLoadingScreenState();
+  _RemeasureTroughLoadingScreenState createState() =>
+      _RemeasureTroughLoadingScreenState();
 }
 
-class _RemeasureTroughLoadingScreenState extends State<RemeasureTroughLoadingScreen> {
+class _RemeasureTroughLoadingScreenState
+    extends State<RemeasureTroughLoadingScreen> {
   final _formKeyTroughLoading = GlobalKey<FormState>();
   var _troughLoading = WitheringLoading(
     id: null,
@@ -25,7 +26,7 @@ class _RemeasureTroughLoadingScreenState extends State<RemeasureTroughLoadingScr
     lotId: null,
   );
 
-  Future<void> _saveTroughArrangementDetails() async {
+  Future<void> _saveTroughArrangementDetails(String leafGrade) async {
     //int troughN, int boxN, String leafG
 
     final authToken = Provider.of<Auth>(context, listen: false).token;
@@ -36,9 +37,9 @@ class _RemeasureTroughLoadingScreenState extends State<RemeasureTroughLoadingScr
     }
 
     if (Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-        listen: false)
+            listen: false)
         .isTroughBoxEnded(int.parse(_troughNum.text), int.parse(_boxNum.text),
-        DateTime.now())) {
+            DateTime.now())) {
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
@@ -70,9 +71,9 @@ class _RemeasureTroughLoadingScreenState extends State<RemeasureTroughLoadingScr
 //    print(batchNo);
 //    return;
     } else if (!Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-        listen: false)
+            listen: false)
         .isTroughBoxLeafGradeCorrect(int.parse(_troughNum.text),
-        int.parse(_boxNum.text), _leafGrade.text, DateTime.now())) {
+            int.parse(_boxNum.text), leafGrade, DateTime.now())) {
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
@@ -106,7 +107,7 @@ class _RemeasureTroughLoadingScreenState extends State<RemeasureTroughLoadingScr
       _formKeyTroughLoading.currentState.save();
       try {
         await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-            listen: false)
+                listen: false)
             .addTroughLoadingItem(_troughLoading, authToken);
 
         Navigator.of(context).pushNamed('RemeasureTroughLoadingViewScreen');
@@ -141,25 +142,21 @@ class _RemeasureTroughLoadingScreenState extends State<RemeasureTroughLoadingScr
         );
       }
     }
-
-
   }
 
   final _troughNum = TextEditingController();
   final _boxNum = TextEditingController();
-  final _leafGrade = TextEditingController();
 
   void dispose() {
     _troughNum.dispose();
     _boxNum.dispose();
-    _leafGrade.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final tea_collection_provider =
-    Provider.of<TeaCollections>(context, listen: false);
+        Provider.of<TeaCollections>(context, listen: false);
     final _height =
         MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
 
@@ -172,7 +169,9 @@ class _RemeasureTroughLoadingScreenState extends State<RemeasureTroughLoadingScr
           IconButton(
             icon: const Icon(Icons.check),
             onPressed: () {
-              _saveTroughArrangementDetails(); //int.parse(_troughNum.text), int.parse(_boxNum.text), _leafGrade.text
+              _saveTroughArrangementDetails(tea_collection_provider
+                  .lastLotNumberItem
+                  .leaf_grade); //int.parse(_troughNum.text), int.parse(_boxNum.text), _leafGrade.text
             },
             disabledColor: Colors.white,
             iconSize: 35.0,
@@ -288,7 +287,7 @@ class _RemeasureTroughLoadingScreenState extends State<RemeasureTroughLoadingScr
                                 .toDouble(),
                             date: null,
                             lotId:
-                            tea_collection_provider.lastLotNumberItem.lotId,
+                                tea_collection_provider.lastLotNumberItem.lotId,
                           );
                         },
                       ),

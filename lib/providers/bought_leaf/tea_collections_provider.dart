@@ -89,7 +89,7 @@ class TeaCollections with ChangeNotifier {
 
   Future<void> fetchAndSetLotData(
       String id, String date, String authToken) async {
-    const url = 'http://10.0.2.2:8080/bleaf/lots';
+    final url = 'http://10.0.2.2:8080/bleaf/lots/$Bulkid';
     _lot_items = [];
     try {
       final dataList = await http.get(
@@ -286,6 +286,7 @@ class TeaCollections with ChangeNotifier {
           body: jsonEncode(<String, dynamic>{
             'report_id': reportId,
             'bulk_id': Bulkid,
+            'supplier_id': supId,
           }),
         );
       }
