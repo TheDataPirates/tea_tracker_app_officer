@@ -41,7 +41,7 @@ class WitheringFinishingViewScreen extends StatelessWidget {
               : Consumer<WitheringLoadingUnloadingRollingProvider>(
                   child: Center(
                     child: const Text(
-                        'Got no Withering finishing items found yet, start adding some!'),
+                        'Got no Withering finishing items found yet, start adding some!', style: kEmptyViewText,),
                   ),
                   builder: (ctx, WitheringStartingFinishingProvider, ch) =>
                       WitheringStartingFinishingProvider

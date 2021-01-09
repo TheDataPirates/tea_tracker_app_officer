@@ -132,7 +132,7 @@ class _WitheringUnloadingBatchChoosingScreenState
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
                         style: const TextStyle(
-                            fontSize: 30.0, fontWeight: FontWeight.bold),
+                            fontSize: 30.0, fontWeight: FontWeight.bold, color:kTextInputColor),
                         validator: (value) {
 //                        batchNum = int.parse(value);
                           if (value.isEmpty) {

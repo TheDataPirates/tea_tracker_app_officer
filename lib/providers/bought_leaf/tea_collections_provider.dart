@@ -219,6 +219,7 @@ class TeaCollections with ChangeNotifier {
     try {
       int total = 0;
       lot_items.forEach((item) => total += item.deductions);
+      print(total);
       return total;
     } catch (e) {
       print(e);

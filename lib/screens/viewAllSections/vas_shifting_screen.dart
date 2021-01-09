@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:teatrackerappofficer/constants.dart';
 
-class VasShiftingScreen extends StatelessWidget {
+class VasShiftingScreen extends StatefulWidget {
+  @override
+  _VasShiftingScreenState createState() => _VasShiftingScreenState();
+}
+
+class _VasShiftingScreenState extends State<VasShiftingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -170,7 +170,7 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
                         style: const TextStyle(
-                            fontSize: 30.0, fontWeight: FontWeight.bold),
+                            fontSize: 30.0, fontWeight: FontWeight.bold, color:kTextInputColor),
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please Enter Trough Number !';
@@ -216,7 +216,7 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
                         style: const TextStyle(
-                            fontSize: 30.0, fontWeight: FontWeight.bold),
+                            fontSize: 30.0, fontWeight: FontWeight.bold, color:kTextInputColor),
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please Enter Box Number !';
@@ -257,7 +257,7 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
                         style: const TextStyle(
-                            fontSize: 30.0, fontWeight: FontWeight.bold),
+                            fontSize: 30.0, fontWeight: FontWeight.bold, color:kTextInputColor),
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please Enter Lot Weight !';

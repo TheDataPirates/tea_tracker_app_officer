@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:teatrackerappofficer/constants.dart';
 
-class VasDispatchingScreen extends StatelessWidget {
+class VasDispatchingScreen extends StatefulWidget {
+  @override
+  _VasDispatchingScreenState createState() => _VasDispatchingScreenState();
+}
+
+class _VasDispatchingScreenState extends State<VasDispatchingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

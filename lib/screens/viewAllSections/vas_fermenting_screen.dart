@@ -1,3 +1,4 @@
+//VasFermentingScreen
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
@@ -20,56 +21,51 @@ class _VasFermentingScreenState extends State<VasFermentingScreen> {
         title: const Text('Fermenting View'),
       ),
       body: Container(
-        decoration: BoxDecoration(gradient: kUIGradient),
+        decoration: BoxDecoration(
+          gradient: kUIGradient,
+        ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-                  listen: false)
+              listen: false)
               .fetchAndSetFermentingItem(token),
-          builder: (ctx, snapshot) =>
-              snapshot.connectionState == ConnectionState.waiting
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : Consumer<WitheringLoadingUnloadingRollingProvider>(
-                      child: Center(
-                        child: const Text(
-                          'Got no fermenting items!',
-                          style: kEmptyViewText,
-                        ),
-                      ),
-                      builder:
-                          (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
-                              WitheringLoadingUnloadingRollingProvider
-                                          .fermentingItems.length <=
-                                      0
-                                  ? ch
-                                  : ListView.builder(
-                                      itemCount:
-                                          WitheringLoadingUnloadingRollingProvider
-                                              .fermentingItems.length,
-                                      itemBuilder: (ctx, i) => FermentingItem(
-                                        id: WitheringLoadingUnloadingRollingProvider
-                                            .fermentingItems[i].id,
-                                        batchNumber:
-                                            WitheringLoadingUnloadingRollingProvider
-                                                .fermentingItems[i].batchNumber,
-                                        dhoolNumber:
-                                            WitheringLoadingUnloadingRollingProvider
-                                                .fermentingItems[i].dhoolNumber,
-                                        time:
-                                            WitheringLoadingUnloadingRollingProvider
-                                                .fermentingItems[i].time,
-                                        dhoolInWeight:
-                                            WitheringLoadingUnloadingRollingProvider
-                                                .fermentingItems[i]
-                                                .dhoolInWeight,
-                                        dhoolOutWeight:
-                                            WitheringLoadingUnloadingRollingProvider
-                                                .fermentingItems[i]
-                                                .dhoolOutWeight,
-                                      ),
-                                    ),
-                    ),
+          builder: (ctx, snapshot) => snapshot.connectionState ==
+              ConnectionState.waiting
+              ? Center(
+            child: CircularProgressIndicator(),
+          )
+              : Consumer<WitheringLoadingUnloadingRollingProvider>(
+            child: Center(
+              child: const Text(
+                  'Got no Withering roll breaking items found yet, start adding some!', style: kEmptyViewText,),
+            ),
+            builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
+            WitheringLoadingUnloadingRollingProvider
+                .fermentingItems.length <=
+                0
+                ? ch
+                : ListView.builder(
+              itemCount: WitheringLoadingUnloadingRollingProvider
+                  .fermentingItems.length,
+              itemBuilder: (ctx, i) => FermentingItem(
+                id: WitheringLoadingUnloadingRollingProvider
+                    .fermentingItems[i].id,
+                batchNumber:
+                WitheringLoadingUnloadingRollingProvider
+                    .fermentingItems[i].batchNumber,
+                dhoolNumber:
+                WitheringLoadingUnloadingRollingProvider
+                    .fermentingItems[i].dhoolNumber,
+                time: WitheringLoadingUnloadingRollingProvider
+                    .fermentingItems[i].time,
+                dhoolInWeight:
+                WitheringLoadingUnloadingRollingProvider
+                    .fermentingItems[i].dhoolInWeight,
+                dhoolOutWeight:
+                WitheringLoadingUnloadingRollingProvider
+                    .fermentingItems[i].dhoolOutWeight,
+              ),
+            ),
+          ),
         ),
       ),
     );

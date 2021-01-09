@@ -5,7 +5,12 @@ import 'package:teatrackerappofficer/providers/withering/withering_loading_unloa
 import 'package:teatrackerappofficer/widgets/roll_breaking_item.dart';
 import 'package:teatrackerappofficer/constants.dart';
 
-class VasRollBreakingScreen extends StatelessWidget {
+class VasRollBreakingScreen extends StatefulWidget {
+  @override
+  _VasRollBreakingScreenState createState() => _VasRollBreakingScreenState();
+}
+
+class _VasRollBreakingScreenState extends State<VasRollBreakingScreen> {
   @override
   Widget build(BuildContext context) {
     final rollBreaking = Provider.of<WitheringLoadingUnloadingRollingProvider>(
