@@ -46,7 +46,7 @@ class _RollingOutputViewScreenState extends State<RollingOutputViewScreen> {
               : Consumer<WitheringLoadingUnloadingRollingProvider>(
             child: Center(
               child: const Text(
-                  'Got no rolling items found yet, start adding some!', style: kEmptyViewText,),
+                  'Got no rolling items found yet, start adding some!'),
             ),
             builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
             WitheringLoadingUnloadingRollingProvider

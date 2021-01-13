@@ -48,7 +48,7 @@ class _DrierOutputViewScreenState extends State<DrierOutputViewScreen> {
               : Consumer<WitheringLoadingUnloadingRollingProvider>(
             child: Center(
               child: const Text(
-                  'Got no drying items found yet, start adding some!', style: kEmptyViewText,),
+                  'Got no drying items found yet, start adding some!'),
             ),
             builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
             WitheringLoadingUnloadingRollingProvider

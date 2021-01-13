@@ -411,7 +411,6 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
                         style: const TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold,
-                          color:kTextInputColor,
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
@@ -468,7 +467,6 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
                         style: const TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold,
-                          color:kTextInputColor,
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
@@ -525,7 +523,6 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
                         style: const TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold,
-                          color:kTextInputColor,
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
