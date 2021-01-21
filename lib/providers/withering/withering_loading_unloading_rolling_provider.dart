@@ -15,6 +15,7 @@ import 'package:teatrackerappofficer/providers/withering/withering_mixing.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_starting_finishing.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_unloading.dart';
 import 'package:http/http.dart' as http;
+import 'package:teatrackerappofficer/constants.dart';
 
 class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   //----------------Withering Starting-------------------
@@ -42,7 +43,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         time: DateTime.now(),
         temperature: witheringStarting.temperature,
         humidity: witheringStarting.humidity);
-    const url = 'http://10.0.2.2:8080/loft/starting';
+    const url = '$kURL/loft/starting';
 
     try {
       final response = await http.post(
@@ -73,7 +74,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   Future<void> fetchAndSetWitheringStartingItem(String authToken) async {
     _witheringStartingItems = [];
-    const url = 'http://10.0.2.2:8080/loft/startings';
+    const url = '$kURL/loft/startings';
     try {
       final dataList = await http.get(
         url,
@@ -135,7 +136,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   Future<void> addWitheringMixingItem(
       WitheringMixing witheringMixing, String authToken) async {
-    const url = 'http://10.0.2.2:8080/loft/mixing';
+    const url = '$kURL/loft/mixing';
     final newWitheringMixingItem = WitheringMixing(
         id: DateTime.now().toString(),
         troughNumber: witheringMixing.troughNumber,
@@ -172,7 +173,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   Future<void> fetchAndSetWitheringMixingItem(String authToken) async {
     _witheringMixingItems = [];
-    const url = 'http://10.0.2.2:8080/loft/mixings';
+    const url = '$kURL/loft/mixings';
     try {
       final dataList = await http.get(
         url,
@@ -270,7 +271,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         time: DateTime.now(),
         temperature: witheringFinishing.temperature,
         humidity: witheringFinishing.humidity);
-    const url = 'http://10.0.2.2:8080/loft/finishing';
+    const url = '$kURL/loft/finishing';
     try {
       final response = await http.post(
         url,
@@ -300,7 +301,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   Future<void> fetchAndSetWitheringFinishingItem(String authToken) async {
     _witheringFinishingItems = [];
-    const url = 'http://10.0.2.2:8080/loft/finishings';
+    const url = '$kURL/loft/finishings';
     try {
       final dataList = await http.get(
         url,
@@ -361,7 +362,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       batchWeight: batch.batchWeight,
       time: DateTime.now(),
     );
-    const url = 'http://10.0.2.2:8080/loft/batch';
+    const url = '$kURL/loft/batch';
 
     try {
       final response = await http.post(
@@ -391,7 +392,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   Future<void> fetchAndSetBatchItem(String authToken) async {
     _batchItems = [];
-    const url = 'http://10.0.2.2:8080/loft/batches';
+    const url = '$kURL/loft/batches';
     try {
       final dataList = await http.get(
         url,
@@ -621,7 +622,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       lotId: troughLoading.lotId,
       date: DateTime.now(),
     );
-    const url = 'http://10.0.2.2:8080/loft/loading';
+    const url = '$kURL/loft/loading';
     print(troughLoading.lotId);
 
     try {
@@ -656,7 +657,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     _troughLoadingItems = [];
 //    print('empty list');
 //    print(troughLoadingItemCount);
-    const url = 'http://10.0.2.2:8080/loft/loadings';
+    const url = '$kURL/loft/loadings';
     try {
       final dataList = await http.get(
         url,
@@ -838,7 +839,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       bigBulkWeight: bigBulk.bigBulkWeight,
       time: DateTime.now(),
     );
-    const url = 'http://10.0.2.2:8080/rolling/rbreaking';
+    const url = '$kURL/rolling/rbreaking';
     try {
       final response = await http.patch(
         url,
@@ -935,7 +936,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       weightOut: rolling.weightOut,
       time: DateTime.now(),
     );
-    const url = 'http://10.0.2.2:8080/rolling/rolling';
+    const url = '$kURL/rolling/rolling';
     try {
       final response = await http.post(
         url,
@@ -966,7 +967,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   Future<void> fetchAndSetRollingOutputItem(String authToken) async {
     _rollingOutputItems = [];
-    const url = 'http://10.0.2.2:8080/rolling/rollings';
+    const url = '$kURL/rolling/rollings';
     try {
       final dataList = await http.get(
         url,
@@ -1119,7 +1120,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       weight: rollBreaking.weight,
       time: DateTime.now(),
     );
-    const url = 'http://10.0.2.2:8080/rolling/rbreaking';
+    const url = '$kURL/rolling/rbreaking';
     try {
       final response = await http.patch(
         url,
@@ -1149,7 +1150,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   Future<void> fetchAndSetWitheringRollBreakingItem(String authToken) async {
     _rollBreakingItems = [];
-    const url = 'http://10.0.2.2:8080/rolling/rbreakings';
+    const url = '$kURL/rolling/rbreakings';
     try {
       final dataList = await http.get(
         url,
@@ -1252,7 +1253,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       dhoolOutWeight: fermenting.dhoolOutWeight,
       time: DateTime.now(),
     );
-    const url = 'http://10.0.2.2:8080/rolling/fermenting';
+    const url = '$kURL/rolling/fermenting';
     try {
       final response = await http.patch(
         url,
@@ -1282,7 +1283,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   Future<void> fetchAndSetFermentingItem(String authToken) async {
     _fermentingItems = [];
-    const url = 'http://10.0.2.2:8080/rolling/fermentings';
+    const url = '$kURL/rolling/fermentings';
     try {
       final dataList = await http.get(
         url,
@@ -1419,7 +1420,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     );
 //    print('Outturn');
 //    print(newDrierItem.outturn);
-    const url = 'http://10.0.2.2:8080/rolling/drying';
+    const url = '$kURL/rolling/drying';
     try {
       final response = await http.patch(
         url,
@@ -1450,7 +1451,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   Future<void> fetchAndSetDryingItem(String authToken) async {
     _dryingItems = [];
-    const url = 'http://10.0.2.2:8080/rolling/dryings';
+    const url = '$kURL/rolling/dryings';
     try {
       final dataList = await http.get(
         url,
