@@ -20,7 +20,7 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
     final auth = Provider.of<Auth>(context, listen: false);
     String token = auth.token;
     String user = auth.user_id;
-    if (supplierNoEditingController.text.isEmpty ||
+    if (supplierNoEditingController.text.isEmpty &&
         supplierNameEditingController.text.isEmpty) {
       await showDialog<void>(
         context: context,
@@ -50,8 +50,12 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
     } else {
       try {
         await Provider.of<TeaCollections>(context, listen: false)
-            .verifySupplier(supplierNoEditingController.text,
-                supplierNameEditingController.text, token, user, "OfficerOriginal");
+            .verifySupplier(
+                supplierNoEditingController.text,
+                supplierNameEditingController.text,
+                token,
+                user,
+                "OfficerOriginal");
         print('bulk saved');
         Navigator.of(context).pushNamed('InputCollectionScreen');
       } catch (error) {
@@ -95,8 +99,8 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
           children: [
             Expanded(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 40.0),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 10.0, horizontal: 40.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -106,7 +110,8 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
                       child: TextField(
                         controller: supplierNoEditingController,
                         obscureText: false,
-                        style: const TextStyle(fontSize: 40.0, color:kTextInputColor),
+                        style: const TextStyle(
+                            fontSize: 40.0, color: kTextInputColor),
                         decoration: InputDecoration(
                           labelText: "Supplier No :",
                           labelStyle: kSupplierTextFormFieldText,
@@ -118,8 +123,8 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
                           //   borderRadius: const BorderRadius.all(
                           //     Radius.circular(40.0),
                           //   ),
-                          ),
                         ),
+                      ),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.1,
@@ -128,7 +133,8 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
                       width: MediaQuery.of(context).size.width * 0.5,
                       child: TextField(
                         controller: supplierNameEditingController,
-                        style: const TextStyle(fontSize: 40.0, color:kTextInputColor),
+                        style: const TextStyle(
+                            fontSize: 40.0, color: kTextInputColor),
                         decoration: InputDecoration(
                           contentPadding:
                               EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -150,7 +156,10 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
                 onPressed: () {
                   submit();
                 },
-                icon: Icon(Icons.add, color: Colors.white,),
+                icon: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
                 label: const Text(
                   'SUBMIT',
                   style: const TextStyle(fontSize: 20, color: Colors.white),
