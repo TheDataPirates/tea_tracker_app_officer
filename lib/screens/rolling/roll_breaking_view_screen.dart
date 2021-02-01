@@ -21,12 +21,15 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
 
   Future<void> _saveBigBulkDetails(String token) async {
     try {
+
+      print(_bigBulk.bigBulkNumber);
+      print(_bigBulk.bigBulkWeight);
+
       await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
               listen: false)
           .addBigBulkItem(_bigBulk, token);
 
-      print(_bigBulk.bigBulkNumber);
-      print(_bigBulk.bigBulkWeight);
+
 
 //      Navigator.of(context).pushNamed('MainMenu');
       Navigator.popUntil(context, ModalRoute.withName('MainMenu'));

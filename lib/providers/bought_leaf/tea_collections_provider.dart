@@ -218,7 +218,7 @@ class TeaCollections with ChangeNotifier {
     try {
       int total = 0;
       lot_items.forEach((item) => total += item.deductions);
-      print(total);
+//      print(total);
       return total;
     } catch (e) {
       print(e);
@@ -236,9 +236,10 @@ class TeaCollections with ChangeNotifier {
     var response;
     try {
       if (supId.isNotEmpty) {
-        supName = null;
+//        supName = null;
+        var _supName = null;
         final dataList = await http.get(
-          'http://10.0.2.2:8080/supp/supplier/$supId/$supName',
+          'http://10.0.2.2:8080/supp/supplier/$supId/$_supName',
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             'Authorization': 'Bearer $authToken'
@@ -248,25 +249,30 @@ class TeaCollections with ChangeNotifier {
         final extractedDataList = jsonDecode(dataList.body);
         print(extractedDataList);
         List suppliers = extractedDataList['supplier'];
-        if (suppliers.length != 0) {
-          response = await http.post(
-            //
-            //creates a bulk record on the mysql
-            url,
-            headers: <String, String>{
-              'Content-Type': 'application/json; charset=UTF-8',
-              'Authorization': 'Bearer $authToken'
-            },
-            body: jsonEncode(<String, dynamic>{
-              'bulk_id': Bulkid,
-              'user_id': userId,
-              'supplier_id': supId,
-              'method': method,
-              'date': getCurrentDate(),
-            }),
-          );
-        } else {
-          throw Exception('Failed ');
+//        print('dajcn');
+        if (suppliers[0]['name'] == supName || supName.isEmpty) {
+          if (suppliers.length != 0) {
+            response = await http.post(
+              //
+              //creates a bulk record on the mysql
+              url,
+              headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+                'Authorization': 'Bearer $authToken'
+              },
+              body: jsonEncode(<String, dynamic>{
+                'bulk_id': Bulkid,
+                'user_id': userId,
+                'supplier_id': supId,
+                'method': method,
+                'date': getCurrentDate(),
+              }),
+            );
+          } else {
+            throw Exception('Failed ');
+          }
+        }else{
+          throw Exception('Name is not matched.');
         }
       } else if (supName.isNotEmpty) {
         supId = null;
@@ -281,7 +287,11 @@ class TeaCollections with ChangeNotifier {
         final extractedDataList = jsonDecode(dataList.body);
         print(extractedDataList);
         List suppliers = extractedDataList['supplier'];
+
+
+
         if (suppliers.length != 0) {
+          supId = suppliers[0]['supplier_id'];
           response = await http.post(
             //
             //creates a bulk record on the mysql

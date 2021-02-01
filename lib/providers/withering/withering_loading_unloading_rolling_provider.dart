@@ -985,11 +985,11 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
           Rolling(
             id: i['id'] as String,
             batchNumber: int.parse(i['BatchBatchNo'].toString()),
-            time: DateTime.parse(i['rolling_out_time']),
-            rollerNumber: int.parse(i['RollerRollerId'].toString()),
-            rollingTurn: int.parse(i['rolling_turn'].toString()),
-            weightIn: double.parse(i['rolling_in_kg'].toString()),
-            weightOut: double.parse(i['rolling_out_kg'].toString()),
+            time: i['rolling_out_time'] == null ? DateTime.now(): DateTime.parse(i['rolling_out_time']),
+            rollerNumber: i['RollerRollerId'] == null ? 0 : int.parse(i['RollerRollerId'].toString()),
+            rollingTurn: i['rolling_turn'].toString() == 'BB' ? 'BB' : int.parse(i['rolling_turn'].toString()),
+            weightIn: i['rolling_in_kg'] == null ? 0 : double.parse(i['rolling_in_kg'].toString()),
+            weightOut: i['rolling_out_kg'] == null ? 0 : double.parse(i['rolling_out_kg'].toString()),
           ),
         );
       }
