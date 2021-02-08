@@ -5,10 +5,9 @@ import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart
 import 'package:teatrackerappofficer/providers/bought_leaf/tea_collections_provider.dart';
 import 'package:teatrackerappofficer/constants.dart';
 
-
 class ReMeasuring extends StatefulWidget {
   @override
-  _ReMeasuringScreen  createState() =>  _ReMeasuringScreen();
+  _ReMeasuringScreen createState() => _ReMeasuringScreen();
 }
 
 class _ReMeasuringScreen extends State<ReMeasuring> {
@@ -20,7 +19,7 @@ class _ReMeasuringScreen extends State<ReMeasuring> {
     final auth = Provider.of<Auth>(context, listen: false);
     String token = auth.token;
     String user = auth.user_id;
-    if (supplierNoEditingController.text.isEmpty ||
+    if (supplierNoEditingController.text.isEmpty &&
         supplierNameEditingController.text.isEmpty) {
       await showDialog<void>(
         context: context,
@@ -51,7 +50,7 @@ class _ReMeasuringScreen extends State<ReMeasuring> {
       try {
         await Provider.of<TeaCollections>(context, listen: false)
             .verifySupplier(supplierNoEditingController.text,
-            supplierNameEditingController.text, token, user, "Remeasuring");
+                supplierNameEditingController.text, token, user, "Remeasuring");
         print('bulk saved');
         Navigator.of(context).pushNamed('ReInputcollectionScreen');
       } catch (error) {
@@ -95,8 +94,8 @@ class _ReMeasuringScreen extends State<ReMeasuring> {
           children: [
             Expanded(
               child: Padding(
-                padding:
-                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 40.0),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 10.0, horizontal: 40.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -111,7 +110,7 @@ class _ReMeasuringScreen extends State<ReMeasuring> {
                           labelText: "Supplier No :",
                           labelStyle: kSupplierTextFormFieldText,
                           contentPadding:
-                          EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                              EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           enabledBorder: kEnabledBorder,
                           focusedBorder: kFocusedBorder,
                           // border: OutlineInputBorder(
@@ -131,7 +130,7 @@ class _ReMeasuringScreen extends State<ReMeasuring> {
                         style: const TextStyle(fontSize: 40.0),
                         decoration: InputDecoration(
                           contentPadding:
-                          EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                              EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           labelText: "Supplier Name :",
                           labelStyle: kSupplierTextFormFieldText,
                           enabledBorder: kEnabledBorder,
@@ -150,7 +149,10 @@ class _ReMeasuringScreen extends State<ReMeasuring> {
                 onPressed: () {
                   submit();
                 },
-                icon: Icon(Icons.add, color: Colors.white,),
+                icon: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
                 label: const Text(
                   'SUBMIT',
                   style: const TextStyle(fontSize: 20, color: Colors.white),
@@ -165,5 +167,3 @@ class _ReMeasuringScreen extends State<ReMeasuring> {
     );
   }
 }
-
-
