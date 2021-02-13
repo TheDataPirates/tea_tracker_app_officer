@@ -1,10 +1,8 @@
-import 'dart:ffi';
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
 import './lot.dart';
 import './supplier.dart';
 import 'package:date_format/date_format.dart';
@@ -16,10 +14,12 @@ class TeaCollections with ChangeNotifier {
     return [..._lot_items];
   }
 
-  int Bulkid = Random().nextInt(100000000);
+  int Bulkid;
+  int reportId;
   int lotTotDeduct;
 
   Supplier _newSupplier;
+
 //  = Supplier("unknown",
 //      "unknown"); //set default value otherwise throws exception cant find supplierID
 
@@ -88,7 +88,7 @@ class TeaCollections with ChangeNotifier {
 
   Future<void> fetchAndSetLotData(
       String id, String date, String authToken) async {
-    const url = 'http://10.0.2.2:8080/bleaf/lots';
+    final url = 'http://10.0.2.2:8080/bleaf/lots/$Bulkid';
     _lot_items = [];
     try {
       final dataList = await http.get(
@@ -159,7 +159,8 @@ class TeaCollections with ChangeNotifier {
         {
           contDeducts = 0.5 * noOfCont;
           gweight = (gweight - contDeducts).toInt();
-          double deductDouble = ((gweight * deductPercnt) / 100) + (0.5 * noOfCont);
+          double deductDouble =
+              ((gweight * deductPercnt) / 100) + (0.5 * noOfCont);
           lotTotDeduct = deductDouble.toInt();
           return deductDouble.toInt();
         }
@@ -168,7 +169,8 @@ class TeaCollections with ChangeNotifier {
         {
           contDeducts = 0.75 * noOfCont;
           gweight = (gweight - contDeducts).toInt();
-          double deductDouble = ((gweight * deductPercnt) / 100) + (0.75 * noOfCont);
+          double deductDouble =
+              ((gweight * deductPercnt) / 100) + (0.75 * noOfCont);
           lotTotDeduct = deductDouble.toInt();
           return deductDouble.toInt();
         }
@@ -177,7 +179,8 @@ class TeaCollections with ChangeNotifier {
         {
           contDeducts = 1.0 * noOfCont;
           gweight = (gweight - contDeducts).toInt();
-          double deductDouble = ((gweight * deductPercnt) / 100) + (1.0 * noOfCont);
+          double deductDouble =
+              ((gweight * deductPercnt) / 100) + (1.0 * noOfCont);
           lotTotDeduct = deductDouble.toInt();
           return deductDouble.toInt();
         }
@@ -186,7 +189,8 @@ class TeaCollections with ChangeNotifier {
         {
           contDeducts = 1.25 * noOfCont;
           gweight = (gweight - contDeducts).toInt();
-          double deductDouble = ((gweight * deductPercnt) / 100) + (1.25 * noOfCont);
+          double deductDouble =
+              ((gweight * deductPercnt) / 100) + (1.25 * noOfCont);
           lotTotDeduct = deductDouble.toInt();
           return deductDouble.toInt();
         }
@@ -195,7 +199,8 @@ class TeaCollections with ChangeNotifier {
         {
           contDeducts = 0.0 * noOfCont;
           gweight = (gweight - contDeducts).toInt();
-          double deductDouble = ((gweight * deductPercnt) / 100) + (0.0 * noOfCont);
+          double deductDouble =
+              ((gweight * deductPercnt) / 100) + (0.0 * noOfCont);
           lotTotDeduct = deductDouble.toInt();
           return deductDouble.toInt();
         }
@@ -213,41 +218,124 @@ class TeaCollections with ChangeNotifier {
     try {
       int total = 0;
       lot_items.forEach((item) => total += item.deductions);
+//      print(total);
       return total;
     } catch (e) {
       print(e);
     }
   }
 
-  Future<void> verifySupplier(
-      String supId, String supName, String authToken, String userId) async {
+  Future<void> verifySupplier(String supId, String supName, String authToken,
+      String userId, String method) async {
     //when use async await whole func wrap into future. so no need to must return.
     const url = 'http://10.0.2.2:8080/bleaf/bulk';
+    const url2 = 'http://10.0.2.2:8080/diff/dreport';
 
+    Bulkid = Random().nextInt(100000000);
+    reportId = Random().nextInt(100000000);
+    var response;
     try {
-      final response = await http.post(
-        //
-        //creates a bulk record on the mysql
-        url,
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer $authToken'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'bulk_id': Bulkid,
-          'user_id': userId,
-          'supplier_id': supId,
-          'method': 'Original',
-          'date': getCurrentDate(),
-        }),
-      );
-      print(response.statusCode);
+      if (supId.isNotEmpty) {
+//        supName = null;
+        var _supName = null;
+        final dataList = await http.get(
+          'http://10.0.2.2:8080/supp/supplier/$supId/$_supName',
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer $authToken'
+          },
+        );
+
+        final extractedDataList = jsonDecode(dataList.body);
+        print(extractedDataList);
+        List suppliers = extractedDataList['supplier'];
+//        print('dajcn');
+        if (suppliers[0]['name'] == supName || supName.isEmpty) {
+          if (suppliers.length != 0) {
+            response = await http.post(
+              //
+              //creates a bulk record on the mysql
+              url,
+              headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+                'Authorization': 'Bearer $authToken'
+              },
+              body: jsonEncode(<String, dynamic>{
+                'bulk_id': Bulkid,
+                'user_id': userId,
+                'supplier_id': supId,
+                'method': method,
+                'date': getCurrentDate(),
+              }),
+            );
+          } else {
+            throw Exception('Failed ');
+          }
+        }else{
+          throw Exception('Name is not matched.');
+        }
+      } else if (supName.isNotEmpty) {
+        supId = null;
+        final dataList = await http.get(
+          'http://10.0.2.2:8080/supp/supplier/$supId/$supName',
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer $authToken'
+          },
+        );
+
+        final extractedDataList = jsonDecode(dataList.body);
+        print(extractedDataList);
+        List suppliers = extractedDataList['supplier'];
+
+
+
+        if (suppliers.length != 0) {
+          supId = suppliers[0]['supplier_id'];
+          response = await http.post(
+            //
+            //creates a bulk record on the mysql
+            url,
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+              'Authorization': 'Bearer $authToken'
+            },
+            body: jsonEncode(<String, dynamic>{
+              'bulk_id': Bulkid,
+              'user_id': userId,
+              'supplier_id': supId,
+              'method': method,
+              'date': getCurrentDate(),
+            }),
+          );
+        } else {
+          throw Exception('Failed ');
+        }
+      }
+
       if (response.statusCode == 500 || response.statusCode == 404) {
         // check whether server sent bad respond
         throw Exception('Failed ');
-      } else if (response.statusCode == 200) {
+      } else if (response.statusCode == 200 && method == 'OfficerOriginal') {
         // respond okay. without having else part this future not return anything, not worked calling placed.
         _newSupplier = Supplier(supId, supName);
+      } else if (response.statusCode == 200 && method == 'Remeasuring') {
+        _newSupplier = Supplier(supId, supName);
+
+        await http.post(
+          //
+          //creates a bulk record on the mysql
+          url2,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer $authToken'
+          },
+          body: jsonEncode(<String, dynamic>{
+            'report_id': reportId,
+            'bulk_id': Bulkid,
+            'supplier_id': supId,
+          }),
+        );
       }
     } catch (err) {
       print(err);

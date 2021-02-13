@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
+import 'package:teatrackerappofficer/providers/difference_report/difference_report.dart';
 import 'package:teatrackerappofficer/providers/rolling/big_bulk.dart';
 import 'package:teatrackerappofficer/providers/rolling/drying.dart';
 import 'package:teatrackerappofficer/providers/rolling/fermenting.dart';
@@ -14,11 +15,13 @@ import 'package:teatrackerappofficer/providers/withering/withering_mixing.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_starting_finishing.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_unloading.dart';
 import 'package:http/http.dart' as http;
+import 'package:teatrackerappofficer/constants.dart';
 
 class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   //----------------Withering Starting-------------------
 
   List<WitheringStartingFinishing> _witheringStartingItems = [];
+
   List<WitheringStartingFinishing> get witheringStartingItems {
     return [..._witheringStartingItems];
   }
@@ -40,7 +43,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         time: DateTime.now(),
         temperature: witheringStarting.temperature,
         humidity: witheringStarting.humidity);
-    const url = 'http://10.0.2.2:8080/loft/starting';
+    const url = '$kURL/loft/starting';
 
     try {
       final response = await http.post(
@@ -71,7 +74,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   Future<void> fetchAndSetWitheringStartingItem(String authToken) async {
     _witheringStartingItems = [];
-    const url = 'http://10.0.2.2:8080/loft/startings';
+    const url = '$kURL/loft/startings';
     try {
       final dataList = await http.get(
         url,
@@ -118,6 +121,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   //----------------Withering Mixing-------------------
 
   List<WitheringMixing> _witheringMixingItems = [];
+
   List<WitheringMixing> get witheringMixingItems {
     return [..._witheringMixingItems];
   }
@@ -132,7 +136,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   Future<void> addWitheringMixingItem(
       WitheringMixing witheringMixing, String authToken) async {
-    const url = 'http://10.0.2.2:8080/loft/mixing';
+    const url = '$kURL/loft/mixing';
     final newWitheringMixingItem = WitheringMixing(
         id: DateTime.now().toString(),
         troughNumber: witheringMixing.troughNumber,
@@ -169,7 +173,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   Future<void> fetchAndSetWitheringMixingItem(String authToken) async {
     _witheringMixingItems = [];
-    const url = 'http://10.0.2.2:8080/loft/mixings';
+    const url = '$kURL/loft/mixings';
     try {
       final dataList = await http.get(
         url,
@@ -245,6 +249,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   //--------------------------- Withering Finishing ----------------------
 
   List<WitheringStartingFinishing> _witheringFinishingItems = [];
+
   List<WitheringStartingFinishing> get witheringFinishingItems {
     return [..._witheringFinishingItems];
   }
@@ -266,7 +271,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         time: DateTime.now(),
         temperature: witheringFinishing.temperature,
         humidity: witheringFinishing.humidity);
-    const url = 'http://10.0.2.2:8080/loft/finishing';
+    const url = '$kURL/loft/finishing';
     try {
       final response = await http.post(
         url,
@@ -296,7 +301,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   Future<void> fetchAndSetWitheringFinishingItem(String authToken) async {
     _witheringFinishingItems = [];
-    const url = 'http://10.0.2.2:8080/loft/finishings';
+    const url = '$kURL/loft/finishings';
     try {
       final dataList = await http.get(
         url,
@@ -357,7 +362,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       batchWeight: batch.batchWeight,
       time: DateTime.now(),
     );
-    const url = 'http://10.0.2.2:8080/loft/batch';
+    const url = '$kURL/loft/batch';
 
     try {
       final response = await http.post(
@@ -387,7 +392,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   Future<void> fetchAndSetBatchItem(String authToken) async {
     _batchItems = [];
-    const url = 'http://10.0.2.2:8080/loft/batches';
+    const url = '$kURL/loft/batches';
     try {
       final dataList = await http.get(
         url,
@@ -617,7 +622,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       lotId: troughLoading.lotId,
       date: DateTime.now(),
     );
-    const url = 'http://10.0.2.2:8080/loft/loading';
+    const url = '$kURL/loft/loading';
     print(troughLoading.lotId);
 
     try {
@@ -652,7 +657,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     _troughLoadingItems = [];
 //    print('empty list');
 //    print(troughLoadingItemCount);
-    const url = 'http://10.0.2.2:8080/loft/loadings';
+    const url = '$kURL/loft/loadings';
     try {
       final dataList = await http.get(
         url,
@@ -667,22 +672,37 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       print(loadedLots);
 //      loadedLots = [];
       for (var i in loadedLots) {
-        var TNum = i['BoxBoxId'].toString();
-        var T_Num = TNum[1];
-        var BNum = i['BoxBoxId'].toString();
-        var B_Num = BNum[3];
+        if (i['BoxBoxId'] == null) {
+          _troughLoadingItems.add(
+            WitheringLoading(
+              id: i['lot_id'].toString(),
+              lotId: i['lot_id'].toString(),
+              troughNumber: 0,
+              date: DateTime.now(),
+              netWeight: double.parse(i['net_weight'].toString()),
+              boxNumber: 0,
+              gradeOfGL: i['grade_GL'].toString(),
+            ),
+          );
+        } else {
+          var TNum = i['BoxBoxId'].toString();
+          var T_Num = TNum[1];
+          var BNum = i['BoxBoxId'].toString();
+          var B_Num = BNum[3];
 
-        _troughLoadingItems.add(
-          WitheringLoading(
-            id: i['lot_id'].toString(),
-            lotId: i['lot_id'].toString(),
-            troughNumber: int.parse(T_Num),
-            date: DateTime.now(),
-            netWeight: double.parse(i['net_weight'].toString()),
-            boxNumber: int.parse(B_Num),
-            gradeOfGL: i['grade_GL'].toString(),
-          ),
-        );
+          _troughLoadingItems.add(
+            WitheringLoading(
+              id: i['lot_id'].toString(),
+              lotId: i['lot_id'].toString(),
+              troughNumber: int.parse(T_Num),
+              date: DateTime.now(),
+              netWeight: double.parse(i['net_weight'].toString()),
+              boxNumber: int.parse(B_Num),
+              gradeOfGL: i['grade_GL'].toString(),
+            ),
+          );
+        }
+
 //        print(i);
       }
 //      print(troughLoadingItemCount);
@@ -717,19 +737,29 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   bool isTroughBoxLeafGradeCorrect(
       int troughNumber, int boxNumber, String leafGrade, DateTime dateTime) {
+    // print('Trough Loading Items');
+
     bool value = false;
     int troughBoxCount = 0;
     if (_troughLoadingItems.length == 0) {
       value = true;
     } else {
       _troughLoadingItems.forEach((troughLoadingItems) {
+        print(troughLoadingItems.date);
         if ((troughLoadingItems.date.year == dateTime.year) &&
             (troughLoadingItems.date.month == dateTime.month) &&
             (troughLoadingItems.date.day == dateTime.day)) {
           if (troughLoadingItems.troughNumber == troughNumber &&
               troughLoadingItems.boxNumber == boxNumber) {
+            // print(troughLoadingItems.troughNumber);
+            // print(troughLoadingItems.boxNumber);
+            // print('Existing grade');
+            // print(troughLoadingItems.gradeOfGL);
+            // print('Input grade');
+            // print(leafGrade);
             troughBoxCount++;
             if (troughLoadingItems.gradeOfGL == leafGrade) {
+              // print(troughLoadingItems.gradeOfGL);
               value = true;
             }
           }
@@ -809,7 +839,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       bigBulkWeight: bigBulk.bigBulkWeight,
       time: DateTime.now(),
     );
-    const url = 'http://10.0.2.2:8080/rolling/rbreaking';
+    const url = '$kURL/rolling/rbreaking';
     try {
       final response = await http.patch(
         url,
@@ -896,7 +926,6 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return _rollingOutputItems.firstWhere((rolling) => rolling.id == id);
   }
 
-
   Future<void> addRollingOutputItem(Rolling rolling, String authToken) async {
     final newRollingOutputItem = Rolling(
       id: DateTime.now().toString(),
@@ -907,7 +936,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       weightOut: rolling.weightOut,
       time: DateTime.now(),
     );
-    const url = 'http://10.0.2.2:8080/rolling/rolling';
+    const url = '$kURL/rolling/rolling';
     try {
       final response = await http.post(
         url,
@@ -938,7 +967,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   Future<void> fetchAndSetRollingOutputItem(String authToken) async {
     _rollingOutputItems = [];
-    const url = 'http://10.0.2.2:8080/rolling/rollings';
+    const url = '$kURL/rolling/rollings';
     try {
       final dataList = await http.get(
         url,
@@ -956,11 +985,11 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
           Rolling(
             id: i['id'] as String,
             batchNumber: int.parse(i['BatchBatchNo'].toString()),
-            time: DateTime.parse(i['rolling_out_time']),
-            rollerNumber: int.parse(i['RollerRollerId'].toString()),
-            rollingTurn: int.parse(i['rolling_turn'].toString()),
-            weightIn: double.parse(i['rolling_in_kg'].toString()),
-            weightOut: double.parse(i['rolling_out_kg'].toString()),
+            time: i['rolling_out_time'] == null ? DateTime.now(): DateTime.parse(i['rolling_out_time']),
+            rollerNumber: i['RollerRollerId'] == null ? 0 : int.parse(i['RollerRollerId'].toString()),
+            rollingTurn: i['rolling_turn'].toString() == 'BB' ? 'BB' : int.parse(i['rolling_turn'].toString()),
+            weightIn: i['rolling_in_kg'] == null ? 0 : double.parse(i['rolling_in_kg'].toString()),
+            weightOut: i['rolling_out_kg'] == null ? 0 : double.parse(i['rolling_out_kg'].toString()),
           ),
         );
       }
@@ -1091,7 +1120,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       weight: rollBreaking.weight,
       time: DateTime.now(),
     );
-    const url = 'http://10.0.2.2:8080/rolling/rbreaking';
+    const url = '$kURL/rolling/rbreaking';
     try {
       final response = await http.patch(
         url,
@@ -1121,7 +1150,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   Future<void> fetchAndSetWitheringRollBreakingItem(String authToken) async {
     _rollBreakingItems = [];
-    const url = 'http://10.0.2.2:8080/rolling/rbreakings';
+    const url = '$kURL/rolling/rbreakings';
     try {
       final dataList = await http.get(
         url,
@@ -1140,7 +1169,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
             id: i['id'] as String,
             batchNumber: int.parse(i['BatchBatchNo'].toString()),
             time: DateTime.parse(i['rb_out_time']),
-            rollBreakerNumber: int.parse(i['RollBreakerRollBreakerId'].toString()),
+            rollBreakerNumber:
+                int.parse(i['RollBreakerRollBreakerId'].toString()),
             rollBreakingTurn: int.parse(i['rolling_turn'].toString()),
             weight: double.parse(i['dhool_out_weight'].toString()),
           ),
@@ -1223,7 +1253,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       dhoolOutWeight: fermenting.dhoolOutWeight,
       time: DateTime.now(),
     );
-    const url = 'http://10.0.2.2:8080/rolling/fermenting';
+    const url = '$kURL/rolling/fermenting';
     try {
       final response = await http.patch(
         url,
@@ -1253,7 +1283,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   Future<void> fetchAndSetFermentingItem(String authToken) async {
     _fermentingItems = [];
-    const url = 'http://10.0.2.2:8080/rolling/fermentings';
+    const url = '$kURL/rolling/fermentings';
     try {
       final dataList = await http.get(
         url,
@@ -1378,8 +1408,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return _dryingItems.firstWhere((drying) => drying.id == id);
   }
 
-  Future<void> addDryingItem(
-      Drying drying, String authToken) async {
+  Future<void> addDryingItem(Drying drying, String authToken) async {
     final newDrierItem = Drying(
       id: DateTime.now().toString(),
       batchNumber: drying.batchNumber,
@@ -1391,7 +1420,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     );
 //    print('Outturn');
 //    print(newDrierItem.outturn);
-    const url = 'http://10.0.2.2:8080/rolling/drying';
+    const url = '$kURL/rolling/drying';
     try {
       final response = await http.patch(
         url,
@@ -1422,7 +1451,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   Future<void> fetchAndSetDryingItem(String authToken) async {
     _dryingItems = [];
-    const url = 'http://10.0.2.2:8080/rolling/dryings';
+    const url = '$kURL/rolling/dryings';
     try {
       final dataList = await http.get(
         url,
@@ -1584,7 +1613,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     return totOutturn;
   }
 
-  double batchOutturnWithDrierWeight(int batchNum, DateTime dateTime, double drierOutWeight) {
+  double batchOutturnWithDrierWeight(
+      int batchNum, DateTime dateTime, double drierOutWeight) {
 //    print("Inside Outturn fuunc");
 //    print(batchNum);
     double totOutturn = 0;
@@ -1615,5 +1645,63 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     });
     totOutturn = (totOut / totIn) * 100.0;
     return totOutturn;
+  }
+
+//----------------Difference Report -------------------
+
+  List<DifferenceReport> _differenceReportItems = [];
+
+  List<DifferenceReport> get differenceReportItems {
+    return [..._differenceReportItems];
+  }
+
+  int get differenceReportItemsCount {
+    return _differenceReportItems.length;
+  }
+
+  Future<void> fetchAndSetDifferenceReportItem(String authToken) async {
+    _differenceReportItems = [];
+    const url = 'http://10.0.2.2:8080/diff/dreports';
+    const url2 = 'http://10.0.2.2:8080/diff/dreport';
+    try {
+      final response = await http.patch(
+        url2,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+        body: jsonEncode(<String, dynamic>{}),
+      );
+      if (response.statusCode == 200) {
+        final dataList = await http.get(
+          url,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer $authToken'
+          },
+        );
+        final extractedDataList = jsonDecode(dataList.body);
+//      print(extractedDataList);
+        List differenceReport = extractedDataList['dreports'];
+        print(differenceReport);
+        for (var i in differenceReport) {
+          _differenceReportItems.add(
+            DifferenceReport(
+              reportId: i['report_id'].toString(),
+              originalWeight: double.parse(i['original_weight'].toString()),
+              remeasuringWeight:
+                  double.parse(i['remeasuring_weight'].toString()),
+              weightDifference: double.parse(i['weight_difference'].toString()),
+              supplierId: i['supplier_id'].toString(),
+            ),
+          );
+        }
+        notifyListeners();
+      } else {
+        throw Exception('Failed ');
+      }
+    } catch (error) {
+      throw error;
+    }
   }
 }

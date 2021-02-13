@@ -411,6 +411,7 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
                         style: const TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold,
+                          color:kTextInputColor,
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
@@ -467,18 +468,18 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
                         style: const TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold,
+                          color:kTextInputColor,
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please Enter Dhool Number !';
                           }
                           if ((value != 'BB') &&
-                              (value != 'bb') &&
-                              (int.parse(value) != 1) &&
-                              (int.parse(value) != 2 &&
-                                  (int.parse(value) != 3) &&
-                                  (int.parse(value) != 4) &&
-                                  (int.parse(value) != 5))) {
+                              (value != '1') &&
+                              (value != '2') &&
+                                  (value != '3') &&
+                                  (value != '4') &&
+                                  (value != '5')) {
                             return 'Please Enter A Valid Dhool Number !';
                           }
                           return null;
@@ -523,6 +524,7 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
                         style: const TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold,
+                          color:kTextInputColor,
                         ),
                         validator: (value) {
                           if (value.isEmpty) {

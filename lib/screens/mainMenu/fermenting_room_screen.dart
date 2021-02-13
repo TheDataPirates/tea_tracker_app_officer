@@ -441,13 +441,12 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
                           if (value.isEmpty) {
                             return 'Please Enter Dhool Number !';
                           }
-                          if ((value != 'BB') &&
-                              (value != 'bb') &&
-                              (int.parse(value) != 1) &&
-                              (int.parse(value) != 2 &&
-                                  (int.parse(value) != 3) &&
-                                  (int.parse(value) != 4) &&
-                                  (int.parse(value) != 5))) {
+                          if ((value != 'BB')&&
+                              (value != '1') &&
+                              (value != '2') &&
+                                  (value != '3') &&
+                                  (value != '4') &&
+                                  (value != '5')) {
                             return 'Please Enter A Valid Dhool Number !';
                           }
                           return null;

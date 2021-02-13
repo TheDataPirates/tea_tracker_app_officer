@@ -7,12 +7,14 @@ import 'package:teatrackerappofficer/providers/withering/withering_loading_unloa
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/constants.dart';
 
-class TroughLoadingScreen extends StatefulWidget {
+class RemeasureTroughLoadingScreen extends StatefulWidget {
   @override
-  _TroughLoadingScreenState createState() => _TroughLoadingScreenState();
+  _RemeasureTroughLoadingScreenState createState() =>
+      _RemeasureTroughLoadingScreenState();
 }
 
-class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
+class _RemeasureTroughLoadingScreenState
+    extends State<RemeasureTroughLoadingScreen> {
   final _formKeyTroughLoading = GlobalKey<FormState>();
   var _troughLoading = WitheringLoading(
     id: null,
@@ -108,7 +110,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                 listen: false)
             .addTroughLoadingItem(_troughLoading, authToken);
 
-        Navigator.of(context).pushNamed('TroughLoadingView');
+        Navigator.of(context).pushNamed('RemeasureTroughLoadingViewScreen');
       } catch (error) {
         await showDialog<void>(
           context: context,
