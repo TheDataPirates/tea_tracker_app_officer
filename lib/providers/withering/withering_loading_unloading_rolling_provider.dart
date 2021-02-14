@@ -488,6 +488,9 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   }
 
   int get lastBatchNumberItem {
+    if(_batchNumberItems.isEmpty){
+      return -1;
+    }
     return _batchNumberItems[_batchNumberItems.length - 1];
   }
 
