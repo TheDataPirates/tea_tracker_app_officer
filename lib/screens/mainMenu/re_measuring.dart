@@ -88,7 +88,8 @@ class _ReMeasuringScreen extends State<ReMeasuring> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          gradient: kUIGradient,
+          image : inputScreenBackgroundImage,
+//          gradient: kUIGradient,
         ),
         child: Column(
           children: [

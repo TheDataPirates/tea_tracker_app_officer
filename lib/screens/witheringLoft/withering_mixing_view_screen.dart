@@ -27,7 +27,8 @@ class WitheringMixingViewScreen extends StatelessWidget {
       ),
       body: Container(
         decoration: BoxDecoration(
-            gradient: kUIGradient,
+          image : viewScreenBackgroundImage,
+//            gradient: kUIGradient,
         ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)

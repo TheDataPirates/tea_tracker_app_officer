@@ -53,54 +53,60 @@ class _RemeasureTroughLoadingViewScreenState
           )
         ],
       ),
-      body: FutureBuilder(
-        future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-                listen: false)
-            .fetchAndSetTroughLoadingItem(token),
-        builder: (ctx, snapshot) => snapshot.connectionState ==
-                ConnectionState.waiting
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : Consumer<WitheringLoadingUnloadingRollingProvider>(
-                child: Center(
-                  child: const Text(
-                      'Got no Trough Loading items found yet, start adding some!'),
-                ),
-                builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
-                    WitheringLoadingUnloadingRollingProvider
-                                .troughLoadingItems.length <=
-                            0
-                        ? ch
-                        : ListView.builder(
-                            itemCount: WitheringLoadingUnloadingRollingProvider
-                                .troughLoadingItems.length,
-                            itemBuilder: (ctx, i) => TroughLoadingItem(
-                              id: WitheringLoadingUnloadingRollingProvider
-                                  .troughLoadingItems[i].id,
-                              troughNumber:
-                                  WitheringLoadingUnloadingRollingProvider
-                                      .troughLoadingItems[i].troughNumber,
-                              boxNumber:
-                                  WitheringLoadingUnloadingRollingProvider
-                                      .troughLoadingItems[i].boxNumber,
-                              gradeGL: WitheringLoadingUnloadingRollingProvider
-                                  .troughLoadingItems[i].gradeOfGL,
-                              recentWeight:
-                                  WitheringLoadingUnloadingRollingProvider
-                                      .troughLoadingItems[i].netWeight,
+      body: Container(
+        decoration: BoxDecoration(
+          image : viewScreenBackgroundImage,
+//            gradient: kUIGradient,
+        ),
+        child: FutureBuilder(
+          future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+                  listen: false)
+              .fetchAndSetTroughLoadingItem(token),
+          builder: (ctx, snapshot) => snapshot.connectionState ==
+                  ConnectionState.waiting
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Consumer<WitheringLoadingUnloadingRollingProvider>(
+                  child: Center(
+                    child: const Text(
+                        'Got no Trough Loading items found yet, start adding some!'),
+                  ),
+                  builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
+                      WitheringLoadingUnloadingRollingProvider
+                                  .troughLoadingItems.length <=
+                              0
+                          ? ch
+                          : ListView.builder(
+                              itemCount: WitheringLoadingUnloadingRollingProvider
+                                  .troughLoadingItems.length,
+                              itemBuilder: (ctx, i) => TroughLoadingItem(
+                                id: WitheringLoadingUnloadingRollingProvider
+                                    .troughLoadingItems[i].id,
+                                troughNumber:
+                                    WitheringLoadingUnloadingRollingProvider
+                                        .troughLoadingItems[i].troughNumber,
+                                boxNumber:
+                                    WitheringLoadingUnloadingRollingProvider
+                                        .troughLoadingItems[i].boxNumber,
+                                gradeGL: WitheringLoadingUnloadingRollingProvider
+                                    .troughLoadingItems[i].gradeOfGL,
+                                recentWeight:
+                                    WitheringLoadingUnloadingRollingProvider
+                                        .troughLoadingItems[i].netWeight,
 //                              netWeight: 10.0,
-                              netWeight: WitheringLoadingUnloadingRollingProvider
-                                  .totalTroughBoxWeight(
-                                      WitheringLoadingUnloadingRollingProvider
-                                          .troughLoadingItems[i].troughNumber,
-                                      WitheringLoadingUnloadingRollingProvider
-                                          .troughLoadingItems[i].boxNumber,
-                                      DateTime
-                                          .now()), //A function should be written to todays whole weight of trough number box number
+                                netWeight: WitheringLoadingUnloadingRollingProvider
+                                    .totalTroughBoxWeight(
+                                        WitheringLoadingUnloadingRollingProvider
+                                            .troughLoadingItems[i].troughNumber,
+                                        WitheringLoadingUnloadingRollingProvider
+                                            .troughLoadingItems[i].boxNumber,
+                                        DateTime
+                                            .now()), //A function should be written to todays whole weight of trough number box number
+                              ),
                             ),
-                          ),
-              ),
+                ),
+        ),
       ),
 
 //      Column(

@@ -126,6 +126,7 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : inputScreenBackgroundImage,
             gradient: kUIGradient,
         ),
         child: Form(

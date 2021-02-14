@@ -178,7 +178,8 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: kUIGradient,
+          image : inputScreenBackgroundImage,
+//          gradient: kUIGradient,
         ),
         child: SafeArea(
           child: Form(

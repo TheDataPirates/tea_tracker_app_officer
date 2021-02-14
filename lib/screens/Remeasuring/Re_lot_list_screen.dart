@@ -108,7 +108,8 @@ class _RemeasureLotListScreenState extends State<RemeasureLotListScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: kUIGradient,
+          image : viewScreenBackgroundImage,
+//          gradient: kUIGradient,
         ),
         child: FutureBuilder(
           future: Provider.of<TeaCollections>(context, listen: false)

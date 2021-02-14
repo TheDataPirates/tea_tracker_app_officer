@@ -93,7 +93,8 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          gradient: kUIGradient,
+          image : inputScreenBackgroundImage,
+//          gradient: kUIGradient,
         ),
         child: Column(
           children: [

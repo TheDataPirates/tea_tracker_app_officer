@@ -108,6 +108,7 @@ class _LotListScreenState extends State<LotListScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : viewScreenBackgroundImage,
           gradient: kUIGradient,
         ),
         child: FutureBuilder(

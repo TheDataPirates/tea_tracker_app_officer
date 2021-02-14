@@ -180,7 +180,8 @@ class _RemeasureTroughLoadingScreenState
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: kUIGradient,
+          image : inputScreenBackgroundImage,
+//          gradient: kUIGradient,
         ),
         child: SafeArea(
           child: Form(

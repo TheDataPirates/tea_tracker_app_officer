@@ -140,7 +140,8 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
-            gradient: kUIGradient,
+          image : inputScreenBackgroundImage,
+//            gradient: kUIGradient,
         ),
         child: SafeArea(
           child: Form(

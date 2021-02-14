@@ -103,3 +103,32 @@ borderSide: const BorderSide(color: Colors.red, width: 2.0),
 
 const kURL = 'http://10.0.2.2:8080';
 const kTextInputColor = Colors.white;
+
+
+const viewScreenBackgroundImage = DecorationImage(
+  image: AssetImage("images/new1.jpg"),
+  fit: BoxFit.cover,
+  /*colorFilter: new ColorFilter.mode(
+            Colors.black.withOpacity(0.8), BlendMode.dstATop),*/
+);
+
+const VASBackgroundImage = DecorationImage(
+  image: AssetImage("images/new2.jpg"),
+  fit: BoxFit.cover,
+  /*colorFilter: new ColorFilter.mode(
+            Colors.black.withOpacity(0.8), BlendMode.dstATop),*/
+);
+
+const reportBackgroundImage = DecorationImage(
+  image: AssetImage("images/new4.jpg"),
+  fit: BoxFit.cover,
+  /*colorFilter: new ColorFilter.mode(
+            Colors.black.withOpacity(0.8), BlendMode.dstATop),*/
+);
+
+const inputScreenBackgroundImage = DecorationImage(
+  image: AssetImage("images/new3.jpg"),
+  fit: BoxFit.cover,
+  /*colorFilter: new ColorFilter.mode(
+            Colors.black.withOpacity(0.8), BlendMode.dstATop),*/
+);
