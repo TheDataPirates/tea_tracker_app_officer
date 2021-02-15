@@ -5,7 +5,7 @@ class RollingItem extends StatelessWidget {
 
   final String id;
   final int batchNumber;
-  final int rollingTurn;
+  final rollingTurn;
   final DateTime time;
   final int rollerNumber;
   final double weightIn;

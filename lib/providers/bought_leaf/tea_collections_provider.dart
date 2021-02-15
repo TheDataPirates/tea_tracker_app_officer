@@ -1,10 +1,8 @@
-import 'dart:ffi';
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
 import './lot.dart';
 import './supplier.dart';
 import 'package:date_format/date_format.dart';
@@ -21,6 +19,7 @@ class TeaCollections with ChangeNotifier {
   int lotTotDeduct;
 
   Supplier _newSupplier;
+
 //  = Supplier("unknown",
 //      "unknown"); //set default value otherwise throws exception cant find supplierID
 
@@ -219,7 +218,7 @@ class TeaCollections with ChangeNotifier {
     try {
       int total = 0;
       lot_items.forEach((item) => total += item.deductions);
-      print(total);
+//      print(total);
       return total;
     } catch (e) {
       print(e);
@@ -234,24 +233,85 @@ class TeaCollections with ChangeNotifier {
 
     Bulkid = Random().nextInt(100000000);
     reportId = Random().nextInt(100000000);
-
+    var response;
     try {
-      final response = await http.post(
-        //
-        //creates a bulk record on the mysql
-        url,
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer $authToken'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'bulk_id': Bulkid,
-          'user_id': userId,
-          'supplier_id': supId,
-          'method': method,
-          'date': getCurrentDate(),
-        }),
-      );
+      if (supId.isNotEmpty) {
+//        supName = null;
+        var _supName = null;
+        final dataList = await http.get(
+          'http://10.0.2.2:8080/supp/supplier/$supId/$_supName',
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer $authToken'
+          },
+        );
+
+        final extractedDataList = jsonDecode(dataList.body);
+        print(extractedDataList);
+        List suppliers = extractedDataList['supplier'];
+//        print('dajcn');
+        if (suppliers[0]['name'] == supName || supName.isEmpty) {
+          if (suppliers.length != 0) {
+            response = await http.post(
+              //
+              //creates a bulk record on the mysql
+              url,
+              headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+                'Authorization': 'Bearer $authToken'
+              },
+              body: jsonEncode(<String, dynamic>{
+                'bulk_id': Bulkid,
+                'user_id': userId,
+                'supplier_id': supId,
+                'method': method,
+                'date': getCurrentDate(),
+              }),
+            );
+          } else {
+            throw Exception('Failed ');
+          }
+        }else{
+          throw Exception('Name is not matched.');
+        }
+      } else if (supName.isNotEmpty) {
+        supId = null;
+        final dataList = await http.get(
+          'http://10.0.2.2:8080/supp/supplier/$supId/$supName',
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer $authToken'
+          },
+        );
+
+        final extractedDataList = jsonDecode(dataList.body);
+        print(extractedDataList);
+        List suppliers = extractedDataList['supplier'];
+
+
+
+        if (suppliers.length != 0) {
+          supId = suppliers[0]['supplier_id'];
+          response = await http.post(
+            //
+            //creates a bulk record on the mysql
+            url,
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+              'Authorization': 'Bearer $authToken'
+            },
+            body: jsonEncode(<String, dynamic>{
+              'bulk_id': Bulkid,
+              'user_id': userId,
+              'supplier_id': supId,
+              'method': method,
+              'date': getCurrentDate(),
+            }),
+          );
+        } else {
+          throw Exception('Failed ');
+        }
+      }
 
       if (response.statusCode == 500 || response.statusCode == 404) {
         // check whether server sent bad respond
@@ -259,20 +319,6 @@ class TeaCollections with ChangeNotifier {
       } else if (response.statusCode == 200 && method == 'OfficerOriginal') {
         // respond okay. without having else part this future not return anything, not worked calling placed.
         _newSupplier = Supplier(supId, supName);
-
-        // await http.post(
-        //   //
-        //   //creates a bulk record on the mysql
-        //   url2,
-        //   headers: <String, String>{
-        //     'Content-Type': 'application/json; charset=UTF-8',
-        //     'Authorization': 'Bearer $authToken'
-        //   },
-        //   body: jsonEncode(<String, dynamic>{
-        //     'report_id': reportId,
-        //     'bulk_id': Bulkid,
-        //   }),
-        // );
       } else if (response.statusCode == 200 && method == 'Remeasuring') {
         _newSupplier = Supplier(supId, supName);
 
