@@ -26,6 +26,7 @@ class OutturnItem extends StatelessWidget {
             child: Text(batchNumber.toString(),
                 style: TextStyle(
                   fontSize: 40.0,
+                  color: Colors.white,
                 )),
             radius: 50.0,
             backgroundColor: Colors.greenAccent.shade700,

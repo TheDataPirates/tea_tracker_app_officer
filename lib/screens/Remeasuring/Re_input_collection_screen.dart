@@ -239,26 +239,6 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
                               SizedBox(
                                 width: mediaQuery.width * 0.005,
                               ),
-                              InputField(
-                                labelText: '  Gross weight',
-                                width: width,
-                                validator: [FormBuilderValidators.required()],
-                                onSave: (value) {
-                                  _editedLot = Lot(
-                                    container_type: _editedLot.container_type,
-                                    no_of_containers: _editedLot.no_of_containers,
-                                    gross_weight: int.parse(value),
-                                    leaf_grade: _editedLot.leaf_grade,
-                                    water: _editedLot.water,
-                                    course_leaf: _editedLot.course_leaf,
-                                    other: _editedLot.other,
-                                  );
-                                },
-                                keytype: TextInputType.number,
-                              ),
-                              SizedBox(
-                                width: mediaQuery.width * 0.005,
-                              ),
                               Card(
                                 elevation: 10,
                                 shape: RoundedRectangleBorder(
@@ -311,6 +291,26 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
                                     },
                                   ),
                                 ),
+                              ),
+                              SizedBox(
+                                width: mediaQuery.width * 0.005,
+                              ),
+                              InputField(
+                                labelText: '  Gross weight',
+                                width: width,
+                                validator: [FormBuilderValidators.required()],
+                                onSave: (value) {
+                                  _editedLot = Lot(
+                                    container_type: _editedLot.container_type,
+                                    no_of_containers: _editedLot.no_of_containers,
+                                    gross_weight: int.parse(value),
+                                    leaf_grade: _editedLot.leaf_grade,
+                                    water: _editedLot.water,
+                                    course_leaf: _editedLot.course_leaf,
+                                    other: _editedLot.other,
+                                  );
+                                },
+                                keytype: TextInputType.number,
                               ),
                               SizedBox(
                                 width: mediaQuery.width * 0.005,

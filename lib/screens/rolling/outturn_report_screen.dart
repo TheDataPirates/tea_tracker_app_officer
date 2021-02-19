@@ -33,7 +33,7 @@ class OutturnReportScreen extends StatelessWidget {
           children: [
             Card(
               margin: const EdgeInsets.all(15.0),
-              color: Colors.white,
+              color:  Colors.black54,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
