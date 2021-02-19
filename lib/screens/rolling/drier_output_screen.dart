@@ -372,6 +372,7 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : inputScreenBackgroundImage,
           gradient: kUIGradient,
         ),
         child: SafeArea(

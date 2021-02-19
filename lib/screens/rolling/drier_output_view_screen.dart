@@ -34,7 +34,8 @@ class _DrierOutputViewScreenState extends State<DrierOutputViewScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: kUIGradient,
+          image : viewScreenBackgroundImage,
+//          gradient: kUIGradient,
         ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,

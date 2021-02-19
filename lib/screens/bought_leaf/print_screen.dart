@@ -21,7 +21,7 @@ class _PrintScreenState extends State<PrintScreen> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          gradient: kUIGradient,
+          image: printScreenBackgroundImage,
         ),
         child: Column(
           children: [

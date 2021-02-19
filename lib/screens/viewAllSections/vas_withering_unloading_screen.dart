@@ -42,7 +42,8 @@ class _VasWitheringUnloadingScreenState extends State<VasWitheringUnloadingScree
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: kUIGradient,
+          image : VASBackgroundImage,
+//          gradient: kUIGradient,
         ),
         child: Column(
           children: [

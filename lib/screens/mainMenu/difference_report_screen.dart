@@ -34,7 +34,7 @@ class _DifferenceReportScreenState extends State<DifferenceReportScreen> {
       body: Container(
         decoration: BoxDecoration(
           image : reportBackgroundImage,
-          gradient: kUIGradient,
+//          gradient: kUIGradient,
         ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,

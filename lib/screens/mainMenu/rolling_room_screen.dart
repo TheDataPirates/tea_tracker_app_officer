@@ -112,7 +112,13 @@ class _RollingRoomScreenState extends State<RollingRoomScreen> {
     }
     else{
       _formKeyRollingOutput.currentState.save();
-
+print (_rollingOutput.batchNumber);
+print (_rollingOutput.id);
+print (_rollingOutput.rollerNumber);
+print (_rollingOutput.rollingTurn);
+print (_rollingOutput.time);
+print (_rollingOutput.weightIn);
+print (_rollingOutput.weightOut);
       await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
           listen: false)
           .addRollingOutputItem(_rollingOutput, authToken);
@@ -159,7 +165,8 @@ class _RollingRoomScreenState extends State<RollingRoomScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
-            gradient: kUIGradient,
+          image : inputScreenBackgroundImage,
+//            gradient: kUIGradient,
         ),
         child: SafeArea(
           child: Form(

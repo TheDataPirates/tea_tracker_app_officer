@@ -179,7 +179,8 @@ class _RollBreakingRoomScreenState extends State<RollBreakingRoomScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: kUIGradient,
+          image : inputScreenBackgroundImage,
+//          gradient: kUIGradient,
         ),
         child: SafeArea(
           child: Form(

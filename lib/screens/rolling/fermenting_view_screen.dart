@@ -32,7 +32,8 @@ class _FermentingViewScreenState extends State<FermentingViewScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: kUIGradient,
+          image : viewScreenBackgroundImage,
+//          gradient: kUIGradient,
         ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,

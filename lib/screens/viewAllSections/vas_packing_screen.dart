@@ -15,7 +15,8 @@ class _VasPackingScreenState extends State<VasPackingScreen> {
     ),
       body: Container(
         decoration: BoxDecoration(
-            gradient:kUIGradient
+            image : VASBackgroundImage,
+//            gradient:kUIGradient
         ),
       ),
     );

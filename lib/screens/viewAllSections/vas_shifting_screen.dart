@@ -15,7 +15,8 @@ class _VasShiftingScreenState extends State<VasShiftingScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
-            gradient:kUIGradient
+            image : VASBackgroundImage,
+//            gradient:kUIGradient
         ),
       ),
     );

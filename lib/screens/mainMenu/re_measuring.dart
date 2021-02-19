@@ -106,7 +106,7 @@ class _ReMeasuringScreen extends State<ReMeasuring> {
                       child: TextField(
                         controller: supplierNoEditingController,
                         obscureText: false,
-                        style: const TextStyle(fontSize: 40.0),
+                        style: const TextStyle(fontSize: 40.0, color: kTextInputColor),
                         decoration: InputDecoration(
                           labelText: "Supplier No :",
                           labelStyle: kSupplierTextFormFieldText,
@@ -128,7 +128,7 @@ class _ReMeasuringScreen extends State<ReMeasuring> {
                       width: MediaQuery.of(context).size.width * 0.5,
                       child: TextField(
                         controller: supplierNameEditingController,
-                        style: const TextStyle(fontSize: 40.0),
+                        style: const TextStyle(fontSize: 40.0, color: kTextInputColor),
                         decoration: InputDecoration(
                           contentPadding:
                               EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),

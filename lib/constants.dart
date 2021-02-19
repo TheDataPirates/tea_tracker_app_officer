@@ -132,3 +132,10 @@ const inputScreenBackgroundImage = DecorationImage(
   /*colorFilter: new ColorFilter.mode(
             Colors.black.withOpacity(0.8), BlendMode.dstATop),*/
 );
+
+const printScreenBackgroundImage = DecorationImage(
+  image: AssetImage("images/new5.jpg"),
+  fit: BoxFit.cover,
+  /*colorFilter: new ColorFilter.mode(
+            Colors.black.withOpacity(0.8), BlendMode.dstATop),*/
+);
