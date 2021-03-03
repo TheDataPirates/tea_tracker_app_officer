@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:teatrackerappofficer/constants.dart';
 
 class Auth with ChangeNotifier {
   String _token;
@@ -29,7 +30,7 @@ class Auth with ChangeNotifier {
 
   Future<void> login(String userId, String password) async {
 //    logout();
-    const url = 'http://10.0.2.2:8080/auth/login';
+    const url = '$kURL/auth/login';
     try {
       final response = await http.post(
         url,

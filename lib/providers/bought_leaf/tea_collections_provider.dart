@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:teatrackerappofficer/constants.dart';
 import './lot.dart';
 import './supplier.dart';
 import 'package:date_format/date_format.dart';
@@ -55,7 +56,7 @@ class TeaCollections with ChangeNotifier {
       deductions: deducts,
       net_weight: nWeight,
     );
-    const url = 'http://10.0.2.2:8080/bleaf/lot';
+    const url = '$kURL/bleaf/lot';
     try {
       await http.post(
         url,
@@ -88,7 +89,7 @@ class TeaCollections with ChangeNotifier {
 
   Future<void> fetchAndSetLotData(
       String id, String date, String authToken) async {
-    final url = 'http://10.0.2.2:8080/bleaf/lots/$Bulkid';
+    final url = '$kURL/bleaf/lots/$Bulkid';
     _lot_items = [];
     try {
       final dataList = await http.get(
@@ -125,7 +126,7 @@ class TeaCollections with ChangeNotifier {
   }
 
   Future<void> deleteLot(String id, String authToken) async {
-    final url = 'http://10.0.2.2:8080/bleaf/lot/$id';
+    final url = '$kURL/bleaf/lot/$id';
     // remove lot from the array
     try {
       final response = await http.delete(
@@ -228,8 +229,8 @@ class TeaCollections with ChangeNotifier {
   Future<void> verifySupplier(String supId, String supName, String authToken,
       String userId, String method) async {
     //when use async await whole func wrap into future. so no need to must return.
-    const url = 'http://10.0.2.2:8080/bleaf/bulk';
-    const url2 = 'http://10.0.2.2:8080/diff/dreport';
+    const url = '$kURL/bleaf/bulk';
+    const url2 = '$kURL/diff/dreport';
 
     Bulkid = Random().nextInt(100000000);
     reportId = Random().nextInt(100000000);
@@ -239,7 +240,7 @@ class TeaCollections with ChangeNotifier {
 //        supName = null;
         var _supName = null;
         final dataList = await http.get(
-          'http://10.0.2.2:8080/supp/supplier/$supId/$_supName',
+          '$kURL/supp/supplier/$supId/$_supName',
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             'Authorization': 'Bearer $authToken'
@@ -252,6 +253,7 @@ class TeaCollections with ChangeNotifier {
 //        print('dajcn');
         if (suppliers[0]['name'] == supName || supName.isEmpty) {
           if (suppliers.length != 0) {
+            supName = suppliers[0]['name'];
             response = await http.post(
               //
               //creates a bulk record on the mysql
@@ -277,7 +279,7 @@ class TeaCollections with ChangeNotifier {
       } else if (supName.isNotEmpty) {
         supId = null;
         final dataList = await http.get(
-          'http://10.0.2.2:8080/supp/supplier/$supId/$supName',
+          '$kURL/supp/supplier/$supId/$supName',
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             'Authorization': 'Bearer $authToken'
