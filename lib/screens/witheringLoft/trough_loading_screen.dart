@@ -179,7 +179,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
       body: Container(
         decoration: BoxDecoration(
           image : inputScreenBackgroundImage,
-//          gradient: kUIGradient,
+          gradient: kUIGradient,
         ),
         child: SafeArea(
           child: Form(
@@ -195,9 +195,11 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                       width: _width * 0.4,
                       child: TextFormField(
                         controller: _troughNum,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           labelText: 'Trough Number : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,
@@ -247,9 +249,11 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                       width: _width * 0.4,
                       child: TextFormField(
                         controller: _boxNum,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           labelText: 'Box Number : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,

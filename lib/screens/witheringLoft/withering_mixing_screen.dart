@@ -150,7 +150,7 @@ class _WitheringMixingScreenState extends State<WitheringMixingScreen> {
       body: Container(
         decoration: BoxDecoration(
           image : inputScreenBackgroundImage,
-//            gradient: kUIGradient,
+            gradient: kUIGradient,
         ),
         child: SafeArea(
           child: Form(
@@ -166,9 +166,11 @@ class _WitheringMixingScreenState extends State<WitheringMixingScreen> {
                       width: _width * 0.4,
                       child: TextFormField(
                         controller: _troughNum,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           labelText: 'Trough Number : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,
@@ -212,9 +214,11 @@ class _WitheringMixingScreenState extends State<WitheringMixingScreen> {
                       width: _width * 0.4,
                       child: TextFormField(
                         controller: _turn,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           labelText: 'Turn : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,
@@ -261,9 +265,11 @@ class _WitheringMixingScreenState extends State<WitheringMixingScreen> {
                       height: _height * 0.2,
                       width: _width * 0.4,
                       child: TextFormField(
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                             labelText: 'Temperature : ',
                             labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                             errorStyle: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 17.0,
@@ -306,9 +312,11 @@ class _WitheringMixingScreenState extends State<WitheringMixingScreen> {
                       height: _height * 0.2,
                       width: _width * 0.4,
                       child: TextFormField(
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           labelText: 'Humidity : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,

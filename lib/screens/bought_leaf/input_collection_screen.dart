@@ -103,7 +103,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
       body: Container(
         decoration: BoxDecoration(
           image : inputScreenBackgroundImage,
-//          gradient: kUIGradient,
+          gradient: kUIGradient,
         ),
         child: FormBuilder(
           key: _fbkey,

@@ -27,9 +27,9 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
           image: DecorationImage(
           image: AssetImage("images/bg1.jpg"),
           fit: BoxFit.cover,
-          /*colorFilter: new ColorFilter.mode(
-            Colors.black.withOpacity(0.8), BlendMode.dstATop),*/
-        ),
+            colorFilter: new ColorFilter.mode(
+         Colors.black.withOpacity(0.8), BlendMode.dstATop),
+       ),
         gradient: kUIGradient,
         ),
       child: Scaffold(
