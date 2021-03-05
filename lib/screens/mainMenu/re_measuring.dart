@@ -89,7 +89,7 @@ class _ReMeasuringScreen extends State<ReMeasuring> {
       body: Container(
         decoration: BoxDecoration(
           image : inputScreenBackgroundImage,
-//          gradient: kUIGradient,
+          gradient: kUIGradient,
         ),
         child: Column(
           children: [
@@ -110,6 +110,8 @@ class _ReMeasuringScreen extends State<ReMeasuring> {
                         decoration: InputDecoration(
                           labelText: "Supplier No :",
                           labelStyle: kSupplierTextFormFieldText,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           contentPadding:
                               EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           enabledBorder: kEnabledBorder,
@@ -134,6 +136,8 @@ class _ReMeasuringScreen extends State<ReMeasuring> {
                               EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           labelText: "Supplier Name :",
                           labelStyle: kSupplierTextFormFieldText,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           enabledBorder: kEnabledBorder,
                           focusedBorder: kFocusedBorder,
                         ),

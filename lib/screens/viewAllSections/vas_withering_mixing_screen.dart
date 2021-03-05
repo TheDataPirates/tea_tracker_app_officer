@@ -22,7 +22,7 @@ class _VasWitheringMixingScreenState extends State<VasWitheringMixingScreen> {
       body: Container(
         decoration: BoxDecoration(
         image : VASBackgroundImage,
-            //gradient: kUIGradient
+            gradient: kUIGradient
     ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)

@@ -59,7 +59,7 @@ class _WitheringUnloadingViewScreenState extends State<WitheringUnloadingViewScr
       body: Container(
         decoration: BoxDecoration(
           image : viewScreenBackgroundImage,
-//          gradient: kUIGradient,
+          gradient: kUIGradient,
         ),
         child: Column(
           children: [

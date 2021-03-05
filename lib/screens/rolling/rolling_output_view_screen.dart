@@ -33,7 +33,7 @@ class _RollingOutputViewScreenState extends State<RollingOutputViewScreen> {
       body: Container(
         decoration: BoxDecoration(
           image : viewScreenBackgroundImage,
-//          gradient: kUIGradient,
+          gradient: kUIGradient,
         ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,

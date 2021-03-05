@@ -103,7 +103,7 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
       body: Container(
         decoration: BoxDecoration(
           image : inputScreenBackgroundImage,
-//          gradient: kUIGradient,
+          gradient: kUIGradient,
         ),
         child: FormBuilder(
           key: _fbkey,

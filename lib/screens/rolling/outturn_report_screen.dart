@@ -27,7 +27,7 @@ class OutturnReportScreen extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image : reportBackgroundImage,
-//            gradient: kUIGradient,
+            gradient: kUIGradient,
         ),
         child: Column(
           children: [

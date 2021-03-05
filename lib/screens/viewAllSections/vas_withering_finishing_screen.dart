@@ -22,7 +22,7 @@ class _VasWitheringFinishingScreenState extends State<VasWitheringFinishingScree
       body: Container(
         decoration: BoxDecoration(
             image : VASBackgroundImage,
-//            gradient: kUIGradient
+            gradient: kUIGradient
         ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,

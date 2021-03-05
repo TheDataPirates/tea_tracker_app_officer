@@ -16,7 +16,7 @@ class _VasDispatchingScreenState extends State<VasDispatchingScreen> {
       body: Container(
         decoration: BoxDecoration(
             image : VASBackgroundImage,
-//            gradient:kUIGradient
+            gradient:kUIGradient
         ),
       ),
     );

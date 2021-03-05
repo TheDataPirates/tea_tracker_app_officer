@@ -23,7 +23,7 @@ class _VasWitheringStartingScreenState extends State<VasWitheringStartingScreen>
       body: Container(
         decoration: BoxDecoration(
             image : VASBackgroundImage,
-//            gradient: kUIGradient
+            gradient: kUIGradient
             ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,

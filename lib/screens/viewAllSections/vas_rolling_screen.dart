@@ -23,7 +23,7 @@ class _VasRollingScreenState extends State<VasRollingScreen> {
       body: Container(
         decoration: BoxDecoration(
           image : VASBackgroundImage,
-//          gradient: kUIGradient,
+          gradient: kUIGradient,
         ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,

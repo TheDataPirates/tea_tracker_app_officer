@@ -34,7 +34,7 @@ class _DifferenceReportScreenState extends State<DifferenceReportScreen> {
       body: Container(
         decoration: BoxDecoration(
           image : reportBackgroundImage,
-//          gradient: kUIGradient,
+          gradient: kUIGradient,
         ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
@@ -47,7 +47,7 @@ class _DifferenceReportScreenState extends State<DifferenceReportScreen> {
                     )
                   : Consumer<WitheringLoadingUnloadingRollingProvider>(
                       child: Center(
-                        child: const Text('No difference report items.'),
+                        child: const Text('No difference report items.',style: kEmptyViewText,),
                       ),
                       builder: (ctx, WitheringLoadingUnloadingRollingProvider,
                               ch) =>

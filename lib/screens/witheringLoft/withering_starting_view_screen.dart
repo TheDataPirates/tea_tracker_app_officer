@@ -29,7 +29,7 @@ class WitheringStartingViewScreen extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image : viewScreenBackgroundImage,
-//            gradient: kUIGradient,
+            gradient: kUIGradient,
         ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,

@@ -11,7 +11,7 @@ class ShiftingRoomScreen extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image : inputScreenBackgroundImage,
-//            gradient: kUIGradient,
+            gradient: kUIGradient,
         ),
       ),
     );
