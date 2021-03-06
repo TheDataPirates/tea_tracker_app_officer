@@ -132,14 +132,14 @@ class _TroughLoadingViewScreenState extends State<TroughLoadingViewScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            height: 70.0,
-            width: 70.0,
+            height: 90.0,
+            width: 90.0,
             child: FittedBox(
               child: FloatingActionButton(
                 child: const Icon(
                   Icons.add,
                   color: Colors.white,
-                  size: 40.0,
+                  size: 50.0,
                 ),
                 onPressed: () {
                   Navigator.of(context).pushNamed('InputCollectionScreen');
@@ -155,7 +155,7 @@ class _TroughLoadingViewScreenState extends State<TroughLoadingViewScreen> {
             label: const Text(
               'End Box',
               style: const TextStyle(
-                fontSize: 30.0,
+                fontSize: 40.0,
                 color: Colors.white,
               ),
             ),

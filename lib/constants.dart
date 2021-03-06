@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-
 const kTextFieldLabelStyle = TextStyle(
   fontSize: 25,
   fontWeight: FontWeight.w700,
@@ -38,13 +36,13 @@ const kUIGradient = LinearGradient(
 );
 
 const kEnabledBorder = OutlineInputBorder(
-    borderSide: const BorderSide(color: Colors.lightGreen, width: 2.0),
+    borderSide: const BorderSide(color: Colors.white, width: 2.0),
     borderRadius: const BorderRadius.all(
         Radius.circular(50.0))
 );
 
 const kFocusedBorder = OutlineInputBorder(
-    borderSide: const BorderSide(color: Colors.lightGreen, width: 2.0),
+    borderSide: const BorderSide(color: Colors.white, width: 2.0),
     borderRadius: const BorderRadius.all(
         Radius.circular(50.0))
 );
@@ -63,7 +61,8 @@ const kErrorBorder= OutlineInputBorder(
 
 const kEmptyViewText = TextStyle(
   color: Colors.white,
-  fontSize: 22,
+  fontSize: 30,
+  fontWeight: FontWeight.w700,
 );
 
 const kInputScreenContainerDisplayText = TextStyle(
@@ -105,7 +104,6 @@ borderSide: const BorderSide(color: Colors.red, width: 2.0),
 const kURL = 'http://10.0.2.2:8080';
 const kTextInputColor = Colors.white;
 
-//BACKGROUND MODIFIED
 var viewScreenBackgroundImage = DecorationImage(
   image: AssetImage("images/new1.jpg"),
   fit: BoxFit.cover,
@@ -121,7 +119,7 @@ var VASBackgroundImage = DecorationImage(
 );
 
 var reportBackgroundImage = DecorationImage(
-  image: AssetImage("images/new4.jpg"),
+  image: AssetImage("images/bg8.jpg"),
   fit: BoxFit.cover,
   colorFilter: new ColorFilter.mode(
       Colors.black.withOpacity(0.8), BlendMode.dstATop),
@@ -141,3 +139,5 @@ const printScreenBackgroundImage = DecorationImage(
 );
 
 var textFieldfillColor = Colors.black.withOpacity(0.5);
+
+var inputCollectionfillColor = Colors.black.withOpacity(0.5);

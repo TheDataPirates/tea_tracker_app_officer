@@ -156,7 +156,7 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
             ),
             Container(
               width: double.infinity,
-//            height: MediaQuery.of(context).size.height * 0.05,
+            height: MediaQuery.of(context).size.height * 0.065,
               child: RaisedButton.icon(
                 onPressed: () {
                   submit();
@@ -167,7 +167,7 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
                 ),
                 label: const Text(
                   'SUBMIT',
-                  style: const TextStyle(fontSize: 20, color: Colors.white),
+                  style: const TextStyle(fontSize: 22, color: Colors.white),
                 ),
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 color: const Color(0xff099857),
