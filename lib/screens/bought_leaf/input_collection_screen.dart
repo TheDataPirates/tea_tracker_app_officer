@@ -136,6 +136,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                   width: mediaQuery.width * width,
                                   child: FormBuilderDropdown(
                                     attribute: "Container Type",
+                                    dropdownColor: Colors.black54,
                                     decoration: InputDecoration(
                                       labelText: "  Container Type",
                                       errorStyle: TextStyle(
@@ -154,7 +155,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
 
                                     style: TextStyle(
                                         fontSize: 40,
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                     // initialValue:
 
@@ -198,9 +199,11 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                   ),
                                   width: mediaQuery.width * width,
                                   child: FormBuilderDropdown(
+                                    dropdownColor: Colors.black54,
                                     attribute: "No of Containers",
                                     decoration: InputDecoration(
                                       labelText: " No of Containers",
+
                                       errorStyle: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w700),
@@ -216,8 +219,9 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                     ),
                                     style: TextStyle(
                                         fontSize: 40,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold
+                                    ),
                                     // initialValue:
 
                                     validators: [
@@ -259,6 +263,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                   ),
                                   width: mediaQuery.width * width,
                                   child: FormBuilderDropdown(
+                                    dropdownColor: Colors.black54,
                                     attribute: "Grade of GL",
                                     decoration: InputDecoration(
                                       labelText: "  Grade of GL",
@@ -277,7 +282,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                     ),
                                     style: TextStyle(
                                         fontSize: 40,
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                     validators: [
                                       FormBuilderValidators.required(),

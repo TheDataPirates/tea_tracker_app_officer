@@ -135,6 +135,7 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
                                   ),
                                   width: mediaQuery.width * width,
                                   child: FormBuilderDropdown(
+                                    dropdownColor: Colors.black54,
                                     attribute: "Container Type",
                                     decoration: InputDecoration(
                                       labelText: "  Container Type",
@@ -152,7 +153,7 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
 
                                     style: TextStyle(
                                         fontSize: 40,
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                     // initialValue:
 
@@ -196,6 +197,7 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
                                   ),
                                   width: mediaQuery.width * width,
                                   child: FormBuilderDropdown(
+                                    dropdownColor: Colors.black54,
                                     attribute: "No of Containers",
                                     decoration: InputDecoration(
                                       labelText: " No of Containers",
@@ -212,7 +214,7 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
                                     ),
                                     style: TextStyle(
                                         fontSize: 40,
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                     // initialValue:
 
@@ -254,6 +256,7 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
                                   ),
                                   width: mediaQuery.width * width,
                                   child: FormBuilderDropdown(
+                                    dropdownColor: Colors.black54,
                                     attribute: "Grade of GL",
                                     decoration: InputDecoration(
                                       labelText: "  Grade of GL",
@@ -270,7 +273,7 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
                                     ),
                                     style: TextStyle(
                                         fontSize: 40,
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                     validators: [
                                       FormBuilderValidators.required(),
