@@ -1,4 +1,3 @@
-//VasBoughtLeafScreen
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
@@ -33,10 +32,6 @@ class _VasBoughtLeafScreenState extends State<VasBoughtLeafScreen> {
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);
     final token = auth.token;
-//
-//    final troughLoading = Provider.of<WitheringLoadingUnloadingRollingProvider>(
-//        context,
-//        listen: false);
 
     return Scaffold(
       appBar: AppBar(
@@ -83,7 +78,6 @@ class _VasBoughtLeafScreenState extends State<VasBoughtLeafScreen> {
                 recentWeight:
                 WitheringLoadingUnloadingRollingProvider
                     .troughLoadingItems[i].netWeight,
-//                              netWeight: 10.0,
                 netWeight: WitheringLoadingUnloadingRollingProvider
                     .totalTroughBoxWeight(
                     WitheringLoadingUnloadingRollingProvider
@@ -97,28 +91,6 @@ class _VasBoughtLeafScreenState extends State<VasBoughtLeafScreen> {
           ),
         ),
       ),
-
-//      Column(
-//        children: [
-//          Expanded(
-//              child: ListView.builder(
-//            itemCount: troughLoading.troughLoadingItems.length,
-//            itemBuilder: (ctx, i) => TroughLoadingItem(
-//              id: troughLoading.troughLoadingItems[i].id,
-//              troughNumber: troughLoading.troughLoadingItems[i].troughNumber,
-//              boxNumber: troughLoading.troughLoadingItems[i].boxNumber,
-//              gradeGL: troughLoading.troughLoadingItems[i].gradeOfGL,
-//              recentWeight: troughLoading.troughLoadingItems[i].netWeight,
-//              netWeight: troughLoading.totalTroughBoxWeight(
-//                  troughLoading.troughLoadingItems[i].troughNumber,
-//                  troughLoading.troughLoadingItems[i].boxNumber,
-//                  DateTime
-//                      .now()), //A function should be written to todays whole weight of trough number box number
-//            ),
-//          ))
-//        ],
-//      ),
-
     );
   }
 }
