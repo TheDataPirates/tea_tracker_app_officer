@@ -126,6 +126,7 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : inputScreenBackgroundImage,
             gradient: kUIGradient,
         ),
         child: Form(
@@ -142,11 +143,13 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
                     child: Center(
                       child: TextFormField(
                         controller: _troughNum,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                             labelText: 'Trough Number : ',
                             labelStyle: kTextFormFieldLabelStyle,
                             errorStyle: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17.0),
+                          fillColor:textFieldfillColor,
+                          filled: true,
                             contentPadding: const EdgeInsets.all(30.0),
                           enabledBorder: kEnabledBorder,
                           focusedBorder: kFocusedBorder,
@@ -185,11 +188,13 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
                       width: _width * 0.4,
                       height: _height * 0.4,
                       child: TextFormField(
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                             labelText: 'Temperature : ',
                             labelStyle: kTextFormFieldLabelStyle,
                             errorStyle: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17.0),
+                          fillColor:textFieldfillColor,
+                          filled: true,
                             contentPadding: const EdgeInsets.all(30.0),
                           enabledBorder: kEnabledBorder,
                           focusedBorder: kFocusedBorder,
@@ -227,11 +232,13 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
                       height: _height * 0.4,
                       width: _width * 0.4,
                       child: TextFormField(
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                             labelText: 'Humidity : ',
                             labelStyle: kTextFormFieldLabelStyle,
                             errorStyle: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17.0),
+                          fillColor:textFieldfillColor,
+                          filled: true,
                             contentPadding: const EdgeInsets.all(30.0),
                           enabledBorder: kEnabledBorder,
                           focusedBorder: kFocusedBorder,

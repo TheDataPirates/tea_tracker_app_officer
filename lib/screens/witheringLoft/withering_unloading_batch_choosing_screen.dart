@@ -102,6 +102,7 @@ class _WitheringUnloadingBatchChoosingScreenState
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : inputScreenBackgroundImage,
             gradient: kUIGradient,
         ),
         child: SafeArea(
@@ -118,9 +119,11 @@ class _WitheringUnloadingBatchChoosingScreenState
                       width: _width * 0.4,
                       child: TextFormField(
                         controller: _batchNum,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                             labelText: 'Batch Number : ',
                             labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                             errorStyle: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17.0),
                             contentPadding: const EdgeInsets.all(30.0),

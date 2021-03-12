@@ -28,8 +28,8 @@ const kUIGradient = LinearGradient(
   begin: Alignment.topCenter,
   end:Alignment.bottomCenter,
   colors: [
-    const Color(0xff45a247),
-    const Color(0xff283c86),
+    const Color(0xff000000),
+    const Color(0xff000000),
     // const Color(0xff159957),///1
     // const Color(0xff155799),///1
   ],
@@ -61,7 +61,8 @@ const kErrorBorder= OutlineInputBorder(
 
 const kEmptyViewText = TextStyle(
   color: Colors.white,
-  fontSize: 22,
+  fontSize: 30,
+  fontWeight: FontWeight.w700,
 );
 
 const kInputScreenContainerDisplayText = TextStyle(
@@ -93,7 +94,6 @@ Radius.circular(13.0),
 borderSide: const BorderSide(color: Colors.red, width: 2.0),
 );
 
-
 const kErrorBorder2 = OutlineInputBorder(
 borderRadius: BorderRadius.all(
 Radius.circular(13.0),
@@ -103,3 +103,41 @@ borderSide: const BorderSide(color: Colors.red, width: 2.0),
 
 const kURL = 'http://10.0.2.2:8080';
 const kTextInputColor = Colors.white;
+
+var viewScreenBackgroundImage = DecorationImage(
+  image: AssetImage("images/new1.jpg"),
+  fit: BoxFit.cover,
+  colorFilter: new ColorFilter.mode(
+      Colors.black.withOpacity(0.8), BlendMode.dstATop),
+);
+
+var VASBackgroundImage = DecorationImage(
+  image: AssetImage("images/new2.jpg"),
+  fit: BoxFit.cover,
+  colorFilter: new ColorFilter.mode(
+      Colors.black.withOpacity(0.8), BlendMode.dstATop),
+);
+
+var reportBackgroundImage = DecorationImage(
+  image: AssetImage("images/bg8.jpg"),
+  fit: BoxFit.cover,
+  colorFilter: new ColorFilter.mode(
+      Colors.black.withOpacity(0.8), BlendMode.dstATop),
+);
+
+var inputScreenBackgroundImage =  DecorationImage(
+image: AssetImage("images/new3.jpg"),
+fit: BoxFit.cover,
+colorFilter: new ColorFilter.mode(
+Colors.black.withOpacity(0.8), BlendMode.dstATop),
+);
+
+const printScreenBackgroundImage = DecorationImage(
+  image: AssetImage("images/new5.jpg"),
+  fit: BoxFit.cover,
+  colorFilter: ColorFilter.mode(Color(0xE6000000),BlendMode.dstATop),
+);
+
+var textFieldfillColor = Colors.black.withOpacity(0.5);
+
+var inputCollectionfillColor = Colors.black.withOpacity(0.5);

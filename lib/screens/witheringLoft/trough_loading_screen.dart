@@ -178,6 +178,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : inputScreenBackgroundImage,
           gradient: kUIGradient,
         ),
         child: SafeArea(
@@ -194,9 +195,11 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                       width: _width * 0.4,
                       child: TextFormField(
                         controller: _troughNum,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           labelText: 'Trough Number : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,
@@ -212,6 +215,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                         style: const TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold,
+                            color: kTextInputColor
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
@@ -245,9 +249,11 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                       width: _width * 0.4,
                       child: TextFormField(
                         controller: _boxNum,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           labelText: 'Box Number : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,
@@ -263,6 +269,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                         style: const TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold,
+                            color: kTextInputColor
                         ),
                         validator: (value) {
                           if (value.isEmpty) {

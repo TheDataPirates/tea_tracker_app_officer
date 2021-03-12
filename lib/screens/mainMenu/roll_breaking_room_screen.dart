@@ -179,6 +179,7 @@ class _RollBreakingRoomScreenState extends State<RollBreakingRoomScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : inputScreenBackgroundImage,
           gradient: kUIGradient,
         ),
         child: SafeArea(
@@ -195,9 +196,11 @@ class _RollBreakingRoomScreenState extends State<RollBreakingRoomScreen> {
                       width: _width * 0.4,
                       child: TextFormField(
                         controller: _batchNum,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           labelText: 'Batch Number : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,
@@ -246,9 +249,11 @@ class _RollBreakingRoomScreenState extends State<RollBreakingRoomScreen> {
                       width: _width * 0.4,
                       child: TextFormField(
                         controller: _rollBreakingTurn,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           labelText: 'Roll Breaking Turn : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,
@@ -296,9 +301,11 @@ class _RollBreakingRoomScreenState extends State<RollBreakingRoomScreen> {
                       height: _height * 0.2,
                       width: _width * 0.4,
                       child: TextFormField(
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           labelText: 'Roll Breaker Number : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,
@@ -341,9 +348,11 @@ class _RollBreakingRoomScreenState extends State<RollBreakingRoomScreen> {
                       height: _height * 0.2,
                       width: _width * 0.4,
                       child: TextFormField(
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           labelText: 'Weight : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,

@@ -18,8 +18,10 @@ class ViewAllSectionsScreen extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("images/bg1.jpg"),
+            image: AssetImage("images/bg9.jpg"),
             fit: BoxFit.cover,
+          colorFilter: new ColorFilter.mode(
+          Colors.black.withOpacity(0.9), BlendMode.dstATop),
           ),
           gradient: kUIGradient,
           ),

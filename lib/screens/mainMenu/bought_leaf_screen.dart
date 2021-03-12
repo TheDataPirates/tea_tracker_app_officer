@@ -91,8 +91,9 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+        body:Container(
         decoration: BoxDecoration(
+          image : inputScreenBackgroundImage,
           gradient: kUIGradient,
         ),
         child: Column(
@@ -115,6 +116,8 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
                         decoration: InputDecoration(
                           labelText: "Supplier No :",
                           labelStyle: kSupplierTextFormFieldText,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           contentPadding:
                               EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           enabledBorder: kEnabledBorder,
@@ -136,6 +139,8 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
                         style: const TextStyle(
                             fontSize: 40.0, color: kTextInputColor),
                         decoration: InputDecoration(
+                          fillColor: textFieldfillColor,
+                          filled: true,
                           contentPadding:
                               EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           labelText: "Supplier Name :",
@@ -151,7 +156,7 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
             ),
             Container(
               width: double.infinity,
-//            height: MediaQuery.of(context).size.height * 0.05,
+            height: MediaQuery.of(context).size.height * 0.065,
               child: RaisedButton.icon(
                 onPressed: () {
                   submit();
@@ -162,7 +167,7 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
                 ),
                 label: const Text(
                   'SUBMIT',
-                  style: const TextStyle(fontSize: 20, color: Colors.white),
+                  style: const TextStyle(fontSize: 22, color: Colors.white),
                 ),
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 color: const Color(0xff099857),
@@ -170,7 +175,7 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
             )
           ],
         ),
-      ),
+        )
     );
   }
 }

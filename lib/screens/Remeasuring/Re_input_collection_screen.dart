@@ -102,6 +102,7 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
+          image : inputScreenBackgroundImage,
           gradient: kUIGradient,
         ),
         child: FormBuilder(
@@ -122,17 +123,19 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
                               Card(
+                                color:inputCollectionfillColor,
                                 elevation: 10,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(13.0),
                                 ),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: Colors.green,
+                                    color:inputCollectionfillColor,
                                     borderRadius: BorderRadius.circular(13),
                                   ),
                                   width: mediaQuery.width * width,
                                   child: FormBuilderDropdown(
+                                    dropdownColor: Colors.black54,
                                     attribute: "Container Type",
                                     decoration: InputDecoration(
                                       labelText: "  Container Type",
@@ -150,7 +153,7 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
 
                                     style: TextStyle(
                                         fontSize: 40,
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                     // initialValue:
 
@@ -182,20 +185,22 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
                                 width: mediaQuery.width * 0.005,
                               ),
                               Card(
+                                color:inputCollectionfillColor,
                                 elevation: 10,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(13.0),
                                 ),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.circular(13),
+                                    color:inputCollectionfillColor,
+                                      borderRadius: BorderRadius.circular(13),
                                   ),
                                   width: mediaQuery.width * width,
                                   child: FormBuilderDropdown(
+                                    dropdownColor: Colors.black54,
                                     attribute: "No of Containers",
                                     decoration: InputDecoration(
-                                      labelText: "No of Containers",
+                                      labelText: " No of Containers",
                                       errorStyle: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w700),
@@ -209,7 +214,7 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
                                     ),
                                     style: TextStyle(
                                         fontSize: 40,
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                     // initialValue:
 
@@ -227,6 +232,64 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
                                         no_of_containers: int.parse(value),
                                         gross_weight: _editedLot.gross_weight,
                                         leaf_grade: _editedLot.leaf_grade,
+                                        water: _editedLot.water,
+                                        course_leaf: _editedLot.course_leaf,
+                                        other: _editedLot.other,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: mediaQuery.width * 0.005,
+                              ),
+                              Card(
+                                color:inputCollectionfillColor,
+                                elevation: 10,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(13.0),
+                                ),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color:inputCollectionfillColor,
+                                    borderRadius: BorderRadius.circular(13),
+                                  ),
+                                  width: mediaQuery.width * width,
+                                  child: FormBuilderDropdown(
+                                    dropdownColor: Colors.black54,
+                                    attribute: "Grade of GL",
+                                    decoration: InputDecoration(
+                                      labelText: "  Grade of GL",
+                                      labelStyle: kInputScreenContainerDisplayText,
+                                      errorStyle: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w700),
+                                      contentPadding: const EdgeInsets.symmetric(
+                                          vertical: 40.0),
+                                      enabledBorder: kEnabledBorder2,
+                                      focusedBorder: kFocusedBorder2,
+                                      focusedErrorBorder:  kFocusedErrorBorder2,
+                                      errorBorder: kErrorBorder2,
+                                    ),
+                                    style: TextStyle(
+                                        fontSize: 40,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                    validators: [
+                                      FormBuilderValidators.required(),
+                                    ],
+                                    items: ['A', 'B', 'C']
+                                        .map((container) => DropdownMenuItem(
+                                        value: container,
+                                        child: Text("$container")))
+                                        .toList(),
+                                    onSaved: (value) {
+                                      _editedLot = Lot(
+                                        container_type: _editedLot.container_type,
+                                        no_of_containers:
+                                        _editedLot.no_of_containers,
+                                        gross_weight: _editedLot.gross_weight,
+                                        leaf_grade: value,
                                         water: _editedLot.water,
                                         course_leaf: _editedLot.course_leaf,
                                         other: _editedLot.other,
@@ -258,62 +321,6 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
                               SizedBox(
                                 width: mediaQuery.width * 0.005,
                               ),
-                              Card(
-                                elevation: 10,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(13.0),
-                                ),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.circular(13),
-                                  ),
-                                  width: mediaQuery.width * width,
-                                  child: FormBuilderDropdown(
-                                    attribute: "Grade of GL",
-                                    decoration: InputDecoration(
-                                      labelText: "  Grade of GL",
-                                      labelStyle: kInputScreenContainerDisplayText,
-                                      errorStyle: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w700),
-                                      contentPadding: const EdgeInsets.symmetric(
-                                          vertical: 40.0),
-                                      enabledBorder: kEnabledBorder2,
-                                      focusedBorder: kFocusedBorder2,
-                                      focusedErrorBorder:  kFocusedErrorBorder2,
-                                      errorBorder: kErrorBorder2,
-                                    ),
-                                    style: TextStyle(
-                                        fontSize: 40,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                    validators: [
-                                      FormBuilderValidators.required(),
-                                    ],
-                                    items: ['A', 'B', 'C']
-                                        .map((container) => DropdownMenuItem(
-                                        value: container,
-                                        child: Text("$container")))
-                                        .toList(),
-                                    onSaved: (value) {
-                                      _editedLot = Lot(
-                                        container_type: _editedLot.container_type,
-                                        no_of_containers:
-                                        _editedLot.no_of_containers,
-                                        gross_weight: _editedLot.gross_weight,
-                                        leaf_grade: value,
-                                        water: _editedLot.water,
-                                        course_leaf: _editedLot.course_leaf,
-                                        other: _editedLot.other,
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: mediaQuery.width * 0.005,
-                              ),
                             ],
                           ),
                         ),
@@ -326,7 +333,7 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
                               child: const Text(
                                 'DEDUCTIONS',
                                 style: const TextStyle(
-                                  fontSize: 30,
+                                  fontSize: 40,
                                   fontWeight: FontWeight.bold,
                                   letterSpacing: 10,
                                   color: Colors.white,
@@ -413,13 +420,14 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
                 ),
               ),
               Container(
-                height: mediaQuery.height * 0.05,
+                width: double.infinity,
+                height: mediaQuery.height * 0.065,
                 child: RaisedButton.icon(
                   onPressed: saveLot,
                   icon: const Icon(Icons.add, color: Colors.white,),
                   label: const Text(
                     'SAVE',
-                    style: const TextStyle(fontSize: 20, color: Colors.white),
+                    style: const TextStyle(fontSize: 22, color: Colors.white),
                   ),
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   color: const Color(0xff099857),

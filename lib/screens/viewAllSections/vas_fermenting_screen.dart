@@ -22,6 +22,7 @@ class _VasFermentingScreenState extends State<VasFermentingScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : VASBackgroundImage,
           gradient: kUIGradient,
         ),
         child: FutureBuilder(

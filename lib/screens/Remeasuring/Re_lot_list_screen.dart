@@ -108,6 +108,7 @@ class _RemeasureLotListScreenState extends State<RemeasureLotListScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : viewScreenBackgroundImage,
           gradient: kUIGradient,
         ),
         child: FutureBuilder(

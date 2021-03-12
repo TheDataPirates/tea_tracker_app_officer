@@ -112,7 +112,13 @@ class _RollingRoomScreenState extends State<RollingRoomScreen> {
     }
     else{
       _formKeyRollingOutput.currentState.save();
-
+print (_rollingOutput.batchNumber);
+print (_rollingOutput.id);
+print (_rollingOutput.rollerNumber);
+print (_rollingOutput.rollingTurn);
+print (_rollingOutput.time);
+print (_rollingOutput.weightIn);
+print (_rollingOutput.weightOut);
       await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
           listen: false)
           .addRollingOutputItem(_rollingOutput, authToken);
@@ -159,6 +165,7 @@ class _RollingRoomScreenState extends State<RollingRoomScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : inputScreenBackgroundImage,
             gradient: kUIGradient,
         ),
         child: SafeArea(
@@ -175,9 +182,11 @@ class _RollingRoomScreenState extends State<RollingRoomScreen> {
                       width: _width * 0.4,
                       child: TextFormField(
                         controller: _batchNum,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           labelText: 'Batch Number : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,
@@ -222,9 +231,11 @@ class _RollingRoomScreenState extends State<RollingRoomScreen> {
                       width: _width * 0.4,
                       child: TextFormField(
                         controller: _rollingTurn,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           labelText: 'Rolling Turn : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,
@@ -273,9 +284,11 @@ class _RollingRoomScreenState extends State<RollingRoomScreen> {
                       height: _height * 0.2,
                       width: _width * 0.4,
                       child: TextFormField(
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           labelText: 'Roller Number : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,
@@ -319,9 +332,11 @@ class _RollingRoomScreenState extends State<RollingRoomScreen> {
                       height: _height * 0.2,
                       width: _width * 0.4,
                       child: TextFormField(
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           labelText: 'Roller Output Weight : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,

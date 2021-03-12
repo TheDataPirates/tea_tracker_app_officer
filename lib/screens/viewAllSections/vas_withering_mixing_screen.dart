@@ -20,7 +20,10 @@ class _VasWitheringMixingScreenState extends State<VasWitheringMixingScreen> {
         title: const Text('Withering Mixing View'),
       ),
       body: Container(
-        decoration: BoxDecoration(gradient: kUIGradient),
+        decoration: BoxDecoration(
+        image : VASBackgroundImage,
+            gradient: kUIGradient
+    ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
               .fetchAndSetWitheringMixingItem(token),

@@ -108,6 +108,7 @@ class _LotListScreenState extends State<LotListScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : viewScreenBackgroundImage,
           gradient: kUIGradient,
         ),
         child: FutureBuilder(
@@ -130,7 +131,7 @@ class _LotListScreenState extends State<LotListScreen> {
                       : ListView.builder(
                           itemCount: teaCollections.lot_items.length,
                           itemBuilder: (ctx, i) => Card(
-                            color: Colors.black54,
+                            color:  Colors.black54,
                             elevation: 10.0,
                             child: ListTile(
                               leading: CircleAvatar(

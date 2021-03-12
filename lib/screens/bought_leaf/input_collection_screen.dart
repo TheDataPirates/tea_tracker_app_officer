@@ -102,6 +102,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
+          image : inputScreenBackgroundImage,
           gradient: kUIGradient,
         ),
         child: FormBuilder(
@@ -122,18 +123,20 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
                               Card(
+                                color: inputCollectionfillColor,
                                 elevation: 10,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(13.0),
                                 ),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: Colors.green,
+                                    color: inputCollectionfillColor,
                                     borderRadius: BorderRadius.circular(13),
                                   ),
                                   width: mediaQuery.width * width,
                                   child: FormBuilderDropdown(
                                     attribute: "Container Type",
+                                    dropdownColor: Colors.black54,
                                     decoration: InputDecoration(
                                       labelText: "  Container Type",
                                       errorStyle: TextStyle(
@@ -152,7 +155,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
 
                                     style: TextStyle(
                                         fontSize: 40,
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                     // initialValue:
 
@@ -184,20 +187,23 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                 width: mediaQuery.width * 0.005,
                               ),
                               Card(
+                                color: inputCollectionfillColor,
                                 elevation: 10,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(13.0),
                                 ),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: Colors.green,
+                                    color: inputCollectionfillColor,
                                     borderRadius: BorderRadius.circular(13),
                                   ),
                                   width: mediaQuery.width * width,
                                   child: FormBuilderDropdown(
+                                    dropdownColor: Colors.black54,
                                     attribute: "No of Containers",
                                     decoration: InputDecoration(
-                                      labelText: "No of Containers",
+                                      labelText: " No of Containers",
+
                                       errorStyle: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w700),
@@ -213,8 +219,9 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                     ),
                                     style: TextStyle(
                                         fontSize: 40,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold
+                                    ),
                                     // initialValue:
 
                                     validators: [
@@ -244,17 +251,19 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                 width: mediaQuery.width * 0.005,
                               ),
                               Card(
+                                color: inputCollectionfillColor,
                                 elevation: 10,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(13.0),
                                 ),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: Colors.green,
+                                    color: inputCollectionfillColor,
                                     borderRadius: BorderRadius.circular(13),
                                   ),
                                   width: mediaQuery.width * width,
                                   child: FormBuilderDropdown(
+                                    dropdownColor: Colors.black54,
                                     attribute: "Grade of GL",
                                     decoration: InputDecoration(
                                       labelText: "  Grade of GL",
@@ -273,7 +282,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                     ),
                                     style: TextStyle(
                                         fontSize: 40,
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                     validators: [
                                       FormBuilderValidators.required(),
@@ -335,7 +344,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                               child: const Text(
                                 'DEDUCTIONS',
                                 style: const TextStyle(
-                                  fontSize: 30,
+                                  fontSize: 40,
                                   fontWeight: FontWeight.bold,
                                   letterSpacing: 10,
                                   color: Colors.white,
@@ -422,7 +431,8 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                 ),
               ),
               Container(
-                height: mediaQuery.height * 0.05,
+                width: double.infinity,
+                height: mediaQuery.height * 0.065,
                 child: RaisedButton.icon(
                   onPressed: saveLot,
                   icon: const Icon(
@@ -431,7 +441,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                   ),
                   label: const Text(
                     'SAVE',
-                    style: const TextStyle(fontSize: 20, color: Colors.white),
+                    style: const TextStyle(fontSize: 22, color: Colors.white),
                   ),
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   color: const Color(0xff099857),

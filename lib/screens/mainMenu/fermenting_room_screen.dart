@@ -345,6 +345,7 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+            image : inputScreenBackgroundImage,
             gradient:kUIGradient
         ),
         child: SafeArea(
@@ -361,9 +362,11 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
                       width: _width * 0.4,
                       child: TextFormField(
                         controller: _batchNum,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           labelText: 'Batch Number : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,
@@ -417,9 +420,11 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
                       width: _width * 0.4,
                       child: TextFormField(
                         controller: _dhoolNum,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           labelText: 'Dhool Number : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,
@@ -467,9 +472,11 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
                       height: _height * 0.2,
                       width: _width * 0.4,
                       child: TextFormField(
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           labelText: 'Dhool Out Weight : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,

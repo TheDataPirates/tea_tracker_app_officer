@@ -44,6 +44,7 @@ class _VasBoughtLeafScreenState extends State<VasBoughtLeafScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : VASBackgroundImage,
           gradient: kUIGradient,
         ),
         child: FutureBuilder(

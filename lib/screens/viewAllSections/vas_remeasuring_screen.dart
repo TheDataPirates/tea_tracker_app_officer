@@ -14,7 +14,10 @@ class _VasRemeasuringScreenState extends State<VasRemeasuringScreen> {
         title: const Text('Remeasuring View'),
       ),
       body: Container(
-        decoration: BoxDecoration(gradient: kUIGradient),
+        decoration: BoxDecoration(
+            image : VASBackgroundImage,
+            gradient: kUIGradient
+        ),
       ),
     );
   }

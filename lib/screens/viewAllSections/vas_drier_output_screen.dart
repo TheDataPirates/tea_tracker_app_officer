@@ -24,6 +24,7 @@ class _VasDrierOutputScreenState extends State<VasDrierOutputScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : VASBackgroundImage,
           gradient: kUIGradient,
         ),
         child: FutureBuilder(

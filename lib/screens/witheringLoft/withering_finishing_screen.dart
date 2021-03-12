@@ -149,6 +149,7 @@ class _WitheringFinishingScreenState extends State<WitheringFinishingScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : inputScreenBackgroundImage,
             gradient: kUIGradient,
         ),
         child: SafeArea(
@@ -165,9 +166,11 @@ class _WitheringFinishingScreenState extends State<WitheringFinishingScreen> {
                       width: _width * 0.4,
                       child: TextFormField(
                         controller: _troughNum,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           labelText: 'Trough Number : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,
@@ -213,9 +216,11 @@ class _WitheringFinishingScreenState extends State<WitheringFinishingScreen> {
                       height: _height * 0.2,
                       width: _width * 0.4,
                       child: TextFormField(
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           labelText: 'Temperature : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,
@@ -257,9 +262,11 @@ class _WitheringFinishingScreenState extends State<WitheringFinishingScreen> {
                       height: _height * 0.2,
                       width: _width * 0.4,
                       child: TextFormField(
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           labelText: 'Humidity : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,
