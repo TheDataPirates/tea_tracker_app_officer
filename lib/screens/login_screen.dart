@@ -35,17 +35,18 @@ class _LoginScreenState extends State<LoginScreen> {
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text('AlertDialog'),
+              backgroundColor: Colors.black87,
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
-                    Text('An error occurred'),
+                    Text('An error occurred', style: TextStyle(color: Colors.white, fontSize: 17),),
                     Text(e.toString()),
                   ],
                 ),
               ),
               actions: <Widget>[
                 FlatButton(
-                  child: Text("OK"),
+                  child: Text("OK", style: TextStyle(fontSize: 17),),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -70,8 +71,8 @@ class _LoginScreenState extends State<LoginScreen> {
         image: DecorationImage(
           image: AssetImage("images/bg1.jpg"),
           fit: BoxFit.cover,
-          // colorFilter: new ColorFilter.mode(
-          //     Colors.black.withOpacity(0.8), BlendMode.dstATop),
+          colorFilter: new ColorFilter.mode(
+              Colors.black.withOpacity(0.8), BlendMode.dstATop),
         ),
         gradient: kUIGradient,
       ),
@@ -103,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             SizedBox(height: mediaQuery.height * 0.15),
                             Container(
                               child: FormBuilderTextField(
-                                attribute: "User-name",
+                                attribute: "User-Id",
                                 obscureText: false,
                                 style: style.copyWith(
                                     color: Colors.black87,
@@ -114,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   fillColor: Colors.white.withOpacity(0.9),
                                   contentPadding: EdgeInsets.fromLTRB(
                                       20.0, 15.0, 20.0, 15.0),
-                                  hintText: "User-name",
+                                  hintText: "User-Id",
                                   border: OutlineInputBorder(
                                       borderRadius:
                                           BorderRadius.circular(32.0)),
@@ -202,7 +203,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Material(
                               elevation: 5.0,
                               borderRadius: BorderRadius.circular(30.0),
-                              color: Theme.of(context).primaryColor,
+                              color: const Color(0xff099857),//Theme.of(context).primaryColor,
                               child: MaterialButton(
                                 minWidth: mediaQuery.width,
                                 padding:
