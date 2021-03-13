@@ -70,6 +70,7 @@ flutter:
     - images/bg12.jpg
     - images/bg13.jpg
     - images/boughtleaf.png
+    - images/app_logo.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

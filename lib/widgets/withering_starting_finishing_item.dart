@@ -28,6 +28,7 @@ class WitheringStartingFinishingItem extends StatelessWidget {
         horizontal: 1,
         vertical: 4,
       ),
+      color: Colors.black54,
       child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(

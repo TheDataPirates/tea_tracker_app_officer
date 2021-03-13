@@ -4,6 +4,8 @@ import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart
 import 'package:teatrackerappofficer/providers/rolling/fermenting.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 
+import '../../constants.dart';
+
 class FermentingRoomScreen extends StatefulWidget {
   @override
   _FermentingRoomScreenState createState() => _FermentingRoomScreenState();
@@ -341,166 +343,184 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
           ),
         ],
       ),
-      body: SafeArea(
-        child: Form(
-          key: _formKeyFermenting,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    height: _height * 0.2,
-                    width: _width * 0.4,
-                    child: TextFormField(
-                      controller: _batchNum,
-                      decoration: const InputDecoration(
-                        labelText: 'Batch Number : ',
-                        errorStyle: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17.0,
-                        ),
-                        contentPadding: const EdgeInsets.all(30.0),
-                        border: const OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(50.0),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient:kUIGradient
+        ),
+        child: SafeArea(
+          child: Form(
+            key: _formKeyFermenting,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: _height * 0.2,
+                      width: _width * 0.4,
+                      child: TextFormField(
+                        controller: _batchNum,
+                        decoration: const InputDecoration(
+                          labelText: 'Batch Number : ',
+                          labelStyle: kTextFormFieldLabelStyle,
+                          errorStyle: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0,
                           ),
-                        ),
-                      ),
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.number,
-                      style: const TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please Enter Batch Number !';
-                        }
-                        if (int.parse(value) >= 31 || int.parse(value) <= 0) {
-                          return 'Please Enter A Valid Batch Number !';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _fermenting = Fermenting(
-                          id: null,
-                          batchNumber: int.parse(value),
-                          dhoolNumber: _fermenting.dhoolNumber,
-                          time: null,
-                          dhoolInWeight: null,
-                          dhoolOutWeight: _fermenting.dhoolOutWeight,
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    height: _height * 0.2,
-                    width: _width * 0.4,
-                    child: TextFormField(
-                      controller: _dhoolNum,
-                      decoration: const InputDecoration(
-                        labelText: 'Dhool Number : ',
-                        errorStyle: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17.0,
-                        ),
-                        contentPadding: const EdgeInsets.all(30.0),
-                        border: const OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(50.0),
+                          contentPadding: const EdgeInsets.all(30.0),
+                          border: const OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(50.0),
+                            ),
                           ),
+                          enabledBorder: kEnabledBorder,
+                          focusedBorder: kFocusedBorder,
+                          focusedErrorBorder: kFocusedErrorBorder,
+                          errorBorder: kErrorBorder,
                         ),
-                      ),
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.number,
-                      style: const TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please Enter Dhool Number !';
-                        }
-                        if ((value != 'BB') &&
-                            (int.parse(value) != 1) &&
-                            (int.parse(value) != 2 &&
-                                (int.parse(value) != 3) &&
-                                (int.parse(value) != 4) &&
-                                (int.parse(value) != 5))) {
-                          return 'Please Enter A Valid Dhool Number !';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _fermenting = Fermenting(
-                          id: null,
-                          batchNumber: _fermenting.batchNumber,
-                          dhoolNumber: value,
-                          time: null,
-                          dhoolInWeight: null,
-                          dhoolOutWeight: _fermenting.dhoolOutWeight,
-                        );
-                      },
-                    ),
-                  ),
-                  Container(
-                    height: _height * 0.2,
-                    width: _width * 0.4,
-                    child: TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: 'Dhool Out Weight : ',
-                        errorStyle: const TextStyle(
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.number,
+                        style: const TextStyle(
+                          fontSize: 30.0,
                           fontWeight: FontWeight.bold,
-                          fontSize: 17.0,
+                            color:kTextInputColor,
                         ),
-                        contentPadding: const EdgeInsets.all(30.0),
-                        border: const OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(50.0),
-                          ),
-                        ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please Enter Batch Number !';
+                          }
+                          if (int.parse(value) >= 31 || int.parse(value) <= 0) {
+                            return 'Please Enter A Valid Batch Number !';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _fermenting = Fermenting(
+                            id: null,
+                            batchNumber: int.parse(value),
+                            dhoolNumber: _fermenting.dhoolNumber,
+                            time: null,
+                            dhoolInWeight: null,
+                            dhoolOutWeight: _fermenting.dhoolOutWeight,
+                          );
+                        },
                       ),
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.number,
-                      style: const TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please Enter Dhool Out Weight !';
-                        }
-                        if (int.parse(value) <= 0 || int.parse(value) >= 301) {
-                          return 'Please Enter A Valid Dhool Out Weight !';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _fermenting = Fermenting(
-                          id: null,
-                          batchNumber: _fermenting.batchNumber,
-                          dhoolNumber: _fermenting.dhoolNumber,
-                          time: DateTime.now(),
-                          dhoolInWeight: fermenting.dhoolInputWeight(
-                              _fermenting.batchNumber,
-                              DateTime.now(),
-                              _fermenting
-                                  .dhoolNumber), //In here have to build a method to return the dhool input weight
-                          dhoolOutWeight: double.parse(value),
-                        );
-                      },
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: _height * 0.2,
+                      width: _width * 0.4,
+                      child: TextFormField(
+                        controller: _dhoolNum,
+                        decoration: const InputDecoration(
+                          labelText: 'Dhool Number : ',
+                          labelStyle: kTextFormFieldLabelStyle,
+                          errorStyle: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0,
+                          ),
+                          contentPadding: const EdgeInsets.all(30.0),
+                          enabledBorder: kEnabledBorder,
+                          focusedBorder: kFocusedBorder,
+                          focusedErrorBorder: kFocusedErrorBorder,
+                          errorBorder: kErrorBorder,
+                        ),
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.number,
+                        style: const TextStyle(
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                            color:kTextInputColor,
+                        ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please Enter Dhool Number !';
+                          }
+                          if ((value != 'BB')&&
+                              (value != '1') &&
+                              (value != '2') &&
+                                  (value != '3') &&
+                                  (value != '4') &&
+                                  (value != '5')) {
+                            return 'Please Enter A Valid Dhool Number !';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _fermenting = Fermenting(
+                            id: null,
+                            batchNumber: _fermenting.batchNumber,
+                            dhoolNumber: value,
+                            time: null,
+                            dhoolInWeight: null,
+                            dhoolOutWeight: _fermenting.dhoolOutWeight,
+                          );
+                        },
+                      ),
+                    ),
+                    Container(
+                      height: _height * 0.2,
+                      width: _width * 0.4,
+                      child: TextFormField(
+                        decoration: const InputDecoration(
+                          labelText: 'Dhool Out Weight : ',
+                          labelStyle: kTextFormFieldLabelStyle,
+                          errorStyle: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0,
+                          ),
+                          contentPadding: const EdgeInsets.all(30.0),
+                          border: const OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(50.0),
+                            ),
+                          ),
+                          enabledBorder: kEnabledBorder,
+                          focusedBorder: kFocusedBorder,
+                          focusedErrorBorder: kFocusedErrorBorder,
+                          errorBorder: kErrorBorder,
+                        ),
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.number,
+                        style: const TextStyle(
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                            color:kTextInputColor,
+                        ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please Enter Dhool Out Weight !';
+                          }
+                          if (int.parse(value) <= 0 || int.parse(value) >= 300) {
+                            return 'Please Enter A Valid Dhool Out Weight !';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _fermenting = Fermenting(
+                            id: null,
+                            batchNumber: _fermenting.batchNumber,
+                            dhoolNumber: _fermenting.dhoolNumber,
+                            time: DateTime.now(),
+                            dhoolInWeight: fermenting.dhoolInputWeight(
+                                _fermenting.batchNumber,
+                                DateTime.now(),
+                                _fermenting
+                                    .dhoolNumber), //In here have to build a method to return the dhool input weight
+                            dhoolOutWeight: double.parse(value),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

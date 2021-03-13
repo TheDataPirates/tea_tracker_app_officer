@@ -3,6 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/bought_leaf/user.dart';
+import 'package:teatrackerappofficer/constants.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -69,9 +70,10 @@ class _LoginScreenState extends State<LoginScreen> {
         image: DecorationImage(
           image: AssetImage("images/bg1.jpg"),
           fit: BoxFit.cover,
-          colorFilter: new ColorFilter.mode(
-              Colors.black.withOpacity(0.8), BlendMode.dstATop),
+          // colorFilter: new ColorFilter.mode(
+          //     Colors.black.withOpacity(0.8), BlendMode.dstATop),
         ),
+        gradient: kUIGradient,
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -94,17 +96,22 @@ class _LoginScreenState extends State<LoginScreen> {
                             SizedBox(
                               height: mediaQuery.height * 0.3,
                               child: Image.asset(
-                                "images/logo.jpg",
+                                "images/app_logo.png",
                                 fit: BoxFit.contain,
                               ),
                             ),
                             SizedBox(height: mediaQuery.height * 0.15),
                             Container(
                               child: FormBuilderTextField(
-                                attribute: "User-name",
+                                attribute: "User-ID",
                                 obscureText: false,
-                                style: style,
+                                style: style.copyWith(
+                                    color: Colors.black87,
+                                    fontWeight: FontWeight.bold),
                                 decoration: InputDecoration(
+                                  errorStyle: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
                                   filled: true,
                                   fillColor: Colors.white.withOpacity(0.9),
                                   contentPadding: EdgeInsets.fromLTRB(
@@ -113,6 +120,26 @@ class _LoginScreenState extends State<LoginScreen> {
                                   border: OutlineInputBorder(
                                       borderRadius:
                                           BorderRadius.circular(32.0)),
+                                  errorBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.red, width: 2.0),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(32.0))),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.red, width: 2.0),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(32.0))),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.green, width: 2.0),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(32.0))),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.green, width: 2.0),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(32.0))),
                                 ),
                                 validators: [FormBuilderValidators.required()],
                                 onSaved: (value) {
@@ -128,13 +155,38 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: FormBuilderTextField(
                                 attribute: "Password",
                                 obscureText: true,
-                                style: style,
+                                style: style.copyWith(
+                                    color: Colors.black87,
+                                    fontWeight: FontWeight.bold),
                                 decoration: InputDecoration(
+                                  errorStyle: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
                                   filled: true,
                                   fillColor: Colors.white.withOpacity(0.9),
                                   contentPadding: EdgeInsets.fromLTRB(
                                       20.0, 15.0, 20.0, 15.0),
                                   hintText: "Password",
+                                  errorBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.red, width: 2.0),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(32.0))),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.red, width: 2.0),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(32.0))),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.green, width: 2.0),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(32.0))),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.green, width: 2.0),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(32.0))),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(32.0),
                                   ),

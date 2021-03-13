@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Rolling with ChangeNotifier {
   final String id;
   final int batchNumber;
-  final int rollingTurn;
+  final rollingTurn;
   final int rollerNumber;
   final double weightIn;
   final double weightOut;

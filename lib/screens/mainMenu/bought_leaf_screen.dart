@@ -4,8 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/bought_leaf/tea_collections_provider.dart';
 import '../bought_leaf/lot_list_screen.dart';
-
-import '../../constants.dart';
+import 'package:teatrackerappofficer/constants.dart';
 
 class BoughtLeafScreen extends StatefulWidget {
   @override
@@ -21,7 +20,7 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
     final auth = Provider.of<Auth>(context, listen: false);
     String token = auth.token;
     String user = auth.user_id;
-    if (supplierNoEditingController.text.isEmpty ||
+    if (supplierNoEditingController.text.isEmpty &&
         supplierNameEditingController.text.isEmpty) {
       await showDialog<void>(
         context: context,
@@ -51,8 +50,12 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
     } else {
       try {
         await Provider.of<TeaCollections>(context, listen: false)
-            .verifySupplier(supplierNoEditingController.text,
-                supplierNameEditingController.text, token, user);
+            .verifySupplier(
+                supplierNoEditingController.text,
+                supplierNameEditingController.text,
+                token,
+                user,
+                "OfficerOriginal");
         print('bulk saved');
         Navigator.of(context).pushNamed('InputCollectionScreen');
       } catch (error) {
@@ -88,77 +91,85 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 40.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    child: TextField(
-                      controller: supplierNoEditingController,
-                      obscureText: false,
-                      style: const TextStyle(fontSize: 40.0),
-                      decoration: InputDecoration(
-                        labelText: "Supplier No :",
-                        labelStyle: kTextLotlistStyle,
-                        contentPadding:
-                            EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                        border: OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(40.0),
-                          ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: kUIGradient,
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 10.0, horizontal: 40.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      child: TextField(
+                        controller: supplierNoEditingController,
+                        obscureText: false,
+                        style: const TextStyle(
+                            fontSize: 40.0, color: kTextInputColor),
+                        decoration: InputDecoration(
+                          labelText: "Supplier No :",
+                          labelStyle: kSupplierTextFormFieldText,
+                          contentPadding:
+                              EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                          enabledBorder: kEnabledBorder,
+                          focusedBorder: kFocusedBorder,
+                          // border: OutlineInputBorder(
+                          //   borderRadius: const BorderRadius.all(
+                          //     Radius.circular(40.0),
+                          //   ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.1,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    child: TextField(
-                      controller: supplierNameEditingController,
-                      style: const TextStyle(fontSize: 40.0),
-                      decoration: InputDecoration(
-                        labelStyle: kTextLotlistStyle,
-                        contentPadding:
-                            EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                        labelText: "Supplier Name :",
-                        border: OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(40.0),
-                          ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      child: TextField(
+                        controller: supplierNameEditingController,
+                        style: const TextStyle(
+                            fontSize: 40.0, color: kTextInputColor),
+                        decoration: InputDecoration(
+                          contentPadding:
+                              EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                          labelText: "Supplier Name :",
+                          labelStyle: kSupplierTextFormFieldText,
+                          enabledBorder: kEnabledBorder,
+                          focusedBorder: kFocusedBorder,
                         ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-          Container(
-            width: double.infinity,
+            Container(
+              width: double.infinity,
 //            height: MediaQuery.of(context).size.height * 0.05,
-            child: RaisedButton.icon(
-              onPressed: () {
-                submit();
-              },
-              icon: Icon(Icons.add),
-              label: const Text(
-                'SUBMIT',
-                style: const TextStyle(fontSize: 20),
+              child: RaisedButton.icon(
+                onPressed: () {
+                  submit();
+                },
+                icon: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+                label: const Text(
+                  'SUBMIT',
+                  style: const TextStyle(fontSize: 20, color: Colors.white),
+                ),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                color: const Color(0xff099857),
               ),
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              color: Colors.amber,
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

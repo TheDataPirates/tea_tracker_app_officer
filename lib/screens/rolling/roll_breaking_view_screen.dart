@@ -4,6 +4,7 @@ import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart
 import 'package:teatrackerappofficer/providers/rolling/big_bulk.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/widgets/roll_breaking_item.dart';
+import 'package:teatrackerappofficer/constants.dart';
 
 class RollBreakingViewScreen extends StatefulWidget {
   @override
@@ -20,12 +21,15 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
 
   Future<void> _saveBigBulkDetails(String token) async {
     try {
+
+      print(_bigBulk.bigBulkNumber);
+      print(_bigBulk.bigBulkWeight);
+
       await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
               listen: false)
           .addBigBulkItem(_bigBulk, token);
 
-      print(_bigBulk.bigBulkNumber);
-      print(_bigBulk.bigBulkWeight);
+
 
 //      Navigator.of(context).pushNamed('MainMenu');
       Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
@@ -82,47 +86,52 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
           )
         ],
       ),
-      body: FutureBuilder(
-        future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-                listen: false)
-            .fetchAndSetWitheringRollBreakingItem(token),
-        builder: (ctx, snapshot) => snapshot.connectionState ==
-                ConnectionState.waiting
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : Consumer<WitheringLoadingUnloadingRollingProvider>(
-                child: Center(
-                  child: const Text(
-                      'Got no Withering roll breaking items found yet, start adding some!'),
-                ),
-                builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
-                    WitheringLoadingUnloadingRollingProvider
-                                .rollBreakingItems.length <=
-                            0
-                        ? ch
-                        : ListView.builder(
-                            itemCount: WitheringLoadingUnloadingRollingProvider
-                                .rollBreakingItems.length,
-                            itemBuilder: (ctx, i) => RollBreakingItem(
-                              id: WitheringLoadingUnloadingRollingProvider
-                                  .rollBreakingItems[i].id,
-                              batchNumber:
-                                  WitheringLoadingUnloadingRollingProvider
-                                      .rollBreakingItems[i].batchNumber,
-                              rollBreakingTurn:
-                                  WitheringLoadingUnloadingRollingProvider
-                                      .rollBreakingItems[i].rollBreakingTurn,
-                              time: WitheringLoadingUnloadingRollingProvider
-                                  .rollBreakingItems[i].time,
-                              rollBreakerNumber:
-                                  WitheringLoadingUnloadingRollingProvider
-                                      .rollBreakingItems[i].rollBreakerNumber,
-                              weight: WitheringLoadingUnloadingRollingProvider
-                                  .rollBreakingItems[i].weight,
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: kUIGradient,
+        ),
+        child: FutureBuilder(
+          future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+                  listen: false)
+              .fetchAndSetWitheringRollBreakingItem(token),
+          builder: (ctx, snapshot) => snapshot.connectionState ==
+                  ConnectionState.waiting
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Consumer<WitheringLoadingUnloadingRollingProvider>(
+                  child: Center(
+                    child: const Text(
+                        'Got no Withering roll breaking items found yet, start adding some!', style: kEmptyViewText,),
+                  ),
+                  builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
+                      WitheringLoadingUnloadingRollingProvider
+                                  .rollBreakingItems.length <=
+                              0
+                          ? ch
+                          : ListView.builder(
+                              itemCount: WitheringLoadingUnloadingRollingProvider
+                                  .rollBreakingItems.length,
+                              itemBuilder: (ctx, i) => RollBreakingItem(
+                                id: WitheringLoadingUnloadingRollingProvider
+                                    .rollBreakingItems[i].id,
+                                batchNumber:
+                                    WitheringLoadingUnloadingRollingProvider
+                                        .rollBreakingItems[i].batchNumber,
+                                rollBreakingTurn:
+                                    WitheringLoadingUnloadingRollingProvider
+                                        .rollBreakingItems[i].rollBreakingTurn,
+                                time: WitheringLoadingUnloadingRollingProvider
+                                    .rollBreakingItems[i].time,
+                                rollBreakerNumber:
+                                    WitheringLoadingUnloadingRollingProvider
+                                        .rollBreakingItems[i].rollBreakerNumber,
+                                weight: WitheringLoadingUnloadingRollingProvider
+                                    .rollBreakingItems[i].weight,
+                              ),
                             ),
-                          ),
-              ),
+                ),
+        ),
       ),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -140,7 +149,6 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
                 onPressed: () {
                   Navigator.of(context).pushNamed('RollBreakingRoom');
                 },
-                backgroundColor: Colors.green,
                 heroTag: null,
               ),
             ),
@@ -201,7 +209,6 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
                 },
               );
             },
-            backgroundColor: Colors.green,
             heroTag: null,
           ),
         ],
