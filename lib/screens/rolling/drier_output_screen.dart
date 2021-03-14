@@ -538,7 +538,7 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
                             return 'Please Enter Drier Out Weight !';
                           }
                           if (int.parse(value) <= 0 ||
-                              int.parse(value) >= 101) {
+                              int.parse(value) >= 251) {
                             return 'Please Enter A Valid Drier Out Weight !';
                           }
                           return null;
