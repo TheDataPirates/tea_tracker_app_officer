@@ -36,7 +36,7 @@ class _VasRollingScreenState extends State<VasRollingScreen> {
               : Consumer<WitheringLoadingUnloadingRollingProvider>(
             child: Center(
               child: const Text(
-                  'Got no rolling items found yet, start adding some!', style: kEmptyViewText,),
+                  'Got no Rolling items!', style: kEmptyViewText,),
             ),
             builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
             WitheringLoadingUnloadingRollingProvider

@@ -37,7 +37,7 @@ class _VasWitheringStartingScreenState extends State<VasWitheringStartingScreen>
               : Consumer<WitheringLoadingUnloadingRollingProvider>(
                   child: Center(
                     child: const Text(
-                      'Got no Withering starting items!',
+                      'Got no Withering Starting items!',
                       style: kEmptyViewText,
                     ),
                   ),

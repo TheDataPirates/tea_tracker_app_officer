@@ -36,7 +36,7 @@ class _VasDrierOutputScreenState extends State<VasDrierOutputScreen> {
               : Consumer<WitheringLoadingUnloadingRollingProvider>(
             child: Center(
               child: const Text(
-                  'Got no drying items found yet, start adding some!', style: kEmptyViewText,),
+                  'Got no Drying items!', style: kEmptyViewText,),
             ),
             builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
             WitheringLoadingUnloadingRollingProvider

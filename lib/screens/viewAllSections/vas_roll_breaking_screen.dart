@@ -38,7 +38,7 @@ class _VasRollBreakingScreenState extends State<VasRollBreakingScreen> {
                   : Consumer<WitheringLoadingUnloadingRollingProvider>(
                       child: Center(
                         child: const Text(
-                          'Got no roll breaking items!',
+                          'Got no Roll Breaking items!',
                           style: kEmptyViewText,
                         ),
                       ),

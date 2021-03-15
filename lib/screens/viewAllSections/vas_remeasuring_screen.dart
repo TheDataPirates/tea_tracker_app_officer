@@ -45,7 +45,7 @@ class _VasRemeasuringScreenState extends State<VasRemeasuringScreen> {
           )
               : Consumer<TeaCollections>(
             child: Center(
-              child: const Text('Got no lots yet, start adding some!', style: kEmptyViewText,),
+              child: const Text('Got no Remeasured Lots!', style: kEmptyViewText,),
             ),
             builder: (ctx, teaCollections, ch) => teaCollections
                 .lot_items.length <=

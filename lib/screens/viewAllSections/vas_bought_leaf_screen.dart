@@ -54,7 +54,7 @@ class _VasBoughtLeafScreenState extends State<VasBoughtLeafScreen> {
               : Consumer<WitheringLoadingUnloadingRollingProvider>(
             child: Center(
               child: const Text(
-                'Got no Trough Loading items found yet, start adding some!', style: kEmptyViewText,),
+                'Got no Trough Loading items!', style: kEmptyViewText,),
             ),
             builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
             WitheringLoadingUnloadingRollingProvider

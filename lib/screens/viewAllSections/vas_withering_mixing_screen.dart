@@ -35,7 +35,7 @@ class _VasWitheringMixingScreenState extends State<VasWitheringMixingScreen> {
               : Consumer<WitheringLoadingUnloadingRollingProvider>(
                   child: Center(
                     child: const Text(
-                      'Got no Withering mixing items!',
+                      'Got no Withering Mixing items!',
                       style: kEmptyViewText,
                     ),
                   ),

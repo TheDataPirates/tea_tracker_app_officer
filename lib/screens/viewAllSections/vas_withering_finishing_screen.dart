@@ -36,7 +36,7 @@ class _VasWitheringFinishingScreenState extends State<VasWitheringFinishingScree
               : Consumer<WitheringLoadingUnloadingRollingProvider>(
                   child: Center(
                     child: const Text(
-                      'Got no Withering finishing items!',
+                      'Got no Withering Finishing items!',
                       style: kEmptyViewText,
                     ),
                   ),
