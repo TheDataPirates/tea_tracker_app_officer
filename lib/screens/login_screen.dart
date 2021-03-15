@@ -108,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 decoration: InputDecoration(
                                   errorStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                                   filled: true,
-                                  fillColor: Colors.black.withOpacity(0.9),
+                                  fillColor: Colors.black.withOpacity(0.8),
                                   contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                                   hintText: "User-Id",
                                   hintStyle: TextStyle(fontSize: 20, color: Colors.white),
@@ -149,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 decoration: InputDecoration(
                                   errorStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                                   filled: true,
-                                  fillColor: Colors.black.withOpacity(0.9),
+                                  fillColor: Colors.black.withOpacity(0.8),
                                   contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                                   hintText: "Password",
                                   hintStyle: TextStyle(fontFamily: 'Montserrat', fontSize: 20, color: Colors.white),
