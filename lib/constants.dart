@@ -69,13 +69,14 @@ const kInputScreenContainerDisplayText = TextStyle(
   color: Colors.white,
     fontSize: 30,
     fontWeight: FontWeight.w700,
+    height: 1.6,
 );
 
 const kEnabledBorder2 = OutlineInputBorder(
 borderRadius: BorderRadius.all(
 Radius.circular(13.0),
 ),
-borderSide: const BorderSide(color: Colors.black87, width: 3.0),
+borderSide: const BorderSide(color: Colors.white, width: 1.0),
 );
 
 
@@ -83,7 +84,7 @@ const kFocusedBorder2 = OutlineInputBorder(
 borderRadius: BorderRadius.all(
 Radius.circular(13.0),
 ),
-borderSide: const BorderSide(color: Colors.white, width: 2.0),
+borderSide: const BorderSide(color: Colors.white, width: 1.0),
 );
 
 
