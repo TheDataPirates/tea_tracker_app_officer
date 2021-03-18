@@ -38,20 +38,21 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
+            backgroundColor: Colors.black87,
             title: Text('You have already entered trough ' +
                 '${int.parse(_troughNum.text)}' +
                 ' and box ' +
-                '${int.parse(_boxNum.text)}'),
+                '${int.parse(_boxNum.text)}',style: TextStyle (color: Colors.white, fontSize: 18),),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  const Text('Please enter a different box in a trough !'),
+                  const Text('Please enter a different box in a trough !',style: TextStyle(color: Colors.white, fontSize: 17),),
                 ],
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('OK'),
+                child: const Text('OK',style: TextStyle(fontSize: 17),),
                 onPressed: () {
                   Navigator.pop(context);
                   return;
@@ -70,20 +71,21 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
+            backgroundColor: Colors.black87,
             title: Text('You have not loaded trough ' +
                 '${int.parse(_troughNum.text)}' +
                 ' box ' +
-                '${int.parse(_boxNum.text)}'),
+                '${int.parse(_boxNum.text)}',style: TextStyle (color: Colors.white, fontSize: 18),),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  const Text('Please enter a loaded box in a trough !'),
+                  const Text('Please enter a loaded box in a trough !',style: TextStyle(color: Colors.white, fontSize: 17),),
                 ],
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('OK'),
+                child: const Text('OK',style: TextStyle(fontSize: 17),),
                 onPressed: () {
                   Navigator.pop(context);
                   return;

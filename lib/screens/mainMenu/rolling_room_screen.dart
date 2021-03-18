@@ -37,17 +37,18 @@ class _RollingRoomScreenState extends State<RollingRoomScreen> {
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('You have already used rolling turn ' + '${int.parse(_rollingTurn.text)}' + ' on batch ' + '${int.parse(_batchNum.text)}'),
+            backgroundColor: Colors.black87,
+            title: Text('You have already used rolling turn ' + '${int.parse(_rollingTurn.text)}' + ' on batch ' + '${int.parse(_batchNum.text)}',style: TextStyle(color: Colors.white, fontSize: 18),),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  const Text('Please enter a different rolling turn !'),
+                  const Text('Please enter a different rolling turn !',style: TextStyle(color: Colors.white, fontSize: 17),),
                 ],
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('OK'),
+                child: const Text('OK',style: TextStyle(fontSize: 17),),
                 onPressed: () {
                   Navigator.pop(context);
                   return;
@@ -63,17 +64,18 @@ class _RollingRoomScreenState extends State<RollingRoomScreen> {
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('You have already ended batch ' + '${int.parse(_batchNum.text)}'),
+            title: Text('You have already ended batch ' + '${int.parse(_batchNum.text)}',style: TextStyle(color: Colors.white, fontSize: 18),),
+            backgroundColor: Colors.black87,
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  const Text('Please try a different batch number !'),
+                  const Text('Please try a different batch number !',style: TextStyle(color: Colors.white, fontSize: 17),),
                 ],
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('OK'),
+                child: const Text('OK',style: TextStyle(fontSize: 17),),
                 onPressed: () {
                   Navigator.pop(context);
                   return;
@@ -89,17 +91,18 @@ class _RollingRoomScreenState extends State<RollingRoomScreen> {
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('You have not created batch ' + '${int.parse(_batchNum.text)}'),
+            title: Text('You have not created batch ' + '${int.parse(_batchNum.text)}',style: TextStyle(color: Colors.white, fontSize: 18),),
+            backgroundColor: Colors.black87,
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  const Text('Please enter a different batch number !'),
+                  const Text('Please enter a different batch number !',style: TextStyle(color: Colors.white, fontSize: 17),),
                 ],
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('OK'),
+                child: const Text('OK',style: TextStyle(fontSize: 17),),
                 onPressed: () {
                   Navigator.pop(context);
                   return;

@@ -27,18 +27,19 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('AlertDialog'),
+            title: const Text('AlertDialog',style: TextStyle(color: Colors.white, fontSize: 18),),
+            backgroundColor: Colors.black87,
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  const Text('No supplier id or name entered'),
-                  const Text('Please Enter again'),
+                  const Text('No supplier id or name entered',style: TextStyle(color: Colors.white, fontSize: 17),),
+                  const Text('Please Enter again',style: TextStyle(color: Colors.white, fontSize: 17),),
                 ],
               ),
             ),
             actions: <Widget>[
               FlatButton(
-                child: const Text("OK"),
+                child: const Text("OK",style: TextStyle(fontSize: 17),),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -64,18 +65,19 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
           barrierDismissible: false, // user must tap button!
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('AlertDialog'),
+              title: Text('AlertDialog',style: TextStyle(color: Colors.white, fontSize: 18),),
+              backgroundColor: Colors.black87,
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
-                    Text('An error occurred'),
-                    Text(error.toString()),
+                    Text('An error occurred', style: TextStyle(color: Colors.white, fontSize: 17),),
+                    Text(error.toString(),style: TextStyle(color: Colors.white, fontSize: 17),),
                   ],
                 ),
               ),
               actions: <Widget>[
                 FlatButton(
-                  child: Text("OK"),
+                  child: Text("OK", style: TextStyle(fontSize: 17),),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },

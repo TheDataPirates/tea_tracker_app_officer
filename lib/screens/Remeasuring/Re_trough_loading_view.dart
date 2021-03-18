@@ -166,17 +166,18 @@ class _RemeasureTroughLoadingViewScreenState
                 barrierDismissible: false, // user must tap button!
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: const Text('Are You Sure?'),
+                    title: const Text('Are You Sure?',style: TextStyle(color: Colors.white, fontSize: 18),),
+                    backgroundColor: Colors.black87,
                     content: SingleChildScrollView(
                       child: ListBody(
                         children: <Widget>[
-                          const Text('Do you want to end loading the box?'),
+                          const Text('Do you want to end loading the box?',style: TextStyle(color: Colors.white, fontSize: 17),),
                         ],
                       ),
                     ),
                     actions: <Widget>[
                       TextButton(
-                        child: const Text('Yes'),
+                        child: const Text('Yes',style: TextStyle(fontSize: 17),),
                         onPressed: () {
                           // Should add the latest trough number and the box number to a new list endedTroughBoxItems with date
                           _endedLoadingTroughBox = EndedLoadingTroughBox(
@@ -198,7 +199,7 @@ class _RemeasureTroughLoadingViewScreenState
                         },
                       ),
                       TextButton(
-                        child: const Text('No'),
+                        child: const Text('No',style: TextStyle(fontSize: 17),),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
