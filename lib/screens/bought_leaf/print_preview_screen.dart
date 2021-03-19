@@ -5,12 +5,12 @@ import 'package:teatrackerappofficer/providers/bought_leaf/tea_collections_provi
 import 'package:teatrackerappofficer/widgets/card_container_printing_screen.dart';
 import 'package:teatrackerappofficer/constants.dart';
 
-class PrintScreen extends StatefulWidget {
+class PrintPreviewScreen extends StatefulWidget {
   @override
   _PrintScreenState createState() => _PrintScreenState();
 }
 
-class _PrintScreenState extends State<PrintScreen> {
+class _PrintScreenState extends State<PrintPreviewScreen> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<TeaCollections>(context, listen: false);

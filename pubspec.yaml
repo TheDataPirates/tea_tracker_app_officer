@@ -38,6 +38,7 @@ dependencies:
   shared_preferences: ^0.5.12+4
   google_fonts: ^1.1.1
   font_awesome_flutter: ^8.10.0
+  blue_thermal_printer: ^1.1.1
 
 
 dev_dependencies:

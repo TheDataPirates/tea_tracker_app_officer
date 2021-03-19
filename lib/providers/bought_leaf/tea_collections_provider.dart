@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:teatrackerappofficer/constants.dart';
+import 'package:teatrackerappofficer/providers/bought_leaf/user.dart';
 import './lot.dart';
 import './supplier.dart';
 import 'package:date_format/date_format.dart';
@@ -14,6 +15,8 @@ class TeaCollections with ChangeNotifier {
   List<Lot> get lot_items {
     return [..._lot_items];
   }
+  var _currUser = User();
+  User get currUser => _currUser;
 
   int Bulkid;
   int reportId;
@@ -208,7 +211,16 @@ class TeaCollections with ChangeNotifier {
         break;
     }
   }
-
+  int grossWeight(){
+    try {
+      int total = 0;
+      lot_items.forEach((item) => total += item.gross_weight);
+//      print(total);
+      return total;
+    } catch (e) {
+      print(e);
+    }
+  }
   int calNetWeight(int gWeight) {
     // calculate net weight lot wise
     return (gWeight - lotTotDeduct);
@@ -225,6 +237,11 @@ class TeaCollections with ChangeNotifier {
       print(e);
     }
   }
+
+  int netWeight(){
+    return grossWeight() - totalDeducts();
+  }
+
 
   Future<void> verifySupplier(String supId, String supName, String authToken,
       String userId, String method) async {
