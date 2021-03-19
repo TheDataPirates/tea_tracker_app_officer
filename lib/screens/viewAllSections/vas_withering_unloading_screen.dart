@@ -1,4 +1,3 @@
-//VasWitheringUnloadingScreen
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
@@ -24,11 +23,6 @@ class _VasWitheringUnloadingScreenState extends State<VasWitheringUnloadingScree
     Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
         .addBatchItem(_batch,authToken);
 
-
-//    print(_batch.batchNumber);
-//    print(_batch.batchWeight);
-
-//    Navigator.of(context).pushNamed('MainMenu');
     Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
   }
 
@@ -42,6 +36,7 @@ class _VasWitheringUnloadingScreenState extends State<VasWitheringUnloadingScree
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : VASBackgroundImage,
           gradient: kUIGradient,
         ),
         child: Column(

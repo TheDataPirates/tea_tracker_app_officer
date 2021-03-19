@@ -42,16 +42,17 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: AlertDialog(
-                title: const Text('Warning !'),
+                title: const Text('Warning !',style: TextStyle(color: Colors.white, fontSize: 18),),
+                backgroundColor: Colors.black87,
                 content: ListBody(
                   children: <Widget>[
-                    const Text('Error has occured'),
-                    Text(error.toString()),
+                    const Text('Error has occured',style: TextStyle(color: Colors.white, fontSize: 17),),
+                    Text(error.toString(),style: TextStyle(color: Colors.white, fontSize: 17),),
                   ],
                 ),
                 actions: <Widget>[
                   TextButton(
-                    child: const Text('Okay'),
+                    child: const Text('Okay',style: TextStyle(fontSize: 17),),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
@@ -88,6 +89,7 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : viewScreenBackgroundImage,
             gradient: kUIGradient,
         ),
         child: FutureBuilder(
@@ -137,14 +139,14 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            height: 70.0,
-            width: 70.0,
+            height: 90.0,
+            width: 90.0,
             child: FittedBox(
               child: FloatingActionButton(
                 child: const Icon(
                   Icons.add,
                   color: Colors.white,
-                  size: 40.0,
+                  size: 50.0,
                 ),
                 onPressed: () {
                   Navigator.of(context).pushNamed('RollBreakingRoom');
@@ -160,7 +162,7 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
             label: const Text(
               'End Batch',
               style: const TextStyle(
-                fontSize: 30.0,
+                fontSize: 40.0,
                 color: Colors.white,
               ),
             ),
@@ -170,17 +172,18 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
                 barrierDismissible: false, // user must tap button!
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: const Text('Are You Sure?'),
+                    backgroundColor: Colors.black87,
+                    title: const Text('Are You Sure?',style: TextStyle(color: Colors.white, fontSize: 18),),
                     content: SingleChildScrollView(
                       child: ListBody(
                         children: <Widget>[
-                          const Text('Do you want to end the batch?'),
+                          const Text('Do you want to end the batch?',style: TextStyle(color: Colors.white, fontSize: 17),)
                         ],
                       ),
                     ),
                     actions: <Widget>[
                       TextButton(
-                        child: const Text('Yes'),
+                        child: const Text('Yes',style: TextStyle(fontSize: 17),),
                         onPressed: () {
                           // Alert dialog should be shown and if yes store the bigbulk weight from the batch weight method in withering loading unloading rolling provider as the big bulk number equal to the batch number
 
@@ -199,7 +202,7 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
                         },
                       ),
                       TextButton(
-                        child: const Text('No'),
+                        child: const Text('No',style: TextStyle(fontSize: 17),),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },

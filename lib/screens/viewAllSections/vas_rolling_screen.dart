@@ -1,4 +1,3 @@
-//VasRollingScreen
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
@@ -22,6 +21,7 @@ class _VasRollingScreenState extends State<VasRollingScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : VASBackgroundImage,
           gradient: kUIGradient,
         ),
         child: FutureBuilder(
@@ -36,7 +36,7 @@ class _VasRollingScreenState extends State<VasRollingScreen> {
               : Consumer<WitheringLoadingUnloadingRollingProvider>(
             child: Center(
               child: const Text(
-                  'Got no rolling items found yet, start adding some!', style: kEmptyViewText,),
+                  'Got no Rolling items!', style: kEmptyViewText,),
             ),
             builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
             WitheringLoadingUnloadingRollingProvider

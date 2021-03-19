@@ -53,54 +53,60 @@ class _RemeasureTroughLoadingViewScreenState
           )
         ],
       ),
-      body: FutureBuilder(
-        future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-                listen: false)
-            .fetchAndSetTroughLoadingItem(token),
-        builder: (ctx, snapshot) => snapshot.connectionState ==
-                ConnectionState.waiting
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : Consumer<WitheringLoadingUnloadingRollingProvider>(
-                child: Center(
-                  child: const Text(
-                      'Got no Trough Loading items found yet, start adding some!'),
-                ),
-                builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
-                    WitheringLoadingUnloadingRollingProvider
-                                .troughLoadingItems.length <=
-                            0
-                        ? ch
-                        : ListView.builder(
-                            itemCount: WitheringLoadingUnloadingRollingProvider
-                                .troughLoadingItems.length,
-                            itemBuilder: (ctx, i) => TroughLoadingItem(
-                              id: WitheringLoadingUnloadingRollingProvider
-                                  .troughLoadingItems[i].id,
-                              troughNumber:
-                                  WitheringLoadingUnloadingRollingProvider
-                                      .troughLoadingItems[i].troughNumber,
-                              boxNumber:
-                                  WitheringLoadingUnloadingRollingProvider
-                                      .troughLoadingItems[i].boxNumber,
-                              gradeGL: WitheringLoadingUnloadingRollingProvider
-                                  .troughLoadingItems[i].gradeOfGL,
-                              recentWeight:
-                                  WitheringLoadingUnloadingRollingProvider
-                                      .troughLoadingItems[i].netWeight,
+      body: Container(
+        decoration: BoxDecoration(
+          image : viewScreenBackgroundImage,
+            gradient: kUIGradient,
+        ),
+        child: FutureBuilder(
+          future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+                  listen: false)
+              .fetchAndSetTroughLoadingItem(token),
+          builder: (ctx, snapshot) => snapshot.connectionState ==
+                  ConnectionState.waiting
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Consumer<WitheringLoadingUnloadingRollingProvider>(
+                  child: Center(
+                    child: const Text(
+                        'Got no Trough Loading items found yet, start adding some!'),
+                  ),
+                  builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
+                      WitheringLoadingUnloadingRollingProvider
+                                  .troughLoadingItems.length <=
+                              0
+                          ? ch
+                          : ListView.builder(
+                              itemCount: WitheringLoadingUnloadingRollingProvider
+                                  .troughLoadingItems.length,
+                              itemBuilder: (ctx, i) => TroughLoadingItem(
+                                id: WitheringLoadingUnloadingRollingProvider
+                                    .troughLoadingItems[i].id,
+                                troughNumber:
+                                    WitheringLoadingUnloadingRollingProvider
+                                        .troughLoadingItems[i].troughNumber,
+                                boxNumber:
+                                    WitheringLoadingUnloadingRollingProvider
+                                        .troughLoadingItems[i].boxNumber,
+                                gradeGL: WitheringLoadingUnloadingRollingProvider
+                                    .troughLoadingItems[i].gradeOfGL,
+                                recentWeight:
+                                    WitheringLoadingUnloadingRollingProvider
+                                        .troughLoadingItems[i].netWeight,
 //                              netWeight: 10.0,
-                              netWeight: WitheringLoadingUnloadingRollingProvider
-                                  .totalTroughBoxWeight(
-                                      WitheringLoadingUnloadingRollingProvider
-                                          .troughLoadingItems[i].troughNumber,
-                                      WitheringLoadingUnloadingRollingProvider
-                                          .troughLoadingItems[i].boxNumber,
-                                      DateTime
-                                          .now()), //A function should be written to todays whole weight of trough number box number
+                                netWeight: WitheringLoadingUnloadingRollingProvider
+                                    .totalTroughBoxWeight(
+                                        WitheringLoadingUnloadingRollingProvider
+                                            .troughLoadingItems[i].troughNumber,
+                                        WitheringLoadingUnloadingRollingProvider
+                                            .troughLoadingItems[i].boxNumber,
+                                        DateTime
+                                            .now()), //A function should be written to todays whole weight of trough number box number
+                              ),
                             ),
-                          ),
-              ),
+                ),
+        ),
       ),
 
 //      Column(
@@ -127,14 +133,14 @@ class _RemeasureTroughLoadingViewScreenState
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            height: 70.0,
-            width: 70.0,
+            height: 90.0,
+            width: 90.0,
             child: FittedBox(
               child: FloatingActionButton(
                 child: const Icon(
                   Icons.add,
                   color: Colors.white,
-                  size: 40.0,
+                  size: 50.0,
                 ),
                 onPressed: () {
                   Navigator.of(context).pushNamed('ReInputcollectionScreen');
@@ -150,7 +156,7 @@ class _RemeasureTroughLoadingViewScreenState
             label: const Text(
               'End Box',
               style: const TextStyle(
-                fontSize: 30.0,
+                fontSize: 40.0,
                 color: Colors.white,
               ),
             ),
@@ -160,17 +166,18 @@ class _RemeasureTroughLoadingViewScreenState
                 barrierDismissible: false, // user must tap button!
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: const Text('Are You Sure?'),
+                    title: const Text('Are You Sure?',style: TextStyle(color: Colors.white, fontSize: 18),),
+                    backgroundColor: Colors.black87,
                     content: SingleChildScrollView(
                       child: ListBody(
                         children: <Widget>[
-                          const Text('Do you want to end loading the box?'),
+                          const Text('Do you want to end loading the box?',style: TextStyle(color: Colors.white, fontSize: 17),),
                         ],
                       ),
                     ),
                     actions: <Widget>[
                       TextButton(
-                        child: const Text('Yes'),
+                        child: const Text('Yes',style: TextStyle(fontSize: 17),),
                         onPressed: () {
                           // Should add the latest trough number and the box number to a new list endedTroughBoxItems with date
                           _endedLoadingTroughBox = EndedLoadingTroughBox(
@@ -192,7 +199,7 @@ class _RemeasureTroughLoadingViewScreenState
                         },
                       ),
                       TextButton(
-                        child: const Text('No'),
+                        child: const Text('No',style: TextStyle(fontSize: 17),),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },

@@ -26,13 +26,14 @@ class OutturnReportScreen extends StatelessWidget {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : reportBackgroundImage,
             gradient: kUIGradient,
         ),
         child: Column(
           children: [
             Card(
               margin: const EdgeInsets.all(15.0),
-              color: Colors.black54,
+              color:  Colors.black54,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(

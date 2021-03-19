@@ -20,9 +20,11 @@ class DryingRoomScreen extends StatelessWidget {
           image: DecorationImage(
             image: AssetImage("images/bg1.jpg"),
             fit: BoxFit.cover,
+            colorFilter: new ColorFilter.mode(
+                Colors.black.withOpacity(0.9), BlendMode.dstATop),
           ),
           gradient: kUIGradient,
-        ),
+          ),
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

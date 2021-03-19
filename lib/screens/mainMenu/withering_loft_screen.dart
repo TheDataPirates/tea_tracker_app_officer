@@ -19,6 +19,8 @@ class WitheringLoftScreen extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage("images/bg1.jpg"),
+    colorFilter: new ColorFilter.mode(
+        Colors.black.withOpacity(0.9), BlendMode.dstATop),
             fit: BoxFit.cover,
           ),
           gradient: kUIGradient,

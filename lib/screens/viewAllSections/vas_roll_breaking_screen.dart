@@ -22,7 +22,10 @@ class _VasRollBreakingScreenState extends State<VasRollBreakingScreen> {
         title: const Text('Roll Breaking View'),
       ),
       body: Container(
-        decoration: BoxDecoration(gradient: kUIGradient),
+        decoration: BoxDecoration(
+            image : VASBackgroundImage,
+            gradient: kUIGradient
+        ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
                   listen: false)
@@ -35,7 +38,7 @@ class _VasRollBreakingScreenState extends State<VasRollBreakingScreen> {
                   : Consumer<WitheringLoadingUnloadingRollingProvider>(
                       child: Center(
                         child: const Text(
-                          'Got no roll breaking items!',
+                          'Got no Roll Breaking items!',
                           style: kEmptyViewText,
                         ),
                       ),

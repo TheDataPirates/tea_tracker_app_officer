@@ -45,20 +45,21 @@ class _RemeasureTroughLoadingScreenState
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
+            backgroundColor: Colors.black87,
             title: Text('You have already ended trough ' +
                 '${int.parse(_troughNum.text)}' +
                 ' box ' +
-                '${int.parse(_boxNum.text)}'),
+                '${int.parse(_boxNum.text)}',style: TextStyle(color: Colors.white, fontSize: 18),),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  const Text('Please enter a different batch number !'),
+                  const Text('Please enter a different batch number !',style: TextStyle(color: Colors.white, fontSize: 17),),
                 ],
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('OK'),
+                child: const Text('OK',style: TextStyle(fontSize: 17),),
                 onPressed: () {
                   Navigator.pop(context);
                   return;
@@ -79,21 +80,22 @@ class _RemeasureTroughLoadingScreenState
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
+            backgroundColor: Colors.black87,
             title: Text(
                 'You have already entered different leaf grade in trough ' +
                     '${int.parse(_troughNum.text)}' +
                     ' box ' +
-                    '${int.parse(_boxNum.text)}'),
+                    '${int.parse(_boxNum.text)}',style: TextStyle(color: Colors.white, fontSize: 18),),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  const Text('Please check the Leaf Grade !'),
+                  const Text('Please check the Leaf Grade !',style: TextStyle(color: Colors.white, fontSize: 17),),
                 ],
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('OK'),
+                child: const Text('OK',style: TextStyle(fontSize: 17),),
                 onPressed: () {
                   Navigator.pop(context);
                   return;
@@ -120,16 +122,17 @@ class _RemeasureTroughLoadingScreenState
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: AlertDialog(
-                  title: const Text('Warning !'),
+                  title: const Text('Warning !',style: TextStyle(color: Colors.white, fontSize: 18),),
+                  backgroundColor: Colors.black87,
                   content: ListBody(
                     children: <Widget>[
-                      const Text('Error has occured'),
-                      Text(error.toString()),
+                      const Text('Error has occured',style: TextStyle(color: Colors.white, fontSize: 17),),
+                      Text(error.toString(),style: TextStyle(color: Colors.white, fontSize: 17),),
                     ],
                   ),
                   actions: <Widget>[
                     TextButton(
-                      child: const Text('Okay'),
+                      child: const Text('Okay',style: TextStyle(fontSize: 17),),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
@@ -180,6 +183,7 @@ class _RemeasureTroughLoadingScreenState
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : inputScreenBackgroundImage,
           gradient: kUIGradient,
         ),
         child: SafeArea(
@@ -196,9 +200,11 @@ class _RemeasureTroughLoadingScreenState
                       width: _width * 0.4,
                       child: TextFormField(
                         controller: _troughNum,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           labelText: 'Trough Number : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,
@@ -214,6 +220,7 @@ class _RemeasureTroughLoadingScreenState
                         style: const TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold,
+                            color: kTextInputColor
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
@@ -247,9 +254,11 @@ class _RemeasureTroughLoadingScreenState
                       width: _width * 0.4,
                       child: TextFormField(
                         controller: _boxNum,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           labelText: 'Box Number : ',
                           labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           errorStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,
@@ -265,6 +274,7 @@ class _RemeasureTroughLoadingScreenState
                         style: const TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold,
+                            color: kTextInputColor
                         ),
                         validator: (value) {
                           if (value.isEmpty) {

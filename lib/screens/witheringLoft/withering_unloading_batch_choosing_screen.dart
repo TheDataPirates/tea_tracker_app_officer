@@ -31,17 +31,18 @@ class _WitheringUnloadingBatchChoosingScreenState
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('You have already made batch ' + '${int.parse(_batchNum.text)}'),
+            title: Text('You have already made batch ' + '${int.parse(_batchNum.text)}',style: TextStyle (color: Colors.white, fontSize: 18),),
+            backgroundColor: Colors.black87,
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  const Text('Please enter a different batch number !'),
+                  const Text('Please enter a different batch number !',style: TextStyle (color: Colors.white, fontSize: 17),),
                 ],
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('OK'),
+                child: const Text('OK',style: TextStyle (fontSize: 17),),
                 onPressed: () {
                   Navigator.pop(context);
                   return;
@@ -102,6 +103,7 @@ class _WitheringUnloadingBatchChoosingScreenState
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : inputScreenBackgroundImage,
             gradient: kUIGradient,
         ),
         child: SafeArea(
@@ -118,9 +120,11 @@ class _WitheringUnloadingBatchChoosingScreenState
                       width: _width * 0.4,
                       child: TextFormField(
                         controller: _batchNum,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                             labelText: 'Batch Number : ',
                             labelStyle: kTextFormFieldLabelStyle,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                             errorStyle: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17.0),
                             contentPadding: const EdgeInsets.all(30.0),
