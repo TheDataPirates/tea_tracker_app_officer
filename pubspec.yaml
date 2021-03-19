@@ -77,6 +77,7 @@ flutter:
     - images/new3.jpg
     - images/new4.jpg
     - images/new5.jpg
+    - images/p1.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:
