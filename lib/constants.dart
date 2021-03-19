@@ -8,9 +8,9 @@ const kTextFieldLabelStyle = TextStyle(
 );
 
 const kTextLotlistStyle = TextStyle(
-  fontSize: 25,
+  fontSize: 30,
   fontWeight: FontWeight.w700,
-  color: Colors.black,
+  color: Colors.white,
   height: 2,
 );
 

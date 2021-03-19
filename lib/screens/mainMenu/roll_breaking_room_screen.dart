@@ -34,17 +34,18 @@ class _RollBreakingRoomScreenState extends State<RollBreakingRoomScreen> {
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('You have already used rollbreaking turn ' + '${int.parse(_rollBreakingTurn.text)}' + ' on batch ' + '${int.parse(_batchNum.text)}'),
+            backgroundColor: Colors.black87,
+            title: Text('You have already used rollbreaking turn ' + '${int.parse(_rollBreakingTurn.text)}' + ' on batch ' + '${int.parse(_batchNum.text)}',style: TextStyle(color: Colors.white, fontSize: 18),),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  const Text('Please enter a different rollbreaking turn !'),
+                  const Text('Please enter a different rollbreaking turn !',style: TextStyle(color: Colors.white, fontSize: 17),),
                 ],
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('OK'),
+                child: const Text('OK',style: TextStyle(fontSize: 17),),
                 onPressed: () {
                   Navigator.pop(context);
                   return;
@@ -60,17 +61,18 @@ class _RollBreakingRoomScreenState extends State<RollBreakingRoomScreen> {
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('You have already ended batch ' + '${int.parse(_batchNum.text)}'),
+            title: Text('You have already ended batch ' + '${int.parse(_batchNum.text)}',style: TextStyle(color: Colors.white, fontSize: 18),),
+            backgroundColor: Colors.black87,
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  const Text('Please try a different batch number !'),
+                  const Text('Please try a different batch number !',style: TextStyle(color: Colors.white, fontSize: 17),),
                 ],
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('OK'),
+                child: const Text('OK',style: TextStyle(fontSize: 17),),
                 onPressed: () {
                   Navigator.pop(context);
                   return;
@@ -86,17 +88,18 @@ class _RollBreakingRoomScreenState extends State<RollBreakingRoomScreen> {
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('You have not created batch ' + '${int.parse(_batchNum.text)}'),
+            title: Text('You have not created batch ' + '${int.parse(_batchNum.text)}',style: TextStyle(color: Colors.white, fontSize: 18),),
+            backgroundColor: Colors.black87,
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  const Text('Please enter a different batch number !'),
+                  const Text('Please enter a different batch number !',style: TextStyle(color: Colors.white, fontSize: 17),),
                 ],
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('OK'),
+                child: const Text('OK',style: TextStyle(fontSize: 17),),
                 onPressed: () {
                   Navigator.pop(context);
                   return;
@@ -123,16 +126,17 @@ class _RollBreakingRoomScreenState extends State<RollBreakingRoomScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: AlertDialog(
-                  title: const Text('Warning !'),
+                  title: const Text('Warning !',style: TextStyle(color: Colors.white, fontSize: 18),),
+                  backgroundColor: Colors.black87,
                   content: ListBody(
                     children: <Widget>[
-                      const Text('Error has occured'),
-                      Text(e.toString()),
+                      const Text('Error has occured',style: TextStyle(color: Colors.white, fontSize: 17),),
+                      Text(e.toString(),style: TextStyle(color: Colors.white, fontSize: 17),),
                     ],
                   ),
                   actions: <Widget>[
                     TextButton(
-                      child: const Text('Okay'),
+                      child: const Text('Okay',style: TextStyle(fontSize: 17),),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },

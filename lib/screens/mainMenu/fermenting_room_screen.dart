@@ -38,18 +38,19 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
+            backgroundColor: Colors.black87,
             title: Text(
-                'You have not created batch ' + '${int.parse(_batchNum.text)}'),
+                'You have not created batch ' + '${int.parse(_batchNum.text)}',style: TextStyle(color: Colors.white, fontSize: 18),),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  const Text('Please enter a different batch number !'),
+                  const Text('Please enter a different batch number !',style: TextStyle(color: Colors.white, fontSize: 17),),
                 ],
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('OK'),
+                child: const Text('OK',style: TextStyle(fontSize: 17),),
                 onPressed: () {
                   Navigator.pop(context);
                   return;
@@ -71,18 +72,19 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
           barrierDismissible: false, // user must tap button!
           builder: (BuildContext context) {
             return AlertDialog(
+              backgroundColor: Colors.black87,
               title: Text('You have not created dhool ' +
-                  '${int.parse(_dhoolNum.text)}'),
+                  '${int.parse(_dhoolNum.text)}',style: TextStyle(color: Colors.white, fontSize: 18),),
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
-                    const Text('Please enter a different dhool number !'),
+                    const Text('Please enter a different dhool number !',style: TextStyle(color: Colors.white, fontSize: 17),),
                   ],
                 ),
               ),
               actions: <Widget>[
                 TextButton(
-                  child: const Text('OK'),
+                  child: const Text('OK',style: TextStyle(fontSize: 17),),
                   onPressed: () {
                     Navigator.pop(context);
                     return;
@@ -103,19 +105,20 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
           barrierDismissible: false, // user must tap button!
           builder: (BuildContext context) {
             return AlertDialog(
+              backgroundColor: Colors.black87,
               title: Text('You have already created fermented dhool ' +
-                  '${int.parse(_dhoolNum.text)}'),
+                  '${int.parse(_dhoolNum.text)}',style: TextStyle(color: Colors.white, fontSize: 18),),
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
                     const Text(
-                        'Please enter a different fermented dhool number !'),
+                        'Please enter a different fermented dhool number !',style: TextStyle(color: Colors.white, fontSize: 17),),
                   ],
                 ),
               ),
               actions: <Widget>[
                 TextButton(
-                  child: const Text('OK'),
+                  child: const Text('OK',style: TextStyle(fontSize: 17),),
                   onPressed: () {
                     Navigator.pop(context);
                     return;
@@ -143,16 +146,17 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: AlertDialog(
-                    title: const Text('Warning !'),
+                    title: const Text('Warning !',style: TextStyle(color: Colors.white, fontSize: 18),),
+                    backgroundColor: Colors.black87,
                     content: ListBody(
                       children: <Widget>[
-                        const Text('Error has occured'),
-                        Text(e.toString()),
+                        const Text('Error has occured',style: TextStyle(color: Colors.white, fontSize: 17),),
+                        Text(e.toString(),style: TextStyle(color: Colors.white, fontSize: 17),),
                       ],
                     ),
                     actions: <Widget>[
                       TextButton(
-                        child: const Text('Okay'),
+                        child: const Text('Okay',style: TextStyle(fontSize: 17),),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
@@ -176,18 +180,19 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
           barrierDismissible: false, // user must tap button!
           builder: (BuildContext context) {
             return AlertDialog(
+              backgroundColor: Colors.black87,
               title: Text('You have not created dhool ' +
-                  _dhoolNum.text),
+                  _dhoolNum.text,style: TextStyle(color: Colors.white, fontSize: 18),),
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
-                    const Text('Please enter a different dhool number !'),
+                    const Text('Please enter a different dhool number !',style: TextStyle(color: Colors.white, fontSize: 17),),
                   ],
                 ),
               ),
               actions: <Widget>[
                 TextButton(
-                  child: const Text('OK'),
+                  child: const Text('OK',style: TextStyle(fontSize: 17),),
                   onPressed: () {
                     Navigator.pop(context);
                     return;
@@ -208,19 +213,20 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
           barrierDismissible: false, // user must tap button!
           builder: (BuildContext context) {
             return AlertDialog(
+              backgroundColor: Colors.black87,
               title: Text('You have already created fermented dhool ' +
-                  _dhoolNum.text),
+                  _dhoolNum.text,style: TextStyle(color: Colors.white, fontSize: 18),),
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
                     const Text(
-                        'Please enter a different fermented dhool number !'),
+                        'Please enter a different fermented dhool number !',style: TextStyle(color: Colors.white, fontSize: 17),),
                   ],
                 ),
               ),
               actions: <Widget>[
                 TextButton(
-                  child: const Text('OK'),
+                  child: const Text('OK',style: TextStyle(fontSize: 17),),
                   onPressed: () {
                     Navigator.pop(context);
                     return;
@@ -248,16 +254,17 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: AlertDialog(
-                    title: const Text('Warning !'),
+                    backgroundColor: Colors.black87,
+                    title: const Text('Warning !',style: TextStyle(color: Colors.white, fontSize: 18),),
                     content: ListBody(
                       children: <Widget>[
-                        const Text('Error has occured'),
-                        Text(e.toString()),
+                        const Text('Error has occured',style: TextStyle(color: Colors.white, fontSize: 17),),
+                        Text(e.toString(),style: TextStyle(color: Colors.white, fontSize: 17),),
                       ],
                     ),
                     actions: <Widget>[
                       TextButton(
-                        child: const Text('Okay'),
+                        child: const Text('Okay',style: TextStyle(fontSize: 17),),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
@@ -288,16 +295,17 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: AlertDialog(
-                  title: const Text('Warning !'),
+                  backgroundColor: Colors.black87,
+                  title: const Text('Warning !',style: TextStyle(color: Colors.white, fontSize: 18),),
                   content: ListBody(
                     children: <Widget>[
-                      const Text('Error has occured'),
-                      Text(e.toString()),
+                      const Text('Error has occured',style: TextStyle(color: Colors.white, fontSize: 17),),
+                      Text(e.toString(),style: TextStyle(color: Colors.white, fontSize: 17),),
                     ],
                   ),
                   actions: <Widget>[
                     TextButton(
-                      child: const Text('Okay'),
+                      child: const Text('Okay',style: TextStyle(fontSize: 17),),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },

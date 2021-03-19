@@ -40,7 +40,8 @@ class InputField extends StatelessWidget {
           attribute: labelText,
           decoration: InputDecoration(
             errorStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-            contentPadding: const EdgeInsets.symmetric(vertical: 40.0),
+            contentPadding:
+            EdgeInsets.fromLTRB(16.0, 40.0, 16.0, 40.0),
             labelText: labelText,
               labelStyle: kInputScreenContainerDisplayText,
             enabledBorder: kEnabledBorder2,

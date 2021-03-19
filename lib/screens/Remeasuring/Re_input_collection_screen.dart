@@ -73,16 +73,17 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
           barrierDismissible: false, // user must tap button!
           builder: (BuildContext context) {
             return AlertDialog(
-              title: const Text('Warning !'),
+              title: const Text('Warning !',style: TextStyle(color: Colors.white, fontSize: 18),),
+              backgroundColor: Colors.black87,
               content: ListBody(
                 children: <Widget>[
-                  const Text('Error has occured'),
-                  Text(e.toString()),
+                  const Text('Error has occured',style: TextStyle(color: Colors.white, fontSize: 17),),
+                  Text(e.toString(),style: TextStyle(color: Colors.white, fontSize: 17),),
                 ],
               ),
               actions: <Widget>[
                 TextButton(
-                  child: const Text('Okay'),
+                  child: const Text('Okay',style: TextStyle(fontSize: 17),),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -134,50 +135,53 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
                                     borderRadius: BorderRadius.circular(13),
                                   ),
                                   width: mediaQuery.width * width,
-                                  child: FormBuilderDropdown(
-                                    dropdownColor: Colors.black54,
-                                    attribute: "Container Type",
-                                    decoration: InputDecoration(
-                                      labelText: "  Container Type",
-                                      errorStyle: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w700),
-                                      contentPadding: const EdgeInsets.symmetric(
-                                          vertical: 40.0),
-                                      labelStyle: kInputScreenContainerDisplayText,
-                                      enabledBorder: kEnabledBorder2,
-                                      focusedBorder: kFocusedBorder2,
-                                      focusedErrorBorder:  kFocusedErrorBorder2,
-                                      errorBorder: kErrorBorder2,
+                                  child: ButtonTheme(
+                                   alignedDropdown: true,
+                                    child: FormBuilderDropdown(
+                                      dropdownColor: Colors.black54,
+                                      attribute: "Container Type",
+                                      decoration: InputDecoration(
+                                        labelText: "  Container Type",
+                                        errorStyle: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w700),
+                                        contentPadding: const EdgeInsets.symmetric(
+                                            vertical: 40.0),
+                                        labelStyle: kInputScreenContainerDisplayText,
+                                        enabledBorder: kEnabledBorder2,
+                                        focusedBorder: kFocusedBorder2,
+                                        focusedErrorBorder:  kFocusedErrorBorder2,
+                                        errorBorder: kErrorBorder2,
+                                      ),
+
+                                      style: TextStyle(
+                                          fontSize: 40,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                      // initialValue:
+
+                                      validators: [
+                                        FormBuilderValidators.required(),
+                                        // ignore: missing_retur
+                                      ],
+                                      items: ['A', 'B', 'C', 'D', 'E']
+                                          .map((container) => DropdownMenuItem(
+                                          value: container,
+                                          child: Text("$container")))
+                                          .toList(),
+                                      onSaved: (value) {
+                                        _editedLot = Lot(
+                                          container_type: value,
+                                          no_of_containers:
+                                          _editedLot.no_of_containers,
+                                          gross_weight: _editedLot.gross_weight,
+                                          leaf_grade: _editedLot.leaf_grade,
+                                          water: _editedLot.water,
+                                          course_leaf: _editedLot.course_leaf,
+                                          other: _editedLot.other,
+                                        );
+                                      },
                                     ),
-
-                                    style: TextStyle(
-                                        fontSize: 40,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                    // initialValue:
-
-                                    validators: [
-                                      FormBuilderValidators.required(),
-                                      // ignore: missing_retur
-                                    ],
-                                    items: ['A', 'B', 'C', 'D', 'E']
-                                        .map((container) => DropdownMenuItem(
-                                        value: container,
-                                        child: Text("$container")))
-                                        .toList(),
-                                    onSaved: (value) {
-                                      _editedLot = Lot(
-                                        container_type: value,
-                                        no_of_containers:
-                                        _editedLot.no_of_containers,
-                                        gross_weight: _editedLot.gross_weight,
-                                        leaf_grade: _editedLot.leaf_grade,
-                                        water: _editedLot.water,
-                                        course_leaf: _editedLot.course_leaf,
-                                        other: _editedLot.other,
-                                      );
-                                    },
                                   ),
                                 ),
                               ),
@@ -196,47 +200,50 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
                                       borderRadius: BorderRadius.circular(13),
                                   ),
                                   width: mediaQuery.width * width,
-                                  child: FormBuilderDropdown(
-                                    dropdownColor: Colors.black54,
-                                    attribute: "No of Containers",
-                                    decoration: InputDecoration(
-                                      labelText: " No of Containers",
-                                      errorStyle: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w700),
-                                      contentPadding: const EdgeInsets.symmetric(
-                                          vertical: 40.0),
-                                      labelStyle: kInputScreenContainerDisplayText,
-                                      enabledBorder: kEnabledBorder2,
-                                      focusedBorder: kFocusedBorder2,
-                                      focusedErrorBorder:  kFocusedErrorBorder2,
-                                      errorBorder: kErrorBorder2,
-                                    ),
-                                    style: TextStyle(
-                                        fontSize: 40,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                    // initialValue:
+                                  child: ButtonTheme(
+                                    alignedDropdown: true,
+                                    child: FormBuilderDropdown(
+                                      dropdownColor: Colors.black54,
+                                      attribute: "No of Containers",
+                                      decoration: InputDecoration(
+                                        labelText: " No of Containers",
+                                        errorStyle: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w700),
+                                        contentPadding: const EdgeInsets.symmetric(
+                                            vertical: 40.0),
+                                        labelStyle: kInputScreenContainerDisplayText,
+                                        enabledBorder: kEnabledBorder2,
+                                        focusedBorder: kFocusedBorder2,
+                                        focusedErrorBorder:  kFocusedErrorBorder2,
+                                        errorBorder: kErrorBorder2,
+                                      ),
+                                      style: TextStyle(
+                                          fontSize: 40,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                      // initialValue:
 
-                                    validators: [
-                                      FormBuilderValidators.required(),
-                                    ],
-                                    items: ['1', '2', '3', '4', '5']
-                                        .map((container) => DropdownMenuItem(
-                                        value: container,
-                                        child: Text("$container")))
-                                        .toList(),
-                                    onSaved: (value) {
-                                      _editedLot = Lot(
-                                        container_type: _editedLot.container_type,
-                                        no_of_containers: int.parse(value),
-                                        gross_weight: _editedLot.gross_weight,
-                                        leaf_grade: _editedLot.leaf_grade,
-                                        water: _editedLot.water,
-                                        course_leaf: _editedLot.course_leaf,
-                                        other: _editedLot.other,
-                                      );
-                                    },
+                                      validators: [
+                                        FormBuilderValidators.required(),
+                                      ],
+                                      items: ['1', '2', '3', '4', '5']
+                                          .map((container) => DropdownMenuItem(
+                                          value: container,
+                                          child: Text("$container")))
+                                          .toList(),
+                                      onSaved: (value) {
+                                        _editedLot = Lot(
+                                          container_type: _editedLot.container_type,
+                                          no_of_containers: int.parse(value),
+                                          gross_weight: _editedLot.gross_weight,
+                                          leaf_grade: _editedLot.leaf_grade,
+                                          water: _editedLot.water,
+                                          course_leaf: _editedLot.course_leaf,
+                                          other: _editedLot.other,
+                                        );
+                                      },
+                                    ),
                                   ),
                                 ),
                               ),
@@ -255,46 +262,49 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
                                     borderRadius: BorderRadius.circular(13),
                                   ),
                                   width: mediaQuery.width * width,
-                                  child: FormBuilderDropdown(
-                                    dropdownColor: Colors.black54,
-                                    attribute: "Grade of GL",
-                                    decoration: InputDecoration(
-                                      labelText: "  Grade of GL",
-                                      labelStyle: kInputScreenContainerDisplayText,
-                                      errorStyle: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w700),
-                                      contentPadding: const EdgeInsets.symmetric(
-                                          vertical: 40.0),
-                                      enabledBorder: kEnabledBorder2,
-                                      focusedBorder: kFocusedBorder2,
-                                      focusedErrorBorder:  kFocusedErrorBorder2,
-                                      errorBorder: kErrorBorder2,
+                                  child: ButtonTheme(
+                                    alignedDropdown: true,
+                                    child: FormBuilderDropdown(
+                                      dropdownColor: Colors.black54,
+                                      attribute: "Grade of GL",
+                                      decoration: InputDecoration(
+                                        labelText: "  Grade of GL",
+                                        labelStyle: kInputScreenContainerDisplayText,
+                                        errorStyle: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w700),
+                                        contentPadding: const EdgeInsets.symmetric(
+                                            vertical: 40.0),
+                                        enabledBorder: kEnabledBorder2,
+                                        focusedBorder: kFocusedBorder2,
+                                        focusedErrorBorder:  kFocusedErrorBorder2,
+                                        errorBorder: kErrorBorder2,
+                                      ),
+                                      style: TextStyle(
+                                          fontSize: 40,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                      validators: [
+                                        FormBuilderValidators.required(),
+                                      ],
+                                      items: ['A', 'B', 'C']
+                                          .map((container) => DropdownMenuItem(
+                                          value: container,
+                                          child: Text("$container")))
+                                          .toList(),
+                                      onSaved: (value) {
+                                        _editedLot = Lot(
+                                          container_type: _editedLot.container_type,
+                                          no_of_containers:
+                                          _editedLot.no_of_containers,
+                                          gross_weight: _editedLot.gross_weight,
+                                          leaf_grade: value,
+                                          water: _editedLot.water,
+                                          course_leaf: _editedLot.course_leaf,
+                                          other: _editedLot.other,
+                                        );
+                                      },
                                     ),
-                                    style: TextStyle(
-                                        fontSize: 40,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                    validators: [
-                                      FormBuilderValidators.required(),
-                                    ],
-                                    items: ['A', 'B', 'C']
-                                        .map((container) => DropdownMenuItem(
-                                        value: container,
-                                        child: Text("$container")))
-                                        .toList(),
-                                    onSaved: (value) {
-                                      _editedLot = Lot(
-                                        container_type: _editedLot.container_type,
-                                        no_of_containers:
-                                        _editedLot.no_of_containers,
-                                        gross_weight: _editedLot.gross_weight,
-                                        leaf_grade: value,
-                                        water: _editedLot.water,
-                                        course_leaf: _editedLot.course_leaf,
-                                        other: _editedLot.other,
-                                      );
-                                    },
                                   ),
                                 ),
                               ),
