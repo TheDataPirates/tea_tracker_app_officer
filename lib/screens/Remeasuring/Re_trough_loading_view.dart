@@ -5,6 +5,7 @@ import 'package:teatrackerappofficer/providers/withering/ended_loading_trough_bo
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/widgets/trough_loading_item.dart';
 import 'package:teatrackerappofficer/constants.dart';
+import 'package:teatrackerappofficer/widgets/trough_loading_item_agent.dart';
 
 class RemeasureTroughLoadingViewScreen extends StatefulWidget {
   @override
@@ -80,7 +81,33 @@ class _RemeasureTroughLoadingViewScreenState
                           : ListView.builder(
                               itemCount: WitheringLoadingUnloadingRollingProvider
                                   .troughLoadingItems.length,
-                              itemBuilder: (ctx, i) => TroughLoadingItem(
+                              itemBuilder: (ctx, i) => WitheringLoadingUnloadingRollingProvider
+                                  .troughLoadingItems[i].troughNumber==0 ?
+                              TroughLoadingItemAgent(
+                                id: WitheringLoadingUnloadingRollingProvider
+                                    .troughLoadingItems[i].id,
+                                troughNumber:
+                                WitheringLoadingUnloadingRollingProvider
+                                    .troughLoadingItems[i].troughNumber,
+                                boxNumber:
+                                WitheringLoadingUnloadingRollingProvider
+                                    .troughLoadingItems[i].boxNumber,
+                                gradeGL: WitheringLoadingUnloadingRollingProvider
+                                    .troughLoadingItems[i].gradeOfGL,
+                                recentWeight:
+                                WitheringLoadingUnloadingRollingProvider
+                                    .troughLoadingItems[i].netWeight,
+//                              netWeight: 10.0,
+                                netWeight: WitheringLoadingUnloadingRollingProvider
+                                    .totalTroughBoxWeight(
+                                    WitheringLoadingUnloadingRollingProvider
+                                        .troughLoadingItems[i].troughNumber,
+                                    WitheringLoadingUnloadingRollingProvider
+                                        .troughLoadingItems[i].boxNumber,
+                                    DateTime
+                                        .now()), //A function should be written to todays whole weight of trough number box number
+                              ):
+                                  TroughLoadingItem(
                                 id: WitheringLoadingUnloadingRollingProvider
                                     .troughLoadingItems[i].id,
                                 troughNumber:
