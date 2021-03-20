@@ -138,7 +138,7 @@ class _PrintScreenState extends State<PrintPreviewScreen> {
               child: RaisedButton.icon(
                 onPressed: () {
                   // Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
-                  Navigator.of(context).pushNamed("MainMenu");
+                  Navigator.of(context).pushNamed("PrintScreen");
                 },
                 icon: const Icon(Icons.print, color: Colors.white,),
                 label: const Text(

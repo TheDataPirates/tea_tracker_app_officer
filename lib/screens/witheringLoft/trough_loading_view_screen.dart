@@ -45,7 +45,7 @@ class _TroughLoadingViewScreenState extends State<TroughLoadingViewScreen> {
           IconButton(
             icon: const Icon(Icons.check),
             onPressed: () {
-              Navigator.of(context).pushNamed('PrintScreen');
+              Navigator.of(context).pushNamed('PrintPreviewScreen');
 //               Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
             },
             disabledColor: Colors.white,

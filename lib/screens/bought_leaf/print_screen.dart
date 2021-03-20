@@ -96,8 +96,8 @@ class _PrintScreenState extends State<PrintScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  // crossAxisAlignment: CrossAxisAlignment.center,
+                  // mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     SizedBox(
                       width: 10,
@@ -125,16 +125,19 @@ class _PrintScreenState extends State<PrintScreen> {
                     ),
                     Expanded(
                       child: Container(
-                          height: mediaQuery.height * 0.07,
-                          width: mediaQuery.width,
+
                         decoration: BoxDecoration(
+
                           color: Colors.black.withOpacity(0.5),
                           borderRadius: BorderRadius.circular(30.0),
                             border: Border.all()
                         ),
+                          height: mediaQuery.height * 0.07,
+                          width: mediaQuery.width * 0.5,
                           child: Container(
-                            padding: const EdgeInsets.only(left: 20.0, right: 10.0,top: 5),
+                            padding: const EdgeInsets.only(left: 20.0, right: 10.0,top: 5.0),
                             child: DropdownButton(
+                              isExpanded: true,
                               items: _getDeviceItems(),
                               onChanged: (value) => setState(() => _device = value),
                               value: _device,
