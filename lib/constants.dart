@@ -134,10 +134,11 @@ colorFilter: new ColorFilter.mode(
 Colors.black.withOpacity(0.8), BlendMode.dstATop),
 );
 
-const printScreenBackgroundImage = DecorationImage(
+var printScreenBackgroundImage = DecorationImage(
   image: AssetImage("images/new5.jpg"),
   fit: BoxFit.cover,
-  colorFilter: ColorFilter.mode(Color(0xE6000000),BlendMode.dstATop),
+  colorFilter: new ColorFilter.mode(
+    Colors.black.withOpacity(0.8), BlendMode.dstATop),
 );
 
 var textFieldfillColor = Colors.black.withOpacity(0.5);

@@ -96,21 +96,12 @@ class _PrintScreenState extends State<PrintScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Row(
-                  // crossAxisAlignment: CrossAxisAlignment.center,
-                  // mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     SizedBox(
                       width: 10,
                     ),
-                    // Container(
-                    //   child: FormBuilderTextField(
-                    //     // style: TextStyle(fontFamily: 'Montserrat', fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-                    //     decoration: InputDecoration(
-                    //       filled: true,
-                    //       fillColor: Colors.black.withOpacity(0.8),
-                    //     ),
-                    //   ),
-                    // ),
                     Text(
                       'Device : ',
                       style: TextStyle(
@@ -125,9 +116,7 @@ class _PrintScreenState extends State<PrintScreen> {
                     ),
                     Expanded(
                       child: Container(
-
                         decoration: BoxDecoration(
-
                           color: Colors.black.withOpacity(0.5),
                           borderRadius: BorderRadius.circular(30.0),
                             border: Border.all()
@@ -147,6 +136,7 @@ class _PrintScreenState extends State<PrintScreen> {
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
+                              dropdownColor: Colors.black54,
                             ),
                           )
                       )
@@ -199,7 +189,7 @@ class _PrintScreenState extends State<PrintScreen> {
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    color: _connected ? Colors.red : const Color(0xff099857),
+                    color: _connected ? Colors.yellow : const Color(0xff099857),
                     onPressed: _connected ? _disconnect : _connect,
                     child: Text(
                       _connected ? 'Disconnect' : 'CONNECT',
@@ -224,7 +214,7 @@ class _PrintScreenState extends State<PrintScreen> {
                     color: const Color(0xff099857),
                     onPressed: () {
                       receipt.sample(provider.currUser.user_id, provider.newSupplier.supplierName, provider.newSupplier.supplierId, gross, deductions, net);
-                      Navigator.pushNamed(context, "MainMenuScreen");
+                      Navigator.pushNamed(context, "MainMenu");
                     },
                     child: Text(
                       'PRINT',

@@ -41,35 +41,41 @@ class _PrintScreenState extends State<PrintPreviewScreen> {
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           itemCount: teaCollections.lot_items.length,
-                          itemBuilder: (ctx, i) => Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CardContainer(
-                                mediaQuery: mediaQuery,
-                                lotData:
-                                    teaCollections.lot_items[i].container_type,
-                                labelText: 'Container type',
-                              ),
-                              CardContainer(
-                                  mediaQuery: mediaQuery,
-                                  lotData: teaCollections.lot_items[i].leaf_grade,
-                                  labelText: 'Grade of GL'),
-                              CardContainer(
-                                  mediaQuery: mediaQuery,
-                                  lotData: teaCollections
-                                      .lot_items[i].no_of_containers,
-                                  labelText: 'Number of Containers'),
-                              CardContainer(
+                          itemBuilder: (ctx, i) => Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                CardContainer(
                                   mediaQuery: mediaQuery,
                                   lotData:
-                                      teaCollections.lot_items[i].gross_weight,
-                                  labelText: 'Gross Weight'),
-                            ],
+                                      teaCollections.lot_items[i].container_type,
+                                  labelText: 'Container type',
+                                ),
+                                CardContainer(
+                                    mediaQuery: mediaQuery,
+                                    lotData: teaCollections.lot_items[i].leaf_grade,
+                                    labelText: 'Grade of GL'),
+                                CardContainer(
+                                    mediaQuery: mediaQuery,
+                                    lotData: teaCollections
+                                        .lot_items[i].no_of_containers,
+                                    labelText: 'Number of Containers'),
+                                CardContainer(
+                                    mediaQuery: mediaQuery,
+                                    lotData:
+                                        teaCollections.lot_items[i].gross_weight,
+                                    labelText: 'Gross Weight'),
+                              ],
+                            ),
+                            padding: EdgeInsets.only(top: 10,bottom: 10),
                           ),
                         ),
                 ),
               ),
             ),
+            // SizedBox(
+            //   height: 10,
+            // ),
             Container(
               child: Text(
                 'DEDUCTIONS',
@@ -108,7 +114,12 @@ class _PrintScreenState extends State<PrintPreviewScreen> {
                     ),
                     Text(
                       'Total deductions',
-                      style: TextStyle(color: Colors.white, fontSize: 35, fontStyle: FontStyle.italic),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 35,
+                          fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     // SizedBox(width: 0.05,),
                     Container(
@@ -133,20 +144,20 @@ class _PrintScreenState extends State<PrintPreviewScreen> {
               ),
             ),
             Container(
-              height: mediaQuery.height * 0.05,
+              height: mediaQuery.height * 0.065,
               width: double.infinity,
               child: RaisedButton.icon(
                 onPressed: () {
                   // Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
                   Navigator.of(context).pushNamed("PrintScreen");
                 },
-                icon: const Icon(Icons.print, color: Colors.white,),
+                icon: const Icon(Icons.print, color: Colors.white, size: 40,),
                 label: const Text(
                   'PRINT',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                  style: TextStyle(fontSize: 40, color: Colors.white),
                 ),
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                color: const Color(0xff099857),
+                color: const Color(0xff099857).withOpacity(0.8),
               ),
             )
           ],
