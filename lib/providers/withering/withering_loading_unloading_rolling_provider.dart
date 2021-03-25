@@ -553,7 +553,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         .firstWhere((witherUnload) => witherUnload.id == id);
   }
 
-  void addWitheringUnloadingItem(WitheringUnloading witheringUnloading) {
+  Future<void> addWitheringUnloadingItem(WitheringUnloading witheringUnloading, String authToken) async{
     final newWitheringUnloadingItem = WitheringUnloading(
       id: DateTime.now().toString(),
       batchNumber: witheringUnloading.batchNumber,
@@ -561,10 +561,77 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       boxNumber: witheringUnloading.boxNumber,
       date: DateTime.now(),
       lotWeight: witheringUnloading.lotWeight,
+      witheringPct: witheringUnloading.witheringPct,
     );
+    const url = '$kURL/loft/unloading';
 
-    _witheringUnloadingItems.add(witheringUnloading);
-    notifyListeners();
+
+    try {
+      final response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'id': DateTime.now().toIso8601String(),
+          'troughNumber': witheringUnloading.troughNumber,
+          'date': DateTime.now().toIso8601String(),
+          'boxNumber': witheringUnloading.boxNumber,
+          'lotWeight': witheringUnloading.lotWeight,
+          'batchNumber': witheringUnloading.batchNumber,
+          'witheringPct': witheringUnloading.witheringPct,
+        }),
+      );
+      if (response.statusCode == 200) {
+        _witheringUnloadingItems.add(witheringUnloading);
+        notifyListeners();
+      } else {
+        throw Exception('Failed ');
+      }
+    } catch (error) {
+      throw error;
+    }
+
+  }
+
+  Future<void> fetchAndSetWitheringUnloadingItem(String authToken) async {
+    _witheringUnloadingItems = [];
+
+    const url = '$kURL/loft/unloadings';
+    try {
+      final dataList = await http.get(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+      );
+      final extractedDataList = jsonDecode(dataList.body);
+//      print(extractedDataList);
+      List loadedLots = extractedDataList['unloadings'];
+      print(loadedLots);
+//      loadedLots = [];
+      for (var i in loadedLots) {
+        var BNum = i['box_id'].toString();
+        var B_Num = BNum[3];
+
+        _witheringUnloadingItems.add(
+          WitheringUnloading(
+            id: i['id'] as String,
+            batchNumber: int.parse(i['BatchBatchNo'].toString()),
+            date: i['date'] == null ? DateTime.now(): DateTime.parse(i['date']),
+            troughNumber: int.parse(i['TroughTroughId'].toString()),
+            lotWeight: double.parse(i['unloading_weight'].toString()),
+            boxNumber: int.parse(B_Num),
+            witheringPct: double.parse(i['withered_pct'].toString()),
+          ),
+        );
+      }
+      notifyListeners();
+    } catch (error) {
+      print(error);
+    }
   }
 
   bool isTroughBoxUsed(int troughNo, int boxNo, DateTime dateTime) {
