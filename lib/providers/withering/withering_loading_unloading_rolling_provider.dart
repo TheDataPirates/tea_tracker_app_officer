@@ -1646,6 +1646,15 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         }
       }
     });
+    _dryingItems.forEach((dryingItem) {
+      if ((dryingItem.time.year == dateTime.year) &&
+          (dryingItem.time.month == dateTime.month) &&
+          (dryingItem.time.day == dateTime.day)) {
+        if (dryingItem.batchNumber == batchNum) {
+          totOut += dryingItem.drierOutWeight;
+        }
+      }
+    });
     totOutturn = (totOut / totIn) * 100.0;
     return totOutturn;
   }
@@ -1664,8 +1673,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 
   Future<void> fetchAndSetDifferenceReportItem(String authToken) async {
     _differenceReportItems = [];
-    const url = 'http://10.0.2.2:8080/diff/dreports';
-    const url2 = 'http://10.0.2.2:8080/diff/dreport';
+    const url = '$kURL/diff/dreports';
+    const url2 = '$kURL/diff/dreport';
     try {
       final response = await http.patch(
         url2,

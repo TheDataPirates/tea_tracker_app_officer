@@ -27,6 +27,7 @@ class WitheringFinishingViewScreen extends StatelessWidget {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : viewScreenBackgroundImage,
             gradient: kUIGradient,
         ),
         child: FutureBuilder(
@@ -69,14 +70,14 @@ class WitheringFinishingViewScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: Container(
-        width: 70.0,
-        height: 70.0,
+        width: 90.0,
+        height: 90.0,
         child: FittedBox(
           child: FloatingActionButton(
             child: const Icon(
               Icons.add,
               color: Colors.white,
-              size: 40.0,
+              size: 50.0,
             ),
             onPressed: () {
               Navigator.of(context).pushNamed('WitheringFinishing');

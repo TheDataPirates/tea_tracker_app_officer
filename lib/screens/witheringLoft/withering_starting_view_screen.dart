@@ -28,6 +28,7 @@ class WitheringStartingViewScreen extends StatelessWidget {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : viewScreenBackgroundImage,
             gradient: kUIGradient,
         ),
         child: FutureBuilder(
@@ -69,14 +70,19 @@ class WitheringStartingViewScreen extends StatelessWidget {
                 ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
+      floatingActionButton: Container(
+        height: 90.0,
+        width: 90.0,
+        child: FloatingActionButton(
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+            size: 50.0,
+          ),
+          onPressed: () {
+            Navigator.of(context).pushNamed('WitheringStarting');
+          },
         ),
-        onPressed: () {
-          Navigator.of(context).pushNamed('WitheringStarting');
-        },
       ),
     );
   }

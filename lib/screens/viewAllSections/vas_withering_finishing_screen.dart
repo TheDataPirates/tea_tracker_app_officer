@@ -20,7 +20,10 @@ class _VasWitheringFinishingScreenState extends State<VasWitheringFinishingScree
         title: const Text('Withering Finishing View'),
       ),
       body: Container(
-        decoration: BoxDecoration(gradient: kUIGradient),
+        decoration: BoxDecoration(
+            image : VASBackgroundImage,
+            gradient: kUIGradient
+        ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
                   listen: false)
@@ -33,7 +36,7 @@ class _VasWitheringFinishingScreenState extends State<VasWitheringFinishingScree
               : Consumer<WitheringLoadingUnloadingRollingProvider>(
                   child: Center(
                     child: const Text(
-                      'Got no Withering finishing items!',
+                      'Got no Withering Finishing items!',
                       style: kEmptyViewText,
                     ),
                   ),

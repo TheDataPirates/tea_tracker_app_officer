@@ -24,18 +24,19 @@ class _RemeasureLotListScreenState extends State<RemeasureLotListScreen> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Warning !'),
+          title: const Text('Warning !',style: TextStyle(color: Colors.white, fontSize: 18),),
+          backgroundColor: Colors.black87,
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                const Text('Your are going to delete the lot'),
-                const Text('Would you like to approve of this action?'),
+                const Text('Your are going to delete the lot',style: TextStyle(color: Colors.white, fontSize: 17),),
+                const Text('Would you like to approve of this action?',style: TextStyle(color: Colors.white, fontSize: 17),),
               ],
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Accept'),
+              child: const Text('Accept',style: TextStyle(fontSize: 17),),
               onPressed: () async {
                 try {
                   await Provider.of<TeaCollections>(context, listen: false)
@@ -48,18 +49,19 @@ class _RemeasureLotListScreenState extends State<RemeasureLotListScreen> {
                     barrierDismissible: false, // user must tap button!
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: Text('AlertDialog'),
+                        title: Text('AlertDialog',style: TextStyle(color: Colors.white, fontSize: 18),),
+                        backgroundColor: Colors.black87,
                         content: SingleChildScrollView(
                           child: ListBody(
                             children: <Widget>[
-                              Text('An error occurred'),
-                              Text('Something went wrong'),
+                              Text('An error occurred',style: TextStyle(color: Colors.white, fontSize: 17),),
+                              Text('Something went wrong',style: TextStyle(color: Colors.white, fontSize: 17),),
                             ],
                           ),
                         ),
                         actions: <Widget>[
                           FlatButton(
-                            child: Text("OK"),
+                            child: Text("OK",style: TextStyle(fontSize: 17),),
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
@@ -72,7 +74,7 @@ class _RemeasureLotListScreenState extends State<RemeasureLotListScreen> {
               },
             ),
             TextButton(
-              child: const Text('Decline'),
+              child: const Text('Decline',style: TextStyle(fontSize: 17),),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -108,6 +110,7 @@ class _RemeasureLotListScreenState extends State<RemeasureLotListScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : viewScreenBackgroundImage,
           gradient: kUIGradient,
         ),
         child: FutureBuilder(

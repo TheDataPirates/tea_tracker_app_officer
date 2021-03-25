@@ -26,18 +26,19 @@ class _ReMeasuringScreen extends State<ReMeasuring> {
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('AlertDialog'),
+            title: const Text('AlertDialog',style: TextStyle(color: Colors.white, fontSize: 18),),
+            backgroundColor: Colors.black87,
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  const Text('No supplier id or name entered'),
-                  const Text('Please Enter again'),
+                  const Text('No supplier id or name entered',style: TextStyle(color: Colors.white, fontSize: 17),),
+                  const Text('Please Enter again',style: TextStyle(color: Colors.white, fontSize: 17),),
                 ],
               ),
             ),
             actions: <Widget>[
               FlatButton(
-                child: const Text("OK"),
+                child: const Text("OK",style: TextStyle(fontSize: 17),),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -59,18 +60,19 @@ class _ReMeasuringScreen extends State<ReMeasuring> {
           barrierDismissible: false, // user must tap button!
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('AlertDialog'),
+              title: Text('AlertDialog',style: TextStyle(color: Colors.white, fontSize: 18),),
+              backgroundColor: Colors.black87,
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
-                    Text('An error occurred'),
-                    Text(error.toString()),
+                    Text('An error occurred',style: TextStyle(color: Colors.white, fontSize: 17),),
+                    Text(error.toString(),style: TextStyle(color: Colors.white, fontSize: 17),),
                   ],
                 ),
               ),
               actions: <Widget>[
                 FlatButton(
-                  child: Text("OK"),
+                  child: Text("OK",style: TextStyle(fontSize: 17),),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -88,6 +90,7 @@ class _ReMeasuringScreen extends State<ReMeasuring> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
+          image : inputScreenBackgroundImage,
           gradient: kUIGradient,
         ),
         child: Column(
@@ -105,10 +108,12 @@ class _ReMeasuringScreen extends State<ReMeasuring> {
                       child: TextField(
                         controller: supplierNoEditingController,
                         obscureText: false,
-                        style: const TextStyle(fontSize: 40.0),
+                        style: const TextStyle(fontSize: 40.0, color: kTextInputColor),
                         decoration: InputDecoration(
                           labelText: "Supplier No :",
                           labelStyle: kSupplierTextFormFieldText,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           contentPadding:
                               EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           enabledBorder: kEnabledBorder,
@@ -127,12 +132,14 @@ class _ReMeasuringScreen extends State<ReMeasuring> {
                       width: MediaQuery.of(context).size.width * 0.5,
                       child: TextField(
                         controller: supplierNameEditingController,
-                        style: const TextStyle(fontSize: 40.0),
+                        style: const TextStyle(fontSize: 40.0, color: kTextInputColor),
                         decoration: InputDecoration(
                           contentPadding:
                               EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           labelText: "Supplier Name :",
                           labelStyle: kSupplierTextFormFieldText,
+                          fillColor:textFieldfillColor,
+                          filled: true,
                           enabledBorder: kEnabledBorder,
                           focusedBorder: kFocusedBorder,
                         ),
@@ -144,7 +151,7 @@ class _ReMeasuringScreen extends State<ReMeasuring> {
             ),
             Container(
               width: double.infinity,
-//            height: MediaQuery.of(context).size.height * 0.05,
+            height: MediaQuery.of(context).size.height * 0.065,
               child: RaisedButton.icon(
                 onPressed: () {
                   submit();
@@ -155,7 +162,7 @@ class _ReMeasuringScreen extends State<ReMeasuring> {
                 ),
                 label: const Text(
                   'SUBMIT',
-                  style: const TextStyle(fontSize: 20, color: Colors.white),
+                  style: const TextStyle(fontSize: 22, color: Colors.white),
                 ),
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 color: const Color(0xff099857),

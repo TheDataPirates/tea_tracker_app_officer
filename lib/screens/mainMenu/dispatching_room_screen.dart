@@ -10,6 +10,7 @@ class DispatchingRoomScreen extends StatelessWidget {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : inputScreenBackgroundImage,
             gradient:kUIGradient,
         ),
       ),
