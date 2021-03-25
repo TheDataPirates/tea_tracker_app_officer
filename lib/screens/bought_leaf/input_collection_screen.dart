@@ -118,11 +118,14 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                     child: Column(
                       children: <Widget>[
                         Container(
-//                      color: Colors.amber,
                           height: mediaQuery.height * 0.4,
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: <Widget>[
+                              SizedBox(
+                                width: mediaQuery.width * 0.005,
+                              ),
                               Card(
                                 color: inputCollectionfillColor,
                                 elevation: 10,
@@ -142,9 +145,10 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                       dropdownColor: Colors.black54,
                                       decoration: InputDecoration(
                                         labelText: "  Container Type",
+                                        errorText: "text field is empty",
                                         errorStyle: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w700),
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w700,),
                                         contentPadding:
                                             const EdgeInsets.symmetric(
                                                 vertical: 40.0),
@@ -211,7 +215,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                         labelText: " No of Containers",
 
                                         errorStyle: TextStyle(
-                                            fontSize: 20,
+                                            fontSize: 18,
                                             fontWeight: FontWeight.w700),
                                         contentPadding:
                                             const EdgeInsets.symmetric(
@@ -279,7 +283,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                         labelStyle:
                                             kInputScreenContainerDisplayText,
                                         errorStyle: TextStyle(
-                                            fontSize: 20,
+                                            fontSize: 18,
                                             fontWeight: FontWeight.w700),
                                         contentPadding:
                                             const EdgeInsets.symmetric(
