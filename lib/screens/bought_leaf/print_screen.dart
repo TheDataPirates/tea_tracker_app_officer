@@ -1,21 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:teatrackerappofficer/main.dart';
+
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/constants.dart';
-import 'file:///E:/Uni/L2S1/Project/Frontend/lib/providers/bought_leaf/receipt.dart';
+import 'package:teatrackerappofficer/providers/bought_leaf/receipt.dart';
 import 'package:teatrackerappofficer/providers/bought_leaf/tea_collections_provider.dart';
-import 'package:teatrackerappofficer/screens/bought_leaf/print_preview_screen.dart';
-import 'package:blue_thermal_printer/blue_thermal_printer.dart';
-import 'package:teatrackerappofficer/providers/bought_leaf/user.dart';
 
+import 'package:blue_thermal_printer/blue_thermal_printer.dart';
 
 class PrintScreen extends StatefulWidget {
   @override
   _PrintScreenState createState() => _PrintScreenState();
 }
+
 class _PrintScreenState extends State<PrintScreen> {
   BlueThermalPrinter bluetooth = BlueThermalPrinter.instance;
 
@@ -32,17 +30,15 @@ class _PrintScreenState extends State<PrintScreen> {
     receipt = Receipt();
   }
 
-  Future <void> initPlatformState() async{
+  Future<void> initPlatformState() async {
     bool isConnected = await bluetooth.isConnected;
     List<BluetoothDevice> devices = [];
     try {
       devices = await bluetooth.getBondedDevices();
-    } on PlatformException {
+    } on PlatformException {}
 
-    }
-
-    bluetooth.onStateChanged().listen((state){
-      switch  (state) {
+    bluetooth.onStateChanged().listen((state) {
+      switch (state) {
         case BlueThermalPrinter.CONNECTED:
           setState(() {
             _connected = true;
@@ -64,7 +60,7 @@ class _PrintScreenState extends State<PrintScreen> {
       _devices = devices;
     });
 
-    if  (isConnected) {
+    if (isConnected) {
       setState(() {
         _connected = true;
       });
@@ -115,71 +111,72 @@ class _PrintScreenState extends State<PrintScreen> {
                       width: 30,
                     ),
                     Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(30.0),
-                            border: Border.all()
-                        ),
-                          height: mediaQuery.height * 0.07,
-                          width: mediaQuery.width * 0.5,
-                          child: Container(
-                            padding: const EdgeInsets.only(left: 20.0, right: 10.0,top: 5.0),
-                            child: DropdownButton(
-                              isExpanded: true,
-                              items: _getDeviceItems(),
-                              onChanged: (value) => setState(() => _device = value),
-                              value: _device,
-                              iconSize: 25,
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
+                        child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(30.0),
+                                border: Border.all()),
+                            height: mediaQuery.height * 0.07,
+                            width: mediaQuery.width * 0.5,
+                            child: Container(
+                              padding: const EdgeInsets.only(
+                                  left: 20.0, right: 10.0, top: 5.0),
+                              child: DropdownButton(
+                                isExpanded: true,
+                                items: _getDeviceItems(),
+                                onChanged: (value) =>
+                                    setState(() => _device = value),
+                                value: _device,
+                                iconSize: 25,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                dropdownColor: Colors.black54,
                               ),
-                              dropdownColor: Colors.black54,
-                            ),
-                          )
-                      )
-                    )
+                            )))
                   ],
                 ),
                 SizedBox(
                   height: 10,
                 ),
-
                 Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 50.0),
+                  padding:
+                      const EdgeInsets.only(left: 10.0, right: 10.0, top: 50.0),
                 ),
-
                 Column(
                   children: [
                     Container(
                       width: mediaQuery.width * 0.35,
                       height: mediaQuery.height * 0.07,
-
-                       child: RaisedButton(
-                          color: const Color(0xff099857),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                          elevation: 15,
-                          onPressed: () {
-                            initPlatformState();
-                          },
-                          child: Text(
-                            'REFRESH',
-                            style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold, fontFamily: 'Montserrat'),
-                          ),
+                      child: RaisedButton(
+                        color: const Color(0xff099857),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
                         ),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                        elevation: 15,
+                        onPressed: () {
+                          initPlatformState();
+                        },
+                        child: Text(
+                          'REFRESH',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Montserrat'),
+                        ),
+                      ),
                     ),
                   ],
                 ),
-
                 Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 20.0),
+                  padding:
+                      const EdgeInsets.only(left: 10.0, right: 10.0, top: 20.0),
                 ),
-
                 Container(
                   width: mediaQuery.width * 0.35,
                   height: mediaQuery.height * 0.07,
@@ -193,15 +190,18 @@ class _PrintScreenState extends State<PrintScreen> {
                     onPressed: _connected ? _disconnect : _connect,
                     child: Text(
                       _connected ? 'Disconnect' : 'CONNECT',
-                      style: TextStyle(color: Colors.white, fontSize: 30, fontFamily: 'Montserrat', fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 30,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
-
                 Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 20.0),
+                  padding:
+                      const EdgeInsets.only(left: 10.0, right: 10.0, top: 20.0),
                 ),
-
                 Container(
                   width: mediaQuery.width * 0.35,
                   height: mediaQuery.height * 0.07,
@@ -213,7 +213,13 @@ class _PrintScreenState extends State<PrintScreen> {
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     color: const Color(0xff099857),
                     onPressed: () {
-                      receipt.sample(provider.currUser.user_id, provider.newSupplier.supplierName, provider.newSupplier.supplierId, gross, deductions, net);
+                      receipt.sample(
+                          provider.currUser.user_id,
+                          provider.newSupplier.supplierName,
+                          provider.newSupplier.supplierId,
+                          gross,
+                          deductions,
+                          net);
                       Navigator.pushNamed(context, "MainMenu");
                     },
                     child: Text(
@@ -228,9 +234,9 @@ class _PrintScreenState extends State<PrintScreen> {
                   ),
                 ),
                 Padding(
-                    padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 50.0),
+                  padding:
+                      const EdgeInsets.only(left: 10.0, right: 10.0, top: 50.0),
                 ),
-
               ],
             ),
           ),
@@ -239,19 +245,19 @@ class _PrintScreenState extends State<PrintScreen> {
     );
   }
 
-  List<DropdownMenuItem<BluetoothDevice>> _getDeviceItems(){
+  List<DropdownMenuItem<BluetoothDevice>> _getDeviceItems() {
     List<DropdownMenuItem<BluetoothDevice>> items = [];
-    if  (_devices.isEmpty) {
+    if (_devices.isEmpty) {
       items.add(DropdownMenuItem(
         child: Text(
           'NONE',
         ),
       ));
-    } else  {
+    } else {
       _devices.forEach((device) {
         items.add(DropdownMenuItem(
-          child: Text(device.name,
-
+          child: Text(
+            device.name,
           ),
           value: device,
         ));
@@ -261,43 +267,40 @@ class _PrintScreenState extends State<PrintScreen> {
   }
 
   void _connect() {
-    if  (_device == null) {
+    if (_device == null) {
       show('No device selected');
-    } else  {
-      bluetooth.isConnected.then((isConnected){
-        if  (!isConnected) {
-          bluetooth.connect(_device).catchError((error){
-            setState(() => _connected = false
-            );
+    } else {
+      bluetooth.isConnected.then((isConnected) {
+        if (!isConnected) {
+          bluetooth.connect(_device).catchError((error) {
+            setState(() => _connected = false);
           });
-          setState(() =>  _connected = true
-          );
+          setState(() => _connected = true);
         }
       });
     }
   }
 
-  void _disconnect()  {
+  void _disconnect() {
     bluetooth.disconnect();
     setState(() => _connected = true);
   }
 
   Future show(
-      String message, {
-        Duration duration: const Duration(seconds: 3),
-        }) async  {
-        await new Future.delayed(new Duration(milliseconds: 100));
-        Scaffold.of(context).showSnackBar(
-          new SnackBar(
-            content: new Text(
-              message,
-              style: new TextStyle(
-                color: Colors.white,
-              ),
-            ),
-            duration: duration,
+    String message, {
+    Duration duration: const Duration(seconds: 3),
+  }) async {
+    await new Future.delayed(new Duration(milliseconds: 100));
+    Scaffold.of(context).showSnackBar(
+      new SnackBar(
+        content: new Text(
+          message,
+          style: new TextStyle(
+            color: Colors.white,
           ),
-        );
+        ),
+        duration: duration,
+      ),
+    );
   }
 }
-

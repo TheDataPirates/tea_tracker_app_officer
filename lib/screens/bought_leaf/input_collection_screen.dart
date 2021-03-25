@@ -73,17 +73,29 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
           barrierDismissible: false, // user must tap button!
           builder: (BuildContext context) {
             return AlertDialog(
-              title: const Text('Warning !',style: TextStyle(color: Colors.white, fontSize: 18),),
+              title: const Text(
+                'Warning !',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
               backgroundColor: Colors.black87,
               content: ListBody(
                 children: <Widget>[
-                  const Text('Error has occured',style: TextStyle(color: Colors.white, fontSize: 17),),
-                  Text(e.toString(),style: TextStyle(color: Colors.white, fontSize: 17),)
+                  const Text(
+                    'Error has occured',
+                    style: TextStyle(color: Colors.white, fontSize: 17),
+                  ),
+                  Text(
+                    e.toString(),
+                    style: TextStyle(color: Colors.white, fontSize: 17),
+                  )
                 ],
               ),
               actions: <Widget>[
                 TextButton(
-                  child: const Text('Okay', style: TextStyle(fontSize: 17),),
+                  child: const Text(
+                    'Okay',
+                    style: TextStyle(fontSize: 17),
+                  ),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -103,7 +115,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          image : inputScreenBackgroundImage,
+          image: inputScreenBackgroundImage,
           gradient: kUIGradient,
         ),
         child: FormBuilder(
@@ -145,18 +157,19 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                       dropdownColor: Colors.black54,
                                       decoration: InputDecoration(
                                         labelText: "  Container Type",
-                                        errorText: "text field is empty",
                                         errorStyle: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w700,),
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w700,
+                                        ),
                                         contentPadding:
                                             const EdgeInsets.symmetric(
                                                 vertical: 40.0),
                                         labelStyle:
-                                        kInputScreenContainerDisplayText,
+                                            kInputScreenContainerDisplayText,
                                         enabledBorder: kEnabledBorder2,
                                         focusedBorder: kFocusedBorder2,
-                                        focusedErrorBorder: kFocusedErrorBorder2,
+                                        focusedErrorBorder:
+                                            kFocusedErrorBorder2,
                                         errorBorder: kErrorBorder2,
                                       ),
 
@@ -213,7 +226,6 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                       attribute: "No of Containers",
                                       decoration: InputDecoration(
                                         labelText: " No of Containers",
-
                                         errorStyle: TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.w700),
@@ -224,14 +236,14 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                             kInputScreenContainerDisplayText,
                                         enabledBorder: kEnabledBorder2,
                                         focusedBorder: kFocusedBorder2,
-                                        focusedErrorBorder: kFocusedErrorBorder2,
+                                        focusedErrorBorder:
+                                            kFocusedErrorBorder2,
                                         errorBorder: kErrorBorder2,
                                       ),
                                       style: TextStyle(
                                           fontSize: 40,
                                           color: Colors.white,
-                                          fontWeight: FontWeight.bold
-                                      ),
+                                          fontWeight: FontWeight.bold),
                                       // initialValue:
 
                                       validators: [
@@ -290,7 +302,8 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                                 vertical: 40.0),
                                         enabledBorder: kEnabledBorder2,
                                         focusedBorder: kFocusedBorder2,
-                                        focusedErrorBorder: kFocusedErrorBorder2,
+                                        focusedErrorBorder:
+                                            kFocusedErrorBorder2,
                                         errorBorder: kErrorBorder2,
                                       ),
                                       style: TextStyle(
