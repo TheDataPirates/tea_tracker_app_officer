@@ -39,11 +39,11 @@ class InputField extends StatelessWidget {
         child: FormBuilderTextField(
           attribute: labelText,
           decoration: InputDecoration(
-            errorStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+            errorStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
             contentPadding:
             EdgeInsets.fromLTRB(16.0, 40.0, 16.0, 40.0),
             labelText: labelText,
-              labelStyle: kInputScreenContainerDisplayText,
+            labelStyle: kInputScreenContainerDisplayText,
             enabledBorder: kEnabledBorder2,
             focusedBorder: kFocusedBorder2,
             focusedErrorBorder:  kFocusedErrorBorder2,
