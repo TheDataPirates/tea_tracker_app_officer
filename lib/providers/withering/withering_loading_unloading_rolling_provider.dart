@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:teatrackerappofficer/providers/difference_report/difference_report.dart';
 import 'package:teatrackerappofficer/providers/rolling/big_bulk.dart';
 import 'package:teatrackerappofficer/providers/rolling/drying.dart';
@@ -489,7 +490,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   }
 
   int get lastBatchNumberItem {
-    if(_batchNumberItems.isEmpty){
+    if (_batchNumberItems.isEmpty) {
       return -1;
     }
     return _batchNumberItems[_batchNumberItems.length - 1];
@@ -553,7 +554,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         .firstWhere((witherUnload) => witherUnload.id == id);
   }
 
-  Future<void> addWitheringUnloadingItem(WitheringUnloading witheringUnloading, String authToken) async{
+  Future<void> addWitheringUnloadingItem(
+      WitheringUnloading witheringUnloading, String authToken) async {
     final newWitheringUnloadingItem = WitheringUnloading(
       id: DateTime.now().toString(),
       batchNumber: witheringUnloading.batchNumber,
@@ -564,7 +566,6 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       witheringPct: witheringUnloading.witheringPct,
     );
     const url = '$kURL/loft/unloading';
-
 
     try {
       final response = await http.post(
@@ -581,6 +582,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
           'lotWeight': witheringUnloading.lotWeight,
           'batchNumber': witheringUnloading.batchNumber,
           'witheringPct': witheringUnloading.witheringPct,
+          'unloadingTime': DateFormat('hh:mm:ss').format(DateTime.now())
         }),
       );
       if (response.statusCode == 200) {
@@ -592,7 +594,6 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
     } catch (error) {
       throw error;
     }
-
   }
 
   Future<void> fetchAndSetWitheringUnloadingItem(String authToken) async {
@@ -620,7 +621,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
           WitheringUnloading(
             id: i['id'] as String,
             batchNumber: int.parse(i['BatchBatchNo'].toString()),
-            date: i['date'] == null ? DateTime.now(): DateTime.parse(i['date']),
+            date:
+                i['date'] == null ? DateTime.now() : DateTime.parse(i['date']),
             troughNumber: int.parse(i['TroughTroughId'].toString()),
             lotWeight: double.parse(i['unloading_weight'].toString()),
             boxNumber: int.parse(B_Num),
@@ -709,7 +711,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
           'boxNumber': troughLoading.boxNumber,
           'gradeOfGL': troughLoading.gradeOfGL,
           'netWeight': troughLoading.netWeight,
-          'lotId': troughLoading.lotId
+          'lotId': troughLoading.lotId,
+          'loadingTime': DateFormat('hh:mm:ss').format(DateTime.now())
         }),
       );
       if (response.statusCode == 200) {
@@ -1055,11 +1058,21 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
           Rolling(
             id: i['id'] as String,
             batchNumber: int.parse(i['BatchBatchNo'].toString()),
-            time: i['rolling_out_time'] == null ? DateTime.now(): DateTime.parse(i['rolling_out_time']),
-            rollerNumber: i['RollerRollerId'] == null ? 0 : int.parse(i['RollerRollerId'].toString()),
-            rollingTurn: i['rolling_turn'].toString() == 'BB' ? 'BB' : int.parse(i['rolling_turn'].toString()),
-            weightIn: i['rolling_in_kg'] == null ? 0 : double.parse(i['rolling_in_kg'].toString()),
-            weightOut: i['rolling_out_kg'] == null ? 0 : double.parse(i['rolling_out_kg'].toString()),
+            time: i['rolling_out_time'] == null
+                ? DateTime.now()
+                : DateTime.parse(i['rolling_out_time']),
+            rollerNumber: i['RollerRollerId'] == null
+                ? 0
+                : int.parse(i['RollerRollerId'].toString()),
+            rollingTurn: i['rolling_turn'].toString() == 'BB'
+                ? 'BB'
+                : int.parse(i['rolling_turn'].toString()),
+            weightIn: i['rolling_in_kg'] == null
+                ? 0
+                : double.parse(i['rolling_in_kg'].toString()),
+            weightOut: i['rolling_out_kg'] == null
+                ? 0
+                : double.parse(i['rolling_out_kg'].toString()),
           ),
         );
       }
