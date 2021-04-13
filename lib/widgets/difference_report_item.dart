@@ -30,13 +30,9 @@ class DifferenceReportItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(5.0),
         child: ListTile(
-          leading: CircleAvatar(
-            child: Text(
-              supplierId.toString(),
-              style: TextStyle(fontSize: 40.0, color: Colors.white),
-            ),
-            radius: 50.0,
-            backgroundColor: Colors.greenAccent.shade700,
+          leading: Text(
+            supplierId.toString(),
+            style: TextStyle(fontSize: 30.0, color: Colors.white),
           ),
           title: Text(
             'Original Weight : ' + '$originalWeight',
