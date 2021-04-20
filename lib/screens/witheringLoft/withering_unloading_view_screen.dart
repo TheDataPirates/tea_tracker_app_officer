@@ -33,8 +33,10 @@ class _WitheringUnloadingViewScreenState extends State<WitheringUnloadingViewScr
 
   @override
   Widget build(BuildContext context) {
+    final auth = Provider.of<Auth>(context, listen: false);
+    final token = auth.token;
     final witheringLoadingUnloading =
-        Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
+        Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Withering Unloading View'),
@@ -58,6 +60,7 @@ class _WitheringUnloadingViewScreenState extends State<WitheringUnloadingViewScr
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : viewScreenBackgroundImage,
           gradient: kUIGradient,
         ),
         child: Column(
@@ -94,43 +97,61 @@ class _WitheringUnloadingViewScreenState extends State<WitheringUnloadingViewScr
               ),
             ),
             Expanded(
-                child: ListView.builder(
-              itemCount: witheringLoadingUnloading.witheringUnloadingItems.length,
-              itemBuilder: (ctx, i) => WitheringUnloadingItem(
-                id: witheringLoadingUnloading.witheringUnloadingItems[i].id,
-                batchNumber: witheringLoadingUnloading
-                    .witheringUnloadingItems[i].batchNumber,
-                troughNumber: witheringLoadingUnloading
-                    .witheringUnloadingItems[i].troughNumber,
-                boxNumber: witheringLoadingUnloading
-                    .witheringUnloadingItems[i].boxNumber,
-                lotWeight: witheringLoadingUnloading
-                    .witheringUnloadingItems[i].lotWeight,
-                date: witheringLoadingUnloading.witheringUnloadingItems[i].date,
-                witheringPercentage:
-                    witheringLoadingUnloading.witheringTroughBoxDatePercentage(
-                  troughNumber: witheringLoadingUnloading
-                      .witheringUnloadingItems[i].troughNumber,
-                  boxNumber: witheringLoadingUnloading
-                      .witheringUnloadingItems[i].boxNumber,
-                  date: witheringLoadingUnloading.witheringUnloadingItems[i].date,
-                  lotWeight: witheringLoadingUnloading
-                      .witheringUnloadingItems[i].lotWeight,
+                child: FutureBuilder(
+                  future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+                      listen: false)
+                      .fetchAndSetWitheringUnloadingItem(token),
+                  builder: (ctx, snapshot) => snapshot.connectionState ==
+                      ConnectionState.waiting
+                      ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                      : Consumer<WitheringLoadingUnloadingRollingProvider>(
+                    child: Center(
+                      child: const Text(
+                        'Got no Withering unloading items found yet, start adding some!', style: kEmptyViewText,),
+                    ),
+                    builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
+                    WitheringLoadingUnloadingRollingProvider
+                        .witheringUnloadingItems.length <=
+                        0
+                        ? ch
+                        : ListView.builder(
+                      itemCount: WitheringLoadingUnloadingRollingProvider
+                          .witheringUnloadingItems.length,
+                      itemBuilder: (ctx, i) =>
+                          WitheringUnloadingItem(
+                            id: WitheringLoadingUnloadingRollingProvider
+                                .witheringUnloadingItems[i].id,
+                            troughNumber: WitheringLoadingUnloadingRollingProvider
+                                .witheringUnloadingItems[i].troughNumber,
+                            date: WitheringLoadingUnloadingRollingProvider
+                                .witheringUnloadingItems[i].date,
+                            lotWeight: WitheringLoadingUnloadingRollingProvider
+                                .witheringUnloadingItems[i].lotWeight,
+                            witheringPercentage: WitheringLoadingUnloadingRollingProvider
+                                .witheringUnloadingItems[i].witheringPct,
+                            boxNumber: WitheringLoadingUnloadingRollingProvider
+                                .witheringUnloadingItems[i].boxNumber,
+                            batchNumber: WitheringLoadingUnloadingRollingProvider
+                                .witheringUnloadingItems[i].batchNumber,
+                          ),
+                    ),
+                  ),
                 ),
-              ),
-            ))
+            )
           ],
         ),
       ),
       floatingActionButton: Container(
-        width: 70.0,
-        height: 70.0,
+        width: 90.0,
+        height: 90.0,
         child: FittedBox(
           child: FloatingActionButton(
             child: const Icon(
               Icons.add,
               color: Colors.white,
-              size: 40.0,
+              size: 50.0,
             ),
             onPressed: () {
               Navigator.of(context).pushNamed('WitheringUnloading');
@@ -142,3 +163,5 @@ class _WitheringUnloadingViewScreenState extends State<WitheringUnloadingViewScr
     );
   }
 }
+
+

@@ -1,4 +1,3 @@
-//VasDrierOutputScreen
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
@@ -15,8 +14,6 @@ class _VasDrierOutputScreenState extends State<VasDrierOutputScreen> {
   @override
   Widget build(BuildContext context) {
     final token = Provider.of<Auth>(context, listen: false).token;
-//    final drying =
-//        Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(
@@ -24,6 +21,7 @@ class _VasDrierOutputScreenState extends State<VasDrierOutputScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : VASBackgroundImage,
           gradient: kUIGradient,
         ),
         child: FutureBuilder(
@@ -38,7 +36,7 @@ class _VasDrierOutputScreenState extends State<VasDrierOutputScreen> {
               : Consumer<WitheringLoadingUnloadingRollingProvider>(
             child: Center(
               child: const Text(
-                  'Got no drying items found yet, start adding some!', style: kEmptyViewText,),
+                  'Got no Drying items!', style: kEmptyViewText,),
             ),
             builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
             WitheringLoadingUnloadingRollingProvider

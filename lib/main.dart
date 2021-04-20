@@ -4,10 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
 import 'package:teatrackerappofficer/providers/bought_leaf/tea_collections_provider.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
+import 'package:teatrackerappofficer/screens/Remeasuring/Re_trough_loading.dart';
 import 'package:teatrackerappofficer/screens/bought_leaf/input_collection_screen.dart';
 import 'package:teatrackerappofficer/screens/bought_leaf/list_tile_lot_screen.dart';
 import 'package:teatrackerappofficer/screens/bought_leaf/lot_list_screen.dart';
-import 'package:teatrackerappofficer/screens/bought_leaf/print_screen.dart';
+import 'package:teatrackerappofficer/screens/bought_leaf/print_preview_screen.dart';
 import 'package:teatrackerappofficer/screens/login_screen.dart';
 import 'package:teatrackerappofficer/screens/mainMenu/re_measuring.dart';
 import 'package:teatrackerappofficer/screens/Remeasuring/Re_input_collection_screen.dart';
@@ -22,9 +23,10 @@ import 'package:teatrackerappofficer/screens/rolling/roll_breaking_view_screen.d
 import 'package:teatrackerappofficer/screens/rolling/rolling_output_view_screen.dart';
 import 'package:teatrackerappofficer/screens/viewAllSections/vas_rolling_screen.dart';
 import 'package:teatrackerappofficer/screens/witheringLoft/withering_finishing_view_screen.dart';
+// import 'package:teatrackerappofficer/screens/witheringLoft/withering_unloading_batch';
 import 'package:teatrackerappofficer/screens/witheringLoft/withering_unloading_batch_choosing_screen.dart';
 import 'package:teatrackerappofficer/screens/witheringLoft/withering_unloading_view_screen.dart';
-import 'screens/Remeasuring/Re_trough_loading.dart';
+
 import 'screens/Remeasuring/Re_trough_loading_view.dart';
 import 'screens/main_menu_screen.dart';
 import 'screens/mainMenu/bought_leaf_screen.dart';
@@ -59,6 +61,8 @@ import 'screens/viewAllSections/vas_shifting_screen.dart';
 import 'screens/viewAllSections/vas_packing_screen.dart';
 import 'screens/viewAllSections/vas_dispatching_screen.dart';
 import 'screens/viewAllSections/vas_remeasuring_screen.dart';
+import 'screens/bought_leaf/print_preview_screen.dart';
+import 'screens/bought_leaf/print_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // set lock to landscape view only
@@ -141,6 +145,7 @@ class MyApp extends StatelessWidget {
             'InputCollectionScreen': (ctx) => InputCollectionScreen(),
             'LotListScreen': (ctx) => LotListScreen(),
             'ListTileLotScreen': (ctx) => ListTileLot(),
+            'PrintPreviewScreen': (ctx) => PrintPreviewScreen(),
             'PrintScreen': (ctx) => PrintScreen(),
             'DrierOutput': (context) => DrierOutputScreen(),
             'OutturnReport': (context) => OutturnReportScreen(),
@@ -148,7 +153,7 @@ class MyApp extends StatelessWidget {
             'ReMeasuring': (context) => ReMeasuring(),
             'ReInputcollectionScreen': (context) => RemeasuringInputCollectionScreen(),
             'RemeasureLotListScreen': (context) => RemeasureLotListScreen(),
-            'RemeasureTroughLoadingScreen': (context) =>RemeasureTroughLoadingScreen(),
+            'RemeasureTroughLoadingScreen': (context) => RemeasureTroughLoadingScreen(),
             'RemeasureTroughLoadingViewScreen': (context) => RemeasureTroughLoadingViewScreen(),
             'RemeasureListTileLot': (context) =>RemeasureListTileLot(),
             'ViewAllSections': (context) => ViewAllSectionsScreen(),

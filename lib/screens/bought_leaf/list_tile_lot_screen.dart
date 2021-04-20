@@ -21,8 +21,13 @@ class ListTileLot extends StatelessWidget {
       appBar: AppBar(
         title: Text("LOT details"),
       ),
-      body: Column(
-        children: [
+      body: Container(
+        decoration: BoxDecoration(
+          image : viewScreenBackgroundImage,
+        gradient: kUIGradient,
+      ),
+        child: Column(
+          children: [
 //          Container(
 //            width: double.infinity,
 //            child: Card(
@@ -49,89 +54,114 @@ class ListTileLot extends StatelessWidget {
 //              ),
 //            ),
 //          ),
-          Container(
-            width: double.infinity,
-            child: Card(
-              margin: EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text("Number of containers :",
-                      style: kTextLotlistStyle),
-                  Text("${selectedLot.no_of_containers}",
-                      style: kTextLotlistStyle),
-                ],
+            Container(
+              width: double.infinity,
+              child: Card(
+                margin: EdgeInsets.all(10),
+                color:  Colors.black54,
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("Number of containers :",
+                          style: kTextLotlistStyle),
+                      Text("${selectedLot.no_of_containers}",
+                          style: kTextLotlistStyle),
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
-          Container(
-            width: double.infinity,
-            child: Card(
-              margin: EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text("Gross weight :", style: kTextLotlistStyle),
-                  Text(selectedLot.gross_weight.toString(),
-                      style: kTextLotlistStyle),
-                ],
+            Container(
+              width: double.infinity,
+              child: Card(
+                margin: EdgeInsets.all(10),
+                color:  Colors.black54,
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("Gross weight :", style: kTextLotlistStyle),
+                      Text(selectedLot.gross_weight.toString(),
+                          style: kTextLotlistStyle),
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
-          Container(
-            width: double.infinity,
-            child: Card(
-              margin: EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text("Leaf grade :", style: kTextLotlistStyle),
-                  Text(selectedLot.leaf_grade, style: kTextLotlistStyle)
-                ],
+            Container(
+              width: double.infinity,
+              child: Card(
+                margin: EdgeInsets.all(10),
+                color:  Colors.black54,
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("Leaf grade :", style: kTextLotlistStyle),
+                      Text(selectedLot.leaf_grade, style: kTextLotlistStyle)
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
-          Container(
-            width: double.infinity,
-            child: Card(
-              margin: EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text("Water % :", style: kTextLotlistStyle),
-                  Text(selectedLot.water.toString(), style: kTextLotlistStyle)
-                ],
+            Container(
+              width: double.infinity,
+              child: Card(
+                margin: EdgeInsets.all(10),
+                color:  Colors.black54,
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("Water % :", style: kTextLotlistStyle),
+                      Text(selectedLot.water.toString(), style: kTextLotlistStyle)
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
-          Container(
-            width: double.infinity,
-            child: Card(
-              margin: EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text("Course leaf % :", style: kTextLotlistStyle),
-                  Text(selectedLot.course_leaf.toString(),
-                      style: kTextLotlistStyle)
-                ],
+            Container(
+              width: double.infinity,
+              child: Card(
+                margin: EdgeInsets.all(10),
+                color:  Colors.black54,
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("Course leaf % :", style: kTextLotlistStyle),
+                      Text(selectedLot.course_leaf.toString(),
+                          style: kTextLotlistStyle)
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
-          Container(
-            width: double.infinity,
-            child: Card(
-              margin: EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text("Other % :", style: kTextLotlistStyle),
-                  Text(selectedLot.other.toString(), style: kTextLotlistStyle)
-                ],
+            Container(
+              width: double.infinity,
+              child: Card(
+                margin: EdgeInsets.all(10),
+                color:  Colors.black54,
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("Other % :", style: kTextLotlistStyle),
+                      Text(selectedLot.other.toString(), style: kTextLotlistStyle)
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

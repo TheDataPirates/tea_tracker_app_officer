@@ -1,4 +1,3 @@
-//VasFermentingScreen
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
@@ -22,6 +21,7 @@ class _VasFermentingScreenState extends State<VasFermentingScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : VASBackgroundImage,
           gradient: kUIGradient,
         ),
         child: FutureBuilder(
@@ -36,7 +36,7 @@ class _VasFermentingScreenState extends State<VasFermentingScreen> {
               : Consumer<WitheringLoadingUnloadingRollingProvider>(
             child: Center(
               child: const Text(
-                  'Got no Withering roll breaking items found yet, start adding some!', style: kEmptyViewText,),
+                  'Got no Fermenting items!', style: kEmptyViewText,),
             ),
             builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
             WitheringLoadingUnloadingRollingProvider

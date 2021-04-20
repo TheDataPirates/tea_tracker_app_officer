@@ -7,6 +7,7 @@ class WitheringUnloading with ChangeNotifier {
   final int boxNumber;
   final DateTime date;
   final double lotWeight;
+  final double witheringPct;
 
   WitheringUnloading({
     @required this.id,
@@ -15,5 +16,6 @@ class WitheringUnloading with ChangeNotifier {
     @required this.boxNumber,
     @required this.date,
     @required this.lotWeight,
+    @required this.witheringPct,
   });
 }

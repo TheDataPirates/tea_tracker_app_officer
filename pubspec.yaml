@@ -38,11 +38,14 @@ dependencies:
   shared_preferences: ^0.5.12+4
   google_fonts: ^1.1.1
   font_awesome_flutter: ^8.10.0
+  blue_thermal_printer: ^1.1.1
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -71,6 +74,12 @@ flutter:
     - images/bg13.jpg
     - images/boughtleaf.png
     - images/app_logo.png
+    - images/new1.jpg
+    - images/new2.jpg
+    - images/new3.jpg
+    - images/new4.jpg
+    - images/new5.jpg
+    - images/p1.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:

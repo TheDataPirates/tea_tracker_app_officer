@@ -33,6 +33,7 @@ class _DifferenceReportScreenState extends State<DifferenceReportScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+          image : reportBackgroundImage,
           gradient: kUIGradient,
         ),
         child: FutureBuilder(
@@ -46,7 +47,7 @@ class _DifferenceReportScreenState extends State<DifferenceReportScreen> {
                     )
                   : Consumer<WitheringLoadingUnloadingRollingProvider>(
                       child: Center(
-                        child: const Text('No difference report items.'),
+                        child: const Text('No difference report items.',style: kEmptyViewText,),
                       ),
                       builder: (ctx, WitheringLoadingUnloadingRollingProvider,
                               ch) =>
@@ -83,15 +84,15 @@ class _DifferenceReportScreenState extends State<DifferenceReportScreen> {
                     ),
         ),
       ),
-      floatingActionButton: Container(
-        height: 70.0,
-        width: 70.0,
+      /*floatingActionButton: Container(
+        height: 90.0,
+        width: 90.0,
         child: FittedBox(
           child: FloatingActionButton(
             child: const Icon(
               Icons.add,
               color: Colors.white,
-              size: 40.0,
+              size: 50.0,
             ),
             onPressed: () {
               Navigator.of(context).pushNamed('DrierOutput');
@@ -99,7 +100,7 @@ class _DifferenceReportScreenState extends State<DifferenceReportScreen> {
           ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,*/
     );
   }
 }
