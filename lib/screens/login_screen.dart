@@ -16,7 +16,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   var _editedUser = User(user_id: '', password: '');
 
-
   Future<void> submit() async {
     if (_fbkey.currentState.saveAndValidate()) {
       setState(() {
@@ -33,18 +32,31 @@ class _LoginScreenState extends State<LoginScreen> {
           barrierDismissible: false, // user must tap button!
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('AlertDialog',style: TextStyle (color: Colors.white, fontSize: 18),),
+              title: Text(
+                'AlertDialog',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+              backgroundColor: Colors.black87,
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
-                    Text('An error occurred', style: TextStyle(color: Colors.white, fontSize: 17),),
-                    Text(e.toString(), style: TextStyle(color: Colors.white, fontSize: 17),),
+                    Text(
+                      'An error occurred',
+                      style: TextStyle(color: Colors.white, fontSize: 17),
+                    ),
+                    Text(
+                      e.toString(),
+                      style: TextStyle(color: Colors.white, fontSize: 17),
+                    ),
                   ],
                 ),
               ),
               actions: <Widget>[
                 FlatButton(
-                  child: Text("OK", style: TextStyle(fontSize: 17),),
+                  child: Text(
+                    "OK",
+                    style: TextStyle(fontSize: 17),
+                  ),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -103,32 +115,45 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: FormBuilderTextField(
                                 attribute: "User-Id",
                                 obscureText: false,
-                                style: TextStyle(fontFamily: 'Montserrat', fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
                                 decoration: InputDecoration(
-                                  errorStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                  errorStyle: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
                                   filled: true,
                                   fillColor: Colors.black.withOpacity(0.8),
-                                  contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                                  contentPadding: EdgeInsets.fromLTRB(
+                                      20.0, 15.0, 20.0, 15.0),
                                   hintText: "User-Id",
-                                  hintStyle: TextStyle(fontSize: 20, color: Colors.white),
+                                  hintStyle: TextStyle(
+                                      fontSize: 20, color: Colors.white),
                                   border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(32.0)),
+                                      borderRadius:
+                                          BorderRadius.circular(32.0)),
                                   errorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(color: Colors.red, width: 2.0),
-                                      borderRadius: const BorderRadius.all(Radius.circular(32.0))
-                                  ),
+                                      borderSide: const BorderSide(
+                                          color: Colors.red, width: 2.0),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(32.0))),
                                   focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(color: Colors.red, width: 2.0),
-                                      borderRadius: const BorderRadius.all(Radius.circular(32.0))
-                                  ),
+                                      borderSide: const BorderSide(
+                                          color: Colors.red, width: 2.0),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(32.0))),
                                   enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(color: Colors.green, width: 2.0),
-                                      borderRadius: const BorderRadius.all(Radius.circular(32.0))
-                                  ),
+                                      borderSide: const BorderSide(
+                                          color: Colors.green, width: 2.0),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(32.0))),
                                   focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(color: Colors.green, width: 2.0),
-                                      borderRadius: const BorderRadius.all(Radius.circular(32.0))
-                                  ),
+                                      borderSide: const BorderSide(
+                                          color: Colors.green, width: 2.0),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(32.0))),
                                 ),
                                 validators: [FormBuilderValidators.required()],
                                 onSaved: (value) {
@@ -144,33 +169,47 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: FormBuilderTextField(
                                 attribute: "Password",
                                 obscureText: true,
-                                style: TextStyle(fontFamily: 'Montserrat', fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
                                 decoration: InputDecoration(
-                                  errorStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                  errorStyle: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
                                   filled: true,
                                   fillColor: Colors.black.withOpacity(0.8),
-                                  contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                                  contentPadding: EdgeInsets.fromLTRB(
+                                      20.0, 15.0, 20.0, 15.0),
                                   hintText: "Password",
-                                  hintStyle: TextStyle(fontFamily: 'Montserrat', fontSize: 20, color: Colors.white),
+                                  hintStyle: TextStyle(
+                                      fontFamily: 'Montserrat',
+                                      fontSize: 20,
+                                      color: Colors.white),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(32.0),
                                   ),
                                   errorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(color: Colors.red, width: 2.0),
-                                      borderRadius: const BorderRadius.all(Radius.circular(32.0))
-                                  ),
+                                      borderSide: const BorderSide(
+                                          color: Colors.red, width: 2.0),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(32.0))),
                                   focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(color: Colors.red, width: 2.0),
-                                      borderRadius: const BorderRadius.all(Radius.circular(32.0))
-                                  ),
+                                      borderSide: const BorderSide(
+                                          color: Colors.red, width: 2.0),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(32.0))),
                                   enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(color: Colors.green, width: 2.0),
-                                      borderRadius: const BorderRadius.all(Radius.circular(32.0))
-                                  ),
+                                      borderSide: const BorderSide(
+                                          color: Colors.green, width: 2.0),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(32.0))),
                                   focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(color: Colors.green, width: 2.0),
-                                      borderRadius: const BorderRadius.all(Radius.circular(32.0))
-                                  ),
+                                      borderSide: const BorderSide(
+                                          color: Colors.green, width: 2.0),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(32.0))),
                                 ),
                                 validators: [FormBuilderValidators.required()],
                                 onSaved: (value) {
@@ -190,11 +229,17 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: Colors.green,
                               child: MaterialButton(
                                 minWidth: mediaQuery.width,
-                                padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                                padding:
+                                    EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                                 onPressed: submit,
-                                child: Text("Login",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(fontFamily: 'Montserrat', fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                                child: Text(
+                                  "Login",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontFamily: 'Montserrat',
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
                                 ),
                               ),
                             ),
