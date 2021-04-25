@@ -12,25 +12,29 @@ class TroughLoadingItemAgent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _height =
+        MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
+
+    final _width = MediaQuery.of(context).size.width;
     return Card(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 5,
+      margin:  EdgeInsets.symmetric(
+        horizontal: _width * 0.01,
+        vertical: _height * 0.01,
       ),
-      color: Color(0xff1b5e20),
+      color: Color(0xff1b5e20).withOpacity(0.7),
       child: Padding(
-        padding: const EdgeInsets.all(5.0),
+        padding:  EdgeInsets.all(_width * 0.005),
         child: ListTile(
-            leading: CircleAvatar(child: Text(gradeGL, style: TextStyle(fontSize: 40.0, color: Colors.white),),
-              radius: 50.0,
+            leading: CircleAvatar(child: Text(gradeGL, style: TextStyle(fontSize: _width * 0.05, color: Colors.white),),
+              radius: _width * 0.05,
               backgroundColor: Colors.greenAccent.shade700,),
-            title: Text('Trough Number : ' + '$troughNumber', style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold, color: Colors.white),),
-            subtitle: Text('Box Number : ' + '$boxNumber', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),),
+            title: Text('Trough Number : ' + '$troughNumber', style: TextStyle(fontSize: _width * 0.03, fontWeight: FontWeight.bold, color: Colors.white),),
+            subtitle: Text('Box Number : ' + '$boxNumber', style: TextStyle(fontSize: _width * 0.0275, fontWeight: FontWeight.bold, color: Colors.white),),
             trailing: Column(
               children: [
-                Text('Recently added : ' +'$recentWeight' + ' Kg', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),),
+                Text('Recently added : ' +'$recentWeight' + ' Kg', style: TextStyle(fontSize: _width * 0.023, fontWeight: FontWeight.bold, color: Colors.white),),
                 SizedBox(height: 6,),
-                Text('Total Box Weight : ' +'$netWeight' + ' Kg', style: TextStyle(fontSize: 23.0, fontWeight: FontWeight.bold, color: Colors.white),),
+                Text('Total Box Weight : ' +'$netWeight' + ' Kg', style: TextStyle(fontSize: _width * 0.025, fontWeight: FontWeight.bold, color: Colors.white),),
               ],
             )
         ),

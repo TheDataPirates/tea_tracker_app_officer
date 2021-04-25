@@ -126,7 +126,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
               Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: EdgeInsets.all(mediaQuery.height * 0.02),
                     child: Column(
                       children: <Widget>[
                         Container(
@@ -149,7 +149,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                     color: inputCollectionfillColor,
                                     borderRadius: BorderRadius.circular(13),
                                   ),
-                                  width: mediaQuery.width * width,
+                                  width: mediaQuery.width * 0.22,
                                   child: ButtonTheme(
                                     alignedDropdown: true,
                                     child: FormBuilderDropdown(
@@ -158,12 +158,13 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                       decoration: InputDecoration(
                                         labelText: "  Container Type",
                                         errorStyle: TextStyle(
-                                          fontSize: 18,
+                                          fontSize: mediaQuery.height * 0.025,
                                           fontWeight: FontWeight.w700,
                                         ),
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                                vertical: 40.0),
+                                        contentPadding: EdgeInsets.symmetric(
+                                            vertical: mediaQuery.height * 0.06,
+                                            horizontal:
+                                                mediaQuery.width * 0.005),
                                         labelStyle:
                                             kInputScreenContainerDisplayText,
                                         enabledBorder: kEnabledBorder2,
@@ -174,7 +175,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                       ),
 
                                       style: TextStyle(
-                                          fontSize: 40,
+                                          fontSize: mediaQuery.height * 0.07,
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
                                       // initialValue:
@@ -218,7 +219,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                     color: inputCollectionfillColor,
                                     borderRadius: BorderRadius.circular(13),
                                   ),
-                                  width: mediaQuery.width * width,
+                                  width: mediaQuery.width * 0.22,
                                   child: ButtonTheme(
                                     alignedDropdown: true,
                                     child: FormBuilderDropdown(
@@ -227,11 +228,13 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                       decoration: InputDecoration(
                                         labelText: " No of Containers",
                                         errorStyle: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: mediaQuery.height * 0.025,
                                             fontWeight: FontWeight.w700),
                                         contentPadding:
-                                            const EdgeInsets.symmetric(
-                                                vertical: 40.0),
+                                             EdgeInsets.symmetric(
+                                                vertical: mediaQuery.height * 0.06,
+                                                horizontal:
+                                                mediaQuery.width * 0.005),
                                         labelStyle:
                                             kInputScreenContainerDisplayText,
                                         enabledBorder: kEnabledBorder2,
@@ -241,7 +244,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                         errorBorder: kErrorBorder2,
                                       ),
                                       style: TextStyle(
-                                          fontSize: 40,
+                                          fontSize: mediaQuery.height * 0.07,
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
                                       // initialValue:
@@ -284,7 +287,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                     color: inputCollectionfillColor,
                                     borderRadius: BorderRadius.circular(13),
                                   ),
-                                  width: mediaQuery.width * width,
+                                  width: mediaQuery.width * 0.22,
                                   child: ButtonTheme(
                                     alignedDropdown: true,
                                     child: FormBuilderDropdown(
@@ -295,11 +298,13 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                         labelStyle:
                                             kInputScreenContainerDisplayText,
                                         errorStyle: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: mediaQuery.height * 0.025,
                                             fontWeight: FontWeight.w700),
                                         contentPadding:
-                                            const EdgeInsets.symmetric(
-                                                vertical: 40.0),
+                                             EdgeInsets.symmetric(
+                                                vertical: mediaQuery.height * 0.06,
+                                                horizontal:
+                                                mediaQuery.width * 0.005),
                                         enabledBorder: kEnabledBorder2,
                                         focusedBorder: kFocusedBorder2,
                                         focusedErrorBorder:
@@ -307,7 +312,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                         errorBorder: kErrorBorder2,
                                       ),
                                       style: TextStyle(
-                                          fontSize: 40,
+                                          fontSize: mediaQuery.height * 0.07,
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
                                       validators: [
@@ -367,11 +372,11 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Padding(
-                              padding: const EdgeInsets.only(top: 30),
-                              child: const Text(
+                              padding:  EdgeInsets.only(top: mediaQuery.height * 0.05),
+                              child:  Text(
                                 'DEDUCTIONS',
-                                style: const TextStyle(
-                                  fontSize: 40,
+                                style:  TextStyle(
+                                  fontSize: mediaQuery.width * 0.045,
                                   fontWeight: FontWeight.bold,
                                   letterSpacing: 10,
                                   color: Colors.white,
@@ -410,7 +415,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                   width: mediaQuery.width * 0.05,
                                 ),
                                 InputField(
-                                  labelText: ' Course Leaf %',
+                                  labelText: 'Course Leaf %',
                                   width: deduct_width,
                                   validator: [FormBuilderValidators.required()],
                                   onSave: (value) {
@@ -459,16 +464,19 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
               ),
               Container(
                 width: double.infinity,
-                height: mediaQuery.height * 0.065,
+                height: mediaQuery.height * 0.075,
                 child: RaisedButton.icon(
                   onPressed: saveLot,
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.add,
                     color: Colors.white,
+                    size: mediaQuery.height * 0.06,
                   ),
-                  label: const Text(
+                  label: Text(
                     'SAVE',
-                    style: const TextStyle(fontSize: 22, color: Colors.white),
+                    style: TextStyle(
+                        fontSize: mediaQuery.height * 0.05,
+                        color: Colors.white),
                   ),
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   color: const Color(0xff099857),

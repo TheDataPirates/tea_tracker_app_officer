@@ -24,6 +24,10 @@ class InputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _height =
+        MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
+
+    final _width = MediaQuery.of(context).size.width;
     return Card(
       color: inputCollectionfillColor,
       elevation: 10,
@@ -39,9 +43,9 @@ class InputField extends StatelessWidget {
         child: FormBuilderTextField(
           attribute: labelText,
           decoration: InputDecoration(
-            errorStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+            errorStyle: TextStyle(fontSize: _height * 0.022, fontWeight: FontWeight.w700),
             contentPadding:
-            EdgeInsets.fromLTRB(16.0, 40.0, 16.0, 40.0),
+            EdgeInsets.fromLTRB(_width * 0.015, _height * 0.0625, _width * 0.025, _height * 0.0625),
             labelText: labelText,
             labelStyle: kInputScreenContainerDisplayText,
             enabledBorder: kEnabledBorder2,
@@ -54,7 +58,7 @@ class InputField extends StatelessWidget {
           keyboardType: keytype,
           onSaved: onSave,
           style: TextStyle(
-              fontSize: 40, color: Colors.white, fontWeight: FontWeight.bold),
+              fontSize: _width * 0.04, color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
     );

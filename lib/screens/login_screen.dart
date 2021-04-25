@@ -104,33 +104,35 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             SizedBox(
-                              height: mediaQuery.height * 0.3,
+                              height: mediaQuery.height * 0.29,
                               child: Image.asset(
                                 "images/app_logo.png",
                                 fit: BoxFit.contain,
                               ),
                             ),
-                            SizedBox(height: mediaQuery.height * 0.15),
+                            SizedBox(height: mediaQuery.height * 0.10),
                             Container(
                               child: FormBuilderTextField(
                                 attribute: "User-Id",
                                 obscureText: false,
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
-                                    fontSize: 20,
+                                    fontSize: mediaQuery.height * 0.04,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),
                                 decoration: InputDecoration(
                                   errorStyle: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
+                                      fontSize: mediaQuery.height * 0.03,
+                                      fontWeight: FontWeight.bold
+                                  ),
                                   filled: true,
                                   fillColor: Colors.black.withOpacity(0.8),
                                   contentPadding: EdgeInsets.fromLTRB(
-                                      20.0, 15.0, 20.0, 15.0),
+                                      mediaQuery.width * 0.025, mediaQuery.height * 0.03, mediaQuery.width * 0.025, mediaQuery.height * 0.02),
                                   hintText: "User-Id",
                                   hintStyle: TextStyle(
-                                      fontSize: 20, color: Colors.white),
+                                      fontSize: mediaQuery.height * 0.04,
+                                      color: Colors.white),
                                   border: OutlineInputBorder(
                                       borderRadius:
                                           BorderRadius.circular(32.0)),
@@ -162,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       password: _editedUser.password);
                                 },
                               ),
-                              height: mediaQuery.height * 0.1,
+//
                             ),
                             SizedBox(height: mediaQuery.height * 0.01),
                             Container(
@@ -171,21 +173,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                 obscureText: true,
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
-                                    fontSize: 20,
+                                    fontSize: mediaQuery.height * 0.04,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),
                                 decoration: InputDecoration(
                                   errorStyle: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: mediaQuery.height * 0.03,
                                       fontWeight: FontWeight.bold),
                                   filled: true,
                                   fillColor: Colors.black.withOpacity(0.8),
                                   contentPadding: EdgeInsets.fromLTRB(
-                                      20.0, 15.0, 20.0, 15.0),
+                                      mediaQuery.width * 0.025, mediaQuery.height * 0.03, mediaQuery.width * 0.025, mediaQuery.height * 0.02),
                                   hintText: "Password",
                                   hintStyle: TextStyle(
                                       fontFamily: 'Montserrat',
-                                      fontSize: 20,
+                                      fontSize: mediaQuery.height * 0.04,
                                       color: Colors.white),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(32.0),
@@ -218,26 +220,26 @@ class _LoginScreenState extends State<LoginScreen> {
                                       password: value);
                                 },
                               ),
-                              height: mediaQuery.height * 0.1,
+
                             ),
                             SizedBox(
                               height: mediaQuery.height * 0.05,
                             ),
                             Material(
-                              elevation: 5.0,
+                              elevation: 10.0,
                               borderRadius: BorderRadius.circular(30.0),
                               color: Colors.green,
                               child: MaterialButton(
                                 minWidth: mediaQuery.width,
                                 padding:
-                                    EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                                    EdgeInsets.fromLTRB(mediaQuery.width * 0.025, mediaQuery.height * 0.02, mediaQuery.width * 0.025, mediaQuery.height * 0.02),
                                 onPressed: submit,
                                 child: Text(
                                   "Login",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontFamily: 'Montserrat',
-                                      fontSize: 20,
+                                      fontSize: mediaQuery.height * 0.04,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white),
                                 ),

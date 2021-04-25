@@ -8,10 +8,10 @@ const kTextFieldLabelStyle = TextStyle(
 );
 
 const kTextLotlistStyle = TextStyle(
-  fontSize: 30,
+  fontSize: 28,
   fontWeight: FontWeight.w700,
   color: Colors.white,
-  height: 2,
+  height: 1,
 );
 
 const kTextFormFieldLabelStyle = TextStyle(
@@ -67,9 +67,9 @@ const kEmptyViewText = TextStyle(
 
 const kInputScreenContainerDisplayText = TextStyle(
   color: Colors.white,
-    fontSize: 30,
+    fontSize: 21,
     fontWeight: FontWeight.w700,
-    height: 1.6,
+    height: 1,
 );
 
 const kEnabledBorder2 = OutlineInputBorder(
@@ -103,7 +103,8 @@ borderSide: const BorderSide(color: Colors.red, width: 2.0),
 );
 
 // const kURL = 'https://tea-tracker-backend.herokuapp.com';
-const kURL = 'http://10.0.2.2:8080';
+const kURL = 'http://192.168.1.34:8080';
+//const kURL = 'http://10.0.2.2:8080';
 const kTextInputColor = Colors.white;
 
 var viewScreenBackgroundImage = DecorationImage(

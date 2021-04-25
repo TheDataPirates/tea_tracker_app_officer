@@ -17,17 +17,22 @@ class ListTileLot extends StatelessWidget {
         .firstWhere((supp) =>
             supp.lotId ==
             lotId); // provider will check selected supp id and give its lots object data along to class
+    final _height =
+        MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
+
+    final _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text("LOT details"),
+        title: Text("LOT Details"),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          image : viewScreenBackgroundImage,
-        gradient: kUIGradient,
-      ),
-        child: Column(
-          children: [
+      body: SingleChildScrollView(
+        child: Container(
+          decoration: BoxDecoration(
+            image : viewScreenBackgroundImage,
+          gradient: kUIGradient,
+        ),
+          child: Column(
+            children: [
 //          Container(
 //            width: double.infinity,
 //            child: Card(
@@ -54,113 +59,114 @@ class ListTileLot extends StatelessWidget {
 //              ),
 //            ),
 //          ),
-            Container(
-              width: double.infinity,
-              child: Card(
-                margin: EdgeInsets.all(10),
-                color:  Colors.black54,
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text("Number of containers :",
-                          style: kTextLotlistStyle),
-                      Text("${selectedLot.no_of_containers}",
-                          style: kTextLotlistStyle),
-                    ],
+              Container(
+                width: double.infinity,
+                child: Card(
+                  margin: EdgeInsets.all(_height * 0.02),
+                  color:  Colors.black54,
+                  child: Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: _width * 0.03, vertical: _height * 0.03),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text("Number of containers :",
+                            style: kTextLotlistStyle),
+                        Text("${selectedLot.no_of_containers}",
+                            style: kTextLotlistStyle),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            Container(
-              width: double.infinity,
-              child: Card(
-                margin: EdgeInsets.all(10),
-                color:  Colors.black54,
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text("Gross weight :", style: kTextLotlistStyle),
-                      Text(selectedLot.gross_weight.toString(),
-                          style: kTextLotlistStyle),
-                    ],
+              Container(
+                width: double.infinity,
+                child: Card(
+                  margin: EdgeInsets.all(_height * 0.02),
+                  color:  Colors.black54,
+                  child: Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: _width * 0.03, vertical: _height * 0.03),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text("Gross weight :", style: kTextLotlistStyle),
+                        Text(selectedLot.gross_weight.toString(),
+                            style: kTextLotlistStyle),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            Container(
-              width: double.infinity,
-              child: Card(
-                margin: EdgeInsets.all(10),
-                color:  Colors.black54,
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text("Leaf grade :", style: kTextLotlistStyle),
-                      Text(selectedLot.leaf_grade, style: kTextLotlistStyle)
-                    ],
+              Container(
+                width: double.infinity,
+                child: Card(
+                  margin: EdgeInsets.all(_height * 0.02),
+                  color:  Colors.black54,
+                  child: Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: _width * 0.03, vertical: _height * 0.03),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text("Leaf grade :", style: kTextLotlistStyle),
+                        Text(selectedLot.leaf_grade, style: kTextLotlistStyle)
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            Container(
-              width: double.infinity,
-              child: Card(
-                margin: EdgeInsets.all(10),
-                color:  Colors.black54,
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text("Water % :", style: kTextLotlistStyle),
-                      Text(selectedLot.water.toString(), style: kTextLotlistStyle)
-                    ],
+              Container(
+                width: double.infinity,
+                child: Card(
+                  margin: EdgeInsets.all(_height * 0.02),
+                  color:  Colors.black54,
+                  child: Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: _width * 0.03, vertical: _height * 0.03),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text("Water % :", style: kTextLotlistStyle),
+                        Text(selectedLot.water.toString(), style: kTextLotlistStyle)
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            Container(
-              width: double.infinity,
-              child: Card(
-                margin: EdgeInsets.all(10),
-                color:  Colors.black54,
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text("Course leaf % :", style: kTextLotlistStyle),
-                      Text(selectedLot.course_leaf.toString(),
-                          style: kTextLotlistStyle)
-                    ],
+              Container(
+                width: double.infinity,
+                child: Card(
+                  margin: EdgeInsets.all(_height * 0.02),
+                  color:  Colors.black54,
+                  child: Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: _width * 0.03, vertical: _height * 0.03),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text("Course leaf % :", style: kTextLotlistStyle),
+                        Text(selectedLot.course_leaf.toString(),
+                            style: kTextLotlistStyle)
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            Container(
-              width: double.infinity,
-              child: Card(
-                margin: EdgeInsets.all(10),
-                color:  Colors.black54,
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text("Other % :", style: kTextLotlistStyle),
-                      Text(selectedLot.other.toString(), style: kTextLotlistStyle)
-                    ],
+              Container(
+                width: double.infinity,
+                child: Card(
+                  margin: EdgeInsets.all(_height * 0.02),
+                  color:  Colors.black54,
+                  child: Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: _width * 0.03, vertical: _height * 0.03),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text("Other % :", style: kTextLotlistStyle),
+                        Text(selectedLot.other.toString(), style: kTextLotlistStyle)
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -37,11 +37,10 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
           title: Text('Main menu'),
           leading: IconButton(
             icon: Icon(Icons.home),
-            iconSize: 30,
+            iconSize: _height * 0.06,
             onPressed: () {
               auth.logout();
               Navigator.of(context).pushReplacementNamed('/');
-//            Navigator.of(context).pushReplacementNamed('LoginScreen');
             },
           ),
         ),
@@ -49,15 +48,15 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.only(top: 20.0),
+              padding:  EdgeInsets.symmetric(vertical: _height * 0.025, horizontal: _width * 0.015),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-//                  MainMenuFlatButtonContainer(height: _height, width: _width, name: 'Bought Leaf', destination: 'BoughtLeaf',),
                       Container(
+
                         child: ButtonTheme(
                           height: _height * 0.2,
                           minWidth: _width * 0.3,
@@ -76,7 +75,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                     textStyle: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 35.0,
+                                      fontSize: _height * 0.05,
                                     ),
                                   ),
                                 ),
@@ -84,16 +83,16 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                   icon: FaIcon(
                                     FontAwesomeIcons.leaf,
                                     color: Colors.greenAccent,
-                                    size: 50.0,
+                                    size: _height * 0.06,
                                   ),
                                   onPressed: () {},
                                 ),
                               ],
                             ),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+                              borderRadius: BorderRadius.circular(10.0),
                               side: BorderSide(
-                                  color: Colors.greenAccent, width: 4.0),
+                                  color: Colors.greenAccent, width: 3.0),
                             ),
                           ),
                         ),
@@ -118,7 +117,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                     textStyle: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 35.0,
+                                      fontSize: _height * 0.05,
                                     ),
                                   ),
                                 ),
@@ -126,16 +125,16 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                   icon: FaIcon(
                                     FontAwesomeIcons.boxes,
                                     color: Colors.greenAccent,
-                                    size: 50.0,
+                                    size: _height * 0.06,
                                   ),
                                   onPressed: () {},
                                 ),
                               ],
                             ),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+                              borderRadius: BorderRadius.circular(10.0),
                               side: BorderSide(
-                                  color: Colors.greenAccent, width: 4.0),
+                                  color: Colors.greenAccent, width: 3.0),
                             ),
                           ),
                         ),
@@ -160,7 +159,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                     textStyle: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 35.0,
+                                      fontSize: _height * 0.05,
                                     ),
                                   ),
                                 ),
@@ -168,16 +167,16 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                   icon: FaIcon(
                                     FontAwesomeIcons.infinity,
                                     color: Colors.greenAccent,
-                                    size: 50.0,
+                                    size: _height * 0.06,
                                   ),
                                   onPressed: () {},
                                 ),
                               ],
                             ),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+                              borderRadius: BorderRadius.circular(10.0),
                               side: BorderSide(
-                                  color: Colors.greenAccent, width: 4.0),
+                                  color: Colors.greenAccent, width: 3.0),
                             ),
                           ),
                         ),
@@ -185,7 +184,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                     ],
                   ),
                   SizedBox(
-                    height: _height * 0.02,
+                    height: _height * 0.015,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -211,7 +210,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                     textStyle: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 35.0,
+                                      fontSize: _height * 0.05,
                                     ),
                                   ),
                                 ),
@@ -219,16 +218,16 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                   icon: FaIcon(
                                     FontAwesomeIcons.creativeCommonsRemix,
                                     color: Colors.greenAccent,
-                                    size: 50.0,
+                                    size: _height * 0.06,
                                   ),
                                   onPressed: () {},
                                 ),
                               ],
                             ),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+                              borderRadius: BorderRadius.circular(10.0),
                               side: BorderSide(
-                                  color: Colors.greenAccent, width: 4.0),
+                                  color: Colors.greenAccent, width: 3.0),
                             ),
                           ),
                         ),
@@ -253,7 +252,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                     textStyle: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 35.0,
+                                      fontSize: _height * 0.05,
                                     ),
                                   ),
                                 ),
@@ -261,16 +260,16 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                   icon: FaIcon(
                                     FontAwesomeIcons.buffer,
                                     color: Colors.greenAccent,
-                                    size: 50.0,
+                                    size: _height * 0.06,
                                   ),
                                   onPressed: () {},
                                 ),
                               ],
                             ),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+                              borderRadius: BorderRadius.circular(10.0),
                               side: BorderSide(
-                                  color: Colors.greenAccent, width: 4.0),
+                                  color: Colors.greenAccent, width: 3.0),
                             ),
                           ),
                         ),
@@ -296,7 +295,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                     textStyle: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 35.0,
+                                      fontSize: _height * 0.05,
                                     ),
                                   ),
                                 ),
@@ -304,16 +303,16 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                   icon: FaIcon(
                                     FontAwesomeIcons.temperatureHigh,
                                     color: Colors.greenAccent,
-                                    size: 50.0,
+                                    size: _height * 0.06,
                                   ),
                                   onPressed: () {},
                                 ),
                               ],
                             ),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+                              borderRadius: BorderRadius.circular(10.0),
                               side: BorderSide(
-                                  color: Colors.greenAccent, width: 4.0),
+                                  color: Colors.greenAccent, width: 3.0),
                             ),
                           ),
                         ),
@@ -321,7 +320,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                     ],
                   ),
                   SizedBox(
-                    height: _height * 0.02,
+                    height: _height * 0.015,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -346,7 +345,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                     textStyle: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 35.0,
+                                      fontSize: _height * 0.05,
                                     ),
                                   ),
                                 ),
@@ -354,16 +353,16 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                   icon: FaIcon(
                                     FontAwesomeIcons.objectGroup,
                                     color: Colors.greenAccent,
-                                    size: 50.0,
+                                    size: _height * 0.06,
                                   ),
                                   onPressed: () {},
                                 ),
                               ],
                             ),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+                              borderRadius: BorderRadius.circular(10.0),
                               side: BorderSide(
-                                  color: Colors.greenAccent, width: 4.0),
+                                  color: Colors.greenAccent, width: 3.0),
                             ),
                           ),
                         ),
@@ -388,7 +387,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                     textStyle: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 35.0,
+                                      fontSize: _height * 0.05,
                                     ),
                                   ),
                                 ),
@@ -396,16 +395,16 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                   icon: FaIcon(
                                     FontAwesomeIcons.box,
                                     color: Colors.greenAccent,
-                                    size: 50.0,
+                                    size: _height * 0.06,
                                   ),
                                   onPressed: () {},
                                 ),
                               ],
                             ),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+                              borderRadius: BorderRadius.circular(10.0),
                               side: BorderSide(
-                                  color: Colors.greenAccent, width: 4.0),
+                                  color: Colors.greenAccent, width: 3.0),
                             ),
                           ),
                         ),
@@ -431,7 +430,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                     textStyle: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 35.0,
+                                      fontSize: _height * 0.05,
                                     ),
                                   ),
                                 ),
@@ -439,16 +438,16 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                   icon: FaIcon(
                                     FontAwesomeIcons.voteYea,
                                     color: Colors.greenAccent,
-                                    size: 50.0,
+                                    size: _height * 0.06,
                                   ),
                                   onPressed: () {},
                                 ),
                               ],
                             ),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+                              borderRadius: BorderRadius.circular(10.0),
                               side: BorderSide(
-                                  color: Colors.greenAccent, width: 4.0),
+                                  color: Colors.greenAccent, width: 3.0),
                             ),
                           ),
                         ),
@@ -456,7 +455,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                     ],
                   ),
                   SizedBox(
-                    height: _height * 0.02,
+                    height: _height * 0.015,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -481,7 +480,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                     textStyle: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 35.0,
+                                      fontSize: _height * 0.05,
                                     ),
                                   ),
                                 ),
@@ -489,16 +488,16 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                   icon: FaIcon(
                                     FontAwesomeIcons.weight,
                                     color: Colors.greenAccent,
-                                    size: 50.0,
+                                    size: _height * 0.06,
                                   ),
                                   onPressed: () {},
                                 ),
                               ],
                             ),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+                              borderRadius: BorderRadius.circular(10.0),
                               side: BorderSide(
-                                  color: Colors.greenAccent, width: 4.0),
+                                  color: Colors.greenAccent, width: 3.0),
                             ),
                           ),
                         ),
@@ -524,7 +523,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                     textStyle: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 35.0,
+                                      fontSize: _height * 0.05,
                                     ),
                                   ),
                                 ),
@@ -532,16 +531,16 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                   icon: FaIcon(
                                     FontAwesomeIcons.stickyNote,
                                     color: Colors.greenAccent,
-                                    size: 50.0,
+                                    size: _height * 0.06,
                                   ),
                                   onPressed: () {},
                                 ),
                               ],
                             ),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+                              borderRadius: BorderRadius.circular(10.0),
                               side: BorderSide(
-                                  color: Colors.greenAccent, width: 4.0),
+                                  color: Colors.greenAccent, width: 3.0),
                             ),
                           ),
                         ),
@@ -567,7 +566,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                     textStyle: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 35.0,
+                                      fontSize: _height * 0.05,
                                     ),
                                   ),
                                 ),
@@ -575,16 +574,16 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                   icon: FaIcon(
                                     FontAwesomeIcons.solidEye,
                                     color: Colors.greenAccent,
-                                    size: 50.0,
+                                    size: _height * 0.06,
                                   ),
                                   onPressed: () {},
                                 ),
                               ],
                             ),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+                              borderRadius: BorderRadius.circular(10.0),
                               side: BorderSide(
-                                  color: Colors.greenAccent, width: 4.0),
+                                  color: Colors.greenAccent, width: 3.0),
                             ),
                           ),
                         ),
