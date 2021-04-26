@@ -16,8 +16,8 @@ class CardContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: mediaQuery.width * 0.2,
-      height: mediaQuery.height * 0.1,
+      width: mediaQuery.width * 0.22,
+      height: mediaQuery.height * 0.12,
       decoration: BoxDecoration(
         color: Colors.greenAccent.shade700,
         borderRadius: BorderRadius.circular(15),
@@ -35,12 +35,12 @@ class CardContainer extends StatelessWidget {
           children: [
             Text(
               labelText,
-              style: TextStyle(color: Colors.white, fontSize: 25),
+              style: TextStyle(color: Colors.white, fontSize: mediaQuery.width * 0.02, fontWeight: FontWeight.bold),
               // Theme.of(context).textTheme.bodyText1,
             ),
             Text(
               lotData != null ? '$lotData' : "Empty",
-              style: TextStyle(color: Colors.white, fontSize: 28),
+              style: TextStyle(color: Colors.white, fontSize: mediaQuery.width * 0.0275),
               // Theme.of(context).textTheme.headline6,
             ),
           ],

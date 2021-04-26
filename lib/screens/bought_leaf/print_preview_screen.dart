@@ -28,7 +28,7 @@ class _PrintScreenState extends State<PrintPreviewScreen> {
           children: [
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding:  EdgeInsets.all(mediaQuery.width * 0.005),
                 child: Consumer<TeaCollections>(
                   child: Center(
                     child: const Text('Got no lots yet', style: kEmptyViewText,),
@@ -67,7 +67,7 @@ class _PrintScreenState extends State<PrintPreviewScreen> {
                                     labelText: 'Gross Weight'),
                               ],
                             ),
-                            padding: EdgeInsets.only(top: 10,bottom: 10),
+                            padding: EdgeInsets.only(top: mediaQuery.height * 0.01,bottom: mediaQuery.height * 0.01),
                           ),
                         ),
                 ),
@@ -80,16 +80,16 @@ class _PrintScreenState extends State<PrintPreviewScreen> {
               child: Text(
                 'DEDUCTIONS',
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: mediaQuery.height * 0.06,
                   fontWeight: FontWeight.bold,
-                  letterSpacing: 15,
+                  letterSpacing: 10,
                   color: Colors.white,
                 ),
               ),
             ),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: 20.0, horizontal: 40.0),
+                   EdgeInsets.symmetric(vertical: mediaQuery.height * 0.025, horizontal: mediaQuery.width * 0.045),
               child: Container(
                 height: mediaQuery.height * 0.2,
                 child: Row(
@@ -107,7 +107,7 @@ class _PrintScreenState extends State<PrintPreviewScreen> {
                         child: Center(
                           child: Text(
                             getCurrDate,
-                            style: TextStyle(color: Colors.white, fontSize: 40),
+                            style: TextStyle(color: Colors.white, fontSize: mediaQuery.height * 0.05),
                           ),
                         ),
                       ),
@@ -116,7 +116,7 @@ class _PrintScreenState extends State<PrintPreviewScreen> {
                       'Total deductions',
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 35,
+                          fontSize: mediaQuery.height * 0.06,
                           fontStyle: FontStyle.italic,
                         fontWeight: FontWeight.bold,
                       ),
@@ -134,7 +134,7 @@ class _PrintScreenState extends State<PrintPreviewScreen> {
                         child: Center(
                           child: Text(
                             "$deductions KG",
-                            style: TextStyle(color: Colors.white, fontSize: 40),
+                            style: TextStyle(color: Colors.white, fontSize: mediaQuery.height * 0.05),
                           ),
                         ),
                       ),
@@ -144,17 +144,17 @@ class _PrintScreenState extends State<PrintPreviewScreen> {
               ),
             ),
             Container(
-              height: mediaQuery.height * 0.065,
+              height: mediaQuery.height * 0.075,
               width: double.infinity,
               child: RaisedButton.icon(
                 onPressed: () {
                   // Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
                   Navigator.of(context).pushNamed("PrintScreen");
                 },
-                icon: const Icon(Icons.print, color: Colors.white, size: 40,),
-                label: const Text(
+                icon:  Icon(Icons.print, color: Colors.white, size: mediaQuery.height * 0.06,),
+                label:  Text(
                   'PRINT',
-                  style: TextStyle(fontSize: 40, color: Colors.white),
+                  style: TextStyle(fontSize: mediaQuery.height * 0.05, color: Colors.white),
                 ),
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 color: const Color(0xff099857).withOpacity(0.8),

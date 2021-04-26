@@ -87,7 +87,7 @@ class _PrintScreenState extends State<PrintScreen> {
             gradient: kUIGradient,
           ),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding:  EdgeInsets.all(mediaQuery.width * 0.03),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -96,7 +96,7 @@ class _PrintScreenState extends State<PrintScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     SizedBox(
-                      width: 10,
+                      width: mediaQuery.width * 0.025,
                     ),
                     Text(
                       'Device : ',
@@ -104,32 +104,32 @@ class _PrintScreenState extends State<PrintScreen> {
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Montserrat',
                         color: Colors.white,
-                        fontSize: 25,
+                        fontSize: mediaQuery.width * 0.04,
                       ),
                     ),
                     SizedBox(
-                      width: 30,
+                      width: mediaQuery.width * 0.04,
                     ),
                     Expanded(
                         child: Container(
                             decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.5),
+                                color: Colors.black.withOpacity(0.6),
                                 borderRadius: BorderRadius.circular(30.0),
                                 border: Border.all()),
-                            height: mediaQuery.height * 0.07,
+                            height: mediaQuery.height * 0.09,
                             width: mediaQuery.width * 0.5,
                             child: Container(
-                              padding: const EdgeInsets.only(
-                                  left: 20.0, right: 10.0, top: 5.0),
+                              padding:  EdgeInsets.only(
+                                  left: mediaQuery.width * 0.03, right: mediaQuery.width * 0.02, top: mediaQuery.height * 0.01, bottom: mediaQuery.height * 0.01),
                               child: DropdownButton(
                                 isExpanded: true,
                                 items: _getDeviceItems(),
                                 onChanged: (value) =>
                                     setState(() => _device = value),
                                 value: _device,
-                                iconSize: 25,
+                                iconSize: mediaQuery.height * 0.06,
                                 style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: mediaQuery.height * 0.04,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -139,24 +139,20 @@ class _PrintScreenState extends State<PrintScreen> {
                   ],
                 ),
                 SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 10.0, right: 10.0, top: 50.0),
+                  height: mediaQuery.height * 0.125,
                 ),
                 Column(
                   children: [
                     Container(
                       width: mediaQuery.width * 0.35,
-                      height: mediaQuery.height * 0.07,
+                      height: mediaQuery.height * 0.09,
                       child: RaisedButton(
                         color: const Color(0xff099857),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0),
                         ),
                         padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                            EdgeInsets.symmetric(vertical: mediaQuery.height * 0.01, horizontal: mediaQuery.width * 0.01),
                         elevation: 15,
                         onPressed: () {
                           initPlatformState();
@@ -165,7 +161,7 @@ class _PrintScreenState extends State<PrintScreen> {
                           'REFRESH',
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: 30,
+                              fontSize: mediaQuery.height * 0.06,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Montserrat'),
                         ),
@@ -173,44 +169,42 @@ class _PrintScreenState extends State<PrintScreen> {
                     ),
                   ],
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 10.0, right: 10.0, top: 20.0),
+                SizedBox(
+                  height: mediaQuery.height * 0.04,
                 ),
                 Container(
                   width: mediaQuery.width * 0.35,
-                  height: mediaQuery.height * 0.07,
+                  height: mediaQuery.height * 0.09,
                   child: RaisedButton(
                     elevation: 15,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    padding: EdgeInsets.symmetric(vertical: mediaQuery.height * 0.01, horizontal: mediaQuery.width * 0.01),
                     color: _connected ? Colors.yellow : const Color(0xff099857),
                     onPressed: _connected ? _disconnect : _connect,
                     child: Text(
                       _connected ? 'Disconnect' : 'CONNECT',
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 30,
+                          fontSize: mediaQuery.height * 0.06,
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 10.0, right: 10.0, top: 20.0),
+                SizedBox(
+                  height: mediaQuery.height * 0.04,
                 ),
                 Container(
                   width: mediaQuery.width * 0.35,
-                  height: mediaQuery.height * 0.07,
+                  height: mediaQuery.height * 0.09,
                   child: RaisedButton(
                     elevation: 15,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    padding: EdgeInsets.symmetric(vertical: mediaQuery.height * 0.01, horizontal: mediaQuery.width * 0.01),
                     color: const Color(0xff099857),
                     onPressed: () {
                       receipt.sample(
@@ -228,15 +222,12 @@ class _PrintScreenState extends State<PrintScreen> {
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
-                        fontSize: 30,
+                        fontSize: mediaQuery.height * 0.06,
                       ),
                     ),
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 10.0, right: 10.0, top: 50.0),
-                ),
+
               ],
             ),
           ),
