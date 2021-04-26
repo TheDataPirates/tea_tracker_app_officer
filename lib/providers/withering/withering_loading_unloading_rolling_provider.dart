@@ -319,7 +319,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         _witheringFinishingItems.add(
           WitheringStartingFinishing(
             id: i['tp_id'] as String,
-            troughNumber: i['TroughTroughId'] as int,
+            troughNumber: int.parse(i['TroughTroughId'].toString()),
             time: DateTime.parse(i['date']),
             temperature: double.parse(i['temperature'].toString()),
             humidity: double.parse(i['humidity'].toString()),
