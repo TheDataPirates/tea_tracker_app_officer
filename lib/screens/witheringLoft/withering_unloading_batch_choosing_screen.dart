@@ -97,7 +97,7 @@ class _WitheringUnloadingBatchChoosingScreenState
               _saveWitheringUnloadingBatchNumberItem();
             },
             disabledColor: Colors.white,
-            iconSize: 35.0,
+            iconSize: _width * 0.04,
           )
         ],
       ),
@@ -116,8 +116,8 @@ class _WitheringUnloadingBatchChoosingScreenState
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
-                      height: _height * 0.2,
-                      width: _width * 0.4,
+//                      height: _height * 0.2,
+                      width: _width * 0.45,
                       child: TextFormField(
                         controller: _batchNum,
                         decoration:  InputDecoration(
@@ -125,9 +125,9 @@ class _WitheringUnloadingBatchChoosingScreenState
                             labelStyle: kTextFormFieldLabelStyle,
                           fillColor:textFieldfillColor,
                           filled: true,
-                            errorStyle: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 17.0),
-                            contentPadding: const EdgeInsets.all(30.0),
+                            errorStyle:  TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: _width * 0.02),
+                            contentPadding: EdgeInsets.symmetric(horizontal: _width * 0.03, vertical: _height * 0.05),
                             enabledBorder: kEnabledBorder,
                             focusedBorder: kFocusedBorder,
                             focusedErrorBorder: kFocusedErrorBorder,
@@ -135,8 +135,8 @@ class _WitheringUnloadingBatchChoosingScreenState
                         ),
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
-                        style: const TextStyle(
-                            fontSize: 30.0, fontWeight: FontWeight.bold, color:kTextInputColor),
+                        style:  TextStyle(
+                            fontSize: _width * 0.03, fontWeight: FontWeight.bold, color:kTextInputColor),
                         validator: (value) {
 //                        batchNum = int.parse(value);
                           if (value.isEmpty) {

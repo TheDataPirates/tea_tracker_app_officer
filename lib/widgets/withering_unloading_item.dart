@@ -16,24 +16,27 @@ class WitheringUnloadingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _height = MediaQuery.of(context).size.height;
+    final _width = MediaQuery.of(context).size.width;
     return Card(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 5,
+      elevation: 10.0,
+      margin:  EdgeInsets.symmetric(
+        horizontal: _height * 0.001,
+        vertical: _width * 0.004,
       ),
       color: Colors.black54,
       child: Padding(
-        padding: const EdgeInsets.all(5.0),
+        padding:  EdgeInsets.all(_width * 0.004),
         child: ListTile(
-          leading: CircleAvatar(child: Text(batchNumber.toString(), style: TextStyle(fontSize: 40.0, color: Colors.white),),
-            radius: 50.0,
+          leading: CircleAvatar(child: Text(batchNumber.toString(), style: TextStyle(fontSize: _width * 0.045, color: Colors.white),),
+            radius: _width * 0.045,
             backgroundColor: Colors.greenAccent.shade700,),
-          title: Text('TroughNumber : ' + '$troughNumber', style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold, color: Colors.white),),
-          subtitle: Text('Box Number : ' + '$boxNumber', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),),
+          title: Text('TroughNumber : ' + '$troughNumber', style: TextStyle(fontSize: _width * 0.025, fontWeight: FontWeight.bold, color: Colors.white),),
+          subtitle: Text('Box Number : ' + '$boxNumber', style: TextStyle(fontSize: _width * 0.025, fontWeight: FontWeight.bold, color: Colors.white),),
           trailing: Column(
             children: [
-              Text('Lot Weight : ' + '$lotWeight', style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold, color: Colors.white),),
-              Text('Withering % : ' + '${witheringPercentage.toStringAsFixed(2)}' + ' %', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),),
+              Text('Lot Weight : ' + '$lotWeight', style: TextStyle(fontSize: _width * 0.025, fontWeight: FontWeight.bold, color: Colors.white),),
+              Text('Withering % : ' + '${witheringPercentage.toStringAsFixed(2)}' + ' %', style: TextStyle(fontSize: _width * 0.025, fontWeight: FontWeight.bold, color: Colors.white),),
             ],
           ),
         ),

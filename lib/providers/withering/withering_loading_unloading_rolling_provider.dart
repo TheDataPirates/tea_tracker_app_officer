@@ -92,7 +92,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         _witheringStartingItems.add(
           WitheringStartingFinishing(
             id: i['tp_id'] as String,
-            troughNumber: i['TroughTroughId'] as int,
+            troughNumber: int.parse(i['TroughTroughId']),
             time: DateTime.parse(i['date']),
             temperature: double.parse(i['temperature'].toString()),
             humidity: double.parse(i['humidity'].toString()),
@@ -191,7 +191,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         _witheringMixingItems.add(
           WitheringMixing(
             id: i['tp_id'] as String,
-            troughNumber: i['TroughTroughId'] as int,
+            troughNumber: int.parse(i['TroughTroughId']),
             time: DateTime.parse(i['date']),
             turn: getMixingturn(i['ProcessProcessName']),
             temperature: double.parse(i['temperature'].toString()),
@@ -319,7 +319,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         _witheringFinishingItems.add(
           WitheringStartingFinishing(
             id: i['tp_id'] as String,
-            troughNumber: i['TroughTroughId'] as int,
+            troughNumber: int.parse(i['TroughTroughId']),
             time: DateTime.parse(i['date']),
             temperature: double.parse(i['temperature'].toString()),
             humidity: double.parse(i['humidity'].toString()),

@@ -16,24 +16,27 @@ class WitheringMixingItem extends StatelessWidget {
   Widget build(BuildContext context) {
 
     var timeNow = time.format('H:i,  d/m/Y');
+    final _height = MediaQuery.of(context).size.height;
 
+    final _width = MediaQuery.of(context).size.width;
     return Card(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 4,
+      elevation: 10.0,
+      margin:  EdgeInsets.symmetric(
+        horizontal: _height * 0.001,
+        vertical: _width * 0.004,
       ),
       color: Colors.black54,
       child: Padding(
-        padding: const EdgeInsets.all(5.0),
+        padding: EdgeInsets.all(_width * 0.004),
         child: ListTile(
-          leading: CircleAvatar(child: Text(troughNumber.toString(), style: TextStyle(fontSize: 40.0, color: Colors.white),),
-            radius: 50.0,
+          leading: CircleAvatar(child: Text(troughNumber.toString(), style: TextStyle(fontSize: _width * 0.045, color: Colors.white),),
+            radius: _width * 0.045,
             backgroundColor: Colors.greenAccent.shade700,),
-          title: Text('Turn : ' + '$turn' , style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold, color: Colors.white),),
-          subtitle: Text('Time : ' + '$timeNow', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),),
+          title: Text('Turn : ' + '$turn' , style: TextStyle(fontSize: _width * 0.025, fontWeight: FontWeight.bold, color: Colors.white),),
+          subtitle: Text('Time : ' + '$timeNow', style: TextStyle(fontSize: _width * 0.025, fontWeight: FontWeight.bold, color: Colors.white),),
           trailing: Column(children: [
-            Text('Temperature : ' + '$temperature', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),),
-            Text('Humidity : ' + '$humidity', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),),
+            Text('Temperature : ' + '$temperature', style: TextStyle(fontSize: _width * 0.025, fontWeight: FontWeight.bold, color: Colors.white),),
+            Text('Humidity : ' + '$humidity', style: TextStyle(fontSize: _width * 0.025, fontWeight: FontWeight.bold, color: Colors.white),),
           ],),
         ),
       ),

@@ -122,7 +122,7 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
               _saveWitheringStartingProviderDetails();
             },
             disabledColor: Colors.white,
-            iconSize: 35.0,
+            iconSize: _width * 0.04,
           )
         ],
       ),
@@ -134,25 +134,25 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
         child: Form(
           key: _formKeyWitheringStarting,
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding:  EdgeInsets.symmetric(horizontal:_width * 0.005, vertical: _height * 0.1),
             child: ListView(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 300.0),
+                  padding:  EdgeInsets.symmetric(horizontal: _width * 0.25, vertical: _height * 0.1),
                   child: Container(
-                    width: _width * 0.2,
-                    height: _height * 0.4,
+                    width: _width * 0.45,
+//                    height: _height * 0.4,
                     child: Center(
                       child: TextFormField(
                         controller: _troughNum,
                         decoration:  InputDecoration(
                             labelText: 'Trough Number : ',
                             labelStyle: kTextFormFieldLabelStyle,
-                            errorStyle: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 17.0),
+                            errorStyle:  TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: _width * 0.02),
                           fillColor:textFieldfillColor,
                           filled: true,
-                            contentPadding: const EdgeInsets.all(30.0),
+                            contentPadding: EdgeInsets.symmetric(horizontal: _width * 0.03, vertical: _height * 0.05),
                           enabledBorder: kEnabledBorder,
                           focusedBorder: kFocusedBorder,
                           focusedErrorBorder: kFocusedErrorBorder,
@@ -160,8 +160,8 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
                         ),
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
-                        style: const TextStyle(
-                            fontSize: 30.0, fontWeight: FontWeight.bold, color:kTextInputColor),
+                        style:  TextStyle(
+                            fontSize: _width * 0.03, fontWeight: FontWeight.bold, color:kTextInputColor),
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please Enter Trough Number !';
@@ -187,17 +187,17 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
-                      width: _width * 0.4,
-                      height: _height * 0.4,
+                      width: _width * 0.45,
+//                      height: _height * 0.4,
                       child: TextFormField(
                         decoration:  InputDecoration(
                             labelText: 'Temperature : ',
                             labelStyle: kTextFormFieldLabelStyle,
-                            errorStyle: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 17.0),
+                            errorStyle:  TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: _width * 0.02),
                           fillColor:textFieldfillColor,
                           filled: true,
-                            contentPadding: const EdgeInsets.all(30.0),
+                            contentPadding: EdgeInsets.symmetric(horizontal: _width * 0.03, vertical: _height * 0.05),
                           enabledBorder: kEnabledBorder,
                           focusedBorder: kFocusedBorder,
                           focusedErrorBorder: kFocusedErrorBorder,
@@ -205,8 +205,8 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
                         ),
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
-                        style: const TextStyle(
-                            fontSize: 30.0, fontWeight: FontWeight.bold, color:kTextInputColor),
+                        style:  TextStyle(
+                            fontSize: _width * 0.03, fontWeight: FontWeight.bold, color:kTextInputColor),
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please Enter Temperature !';
@@ -231,17 +231,17 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
 //                    width: _width * 0.15,
 //                  ),
                     Container(
-                      height: _height * 0.4,
-                      width: _width * 0.4,
+//                      height: _height * 0.4,
+                      width: _width * 0.45,
                       child: TextFormField(
                         decoration:  InputDecoration(
                             labelText: 'Humidity : ',
                             labelStyle: kTextFormFieldLabelStyle,
-                            errorStyle: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 17.0),
+                            errorStyle:  TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: _width * 0.02),
                           fillColor:textFieldfillColor,
                           filled: true,
-                            contentPadding: const EdgeInsets.all(30.0),
+                            contentPadding: EdgeInsets.symmetric(horizontal: _width * 0.03, vertical: _height * 0.05),
                           enabledBorder: kEnabledBorder,
                           focusedBorder: kFocusedBorder,
                           focusedErrorBorder: kFocusedErrorBorder,
@@ -249,8 +249,8 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
                         ),
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
-                        style: const TextStyle(
-                          fontSize: 30.0,
+                        style:  TextStyle(
+                          fontSize: _width * 0.03,
                           fontWeight: FontWeight.bold,
                             color:kTextInputColor,
                         ),

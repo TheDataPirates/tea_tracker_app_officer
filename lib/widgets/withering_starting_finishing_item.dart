@@ -21,16 +21,18 @@ class WitheringStartingFinishingItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var timeNow = time.format('d/m/Y, H:i');
+    final _height = MediaQuery.of(context).size.height;
 
+    final _width = MediaQuery.of(context).size.width;
     return Card(
       elevation: 10,
-      margin: const EdgeInsets.symmetric(
-        horizontal: 1,
-        vertical: 4,
+      margin:  EdgeInsets.symmetric(
+        horizontal: _height * 0.001,
+        vertical: _width * 0.004,
       ),
       color: Colors.black54,
       child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding:  EdgeInsets.all(_width * 0.004),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

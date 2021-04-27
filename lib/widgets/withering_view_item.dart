@@ -12,15 +12,18 @@ class WitheringViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _height = MediaQuery.of(context).size.height;
+
+    final _width = MediaQuery.of(context).size.width;
     return Container(
-        padding: const EdgeInsets.all(10.0),
+        padding:  EdgeInsets.all(_width * 0.01),
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0),
             color: Colors.greenAccent.shade700,
             border: Border.all(color: const Color(0xff099857),)),
         child: Column(
           children: [
-            Container(child: Text(name, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white,),), decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.black26),),),),
-            Text('$variableName', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white,),),
+            Container(child: Text(name, style: TextStyle(fontSize: _height * 0.045, fontWeight: FontWeight.bold, color: Colors.white,),), decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.black26),),),),
+            Text('$variableName', style: TextStyle(fontSize: _height * 0.04, fontWeight: FontWeight.bold, color: Colors.white,),),
           ],
         ));
   }
