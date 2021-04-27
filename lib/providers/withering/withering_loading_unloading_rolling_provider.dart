@@ -482,7 +482,10 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
             (witheringUnloadingItem.date.month == DateTime.now().month) &&
             (witheringUnloadingItem.date.day == DateTime.now().day)) {
           //For those filtered items filter items which are entered today
+          print("Total");
+          print(total);
           total += witheringUnloadingItem.lotWeight;
+          print(total);
         }
       }
     });

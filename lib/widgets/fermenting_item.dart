@@ -15,24 +15,25 @@ class FermentingItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var timeNow = time.format('H:i,  d/m/Y');
-
+    final _height = MediaQuery.of(context).size.height;
+    final _width = MediaQuery.of(context).size.width;
     return Card(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 4,
+      margin:  EdgeInsets.symmetric(
+        horizontal: _width * 0.01,
+        vertical: _height * 0.01,
       ),
       color: Colors.black54,
       child: Padding(
-        padding: const EdgeInsets.all(5.0),
+        padding:  EdgeInsets.all(_width * 0.005),
         child: ListTile(
-          leading: CircleAvatar(child: Text(batchNumber.toString(), style: TextStyle(fontSize: 40.0,color: Colors.white)),
-            radius: 50.0,
+          leading: CircleAvatar(child: Text(batchNumber.toString(), style: TextStyle(fontSize: _width * 0.045,color: Colors.white)),
+            radius: _width * 0.045,
             backgroundColor: Colors.greenAccent.shade700,),
-          title: Text('Dhool Number : ' + '$dhoolNumber' , style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold, color: Colors.white),),
-          subtitle: Text('Time : ' + '$timeNow', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),),
+          title: Text('Dhool Number : ' + '$dhoolNumber' , style: TextStyle(fontSize: _width * 0.025, fontWeight: FontWeight.bold, color: Colors.white),),
+          subtitle: Text('Time : ' + '$timeNow', style: TextStyle(fontSize: _width * 0.025, fontWeight: FontWeight.bold, color: Colors.white),),
           trailing: Column(children: [
-            Text('Dhool In Weight : ' + '$dhoolInWeight', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),),
-            Text('Dhool Out Weight : ' + '$dhoolOutWeight', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),),
+            Text('Dhool In Weight : ' + '$dhoolInWeight', style: TextStyle(fontSize: _width * 0.025, fontWeight: FontWeight.bold, color: Colors.white),),
+            Text('Dhool Out Weight : ' + '$dhoolOutWeight', style: TextStyle(fontSize: _width * 0.025, fontWeight: FontWeight.bold, color: Colors.white),),
           ],),
         ),
       ),
