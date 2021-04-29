@@ -9,32 +9,34 @@ class OutturnItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _height = MediaQuery.of(context).size.height;
+    final _width = MediaQuery.of(context).size.width;
     return Card(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 4,
+      margin:  EdgeInsets.symmetric(
+        horizontal: _height * 0.001,
+        vertical: _width * 0.004,
       ),
       color: Colors.black54,
       child: Padding(
-        padding: const EdgeInsets.all(5.0),
+        padding:  EdgeInsets.all(_width * 0.004),
         child: ListTile(
-          leading: const Text(
+          leading:  Text(
             'Batch Number : ',
-            style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold, color: Colors.white,),
+            style: TextStyle(fontSize: _width * 0.035, fontWeight: FontWeight.bold, color: Colors.white,),
           ),
           title: CircleAvatar(
             child: Text(batchNumber.toString(),
                 style: TextStyle(
-                  fontSize: 40.0,
+                  fontSize: _width * 0.05,
                   color: Colors.white,
                 )),
-            radius: 50.0,
+            radius: _width * 0.05,
             backgroundColor: Colors.greenAccent.shade700,
           ),
           trailing: Chip(
             label: Text(
               '${outturn.toStringAsFixed(4)}' + ' %',
-              style: TextStyle(fontSize: 20.0, color: Colors.white),
+              style: TextStyle(fontSize: _width * 0.025, color: Colors.white),
             ),
             backgroundColor: Colors.greenAccent.shade700,
           ),

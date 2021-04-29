@@ -8,7 +8,8 @@ class OutturnReportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final out = Provider.of<WitheringLoadingUnloadingRollingProvider>(context);
-
+    final _height = MediaQuery.of(context).size.height;
+    final _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Outturn Report'),
@@ -20,7 +21,7 @@ class OutturnReportScreen extends StatelessWidget {
               Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
             },
             disabledColor: Colors.white,
-            iconSize: 35.0,
+            iconSize: _width * 0.04,
           )
         ],
       ),
@@ -32,29 +33,29 @@ class OutturnReportScreen extends StatelessWidget {
         child: Column(
           children: [
             Card(
-              margin: const EdgeInsets.all(15.0),
+              margin:  EdgeInsets.all(_width * 0.0075),
               color:  Colors.black54,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding:  EdgeInsets.all(_width * 0.005),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                     Text(
                       'Total Day Outturn : ',
-                      style: const TextStyle(
+                      style:  TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 30.0,
+                        fontSize: _width * 0.035,
                         color: Colors.white,
                       ),
                     ),
                     SizedBox(
-                      width: 20.0,
+                      width:  _width * 0.02,
                     ),
                     Chip(
                       label: Text(
                         '${out.totalDayOutturn(DateTime.now()).toStringAsFixed(4)}' +
                             ' %',
-                        style: TextStyle(fontSize: 20.0, color: Colors.white),
+                        style: TextStyle(fontSize: _width * 0.025, color: Colors.white),
                       ),
                       backgroundColor:Colors.greenAccent.shade700,
                     ),
