@@ -48,6 +48,8 @@ import 'screens/witheringLoft/trough_loading_view_screen.dart';
 import 'screens/witheringLoft/withering_mixing_view_screen.dart';
 import 'screens/witheringLoft/withering_starting_view_screen.dart';
 import 'screens/viewAllSections/vas_bought_leaf_screen.dart';
+import 'screens/viewAllSections/vas_trough_loading_screen.dart';
+import 'screens/viewAllSections/vas_lots_screen.dart';
 import 'screens/viewAllSections/vas_withering_loft_screen.dart';
 import 'screens/viewAllSections/vas_withering_starting_screen.dart';
 import 'screens/viewAllSections/vas_withering_mixing_screen.dart';
@@ -158,6 +160,8 @@ class MyApp extends StatelessWidget {
             'RemeasureListTileLot': (context) =>RemeasureListTileLot(),
             'ViewAllSections': (context) => ViewAllSectionsScreen(),
             'VasBoughtLeaf':(context) => VasBoughtLeafScreen(),
+            'VasTroughLoading':(context) => VasTroughLoadingScreen(),
+            'VasLots' :(context) => VasLotsScreen(),
             'VasWitheringLoft':(context) => VasWitheringLoftScreen(),
             'VasWitheringStarting':(context) => VasWitheringStartingScreen(),
             'VasWitheringMixing':(context) => VasWitheringMixingScreen(),
