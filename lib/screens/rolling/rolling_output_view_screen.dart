@@ -77,6 +77,8 @@ class _RollingOutputViewScreenState extends State<RollingOutputViewScreen> {
                     .rollingOutputItems[i].weightIn,
                 weightOut: WitheringLoadingUnloadingRollingProvider
                     .rollingOutputItems[i].weightOut,
+                height: _height,
+                width: _width,
               ),
             ),
           ),

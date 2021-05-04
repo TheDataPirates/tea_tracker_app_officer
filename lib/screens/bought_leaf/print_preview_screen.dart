@@ -46,22 +46,26 @@ class _PrintScreenState extends State<PrintPreviewScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 CardContainer(
-                                  mediaQuery: mediaQuery,
+                                  height: mediaQuery.height,
+                                  width: mediaQuery.width,
                                   lotData:
                                       teaCollections.lot_items[i].container_type,
                                   labelText: 'Container type',
                                 ),
                                 CardContainer(
-                                    mediaQuery: mediaQuery,
+                                    height: mediaQuery.height,
+                                    width: mediaQuery.width,
                                     lotData: teaCollections.lot_items[i].leaf_grade,
                                     labelText: 'Grade of GL'),
                                 CardContainer(
-                                    mediaQuery: mediaQuery,
+                                    height: mediaQuery.height,
+                                    width: mediaQuery.width,
                                     lotData: teaCollections
                                         .lot_items[i].no_of_containers,
                                     labelText: 'Number of Containers'),
                                 CardContainer(
-                                    mediaQuery: mediaQuery,
+                                    height: mediaQuery.height,
+                                    width: mediaQuery.width,
                                     lotData:
                                         teaCollections.lot_items[i].gross_weight,
                                     labelText: 'Gross Weight'),

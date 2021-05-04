@@ -75,6 +75,8 @@ class _FermentingViewScreenState extends State<FermentingViewScreen> {
                                 dhoolOutWeight:
                                     WitheringLoadingUnloadingRollingProvider
                                         .fermentingItems[i].dhoolOutWeight,
+                                height: _height,
+                                width: _width,
                               ),
                             ),
                 ),

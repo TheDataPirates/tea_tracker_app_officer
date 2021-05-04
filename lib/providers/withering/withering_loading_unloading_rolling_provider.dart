@@ -730,6 +730,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   }
 
   Future<void> fetchAndSetTroughLoadingItem(String authToken) async {
+    print("fetchAndSetTroughLoadingItem");
     _troughLoadingItems = [];
 //    print('empty list');
 //    print(troughLoadingItemCount);
@@ -747,20 +748,12 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       List loadedLots = extractedDataList['loadings'];
       print(loadedLots);
 //      loadedLots = [];
+      var count = 1;
       for (var i in loadedLots) {
-        if (i['BoxBoxId'] == null) {
-          _troughLoadingItems.add(
-            WitheringLoading(
-              id: i['lot_id'].toString(),
-              lotId: i['lot_id'].toString(),
-              troughNumber: 0,
-              date: DateTime.now(),
-              netWeight: double.parse(i['net_weight'].toString()),
-              boxNumber: 0,
-              gradeOfGL: i['grade_GL'].toString(),
-            ),
-          );
-        } else {
+        print("for");
+        print(count);
+//        if (i['BoxBoxId'] == null) {
+
           var TNum = i['BoxBoxId'].toString();
           var T_Num = TNum[1];
           var BNum = i['BoxBoxId'].toString();
@@ -770,16 +763,34 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
             WitheringLoading(
               id: i['lot_id'].toString(),
               lotId: i['lot_id'].toString(),
-              troughNumber: int.parse(T_Num),
+              troughNumber: i['BoxBoxId'] == null ? 0 :int.parse(T_Num),
               date: DateTime.now(),
               netWeight: double.parse(i['net_weight'].toString()),
-              boxNumber: int.parse(B_Num),
+              boxNumber: i['BoxBoxId'] == null ? 0 :int.parse(B_Num),
               gradeOfGL: i['grade_GL'].toString(),
             ),
           );
-        }
+//        } else {
+//          var TNum = i['BoxBoxId'].toString();
+//          var T_Num = TNum[1];
+//          var BNum = i['BoxBoxId'].toString();
+//          var B_Num = BNum[3];
+//
+//          _troughLoadingItems.add(
+//            WitheringLoading(
+//              id: i['lot_id'].toString(),
+//              lotId: i['lot_id'].toString(),
+//              troughNumber: int.parse(T_Num),
+//              date: DateTime.now(),
+//              netWeight: double.parse(i['net_weight'].toString()),
+//              boxNumber: int.parse(B_Num),
+//              gradeOfGL: i['grade_GL'].toString(),
+//            ),
+//          );
+//        }
 
 //        print(i);
+      count++;
       }
 //      print(troughLoadingItemCount);
       notifyListeners();
@@ -865,8 +876,8 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         .firstWhere((troughLoadEnd) => troughLoadEnd.id == id);
   }
 
-  void addEndedLoadingTroughBoxItem(
-      EndedLoadingTroughBox endedLoadingTroughBox) {
+  Future <void> addEndedLoadingTroughBoxItem(
+      EndedLoadingTroughBox endedLoadingTroughBox) async {
     final newEndedTroughLoadingItem = EndedLoadingTroughBox(
         id: DateTime.now().toString(),
         troughNumber: endedLoadingTroughBox.troughNumber,

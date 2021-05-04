@@ -15,6 +15,8 @@ class _VasRollingScreenState extends State<VasRollingScreen> {
   Widget build(BuildContext context) {
 //    final rollingOutput = Provider.of<WitheringLoadingUnloadingRollingProvider>(context,listen: false);
     final token = Provider.of<Auth>(context, listen: false).token;
+    final _height = MediaQuery.of(context).size.height;
+    final _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Rolling Output View'),
@@ -64,6 +66,8 @@ class _VasRollingScreenState extends State<VasRollingScreen> {
                     .rollingOutputItems[i].weightIn,
                 weightOut: WitheringLoadingUnloadingRollingProvider
                     .rollingOutputItems[i].weightOut,
+                height: _height,
+                width: _width,
               ),
             ),
           ),

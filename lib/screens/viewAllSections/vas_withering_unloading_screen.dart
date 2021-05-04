@@ -32,6 +32,8 @@ class _VasWitheringUnloadingScreenState extends State<VasWitheringUnloadingScree
     final token = auth.token;
     final witheringLoadingUnloading =
     Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false);
+    final _height = MediaQuery.of(context).size.height;
+    final _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Withering Unloading View'),
@@ -113,6 +115,8 @@ class _VasWitheringUnloadingScreenState extends State<VasWitheringUnloadingScree
                                 .witheringUnloadingItems[i].boxNumber,
                             batchNumber: WitheringLoadingUnloadingRollingProvider
                                 .witheringUnloadingItems[i].batchNumber,
+                            height: _height,
+                            width: _width,
                           ),
                     ),
                   ),

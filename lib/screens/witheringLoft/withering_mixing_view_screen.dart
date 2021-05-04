@@ -65,6 +65,8 @@ class WitheringMixingViewScreen extends StatelessWidget {
                                         .witheringMixingItems[i].temperature,
                                     humidity: WitheringMixingProvider
                                         .witheringMixingItems[i].humidity,
+                                    height: _height,
+                                    width: _width,
                                   ),
                                 ),
                     ),

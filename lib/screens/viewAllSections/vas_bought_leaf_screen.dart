@@ -7,32 +7,40 @@ import 'package:teatrackerappofficer/widgets/trough_loading_item.dart';
 import 'package:teatrackerappofficer/constants.dart';
 import 'package:teatrackerappofficer/widgets/trough_loading_item_agent.dart';
 
-class VasBoughtLeafScreen extends StatefulWidget {
-  @override
-  _VasBoughtLeafScreenState createState() =>
-      _VasBoughtLeafScreenState();
-}
+class VasBoughtLeafScreen extends StatelessWidget {
+//  @override
+//  _VasBoughtLeafScreenState createState() =>
+//      _VasBoughtLeafScreenState();
+//}
 
-class _VasBoughtLeafScreenState extends State<VasBoughtLeafScreen> {
-  var _endedLoadingTroughBox = EndedLoadingTroughBox(
-    id: null,
-    troughNumber: null,
-    boxNumber: null,
-    date: null,
-  );
+//class _VasBoughtLeafScreenState extends State<VasBoughtLeafScreen> {
+//  var _endedLoadingTroughBox = EndedLoadingTroughBox(
+//    id: null,
+//    troughNumber: null,
+//    boxNumber: null,
+//    date: null,
+//  );
 
-  void _saveEndedLoadingTroughBoxDetails() {
-    Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-        listen: false)
-        .addEndedLoadingTroughBoxItem(_endedLoadingTroughBox);
-
-    Navigator.of(context).pop();
-  }
+//  void _saveEndedLoadingTroughBoxDetails() {
+//    Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+//        listen: false)
+//        .addEndedLoadingTroughBoxItem(_endedLoadingTroughBox);
+//
+//    Navigator.of(context).pop();
+//  }
 
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);
     final token = auth.token;
+    final _height = MediaQuery
+        .of(context)
+        .size
+        .height;
+    final _width = MediaQuery
+        .of(context)
+        .size
+        .width;
 
     return Scaffold(
       appBar: AppBar(
@@ -40,14 +48,15 @@ class _VasBoughtLeafScreenState extends State<VasBoughtLeafScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          image : VASBackgroundImage,
+          image: VASBackgroundImage,
           gradient: kUIGradient,
         ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
               listen: false)
               .fetchAndSetTroughLoadingItem(token),
-          builder: (ctx, snapshot) => snapshot.connectionState ==
+          builder: (ctx, snapshot) =>
+          snapshot.connectionState ==
               ConnectionState.waiting
               ? Center(
             child: CircularProgressIndicator(),
@@ -65,8 +74,9 @@ class _VasBoughtLeafScreenState extends State<VasBoughtLeafScreen> {
                 : ListView.builder(
               itemCount: WitheringLoadingUnloadingRollingProvider
                   .troughLoadingItems.length,
-              itemBuilder: (ctx, i) => WitheringLoadingUnloadingRollingProvider
-                  .troughLoadingItems[i].troughNumber==0 ?
+              itemBuilder: (ctx, i) =>
+              WitheringLoadingUnloadingRollingProvider
+                  .troughLoadingItems[i].troughNumber == 0 ?
               TroughLoadingItemAgent(
                 id: WitheringLoadingUnloadingRollingProvider
                     .troughLoadingItems[i].id,
@@ -89,9 +99,12 @@ class _VasBoughtLeafScreenState extends State<VasBoughtLeafScreen> {
                     WitheringLoadingUnloadingRollingProvider
                         .troughLoadingItems[i].boxNumber,
                     DateTime
-                        .now()), //A function should be written to todays whole weight of trough number box number
-              ):
-                  TroughLoadingItem(
+                        .now()),
+                //A function should be written to todays whole weight of trough number box number
+                height: _height,
+                width: _width,
+              ) :
+              TroughLoadingItem(
                 id: WitheringLoadingUnloadingRollingProvider
                     .troughLoadingItems[i].id,
                 troughNumber:
@@ -112,7 +125,10 @@ class _VasBoughtLeafScreenState extends State<VasBoughtLeafScreen> {
                     WitheringLoadingUnloadingRollingProvider
                         .troughLoadingItems[i].boxNumber,
                     DateTime
-                        .now()), //A function should be written to todays whole weight of trough number box number
+                        .now()),
+                //A function should be written to todays whole weight of trough number box number
+                height: _height,
+                width: _width,
               ),
             ),
           ),
@@ -121,3 +137,4 @@ class _VasBoughtLeafScreenState extends State<VasBoughtLeafScreen> {
     );
   }
 }
+//}

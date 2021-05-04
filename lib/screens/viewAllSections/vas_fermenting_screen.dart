@@ -14,6 +14,8 @@ class _VasFermentingScreenState extends State<VasFermentingScreen> {
   @override
   Widget build(BuildContext context) {
     final token = Provider.of<Auth>(context, listen: false).token;
+    final _height = MediaQuery.of(context).size.height;
+    final _width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
@@ -63,6 +65,8 @@ class _VasFermentingScreenState extends State<VasFermentingScreen> {
                 dhoolOutWeight:
                 WitheringLoadingUnloadingRollingProvider
                     .fermentingItems[i].dhoolOutWeight,
+                height: _height,
+                width: _width,
               ),
             ),
           ),

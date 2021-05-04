@@ -17,6 +17,8 @@ class _VasRollBreakingScreenState extends State<VasRollBreakingScreen> {
         context,
         listen: false);
     final token = Provider.of<Auth>(context, listen: false).token;
+    final _height = MediaQuery.of(context).size.height;
+    final _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Roll Breaking View'),
@@ -73,6 +75,8 @@ class _VasRollBreakingScreenState extends State<VasRollBreakingScreen> {
                                         weight:
                                             WitheringLoadingUnloadingRollingProvider
                                                 .rollBreakingItems[i].weight,
+                                        height: _height,
+                                        width: _width,
                                       ),
                                     ),
                     ),

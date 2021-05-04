@@ -7,44 +7,50 @@ class DifferenceReportItem extends StatelessWidget {
   final double remeasuringWeight;
   final double weightDifference;
   final String supplierId;
+  final double _height;
+  final double _width;
 
   const DifferenceReportItem(
       {Key key,
+        @required double height,
+        @required double width,
       this.reportId,
       this.originalWeight,
       this.remeasuringWeight,
       this.weightDifference,
       this.supplierId})
-      : super(key: key);
+      : _height = height,
+        _width = width,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
 //    var timeNow = time.format('H:i,  d/m/Y');
 
     return Card(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 4,
+      margin:  EdgeInsets.symmetric(
+        horizontal: _width * 0.01,
+        vertical: _height * 0.01,
       ),
       color: Colors.black54,
       child: Padding(
-        padding: const EdgeInsets.all(5.0),
+        padding: EdgeInsets.all(_width * 0.005),
         child: ListTile(
           leading: Text(
             "Supplier ID : " + supplierId.toString(),
-            style: TextStyle(fontSize: 30.0, color: Colors.green),
+            style: TextStyle(fontSize: _width * 0.025, color: Colors.green),
           ),
           title: Text(
             'Original Weight : ' + '$originalWeight',
             style: TextStyle(
-                fontSize: 25.0,
+                fontSize: _width * 0.025,
                 fontWeight: FontWeight.bold,
                 color: Colors.white),
           ),
           subtitle: Text(
             'Remeasuring Weight : ' + '$remeasuringWeight',
             style: TextStyle(
-                fontSize: 20.0,
+                fontSize: _width * 0.025,
                 fontWeight: FontWeight.bold,
                 color: Colors.white),
           ),
@@ -53,7 +59,7 @@ class DifferenceReportItem extends StatelessWidget {
               Text(
                 'Weight Difference : ' + '$weightDifference',
                 style: TextStyle(
-                    fontSize: 20.0,
+                    fontSize: _width * 0.025,
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
               ),

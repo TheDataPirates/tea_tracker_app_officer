@@ -161,6 +161,8 @@ class _WitheringUnloadingViewScreenState
                                               WitheringLoadingUnloadingRollingProvider
                                                   .witheringUnloadingItems[i]
                                                   .batchNumber,
+                                              height: _height,
+                                              width: _width,
                                         ),
                                       ),
                           ),

@@ -77,6 +77,8 @@ class _DrierOutputViewScreenState extends State<DrierOutputViewScreen> {
                 drierOutWeight:
                 WitheringLoadingUnloadingRollingProvider
                     .dryingItems[i].drierOutWeight,
+                height: _height,
+                width: _width,
               ),
             ),
           ),

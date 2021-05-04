@@ -22,18 +22,52 @@ class _RemeasureTroughLoadingViewScreenState
     date: null,
   );
 
-  void _saveEndedLoadingTroughBoxDetails() {
-    Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-            listen: false)
-        .addEndedLoadingTroughBoxItem(_endedLoadingTroughBox);
+  Future<void> _saveEndedLoadingTroughBoxDetails() async {
+    try{
+      await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
+          listen: false)
+          .addEndedLoadingTroughBoxItem(_endedLoadingTroughBox);
 
-    Navigator.of(context).pop();
+      Navigator.of(context).pop();
+    }catch (error) {
+      await showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: AlertDialog(
+                title: const Text('Warning !',style: TextStyle(color: Colors.white, fontSize: 18),),
+                backgroundColor: Colors.black87,
+                content: ListBody(
+                  children: <Widget>[
+                    const Text('Error has occured',style: TextStyle(color: Colors.white, fontSize: 17),),
+                    Text(error.toString(),style: TextStyle(color: Colors.white, fontSize: 17),),
+                  ],
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('Okay',style: TextStyle(fontSize: 17),),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);
     final token = auth.token;
+    final _height = MediaQuery.of(context).size.height;
+    final _width = MediaQuery.of(context).size.width;
 //
 //    final troughLoading = Provider.of<WitheringLoadingUnloadingRollingProvider>(
 //        context,
@@ -106,6 +140,8 @@ class _RemeasureTroughLoadingViewScreenState
                                         .troughLoadingItems[i].boxNumber,
                                     DateTime
                                         .now()), //A function should be written to todays whole weight of trough number box number
+                                height: _height,
+                                width: _width,
                               ):
                                   TroughLoadingItem(
                                 id: WitheringLoadingUnloadingRollingProvider
@@ -130,6 +166,8 @@ class _RemeasureTroughLoadingViewScreenState
                                             .troughLoadingItems[i].boxNumber,
                                         DateTime
                                             .now()), //A function should be written to todays whole weight of trough number box number
+                                    height: _height,
+                                    width: _width,
                               ),
                             ),
                 ),

@@ -72,6 +72,8 @@ class OutturnReportScreen extends StatelessWidget {
                     out.batchItems[i].batchNumber,
                     DateTime
                         .now()), //A double value of the outturn of a given batch should be calculated and returned when the batch number and date is provided
+                height: _height,
+                width: _width,
               ),
             ))
           ],

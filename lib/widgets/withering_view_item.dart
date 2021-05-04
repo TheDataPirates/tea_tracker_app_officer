@@ -3,18 +3,24 @@ import 'package:flutter/material.dart';
 class WitheringViewItem extends StatelessWidget {
   const WitheringViewItem({
     Key key,
+    @required double height,
+    @required double width,
     @required this.variableName,
     @required this.name,
-  }) : super(key: key);
+  }) : _height = height,
+        _width = width,
+        super(key: key);
 
   final variableName;
   final String name;
+  final double _height;
+  final double _width;
 
   @override
   Widget build(BuildContext context) {
-    final _height = MediaQuery.of(context).size.height;
-
-    final _width = MediaQuery.of(context).size.width;
+//    final _height = MediaQuery.of(context).size.height;
+//
+//    final _width = MediaQuery.of(context).size.width;
     return Container(
         padding:  EdgeInsets.all(_width * 0.01),
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0),

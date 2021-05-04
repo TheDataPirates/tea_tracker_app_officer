@@ -100,6 +100,7 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context).size;
+    final _height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -314,6 +315,7 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
                               InputField(
                                 labelText: '  Gross weight',
                                 width: width,
+                                height: _height,
                                 validator: [FormBuilderValidators.required()],
                                 onSave: (value) {
                                   _editedLot = Lot(
@@ -363,6 +365,7 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
                                 InputField(
                                   labelText: '  Water %',
                                   width: deduct_width,
+                                  height: _height,
                                   validator: [FormBuilderValidators.required()],
                                   onSave: (value) {
                                     _editedLot = Lot(
@@ -384,6 +387,7 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
                                 InputField(
                                   labelText: '  Course Leaf %',
                                   width: deduct_width,
+                                  height: _height,
                                   validator: [FormBuilderValidators.required()],
                                   onSave: (value) {
                                     _editedLot = Lot(
@@ -405,6 +409,7 @@ class _RemeasuringInputCollectionScreenState extends State<RemeasuringInputColle
                                 InputField(
                                   labelText: '  Other %',
                                   width: deduct_width,
+                                  height: _height,
                                   validator: [FormBuilderValidators.required()],
                                   onSave: (value) {
                                     _editedLot = Lot(

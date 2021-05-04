@@ -15,6 +15,8 @@ class _VasWitheringMixingScreenState extends State<VasWitheringMixingScreen> {
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);
     final token = auth.token;
+    final _height = MediaQuery.of(context).size.height;
+    final _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Withering Mixing View'),
@@ -58,6 +60,8 @@ class _VasWitheringMixingScreenState extends State<VasWitheringMixingScreen> {
                                     .witheringMixingItems[i].temperature,
                                 humidity: WitheringMixingProvider
                                     .witheringMixingItems[i].humidity,
+                                height: _height,
+                                width: _width,
                               ),
                             ),
                 ),

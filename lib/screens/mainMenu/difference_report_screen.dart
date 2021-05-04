@@ -15,6 +15,8 @@ class _DifferenceReportScreenState extends State<DifferenceReportScreen> {
   @override
   Widget build(BuildContext context) {
     final token = Provider.of<Auth>(context, listen: false).token;
+    final _height = MediaQuery.of(context).size.height;
+    final _width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
@@ -27,7 +29,7 @@ class _DifferenceReportScreenState extends State<DifferenceReportScreen> {
               Navigator.of(context).pop();
             },
             disabledColor: Colors.white,
-            iconSize: 35.0,
+            iconSize: _width * 0.04,
           )
         ],
       ),
@@ -79,6 +81,8 @@ class _DifferenceReportScreenState extends State<DifferenceReportScreen> {
                                         WitheringLoadingUnloadingRollingProvider
                                             .differenceReportItems[i]
                                             .supplierId,
+                                    height: _height,
+                                    width: _width,
                                   ),
                                 ),
                     ),

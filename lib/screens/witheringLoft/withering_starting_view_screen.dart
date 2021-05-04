@@ -68,6 +68,8 @@ class WitheringStartingViewScreen extends StatelessWidget {
                                     .witheringStartingItems[i].temperature,
                                 humidity: WitheringStartingFinishingProvider
                                     .witheringStartingItems[i].humidity,
+                                    height: _height,
+                                    width: _width,
                               ),
                             ),
                 ),

@@ -22,8 +22,8 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
   Future<void> _saveBigBulkDetails(String token) async {
     try {
 
-      print(_bigBulk.bigBulkNumber);
-      print(_bigBulk.bigBulkWeight);
+//      print(_bigBulk.bigBulkNumber);
+//      print(_bigBulk.bigBulkWeight);
 
       await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
               listen: false)
@@ -132,6 +132,8 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
                                         .rollBreakingItems[i].rollBreakerNumber,
                                 weight: WitheringLoadingUnloadingRollingProvider
                                     .rollBreakingItems[i].weight,
+                                height: _height,
+                                width: _width,
                               ),
                             ),
                 ),

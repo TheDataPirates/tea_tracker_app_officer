@@ -112,6 +112,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context).size;
+    final _height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -126,11 +127,11 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
               Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.all(mediaQuery.height * 0.02),
+                    padding: EdgeInsets.symmetric(horizontal: mediaQuery.width * 0.02, vertical: mediaQuery.height * 0.175),
                     child: Column(
                       children: <Widget>[
                         Container(
-                          height: mediaQuery.height * 0.4,
+                          height: mediaQuery.height * 0.2,
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -345,7 +346,8 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                               ),
                               InputField(
                                 labelText: ' Gross weight',
-                                width: width,
+                                width: deduct_width,
+                                height: _height,
                                 validator: [FormBuilderValidators.required()],
                                 onSave: (value) {
                                   _editedLot = Lot(
@@ -396,6 +398,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                 InputField(
                                   labelText: ' Water %',
                                   width: deduct_width,
+                                  height: _height,
                                   validator: [FormBuilderValidators.required()],
                                   onSave: (value) {
                                     _editedLot = Lot(
@@ -415,8 +418,9 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                   width: mediaQuery.width * 0.05,
                                 ),
                                 InputField(
-                                  labelText: 'Course Leaf %',
+                                  labelText: ' Course Leaf %',
                                   width: deduct_width,
+                                  height: _height,
                                   validator: [FormBuilderValidators.required()],
                                   onSave: (value) {
                                     _editedLot = Lot(
@@ -438,6 +442,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                 InputField(
                                   labelText: ' Other %',
                                   width: deduct_width,
+                                  height: _height,
                                   validator: [FormBuilderValidators.required()],
                                   onSave: (value) {
                                     _editedLot = Lot(

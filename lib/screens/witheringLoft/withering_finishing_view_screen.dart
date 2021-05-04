@@ -67,6 +67,8 @@ class WitheringFinishingViewScreen extends StatelessWidget {
                                     .witheringFinishingItems[i].temperature,
                                 humidity: WitheringStartingFinishingProvider
                                     .witheringFinishingItems[i].humidity,
+                                    height: _height,
+                                    width: _width,
                               ),
                             ),
                 ),

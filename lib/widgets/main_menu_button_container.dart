@@ -22,8 +22,6 @@ class MainMenuFlatButtonContainer extends StatelessWidget {
   final String iconString;
   final IconData icon;
 
-
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,7 +47,14 @@ class MainMenuFlatButtonContainer extends StatelessWidget {
                   ),
                 ),
               ),
-              IconButton(icon: FaIcon(icon, color: Colors.greenAccent, size: _height * 0.06,), onPressed: (){},),
+              IconButton(
+                icon: FaIcon(
+                  icon,
+                  color: Colors.greenAccent,
+                  size: _height * 0.06,
+                ),
+                onPressed: () {},
+              ),
             ],
           ),
           shape: RoundedRectangleBorder(

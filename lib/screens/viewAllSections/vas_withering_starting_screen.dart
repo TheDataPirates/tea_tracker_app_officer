@@ -15,6 +15,8 @@ class _VasWitheringStartingScreenState extends State<VasWitheringStartingScreen>
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);
     final token = auth.token;
+    final _height = MediaQuery.of(context).size.height;
+    final _width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
@@ -61,6 +63,8 @@ class _VasWitheringStartingScreenState extends State<VasWitheringStartingScreen>
                                     .witheringStartingItems[i].temperature,
                                 humidity: WitheringStartingFinishingProvider
                                     .witheringStartingItems[i].humidity,
+                                    height: _height,
+                                    width: _width,
                               ),
                             ),
                 ),
