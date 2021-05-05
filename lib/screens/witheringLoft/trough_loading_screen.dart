@@ -35,9 +35,9 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
     }
 
     if (Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-            listen: false)
+        listen: false)
         .isTroughBoxEnded(int.parse(_troughNum.text), int.parse(_boxNum.text),
-            DateTime.now())) {
+        DateTime.now())) {
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
@@ -70,9 +70,9 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
 //    print(batchNo);
 //    return;
     } else if (!Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-            listen: false)
+        listen: false)
         .isTroughBoxLeafGradeCorrect(int.parse(_troughNum.text),
-            int.parse(_boxNum.text), leafGrade, DateTime.now())) {
+        int.parse(_boxNum.text), leafGrade, DateTime.now())) {
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
@@ -80,10 +80,10 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
           return AlertDialog(
             backgroundColor: Colors.black87,
             title: Text(
-                'You have already entered different leaf grade in trough ' +
-                    '${int.parse(_troughNum.text)}' +
-                    ' box ' +
-                    '${int.parse(_boxNum.text)}',style: TextStyle(color: Colors.white, fontSize: 18),),
+              'You have already entered different leaf grade in trough ' +
+                  '${int.parse(_troughNum.text)}' +
+                  ' box ' +
+                  '${int.parse(_boxNum.text)}',style: TextStyle(color: Colors.white, fontSize: 18),),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
@@ -107,7 +107,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
       _formKeyTroughLoading.currentState.save();
       try {
         await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-                listen: false)
+            listen: false)
             .addTroughLoadingItem(_troughLoading, authToken);
 
         Navigator.of(context).pushNamed('TroughLoadingView');
@@ -157,7 +157,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
   @override
   Widget build(BuildContext context) {
     final tea_collection_provider =
-        Provider.of<TeaCollections>(context, listen: false);
+    Provider.of<TeaCollections>(context, listen: false);
     final _height =
         MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
 
@@ -175,7 +175,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                   .leaf_grade); //int.parse(_troughNum.text), int.parse(_boxNum.text), _leafGrade.text
             },
             disabledColor: Colors.white,
-            iconSize: 35.0,
+            iconSize: _width * 0.04,
           )
         ],
       ),
@@ -194,8 +194,8 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
-                      height: _height * 0.2,
-                      width: _width * 0.4,
+//                      height: _height * 0.15,
+                      width: _width * 0.45,
                       child: TextFormField(
                         controller: _troughNum,
                         decoration:  InputDecoration(
@@ -203,11 +203,11 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                           labelStyle: kTextFormFieldLabelStyle,
                           fillColor:textFieldfillColor,
                           filled: true,
-                          errorStyle: const TextStyle(
+                          errorStyle:  TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 17.0,
+                            fontSize: _width * 0.02,
                           ),
-                          contentPadding: const EdgeInsets.all(30.0),
+                          contentPadding:  EdgeInsets.symmetric(horizontal: _width * 0.03, vertical: _height * 0.05),
                           enabledBorder: kEnabledBorder,
                           focusedBorder: kFocusedBorder,
                           focusedErrorBorder: kFocusedErrorBorder,
@@ -215,9 +215,9 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                         ),
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
-                        style: const TextStyle(
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
+                        style:  TextStyle(
+                            fontSize: _width * 0.03,
+                            fontWeight: FontWeight.bold,
                             color: kTextInputColor
                         ),
                         validator: (value) {
@@ -248,8 +248,8 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
-                      height: _height * 0.2,
-                      width: _width * 0.4,
+//                      height: _height * 0.15,
+                      width: _width * 0.45,
                       child: TextFormField(
                         controller: _boxNum,
                         decoration: InputDecoration(
@@ -257,11 +257,11 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                           labelStyle: kTextFormFieldLabelStyle,
                           fillColor:textFieldfillColor,
                           filled: true,
-                          errorStyle: const TextStyle(
+                          errorStyle:  TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 17.0,
+                            fontSize: _width * 0.02,
                           ),
-                          contentPadding: const EdgeInsets.all(30.0),
+                          contentPadding:  EdgeInsets.symmetric(horizontal: _width * 0.03, vertical: _height * 0.05),
                           enabledBorder: kEnabledBorder,
                           focusedBorder: kFocusedBorder,
                           focusedErrorBorder: kFocusedErrorBorder,
@@ -269,9 +269,9 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                         ),
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
-                        style: const TextStyle(
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
+                        style:  TextStyle(
+                            fontSize: _width * 0.03,
+                            fontWeight: FontWeight.bold,
                             color: kTextInputColor
                         ),
                         validator: (value) {
@@ -295,7 +295,7 @@ class _TroughLoadingScreenState extends State<TroughLoadingScreen> {
                                 .toDouble(),
                             date: null,
                             lotId:
-                                tea_collection_provider.lastLotNumberItem.lotId,
+                            tea_collection_provider.lastLotNumberItem.lotId,
                           );
                         },
                       ),

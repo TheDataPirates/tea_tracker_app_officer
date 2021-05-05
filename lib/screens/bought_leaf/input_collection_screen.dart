@@ -112,6 +112,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context).size;
+    final _height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -126,11 +127,11 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
               Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: EdgeInsets.symmetric(horizontal: mediaQuery.width * 0.02, vertical: mediaQuery.height * 0.175),
                     child: Column(
                       children: <Widget>[
                         Container(
-                          height: mediaQuery.height * 0.4,
+                          height: mediaQuery.height * 0.2,
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -149,7 +150,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                     color: inputCollectionfillColor,
                                     borderRadius: BorderRadius.circular(13),
                                   ),
-                                  width: mediaQuery.width * width,
+                                  width: mediaQuery.width * 0.22,
                                   child: ButtonTheme(
                                     alignedDropdown: true,
                                     child: FormBuilderDropdown(
@@ -158,23 +159,24 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                       decoration: InputDecoration(
                                         labelText: "  Container Type",
                                         errorStyle: TextStyle(
-                                          fontSize: 18,
+                                          fontSize: mediaQuery.height * 0.025,
                                           fontWeight: FontWeight.w700,
                                         ),
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                                vertical: 40.0),
+                                        contentPadding: EdgeInsets.symmetric(
+                                            vertical: mediaQuery.height * 0.06,
+                                            horizontal:
+                                            mediaQuery.width * 0.005),
                                         labelStyle:
-                                            kInputScreenContainerDisplayText,
+                                        kInputScreenContainerDisplayText,
                                         enabledBorder: kEnabledBorder2,
                                         focusedBorder: kFocusedBorder2,
                                         focusedErrorBorder:
-                                            kFocusedErrorBorder2,
+                                        kFocusedErrorBorder2,
                                         errorBorder: kErrorBorder2,
                                       ),
 
                                       style: TextStyle(
-                                          fontSize: 40,
+                                          fontSize: mediaQuery.height * 0.07,
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
                                       // initialValue:
@@ -185,14 +187,14 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                       ],
                                       items: ['A', 'B', 'C', 'D', 'E']
                                           .map((container) => DropdownMenuItem(
-                                              value: container,
-                                              child: Text("$container")))
+                                          value: container,
+                                          child: Text("$container")))
                                           .toList(),
                                       onSaved: (value) {
                                         _editedLot = Lot(
                                           container_type: value,
                                           no_of_containers:
-                                              _editedLot.no_of_containers,
+                                          _editedLot.no_of_containers,
                                           gross_weight: _editedLot.gross_weight,
                                           leaf_grade: _editedLot.leaf_grade,
                                           water: _editedLot.water,
@@ -218,7 +220,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                     color: inputCollectionfillColor,
                                     borderRadius: BorderRadius.circular(13),
                                   ),
-                                  width: mediaQuery.width * width,
+                                  width: mediaQuery.width * 0.22,
                                   child: ButtonTheme(
                                     alignedDropdown: true,
                                     child: FormBuilderDropdown(
@@ -227,21 +229,23 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                       decoration: InputDecoration(
                                         labelText: " No of Containers",
                                         errorStyle: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: mediaQuery.height * 0.025,
                                             fontWeight: FontWeight.w700),
                                         contentPadding:
-                                            const EdgeInsets.symmetric(
-                                                vertical: 40.0),
+                                        EdgeInsets.symmetric(
+                                            vertical: mediaQuery.height * 0.06,
+                                            horizontal:
+                                            mediaQuery.width * 0.005),
                                         labelStyle:
-                                            kInputScreenContainerDisplayText,
+                                        kInputScreenContainerDisplayText,
                                         enabledBorder: kEnabledBorder2,
                                         focusedBorder: kFocusedBorder2,
                                         focusedErrorBorder:
-                                            kFocusedErrorBorder2,
+                                        kFocusedErrorBorder2,
                                         errorBorder: kErrorBorder2,
                                       ),
                                       style: TextStyle(
-                                          fontSize: 40,
+                                          fontSize: mediaQuery.height * 0.07,
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
                                       // initialValue:
@@ -251,13 +255,13 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                       ],
                                       items: ['1', '2', '3', '4', '5']
                                           .map((container) => DropdownMenuItem(
-                                              value: container,
-                                              child: Text("$container")))
+                                          value: container,
+                                          child: Text("$container")))
                                           .toList(),
                                       onSaved: (value) {
                                         _editedLot = Lot(
                                           container_type:
-                                              _editedLot.container_type,
+                                          _editedLot.container_type,
                                           no_of_containers: int.parse(value),
                                           gross_weight: _editedLot.gross_weight,
                                           leaf_grade: _editedLot.leaf_grade,
@@ -284,7 +288,7 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                     color: inputCollectionfillColor,
                                     borderRadius: BorderRadius.circular(13),
                                   ),
-                                  width: mediaQuery.width * width,
+                                  width: mediaQuery.width * 0.22,
                                   child: ButtonTheme(
                                     alignedDropdown: true,
                                     child: FormBuilderDropdown(
@@ -293,21 +297,23 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                       decoration: InputDecoration(
                                         labelText: "  Grade of GL",
                                         labelStyle:
-                                            kInputScreenContainerDisplayText,
+                                        kInputScreenContainerDisplayText,
                                         errorStyle: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: mediaQuery.height * 0.025,
                                             fontWeight: FontWeight.w700),
                                         contentPadding:
-                                            const EdgeInsets.symmetric(
-                                                vertical: 40.0),
+                                        EdgeInsets.symmetric(
+                                            vertical: mediaQuery.height * 0.06,
+                                            horizontal:
+                                            mediaQuery.width * 0.005),
                                         enabledBorder: kEnabledBorder2,
                                         focusedBorder: kFocusedBorder2,
                                         focusedErrorBorder:
-                                            kFocusedErrorBorder2,
+                                        kFocusedErrorBorder2,
                                         errorBorder: kErrorBorder2,
                                       ),
                                       style: TextStyle(
-                                          fontSize: 40,
+                                          fontSize: mediaQuery.height * 0.07,
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
                                       validators: [
@@ -315,15 +321,15 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                       ],
                                       items: ['A', 'B', 'C']
                                           .map((container) => DropdownMenuItem(
-                                              value: container,
-                                              child: Text("$container")))
+                                          value: container,
+                                          child: Text("$container")))
                                           .toList(),
                                       onSaved: (value) {
                                         _editedLot = Lot(
                                           container_type:
-                                              _editedLot.container_type,
+                                          _editedLot.container_type,
                                           no_of_containers:
-                                              _editedLot.no_of_containers,
+                                          _editedLot.no_of_containers,
                                           gross_weight: _editedLot.gross_weight,
                                           leaf_grade: value,
                                           water: _editedLot.water,
@@ -340,13 +346,14 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                               ),
                               InputField(
                                 labelText: ' Gross weight',
-                                width: width,
+                                width: deduct_width,
+                                height: _height,
                                 validator: [FormBuilderValidators.required()],
                                 onSave: (value) {
                                   _editedLot = Lot(
                                     container_type: _editedLot.container_type,
                                     no_of_containers:
-                                        _editedLot.no_of_containers,
+                                    _editedLot.no_of_containers,
                                     gross_weight: int.parse(value),
                                     leaf_grade: _editedLot.leaf_grade,
                                     water: _editedLot.water,
@@ -367,11 +374,11 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Padding(
-                              padding: const EdgeInsets.only(top: 30),
-                              child: const Text(
+                              padding:  EdgeInsets.only(top: mediaQuery.height * 0.05),
+                              child:  Text(
                                 'DEDUCTIONS',
-                                style: const TextStyle(
-                                  fontSize: 40,
+                                style:  TextStyle(
+                                  fontSize: mediaQuery.width * 0.045,
                                   fontWeight: FontWeight.bold,
                                   letterSpacing: 10,
                                   color: Colors.white,
@@ -391,12 +398,13 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                 InputField(
                                   labelText: ' Water %',
                                   width: deduct_width,
+                                  height: _height,
                                   validator: [FormBuilderValidators.required()],
                                   onSave: (value) {
                                     _editedLot = Lot(
                                       container_type: _editedLot.container_type,
                                       no_of_containers:
-                                          _editedLot.no_of_containers,
+                                      _editedLot.no_of_containers,
                                       gross_weight: _editedLot.gross_weight,
                                       leaf_grade: _editedLot.leaf_grade,
                                       water: int.parse(value),
@@ -412,12 +420,13 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                 InputField(
                                   labelText: ' Course Leaf %',
                                   width: deduct_width,
+                                  height: _height,
                                   validator: [FormBuilderValidators.required()],
                                   onSave: (value) {
                                     _editedLot = Lot(
                                       container_type: _editedLot.container_type,
                                       no_of_containers:
-                                          _editedLot.no_of_containers,
+                                      _editedLot.no_of_containers,
                                       gross_weight: _editedLot.gross_weight,
                                       leaf_grade: _editedLot.leaf_grade,
                                       water: _editedLot.water,
@@ -433,12 +442,13 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
                                 InputField(
                                   labelText: ' Other %',
                                   width: deduct_width,
+                                  height: _height,
                                   validator: [FormBuilderValidators.required()],
                                   onSave: (value) {
                                     _editedLot = Lot(
                                       container_type: _editedLot.container_type,
                                       no_of_containers:
-                                          _editedLot.no_of_containers,
+                                      _editedLot.no_of_containers,
                                       gross_weight: _editedLot.gross_weight,
                                       leaf_grade: _editedLot.leaf_grade,
                                       water: _editedLot.water,
@@ -459,16 +469,19 @@ class _InputCollectionScreenState extends State<InputCollectionScreen> {
               ),
               Container(
                 width: double.infinity,
-                height: mediaQuery.height * 0.065,
+                height: mediaQuery.height * 0.075,
                 child: RaisedButton.icon(
                   onPressed: saveLot,
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.add,
                     color: Colors.white,
+                    size: mediaQuery.height * 0.06,
                   ),
-                  label: const Text(
+                  label: Text(
                     'SAVE',
-                    style: const TextStyle(fontSize: 22, color: Colors.white),
+                    style: TextStyle(
+                        fontSize: mediaQuery.height * 0.05,
+                        color: Colors.white),
                   ),
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   color: const Color(0xff099857),

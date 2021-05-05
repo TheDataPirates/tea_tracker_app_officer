@@ -52,11 +52,11 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
       try {
         await Provider.of<TeaCollections>(context, listen: false)
             .verifySupplier(
-                supplierNoEditingController.text,
-                supplierNameEditingController.text,
-                token,
-                user,
-                "OfficerOriginal");
+            supplierNoEditingController.text,
+            supplierNameEditingController.text,
+            token,
+            user,
+            "OfficerOriginal");
         print('bulk saved');
         Navigator.of(context).pushNamed('InputCollectionScreen');
       } catch (error) {
@@ -92,91 +92,98 @@ class _BoughtLeafScreenState extends State<BoughtLeafScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final _height =
+        MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
+
+    final _width = MediaQuery.of(context).size.width;
     return Scaffold(
         body:Container(
-        decoration: BoxDecoration(
-          image : inputScreenBackgroundImage,
-          gradient: kUIGradient,
-        ),
-        child: Column(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 10.0, horizontal: 40.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      child: TextField(
-                        controller: supplierNoEditingController,
-                        obscureText: false,
-                        style: const TextStyle(
-                            fontSize: 40.0, color: kTextInputColor),
-                        decoration: InputDecoration(
-                          labelText: "Supplier No :",
-                          labelStyle: kSupplierTextFormFieldText,
-                          fillColor:textFieldfillColor,
-                          filled: true,
-                          contentPadding:
-                              EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                          enabledBorder: kEnabledBorder,
-                          focusedBorder: kFocusedBorder,
-                          // border: OutlineInputBorder(
-                          //   borderRadius: const BorderRadius.all(
-                          //     Radius.circular(40.0),
-                          //   ),
+          decoration: BoxDecoration(
+            image : inputScreenBackgroundImage,
+            gradient: kUIGradient,
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: _height * 0.3, horizontal: _width * 0.05),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: _width * 0.5,
+                          child: TextField(
+                            controller: supplierNoEditingController,
+                            obscureText: false,
+                            style:  TextStyle(
+                                fontSize: _height * 0.06, color: kTextInputColor),
+                            decoration: InputDecoration(
+                              labelText: "Supplier No :",
+                              labelStyle: kSupplierTextFormFieldText,
+                              fillColor:textFieldfillColor,
+                              filled: true,
+                              contentPadding:
+                              EdgeInsets.fromLTRB(_width * 0.025, _height * 0.03, _width * 0.025, _height * 0.02),
+                              enabledBorder: kEnabledBorder,
+                              focusedBorder: kFocusedBorder,
+                              // border: OutlineInputBorder(
+                              //   borderRadius: const BorderRadius.all(
+                              //     Radius.circular(40.0),
+                              //   ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.1,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      child: TextField(
-                        controller: supplierNameEditingController,
-                        style: const TextStyle(
-                            fontSize: 40.0, color: kTextInputColor),
-                        decoration: InputDecoration(
-                          fillColor: textFieldfillColor,
-                          filled: true,
-                          contentPadding:
-                              EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                          labelText: "Supplier Name :",
-                          labelStyle: kSupplierTextFormFieldText,
-                          enabledBorder: kEnabledBorder,
-                          focusedBorder: kFocusedBorder,
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.1,
                         ),
-                      ),
-                    )
-                  ],
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          child: TextField(
+                            controller: supplierNameEditingController,
+                            style:  TextStyle(
+                                fontSize: _height * 0.06, color: kTextInputColor),
+                            decoration: InputDecoration(
+                              fillColor: textFieldfillColor,
+                              filled: true,
+                              contentPadding:
+                              EdgeInsets.fromLTRB(_width * 0.025, _height * 0.03, _width * 0.025, _height * 0.02),
+                              labelText: "Supplier Name :",
+                              labelStyle: kSupplierTextFormFieldText,
+                              enabledBorder: kEnabledBorder,
+                              focusedBorder: kFocusedBorder,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
-            ),
-            Container(
-              width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.065,
-              child: RaisedButton.icon(
-                onPressed: () {
-                  submit();
-                },
-                icon: Icon(
-                  Icons.add,
-                  color: Colors.white,
+              Container(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height * 0.075,
+                child: RaisedButton.icon(
+                  onPressed: () {
+                    submit();
+                  },
+                  icon: Icon(
+                    Icons.add,
+                    color: Colors.white,
+                    size: _height * 0.06,
+                  ),
+                  label: Text(
+                    'SUBMIT',
+                    style: TextStyle(fontSize: _height * 0.05, color: Colors.white),
+                  ),
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  color: const Color(0xff099857),
                 ),
-                label: const Text(
-                  'SUBMIT',
-                  style: const TextStyle(fontSize: 22, color: Colors.white),
-                ),
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                color: const Color(0xff099857),
-              ),
-            )
-          ],
-        ),
+              )
+            ],
+          ),
         )
     );
   }

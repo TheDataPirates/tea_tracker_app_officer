@@ -6,24 +6,33 @@ import '../constants.dart';
 class InputField extends StatelessWidget {
   const InputField(
       {Key key,
-      @required this.labelText,
-      @required this.width,
-      TextEditingController editingController,
-      this.validator,
-      @required this.onSave,
-      this.keytype})
-      : _editingController = editingController,
+        @required double height,
+        @required double width,
+        @required this.labelText,
+        TextEditingController editingController,
+        this.validator,
+        @required this.onSave,
+        this.keytype})
+      :
+        _editingController = editingController,
+        _height = height,
+        _width = width,
         super(key: key);
 
-  final double width;
   final String labelText;
   final TextEditingController _editingController;
   final List<String Function(dynamic)> validator;
   final Function onSave;
   final TextInputType keytype;
+  final double _height;
+  final double _width;
 
   @override
   Widget build(BuildContext context) {
+//    final _height =
+//        MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
+//
+//    final _width = MediaQuery.of(context).size.width;
     return Card(
       color: inputCollectionfillColor,
       elevation: 10,
@@ -31,7 +40,7 @@ class InputField extends StatelessWidget {
         borderRadius: BorderRadius.circular(13.0),
       ),
       child: Container(
-        width: MediaQuery.of(context).size.width * width,
+        width: MediaQuery.of(context).size.width * _width,
         decoration: BoxDecoration(
           color: inputCollectionfillColor,
           borderRadius: BorderRadius.circular(13),
@@ -39,14 +48,15 @@ class InputField extends StatelessWidget {
         child: FormBuilderTextField(
           attribute: labelText,
           decoration: InputDecoration(
-            errorStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-            contentPadding:
-            EdgeInsets.fromLTRB(16.0, 40.0, 16.0, 40.0),
+            errorStyle: TextStyle(
+                fontSize: _height * 0.022, fontWeight: FontWeight.w700),
+            contentPadding: EdgeInsets.fromLTRB(_width * 50,
+                _height * 0.125, _width * 0, _height * 0.125),
             labelText: labelText,
             labelStyle: kInputScreenContainerDisplayText,
             enabledBorder: kEnabledBorder2,
             focusedBorder: kFocusedBorder2,
-            focusedErrorBorder:  kFocusedErrorBorder2,
+            focusedErrorBorder: kFocusedErrorBorder2,
             errorBorder: kErrorBorder2,
           ),
           validators: validator,
@@ -54,7 +64,9 @@ class InputField extends StatelessWidget {
           keyboardType: keytype,
           onSaved: onSave,
           style: TextStyle(
-              fontSize: 40, color: Colors.white, fontWeight: FontWeight.bold),
+              fontSize: _height * 0.07,
+              color: Colors.white,
+              fontWeight: FontWeight.bold),
         ),
       ),
     );

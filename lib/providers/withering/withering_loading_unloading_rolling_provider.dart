@@ -727,6 +727,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   }
 
   Future<void> fetchAndSetTroughLoadingItem(String authToken) async {
+    print("fetchAndSetTroughLoadingItem");
     _troughLoadingItems = [];
 //    print('empty list');
 //    print(troughLoadingItemCount);
