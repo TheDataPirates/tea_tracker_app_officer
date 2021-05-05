@@ -87,12 +87,13 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       final extractedDataList = jsonDecode(dataList.body);
 //      print(extractedDataList);
       List loadedLots = extractedDataList['startings'];
-      print(loadedLots);
+      // print(loadedLots);
       for (var i in loadedLots) {
+        print(i['date']);
         _witheringStartingItems.add(
           WitheringStartingFinishing(
             id: i['tp_id'] as String,
-            troughNumber: i['TroughTroughId'] as int,
+            troughNumber: int.parse(i['TroughTroughId'].toString()),
             time: DateTime.parse(i['date']),
             temperature: double.parse(i['temperature'].toString()),
             humidity: double.parse(i['humidity'].toString()),
@@ -191,7 +192,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         _witheringMixingItems.add(
           WitheringMixing(
             id: i['tp_id'] as String,
-            troughNumber: i['TroughTroughId'] as int,
+            troughNumber: int.parse(i['TroughTroughId'].toString()),
             time: DateTime.parse(i['date']),
             turn: getMixingturn(i['ProcessProcessName']),
             temperature: double.parse(i['temperature'].toString()),
@@ -319,7 +320,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         _witheringFinishingItems.add(
           WitheringStartingFinishing(
             id: i['tp_id'] as String,
-            troughNumber: i['TroughTroughId'] as int,
+            troughNumber: int.parse(i['TroughTroughId'].toString()),
             time: DateTime.parse(i['date']),
             temperature: double.parse(i['temperature'].toString()),
             humidity: double.parse(i['humidity'].toString()),
@@ -740,7 +741,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         },
       );
       final extractedDataList = jsonDecode(dataList.body);
-//      print(extractedDataList);
+      // print(extractedDataList);
       List loadedLots = extractedDataList['loadings'];
       print(loadedLots);
 //      loadedLots = [];

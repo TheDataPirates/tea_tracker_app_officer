@@ -31,8 +31,8 @@ class DifferenceReportItem extends StatelessWidget {
         padding: const EdgeInsets.all(5.0),
         child: ListTile(
           leading: Text(
-            supplierId.toString(),
-            style: TextStyle(fontSize: 30.0, color: Colors.white),
+            "Supplier ID : " + supplierId.toString(),
+            style: TextStyle(fontSize: 30.0, color: Colors.green),
           ),
           title: Text(
             'Original Weight : ' + '$originalWeight',
@@ -42,7 +42,7 @@ class DifferenceReportItem extends StatelessWidget {
                 color: Colors.white),
           ),
           subtitle: Text(
-            'Reameasuring Weight : ' + '$remeasuringWeight',
+            'Remeasuring Weight : ' + '$remeasuringWeight',
             style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,

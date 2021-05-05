@@ -46,7 +46,10 @@ class _VasRollingScreenState extends State<VasRollingScreen> {
                 : ListView.builder(
               itemCount: WitheringLoadingUnloadingRollingProvider
                   .rollingOutputItems.length,
-              itemBuilder: (ctx, i) => RollingItem(
+              itemBuilder: (ctx, i) =>
+              WitheringLoadingUnloadingRollingProvider
+                  .rollingOutputItems[i].rollingTurn!='BB'?
+                  RollingItem(
                 id: WitheringLoadingUnloadingRollingProvider
                     .rollingOutputItems[i].id,
                 batchNumber:
@@ -64,7 +67,7 @@ class _VasRollingScreenState extends State<VasRollingScreen> {
                     .rollingOutputItems[i].weightIn,
                 weightOut: WitheringLoadingUnloadingRollingProvider
                     .rollingOutputItems[i].weightOut,
-              ),
+              ):null,
             ),
           ),
         ),
