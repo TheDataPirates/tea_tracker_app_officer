@@ -92,6 +92,7 @@ class TeaCollections with ChangeNotifier {
 
   Future<void> fetchAndSetLotData(
       String id, String date, String authToken) async {
+    print("fetchAndSetLotData");
     final url = '$kURL/bleaf/lots/$Bulkid';
     _lot_items = [];
     try {

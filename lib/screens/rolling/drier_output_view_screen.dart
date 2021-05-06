@@ -16,8 +16,7 @@ class _DrierOutputViewScreenState extends State<DrierOutputViewScreen> {
     final token = Provider.of<Auth>(context, listen: false).token;
 //    final drying =
 //        Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false);
-    final _height = MediaQuery.of(context).size.height;
-    final _width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Drier Output View'),
@@ -29,7 +28,7 @@ class _DrierOutputViewScreenState extends State<DrierOutputViewScreen> {
               Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
             },
             disabledColor: Colors.white,
-            iconSize: _width * 0.04,
+            iconSize: 35.0,
           )
         ],
       ),
@@ -77,22 +76,20 @@ class _DrierOutputViewScreenState extends State<DrierOutputViewScreen> {
                 drierOutWeight:
                 WitheringLoadingUnloadingRollingProvider
                     .dryingItems[i].drierOutWeight,
-                height: _height,
-                width: _width,
               ),
             ),
           ),
         ),
       ),
       floatingActionButton: Container(
-        height: _height * 0.13,
-        width: _width * 0.13,
+        height: 75.0,
+        width: 75.0,
         child: FittedBox(
           child: FloatingActionButton(
-            child:  Icon(
+            child: const Icon(
               Icons.add,
               color: Colors.white,
-              size: _width * 0.06,
+              size: 40.0,
             ),
             onPressed: () {
               Navigator.of(context).pushNamed('DrierOutput');

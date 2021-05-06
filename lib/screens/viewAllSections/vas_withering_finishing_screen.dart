@@ -15,8 +15,6 @@ class _VasWitheringFinishingScreenState extends State<VasWitheringFinishingScree
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);
     final token = auth.token;
-    final _height = MediaQuery.of(context).size.height;
-    final _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Withering Finishing View'),
@@ -28,45 +26,43 @@ class _VasWitheringFinishingScreenState extends State<VasWitheringFinishingScree
         ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-                  listen: false)
+              listen: false)
               .fetchAndSetWitheringFinishingItem(token),
           builder: (ctx, snapshot) => snapshot.connectionState ==
-                  ConnectionState.waiting
+              ConnectionState.waiting
               ? Center(
-                  child: CircularProgressIndicator(),
-                )
+            child: CircularProgressIndicator(),
+          )
               : Consumer<WitheringLoadingUnloadingRollingProvider>(
-                  child: Center(
-                    child: const Text(
-                      'Got no Withering Finishing items!',
-                      style: kEmptyViewText,
-                    ),
+            child: Center(
+              child: const Text(
+                'Got no Withering Finishing items!',
+                style: kEmptyViewText,
+              ),
+            ),
+            builder: (ctx, WitheringStartingFinishingProvider, ch) =>
+            WitheringStartingFinishingProvider
+                .witheringFinishingItems.length <=
+                0
+                ? ch
+                : ListView.builder(
+              itemCount: WitheringStartingFinishingProvider
+                  .witheringFinishingItems.length,
+              itemBuilder: (ctx, i) =>
+                  WitheringStartingFinishingItem(
+                    id: WitheringStartingFinishingProvider
+                        .witheringFinishingItems[i].id,
+                    troughNumber: WitheringStartingFinishingProvider
+                        .witheringFinishingItems[i].troughNumber,
+                    time: WitheringStartingFinishingProvider
+                        .witheringFinishingItems[i].time,
+                    temperature: WitheringStartingFinishingProvider
+                        .witheringFinishingItems[i].temperature,
+                    humidity: WitheringStartingFinishingProvider
+                        .witheringFinishingItems[i].humidity,
                   ),
-                  builder: (ctx, WitheringStartingFinishingProvider, ch) =>
-                      WitheringStartingFinishingProvider
-                                  .witheringFinishingItems.length <=
-                              0
-                          ? ch
-                          : ListView.builder(
-                              itemCount: WitheringStartingFinishingProvider
-                                  .witheringFinishingItems.length,
-                              itemBuilder: (ctx, i) =>
-                                  WitheringStartingFinishingItem(
-                                id: WitheringStartingFinishingProvider
-                                    .witheringFinishingItems[i].id,
-                                troughNumber: WitheringStartingFinishingProvider
-                                    .witheringFinishingItems[i].troughNumber,
-                                time: WitheringStartingFinishingProvider
-                                    .witheringFinishingItems[i].time,
-                                temperature: WitheringStartingFinishingProvider
-                                    .witheringFinishingItems[i].temperature,
-                                humidity: WitheringStartingFinishingProvider
-                                    .witheringFinishingItems[i].humidity,
-                                    height: _height,
-                                    width: _width,
-                              ),
-                            ),
-                ),
+            ),
+          ),
         ),
       ),
     );

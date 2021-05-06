@@ -20,6 +20,7 @@ class CardContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(vertical: _height * 0.005, horizontal: _width * 0.005),
       decoration: BoxDecoration(
         color: Colors.greenAccent.shade700,
         borderRadius: BorderRadius.circular(15),
@@ -31,21 +32,24 @@ class CardContainer extends StatelessWidget {
         ),
         color: Colors.greenAccent.shade700,
         // Theme.of(context).accentColor,
-        child: Column(
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: _height * 0.005, horizontal: _width * 0.005),
+          child: Column(
 //          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              labelText,
-              style: TextStyle(color: Colors.white, fontSize: _width * 0.02, fontWeight: FontWeight.bold),
-              // Theme.of(context).textTheme.bodyText1,
-            ),
-            Text(
-              lotData != null ? '$lotData' : "Empty",
-              style: TextStyle(color: Colors.white, fontSize: _width * 0.0275),
-              // Theme.of(context).textTheme.headline6,
-            ),
-          ],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                labelText,
+                style: TextStyle(color: Colors.white, fontSize: _width * 0.025, fontWeight: FontWeight.bold),
+                // Theme.of(context).textTheme.bodyText1,
+              ),
+              Text(
+                lotData != null ? '$lotData' : "Empty",
+                style: TextStyle(color: Colors.white, fontSize: _width * 0.0325),
+                // Theme.of(context).textTheme.headline6,
+              ),
+            ],
+          ),
         ),
       ),
     );

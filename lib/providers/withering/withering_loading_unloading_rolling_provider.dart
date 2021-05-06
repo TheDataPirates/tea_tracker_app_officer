@@ -74,6 +74,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   }
 
   Future<void> fetchAndSetWitheringStartingItem(String authToken) async {
+    print("fetchAndSetWitheringStartingItem");
     _witheringStartingItems = [];
     const url = '$kURL/loft/startings';
     try {
@@ -92,7 +93,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         _witheringStartingItems.add(
           WitheringStartingFinishing(
             id: i['tp_id'] as String,
-            troughNumber: int.parse(i['TroughTroughId']),
+            troughNumber: int.parse(i['TroughTroughId'].toString()),
             time: DateTime.parse(i['date']),
             temperature: double.parse(i['temperature'].toString()),
             humidity: double.parse(i['humidity'].toString()),
@@ -173,6 +174,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   }
 
   Future<void> fetchAndSetWitheringMixingItem(String authToken) async {
+    print("fetchAndSetWitheringMixingItem");
     _witheringMixingItems = [];
     const url = '$kURL/loft/mixings';
     try {
@@ -191,7 +193,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         _witheringMixingItems.add(
           WitheringMixing(
             id: i['tp_id'] as String,
-            troughNumber: int.parse(i['TroughTroughId']),
+            troughNumber: int.parse(i['TroughTroughId'].toString()),
             time: DateTime.parse(i['date']),
             turn: getMixingturn(i['ProcessProcessName']),
             temperature: double.parse(i['temperature'].toString()),
@@ -301,6 +303,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   }
 
   Future<void> fetchAndSetWitheringFinishingItem(String authToken) async {
+    print("fetchAndSetWitheringFinishingItem");
     _witheringFinishingItems = [];
     const url = '$kURL/loft/finishings';
     try {
@@ -319,7 +322,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         _witheringFinishingItems.add(
           WitheringStartingFinishing(
             id: i['tp_id'] as String,
-            troughNumber: int.parse(i['TroughTroughId']),
+            troughNumber: int.parse(i['TroughTroughId'].toString()),
             time: DateTime.parse(i['date']),
             temperature: double.parse(i['temperature'].toString()),
             humidity: double.parse(i['humidity'].toString()),
@@ -600,6 +603,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   }
 
   Future<void> fetchAndSetWitheringUnloadingItem(String authToken) async {
+    print("fetchAndSetWitheringUnloadingItem");
     _witheringUnloadingItems = [];
 
     const url = '$kURL/loft/unloadings';
@@ -748,10 +752,10 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       List loadedLots = extractedDataList['loadings'];
       print(loadedLots);
 //      loadedLots = [];
-      var count = 1;
+//      var count = 1;
       for (var i in loadedLots) {
-        print("for");
-        print(count);
+//        print("for");
+//        print(count);
 //        if (i['BoxBoxId'] == null) {
 
           var TNum = i['BoxBoxId'].toString();
@@ -790,7 +794,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
 //        }
 
 //        print(i);
-      count++;
+//      count++;
       }
 //      print(troughLoadingItemCount);
       notifyListeners();
@@ -1053,6 +1057,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   }
 
   Future<void> fetchAndSetRollingOutputItem(String authToken) async {
+    print("fetchAndSetRollingOutputItem");
     _rollingOutputItems = [];
     const url = '$kURL/rolling/rollings';
     try {
@@ -1246,6 +1251,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   }
 
   Future<void> fetchAndSetWitheringRollBreakingItem(String authToken) async {
+    print("fetchAndSetWitheringRollBreakingItem");
     _rollBreakingItems = [];
     const url = '$kURL/rolling/rbreakings';
     try {
@@ -1379,6 +1385,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   }
 
   Future<void> fetchAndSetFermentingItem(String authToken) async {
+    print("fetchAndSetFermentingItem");
     _fermentingItems = [];
     const url = '$kURL/rolling/fermentings';
     try {
@@ -1547,6 +1554,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
   }
 
   Future<void> fetchAndSetDryingItem(String authToken) async {
+    print("fetchAndSetDryingItem");
     _dryingItems = [];
     const url = '$kURL/rolling/dryings';
     try {

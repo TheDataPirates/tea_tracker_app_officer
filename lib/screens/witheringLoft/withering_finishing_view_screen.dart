@@ -10,9 +10,9 @@ class WitheringFinishingViewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);
     final token = auth.token;
-    final _height = MediaQuery.of(context).size.height;
-
-    final _width = MediaQuery.of(context).size.width;
+//    final _height = MediaQuery.of(context).size.height;
+//
+//    final _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Withering Finishing View'),
@@ -24,7 +24,7 @@ class WitheringFinishingViewScreen extends StatelessWidget {
               Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
             },
             disabledColor: Colors.white,
-            iconSize: _width * 0.04,
+            iconSize: 35,
           )
         ],
       ),
@@ -67,23 +67,23 @@ class WitheringFinishingViewScreen extends StatelessWidget {
                                     .witheringFinishingItems[i].temperature,
                                 humidity: WitheringStartingFinishingProvider
                                     .witheringFinishingItems[i].humidity,
-                                    height: _height,
-                                    width: _width,
+//                                    height: _height,
+//                                    width: _width,
                               ),
                             ),
                 ),
         ),
       ),
       floatingActionButton: Container(
-        height: _height * 0.13,
-        width: _width * 0.13,
+        height: 75,
+        width: 75,
         child: FittedBox(
           child: FloatingActionButton(
             elevation: 10.0,
             child:  Icon(
               Icons.add,
               color: Colors.white,
-              size: _width * 0.06,
+              size: 40,
             ),
             onPressed: () {
               Navigator.of(context).pushNamed('WitheringFinishing');

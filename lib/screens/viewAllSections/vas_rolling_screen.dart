@@ -15,8 +15,6 @@ class _VasRollingScreenState extends State<VasRollingScreen> {
   Widget build(BuildContext context) {
 //    final rollingOutput = Provider.of<WitheringLoadingUnloadingRollingProvider>(context,listen: false);
     final token = Provider.of<Auth>(context, listen: false).token;
-    final _height = MediaQuery.of(context).size.height;
-    final _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Rolling Output View'),
@@ -38,7 +36,7 @@ class _VasRollingScreenState extends State<VasRollingScreen> {
               : Consumer<WitheringLoadingUnloadingRollingProvider>(
             child: Center(
               child: const Text(
-                  'Got no Rolling items!', style: kEmptyViewText,),
+                'Got no Rolling items!', style: kEmptyViewText,),
             ),
             builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
             WitheringLoadingUnloadingRollingProvider
@@ -48,7 +46,10 @@ class _VasRollingScreenState extends State<VasRollingScreen> {
                 : ListView.builder(
               itemCount: WitheringLoadingUnloadingRollingProvider
                   .rollingOutputItems.length,
-              itemBuilder: (ctx, i) => RollingItem(
+              itemBuilder: (ctx, i) =>
+              WitheringLoadingUnloadingRollingProvider
+                  .rollingOutputItems[i].rollingTurn!='BB'?
+              RollingItem(
                 id: WitheringLoadingUnloadingRollingProvider
                     .rollingOutputItems[i].id,
                 batchNumber:
@@ -66,9 +67,7 @@ class _VasRollingScreenState extends State<VasRollingScreen> {
                     .rollingOutputItems[i].weightIn,
                 weightOut: WitheringLoadingUnloadingRollingProvider
                     .rollingOutputItems[i].weightOut,
-                height: _height,
-                width: _width,
-              ),
+              ):null,
             ),
           ),
         ),

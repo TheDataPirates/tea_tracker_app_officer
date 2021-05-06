@@ -15,56 +15,52 @@ class _VasWitheringMixingScreenState extends State<VasWitheringMixingScreen> {
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);
     final token = auth.token;
-    final _height = MediaQuery.of(context).size.height;
-    final _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Withering Mixing View'),
       ),
       body: Container(
         decoration: BoxDecoration(
-        image : VASBackgroundImage,
+            image : VASBackgroundImage,
             gradient: kUIGradient
-    ),
+        ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
               .fetchAndSetWitheringMixingItem(token),
           builder: (ctx, snapshot) => snapshot.connectionState ==
-                  ConnectionState.waiting
+              ConnectionState.waiting
               ? Center(
-                  child: CircularProgressIndicator(),
-                )
+            child: CircularProgressIndicator(),
+          )
               : Consumer<WitheringLoadingUnloadingRollingProvider>(
-                  child: Center(
-                    child: const Text(
-                      'Got no Withering Mixing items!',
-                      style: kEmptyViewText,
-                    ),
-                  ),
-                  builder: (ctx, WitheringMixingProvider, ch) =>
-                      WitheringMixingProvider.witheringMixingItems.length <= 0
-                          ? ch
-                          : ListView.builder(
-                              itemCount: WitheringMixingProvider
-                                  .witheringMixingItems.length,
-                              itemBuilder: (ctx, i) => WitheringMixingItem(
-                                id: WitheringMixingProvider
-                                    .witheringMixingItems[i].id,
-                                troughNumber: WitheringMixingProvider
-                                    .witheringMixingItems[i].troughNumber,
-                                turn: WitheringMixingProvider
-                                    .witheringMixingItems[i].turn,
-                                time: WitheringMixingProvider
-                                    .witheringMixingItems[i].time,
-                                temperature: WitheringMixingProvider
-                                    .witheringMixingItems[i].temperature,
-                                humidity: WitheringMixingProvider
-                                    .witheringMixingItems[i].humidity,
-                                height: _height,
-                                width: _width,
-                              ),
-                            ),
-                ),
+            child: Center(
+              child: const Text(
+                'Got no Withering Mixing items!',
+                style: kEmptyViewText,
+              ),
+            ),
+            builder: (ctx, WitheringMixingProvider, ch) =>
+            WitheringMixingProvider.witheringMixingItems.length <= 0
+                ? ch
+                : ListView.builder(
+              itemCount: WitheringMixingProvider
+                  .witheringMixingItems.length,
+              itemBuilder: (ctx, i) => WitheringMixingItem(
+                id: WitheringMixingProvider
+                    .witheringMixingItems[i].id,
+                troughNumber: WitheringMixingProvider
+                    .witheringMixingItems[i].troughNumber,
+                turn: WitheringMixingProvider
+                    .witheringMixingItems[i].turn,
+                time: WitheringMixingProvider
+                    .witheringMixingItems[i].time,
+                temperature: WitheringMixingProvider
+                    .witheringMixingItems[i].temperature,
+                humidity: WitheringMixingProvider
+                    .witheringMixingItems[i].humidity,
+              ),
+            ),
+          ),
         ),
       ),
     );

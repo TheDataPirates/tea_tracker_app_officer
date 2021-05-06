@@ -22,11 +22,11 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
   Future<void> _saveBigBulkDetails(String token) async {
     try {
 
-//      print(_bigBulk.bigBulkNumber);
-//      print(_bigBulk.bigBulkWeight);
+      print(_bigBulk.bigBulkNumber);
+      print(_bigBulk.bigBulkWeight);
 
       await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-              listen: false)
+          listen: false)
           .addBigBulkItem(_bigBulk, token);
 
 
@@ -68,8 +68,6 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final _height = MediaQuery.of(context).size.height;
-    final _width = MediaQuery.of(context).size.width;
     final rollBreaking = Provider.of<WitheringLoadingUnloadingRollingProvider>(
         context,
         listen: false);
@@ -85,72 +83,70 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
               Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
             },
             disabledColor: Colors.white,
-            iconSize: _width * 0.04,
+            iconSize: 35.0,
           )
         ],
       ),
       body: Container(
         decoration: BoxDecoration(
           image : viewScreenBackgroundImage,
-            gradient: kUIGradient,
+          gradient: kUIGradient,
         ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-                  listen: false)
+              listen: false)
               .fetchAndSetWitheringRollBreakingItem(token),
           builder: (ctx, snapshot) => snapshot.connectionState ==
-                  ConnectionState.waiting
+              ConnectionState.waiting
               ? Center(
-                  child: CircularProgressIndicator(),
-                )
+            child: CircularProgressIndicator(),
+          )
               : Consumer<WitheringLoadingUnloadingRollingProvider>(
-                  child: Center(
-                    child: const Text(
-                        'Got no Withering roll breaking items found yet, start adding some!', style: kEmptyViewText,),
-                  ),
-                  builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
-                      WitheringLoadingUnloadingRollingProvider
-                                  .rollBreakingItems.length <=
-                              0
-                          ? ch
-                          : ListView.builder(
-                              itemCount: WitheringLoadingUnloadingRollingProvider
-                                  .rollBreakingItems.length,
-                              itemBuilder: (ctx, i) => RollBreakingItem(
-                                id: WitheringLoadingUnloadingRollingProvider
-                                    .rollBreakingItems[i].id,
-                                batchNumber:
-                                    WitheringLoadingUnloadingRollingProvider
-                                        .rollBreakingItems[i].batchNumber,
-                                rollBreakingTurn:
-                                    WitheringLoadingUnloadingRollingProvider
-                                        .rollBreakingItems[i].rollBreakingTurn,
-                                time: WitheringLoadingUnloadingRollingProvider
-                                    .rollBreakingItems[i].time,
-                                rollBreakerNumber:
-                                    WitheringLoadingUnloadingRollingProvider
-                                        .rollBreakingItems[i].rollBreakerNumber,
-                                weight: WitheringLoadingUnloadingRollingProvider
-                                    .rollBreakingItems[i].weight,
-                                height: _height,
-                                width: _width,
-                              ),
-                            ),
-                ),
+            child: Center(
+              child: const Text(
+                'Got no Withering roll breaking items found yet, start adding some!', style: kEmptyViewText,),
+            ),
+            builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
+            WitheringLoadingUnloadingRollingProvider
+                .rollBreakingItems.length <=
+                0
+                ? ch
+                : ListView.builder(
+              itemCount: WitheringLoadingUnloadingRollingProvider
+                  .rollBreakingItems.length,
+              itemBuilder: (ctx, i) => RollBreakingItem(
+                id: WitheringLoadingUnloadingRollingProvider
+                    .rollBreakingItems[i].id,
+                batchNumber:
+                WitheringLoadingUnloadingRollingProvider
+                    .rollBreakingItems[i].batchNumber,
+                rollBreakingTurn:
+                WitheringLoadingUnloadingRollingProvider
+                    .rollBreakingItems[i].rollBreakingTurn,
+                time: WitheringLoadingUnloadingRollingProvider
+                    .rollBreakingItems[i].time,
+                rollBreakerNumber:
+                WitheringLoadingUnloadingRollingProvider
+                    .rollBreakingItems[i].rollBreakerNumber,
+                weight: WitheringLoadingUnloadingRollingProvider
+                    .rollBreakingItems[i].weight,
+              ),
+            ),
+          ),
         ),
       ),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            height: _height * 0.13,
-            width: _width * 0.13,
+            height: 75.0,
+            width: 75.0,
             child: FittedBox(
               child: FloatingActionButton(
-                child:  Icon(
+                child: const Icon(
                   Icons.add,
                   color: Colors.white,
-                  size: _width * 0.06,
+                  size: 40.0,
                 ),
                 onPressed: () {
                   Navigator.of(context).pushNamed('RollBreakingRoom');
@@ -160,13 +156,13 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
             ),
           ),
           SizedBox(
-            width: _width * 0.01,
+            width: 30.0,
           ),
           FloatingActionButton.extended(
-            label:  Text(
+            label: const Text(
               'End Batch',
-              style:  TextStyle(
-                fontSize: _width * 0.035,
+              style: const TextStyle(
+                fontSize: 40.0,
                 color: Colors.white,
               ),
             ),
@@ -194,7 +190,7 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
                           _bigBulk = BigBulk(
                             id: DateTime.now().toString(),
                             bigBulkNumber:
-                                rollBreaking.latestRollBreakingBatch(),
+                            rollBreaking.latestRollBreakingBatch(),
                             bigBulkWeight: rollBreaking.batchWeight(
                                 rollBreaking.latestRollBreakingBatch(),
                                 DateTime.now(),

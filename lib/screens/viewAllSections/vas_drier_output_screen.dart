@@ -14,8 +14,6 @@ class _VasDrierOutputScreenState extends State<VasDrierOutputScreen> {
   @override
   Widget build(BuildContext context) {
     final token = Provider.of<Auth>(context, listen: false).token;
-    final _height = MediaQuery.of(context).size.height;
-    final _width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
@@ -38,7 +36,7 @@ class _VasDrierOutputScreenState extends State<VasDrierOutputScreen> {
               : Consumer<WitheringLoadingUnloadingRollingProvider>(
             child: Center(
               child: const Text(
-                  'Got no Drying items!', style: kEmptyViewText,),
+                'Got no Drying items!', style: kEmptyViewText,),
             ),
             builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
             WitheringLoadingUnloadingRollingProvider
@@ -65,8 +63,6 @@ class _VasDrierOutputScreenState extends State<VasDrierOutputScreen> {
                 drierOutWeight:
                 WitheringLoadingUnloadingRollingProvider
                     .dryingItems[i].drierOutWeight,
-                height: _height,
-                width: _width,
               ),
             ),
           ),

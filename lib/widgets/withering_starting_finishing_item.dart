@@ -8,63 +8,47 @@ class WitheringStartingFinishingItem extends StatelessWidget {
   final DateTime time;
   final double temperature;
   final double humidity;
-  final double _height;
-  final double _width;
 
   const WitheringStartingFinishingItem(
       {Key key,
-        @required double height,
-        @required double width,
-      this.id,
-      this.troughNumber,
-      this.time,
-      this.temperature,
-      this.humidity})
-      : _height = height,
-        _width = width,
-        super(key: key);
+        this.id,
+        this.troughNumber,
+        this.time,
+        this.temperature,
+        this.humidity})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var timeNow = time.format('d/m/Y, H:i');
-//    final _height = MediaQuery.of(context).size.height;
-//
-//    final _width = MediaQuery.of(context).size.width;
+
     return Card(
       elevation: 10,
-      margin:  EdgeInsets.symmetric(
-        horizontal: _height * 0.001,
-        vertical: _width * 0.004,
+      margin: const EdgeInsets.symmetric(
+        horizontal: 1,
+        vertical: 4,
       ),
       color: Colors.black54,
       child: Padding(
-          padding:  EdgeInsets.all(_width * 0.004),
+          padding: const EdgeInsets.all(8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               WitheringViewItem(
                 variableName: troughNumber,
                 name: 'Trough Number',
-                height: _height,
-                width: _width,
               ),
               WitheringViewItem(
                 variableName: timeNow,
                 name: 'Time',
-                height: _height,
-                width: _width,
               ),
               WitheringViewItem(
                 variableName: temperature,
                 name: 'Temperature',
-                height: _height,
-                width: _width,
               ),
               WitheringViewItem(
                 variableName: humidity,
                 name: 'Humidity',
-                height: _height,
-                width: _width,
               ),
             ],
           )),

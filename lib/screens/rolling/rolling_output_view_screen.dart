@@ -15,8 +15,6 @@ class _RollingOutputViewScreenState extends State<RollingOutputViewScreen> {
   Widget build(BuildContext context) {
 //    final rollingOutput = Provider.of<WitheringLoadingUnloadingRollingProvider>(context,listen: false);
     final token = Provider.of<Auth>(context, listen: false).token;
-    final _height = MediaQuery.of(context).size.height;
-    final _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Rolling Output View'),
@@ -28,7 +26,7 @@ class _RollingOutputViewScreenState extends State<RollingOutputViewScreen> {
               Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
             },
             disabledColor: Colors.white,
-            iconSize: _width * 0.04,
+            iconSize: 35.0,
           )
         ],
       ),
@@ -77,19 +75,17 @@ class _RollingOutputViewScreenState extends State<RollingOutputViewScreen> {
                     .rollingOutputItems[i].weightIn,
                 weightOut: WitheringLoadingUnloadingRollingProvider
                     .rollingOutputItems[i].weightOut,
-                height: _height,
-                width: _width,
               ),
             ),
           ),
         ),
       ),
       floatingActionButton: Container(
-        height: _height * 0.13,
-        width: _width * 0.13,
+        height: 75.0,
+        width: 75.0,
         child: FittedBox(
           child: FloatingActionButton(
-            child:  Icon(Icons.add, color: Colors.white,size: _width * 0.06,),
+            child: const Icon(Icons.add, color: Colors.white,size: 40.0,),
             onPressed: (){
               Navigator.of(context).pushNamed('RollingRoom');
             },

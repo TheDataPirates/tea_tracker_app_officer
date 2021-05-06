@@ -10,9 +10,6 @@ class WitheringMixingViewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);
     final token = auth.token;
-    final _height = MediaQuery.of(context).size.height;
-
-    final _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Withering Mixing View'),
@@ -24,64 +21,61 @@ class WitheringMixingViewScreen extends StatelessWidget {
               Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
             },
             disabledColor: Colors.white,
-            iconSize: _width * 0.04,
+            iconSize: 35.0,
           )
         ],
       ),
       body: Container(
         decoration: BoxDecoration(
           image : viewScreenBackgroundImage,
-            gradient: kUIGradient,
+          gradient: kUIGradient,
         ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
               .fetchAndSetWitheringMixingItem(token),
           builder: (ctx, snapshot) =>
-              snapshot.connectionState == ConnectionState.waiting
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : Consumer<WitheringLoadingUnloadingRollingProvider>(
-                      child: Center(
-                        child: const Text(
-                            'Got no Withering mixing items found yet, start adding some!', style: kEmptyViewText,),
-                      ),
-                      builder: (ctx, WitheringMixingProvider, ch) =>
-                          WitheringMixingProvider.witheringMixingItems.length <= 0
-                              ? ch
-                              : ListView.builder(
-                                  itemCount: WitheringMixingProvider
-                                      .witheringMixingItems.length,
-                                  itemBuilder: (ctx, i) => WitheringMixingItem(
-                                    id: WitheringMixingProvider
-                                        .witheringMixingItems[i].id,
-                                    troughNumber: WitheringMixingProvider
-                                        .witheringMixingItems[i].troughNumber,
-                                    turn: WitheringMixingProvider
-                                        .witheringMixingItems[i].turn,
-                                    time: WitheringMixingProvider
-                                        .witheringMixingItems[i].time,
-                                    temperature: WitheringMixingProvider
-                                        .witheringMixingItems[i].temperature,
-                                    humidity: WitheringMixingProvider
-                                        .witheringMixingItems[i].humidity,
-                                    height: _height,
-                                    width: _width,
-                                  ),
-                                ),
-                    ),
+          snapshot.connectionState == ConnectionState.waiting
+              ? Center(
+            child: CircularProgressIndicator(),
+          )
+              : Consumer<WitheringLoadingUnloadingRollingProvider>(
+            child: Center(
+              child: const Text(
+                'Got no Withering mixing items found yet, start adding some!', style: kEmptyViewText,),
+            ),
+            builder: (ctx, WitheringMixingProvider, ch) =>
+            WitheringMixingProvider.witheringMixingItems.length <= 0
+                ? ch
+                : ListView.builder(
+              itemCount: WitheringMixingProvider
+                  .witheringMixingItems.length,
+              itemBuilder: (ctx, i) => WitheringMixingItem(
+                id: WitheringMixingProvider
+                    .witheringMixingItems[i].id,
+                troughNumber: WitheringMixingProvider
+                    .witheringMixingItems[i].troughNumber,
+                turn: WitheringMixingProvider
+                    .witheringMixingItems[i].turn,
+                time: WitheringMixingProvider
+                    .witheringMixingItems[i].time,
+                temperature: WitheringMixingProvider
+                    .witheringMixingItems[i].temperature,
+                humidity: WitheringMixingProvider
+                    .witheringMixingItems[i].humidity,
+              ),
+            ),
+          ),
         ),
       ),
       floatingActionButton: Container(
-        height: _height * 0.13,
-        width: _width * 0.13,
+        height: 75.0,
+        width: 75.0,
         child: FittedBox(
           child: FloatingActionButton(
-            elevation: 10.0,
-            child:  Icon(
+            child: const Icon(
               Icons.add,
               color: Colors.white,
-              size: _width * 0.06,
+              size: 40.0,
             ),
             onPressed: () {
               Navigator.of(context).pushNamed('WitheringMixing');

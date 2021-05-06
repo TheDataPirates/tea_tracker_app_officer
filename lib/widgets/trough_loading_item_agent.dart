@@ -1,87 +1,39 @@
 import 'package:flutter/material.dart';
-
 class TroughLoadingItemAgent extends StatelessWidget {
+
   final String id;
   final int troughNumber;
   final int boxNumber;
   final String gradeGL;
   final double netWeight;
   final double recentWeight;
-  final double _height;
-  final double _width;
 
-  TroughLoadingItemAgent(
-      {Key key,
-      this.id,
-      @required double height,
-      @required double width,
-      this.troughNumber,
-      this.boxNumber,
-      this.gradeGL,
-      this.netWeight,
-      this.recentWeight})
-      : _height = height,
-        _width = width,
-        super(key: key);
+  TroughLoadingItemAgent({this.id, this.troughNumber, this.boxNumber, this.gradeGL, this.netWeight, this.recentWeight});
 
   @override
   Widget build(BuildContext context) {
-//    final _height =
-//        MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
-//
-//    final _width = MediaQuery.of(context).size.width;
     return Card(
-      margin: EdgeInsets.symmetric(
-        horizontal: _width * 0.01,
-        vertical: _height * 0.01,
+      margin: const EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 5,
       ),
-      color: Color(0xff1b5e20).withOpacity(0.7),
+      color: Color(0xff1b5e20),
       child: Padding(
-        padding: EdgeInsets.all(_width * 0.005),
+        padding: const EdgeInsets.all(5.0),
         child: ListTile(
-            leading: CircleAvatar(
-              child: Text(
-                gradeGL,
-                style: TextStyle(fontSize: _width * 0.05, color: Colors.white),
-              ),
-              radius: _width * 0.05,
-              backgroundColor: Colors.greenAccent.shade700,
-            ),
-            title: Text(
-              'Trough Number : ' + '$troughNumber',
-              style: TextStyle(
-                  fontSize: _width * 0.03,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-            ),
-            subtitle: Text(
-              'Box Number : ' + '$boxNumber',
-              style: TextStyle(
-                  fontSize: _width * 0.0275,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-            ),
+            leading: CircleAvatar(child: Text(gradeGL, style: TextStyle(fontSize: 40.0, color: Colors.white),),
+              radius: 50.0,
+              backgroundColor: Colors.greenAccent.shade700,),
+            title: Text('Trough Number : ' + '$troughNumber', style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold, color: Colors.white),),
+            subtitle: Text('Box Number : ' + '$boxNumber', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),),
             trailing: Column(
               children: [
-                Text(
-                  'Recently added : ' + '$recentWeight' + ' Kg',
-                  style: TextStyle(
-                      fontSize: _width * 0.023,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-                SizedBox(
-                  height: 6,
-                ),
-                Text(
-                  'Total Box Weight : ' + '$netWeight' + ' Kg',
-                  style: TextStyle(
-                      fontSize: _width * 0.025,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
+                Text('Recently added : ' +'$recentWeight' + ' Kg', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),),
+                SizedBox(height: 6,),
+                Text('Total Box Weight : ' +'$netWeight' + ' Kg', style: TextStyle(fontSize: 23.0, fontWeight: FontWeight.bold, color: Colors.white),),
               ],
-            )),
+            )
+        ),
       ),
     );
   }

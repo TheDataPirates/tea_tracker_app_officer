@@ -23,8 +23,6 @@ class _VasRemeasuringScreenState extends State<VasRemeasuringScreen> {
     final token = auth.token;
     final provider = Provider.of<TeaCollections>(context, listen: false);
     final currentDate = provider.getCurrentDate();
-    final _height = MediaQuery.of(context).size.height;
-    final _width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(

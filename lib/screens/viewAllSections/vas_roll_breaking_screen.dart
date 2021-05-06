@@ -17,8 +17,6 @@ class _VasRollBreakingScreenState extends State<VasRollBreakingScreen> {
         context,
         listen: false);
     final token = Provider.of<Auth>(context, listen: false).token;
-    final _height = MediaQuery.of(context).size.height;
-    final _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Roll Breaking View'),
@@ -30,56 +28,54 @@ class _VasRollBreakingScreenState extends State<VasRollBreakingScreen> {
         ),
         child: FutureBuilder(
           future: Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
-                  listen: false)
+              listen: false)
               .fetchAndSetWitheringRollBreakingItem(token),
           builder: (ctx, snapshot) =>
-              snapshot.connectionState == ConnectionState.waiting
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : Consumer<WitheringLoadingUnloadingRollingProvider>(
-                      child: Center(
-                        child: const Text(
-                          'Got no Roll Breaking items!',
-                          style: kEmptyViewText,
-                        ),
-                      ),
-                      builder:
-                          (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
-                              WitheringLoadingUnloadingRollingProvider
-                                          .rollBreakingItems.length <=
-                                      0
-                                  ? ch
-                                  : ListView.builder(
-                                      itemCount:
-                                          WitheringLoadingUnloadingRollingProvider
-                                              .rollBreakingItems.length,
-                                      itemBuilder: (ctx, i) => RollBreakingItem(
-                                        id: WitheringLoadingUnloadingRollingProvider
-                                            .rollBreakingItems[i].id,
-                                        batchNumber:
-                                            WitheringLoadingUnloadingRollingProvider
-                                                .rollBreakingItems[i]
-                                                .batchNumber,
-                                        rollBreakingTurn:
-                                            WitheringLoadingUnloadingRollingProvider
-                                                .rollBreakingItems[i]
-                                                .rollBreakingTurn,
-                                        time:
-                                            WitheringLoadingUnloadingRollingProvider
-                                                .rollBreakingItems[i].time,
-                                        rollBreakerNumber:
-                                            WitheringLoadingUnloadingRollingProvider
-                                                .rollBreakingItems[i]
-                                                .rollBreakerNumber,
-                                        weight:
-                                            WitheringLoadingUnloadingRollingProvider
-                                                .rollBreakingItems[i].weight,
-                                        height: _height,
-                                        width: _width,
-                                      ),
-                                    ),
-                    ),
+          snapshot.connectionState == ConnectionState.waiting
+              ? Center(
+            child: CircularProgressIndicator(),
+          )
+              : Consumer<WitheringLoadingUnloadingRollingProvider>(
+            child: Center(
+              child: const Text(
+                'Got no Roll Breaking items!',
+                style: kEmptyViewText,
+              ),
+            ),
+            builder:
+                (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
+            WitheringLoadingUnloadingRollingProvider
+                .rollBreakingItems.length <=
+                0
+                ? ch
+                : ListView.builder(
+              itemCount:
+              WitheringLoadingUnloadingRollingProvider
+                  .rollBreakingItems.length,
+              itemBuilder: (ctx, i) => RollBreakingItem(
+                id: WitheringLoadingUnloadingRollingProvider
+                    .rollBreakingItems[i].id,
+                batchNumber:
+                WitheringLoadingUnloadingRollingProvider
+                    .rollBreakingItems[i]
+                    .batchNumber,
+                rollBreakingTurn:
+                WitheringLoadingUnloadingRollingProvider
+                    .rollBreakingItems[i]
+                    .rollBreakingTurn,
+                time:
+                WitheringLoadingUnloadingRollingProvider
+                    .rollBreakingItems[i].time,
+                rollBreakerNumber:
+                WitheringLoadingUnloadingRollingProvider
+                    .rollBreakingItems[i]
+                    .rollBreakerNumber,
+                weight:
+                WitheringLoadingUnloadingRollingProvider
+                    .rollBreakingItems[i].weight,
+              ),
+            ),
+          ),
         ),
       ),
     );
