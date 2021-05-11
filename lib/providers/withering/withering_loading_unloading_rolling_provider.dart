@@ -88,8 +88,9 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
       final extractedDataList = jsonDecode(dataList.body);
 //      print(extractedDataList);
       List loadedLots = extractedDataList['startings'];
-      print(loadedLots);
+      // print(loadedLots);
       for (var i in loadedLots) {
+        print(i['date']);
         _witheringStartingItems.add(
           WitheringStartingFinishing(
             id: i['tp_id'] as String,
@@ -748,7 +749,7 @@ class WitheringLoadingUnloadingRollingProvider with ChangeNotifier {
         },
       );
       final extractedDataList = jsonDecode(dataList.body);
-//      print(extractedDataList);
+      // print(extractedDataList);
       List loadedLots = extractedDataList['loadings'];
       print(loadedLots);
 //      loadedLots = [];

@@ -36,7 +36,7 @@ class _VasRollingScreenState extends State<VasRollingScreen> {
               : Consumer<WitheringLoadingUnloadingRollingProvider>(
             child: Center(
               child: const Text(
-                'Got no Rolling items!', style: kEmptyViewText,),
+                  'Got no Rolling items!', style: kEmptyViewText,),
             ),
             builder: (ctx, WitheringLoadingUnloadingRollingProvider, ch) =>
             WitheringLoadingUnloadingRollingProvider
@@ -49,7 +49,7 @@ class _VasRollingScreenState extends State<VasRollingScreen> {
               itemBuilder: (ctx, i) =>
               WitheringLoadingUnloadingRollingProvider
                   .rollingOutputItems[i].rollingTurn!='BB'?
-              RollingItem(
+                  RollingItem(
                 id: WitheringLoadingUnloadingRollingProvider
                     .rollingOutputItems[i].id,
                 batchNumber:
