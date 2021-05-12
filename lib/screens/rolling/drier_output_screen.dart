@@ -143,7 +143,7 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
           await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
               listen: false)
               .addDryingItem(_drying, authToken);
-
+          FocusScope.of(context).requestFocus(FocusNode());
           Navigator.of(context).pushNamed('DrierOutputView');
         } catch (e) {
           await showDialog<void>(
@@ -260,7 +260,7 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
           await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
               listen: false)
               .addDryingItem(_drying, authToken);
-
+          FocusScope.of(context).requestFocus(FocusNode());
           Navigator.of(context).pushNamed('DrierOutputView');
         } catch (e) {
           await showDialog<void>(
@@ -311,7 +311,7 @@ class _DrierOutputScreenState extends State<DrierOutputScreen> {
         await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
             listen: false)
             .addDryingItem(_drying, authToken);
-
+        FocusScope.of(context).requestFocus(FocusNode());
         Navigator.of(context).pushNamed('DrierOutputView');
       } catch (e) {
         await showDialog<void>(

@@ -62,7 +62,7 @@ class _WitheringStartScreenState extends State<WitheringStartScreen> {
         await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
             listen: false)
             .addWitheringStartingItem(_witheringStarting, authToken);
-
+        FocusScope.of(context).requestFocus(FocusNode());
         Navigator.of(context).pushNamed('WitheringStartingView');
       } catch (e) {
         await showDialog<void>(

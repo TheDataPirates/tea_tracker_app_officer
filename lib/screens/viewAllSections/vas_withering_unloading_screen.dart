@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teatrackerappofficer/providers/authentication/auth_provider.dart';
-import 'package:teatrackerappofficer/providers/withering/batch.dart';
+//import 'package:teatrackerappofficer/providers/withering/batch.dart';
 import 'package:teatrackerappofficer/providers/withering/withering_loading_unloading_rolling_provider.dart';
 import 'package:teatrackerappofficer/widgets/withering_unloading_item.dart';
 import 'package:teatrackerappofficer/constants.dart';
@@ -14,17 +14,17 @@ class VasWitheringUnloadingScreen extends StatefulWidget {
 
 class _VasWitheringUnloadingScreenState extends State<VasWitheringUnloadingScreen> {
 
-  var _batch = Batch(id: null, batchNumber: null, batchWeight: null, time: null);
+//  var _batch = Batch(id: null, batchNumber: null, batchWeight: null, time: null);
 
-  Future<void>_saveBatchWeightAndNavigate() async{
-
-    final authToken = Provider.of<Auth>(context, listen: false).token;
-
-    Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
-        .addBatchItem(_batch,authToken);
-
-    Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
-  }
+//  Future<void>_saveBatchWeightAndNavigate() async{
+//
+//    final authToken = Provider.of<Auth>(context, listen: false).token;
+//
+//    Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
+//        .addBatchItem(_batch,authToken);
+//    FocusScope.of(context).requestFocus(FocusNode());
+//    Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
+//  }
 
   @override
   Widget build(BuildContext context) {

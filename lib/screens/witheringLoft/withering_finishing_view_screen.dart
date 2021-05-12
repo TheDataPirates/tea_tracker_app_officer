@@ -21,6 +21,7 @@ class WitheringFinishingViewScreen extends StatelessWidget {
             icon: const Icon(Icons.check),
             onPressed: () {
 //              Navigator.of(context).pushNamed('MainMenu');
+              FocusScope.of(context).requestFocus(FocusNode());
               Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
             },
             disabledColor: Colors.white,
@@ -86,6 +87,7 @@ class WitheringFinishingViewScreen extends StatelessWidget {
               size: 40,
             ),
             onPressed: () {
+//              FocusScope.of(context).requestFocus(FocusNode());
               Navigator.of(context).pushNamed('WitheringFinishing');
             },
           ),

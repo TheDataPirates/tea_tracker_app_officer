@@ -115,7 +115,7 @@ class _RollBreakingRoomScreenState extends State<RollBreakingRoomScreen> {
         await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
             listen: false)
             .addRollBreakingItem(_rollBreaking, authToken);
-
+        FocusScope.of(context).requestFocus(FocusNode());
         Navigator.of(context).pushNamed('RollBreakingView');
       } catch (e) {
         await showDialog<void>(

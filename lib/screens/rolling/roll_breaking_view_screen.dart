@@ -32,6 +32,7 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
 
 
 //      Navigator.of(context).pushNamed('MainMenu');
+      FocusScope.of(context).requestFocus(FocusNode());
       Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
     } catch (error) {
       await showDialog<void>(
@@ -80,6 +81,7 @@ class _RollBreakingViewScreenState extends State<RollBreakingViewScreen> {
             icon: const Icon(Icons.check),
             onPressed: () {
 //              Navigator.of(context).pushNamed('MainMenu');
+              FocusScope.of(context).requestFocus(FocusNode());
               Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
             },
             disabledColor: Colors.white,

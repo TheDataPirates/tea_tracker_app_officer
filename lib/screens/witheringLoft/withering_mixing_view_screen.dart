@@ -18,6 +18,7 @@ class WitheringMixingViewScreen extends StatelessWidget {
             icon: const Icon(Icons.check),
             onPressed: () {
 //              Navigator.of(context).pushNamed('MainMenu');
+              FocusScope.of(context).requestFocus(FocusNode());
               Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
             },
             disabledColor: Colors.white,
@@ -78,6 +79,7 @@ class WitheringMixingViewScreen extends StatelessWidget {
               size: 40.0,
             ),
             onPressed: () {
+//              FocusScope.of(context).requestFocus(FocusNode());
               Navigator.of(context).pushNamed('WitheringMixing');
             },
           ),

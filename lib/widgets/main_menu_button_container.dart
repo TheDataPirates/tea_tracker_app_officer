@@ -32,6 +32,7 @@ class MainMenuFlatButtonContainer extends StatelessWidget {
           elevation: 30.0,
           color: Colors.black.withOpacity(0.6),
           onPressed: () {
+            FocusScope.of(context).requestFocus(FocusNode());
             Navigator.of(context).pushNamed(destination);
           },
           child: Column(

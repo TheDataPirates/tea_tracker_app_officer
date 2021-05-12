@@ -161,7 +161,7 @@ class _RollingRoomScreenState extends State<RollingRoomScreen> {
       await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
               listen: false)
           .addRollingOutputItem(_rollingOutput, authToken);
-
+      FocusScope.of(context).requestFocus(FocusNode());
       Navigator.of(context).pushNamed('RollingOutputView');
     }
   }

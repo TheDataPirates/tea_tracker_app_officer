@@ -111,7 +111,7 @@ class _RemeasureTroughLoadingScreenState
         await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
                 listen: false)
             .addTroughLoadingItem(_troughLoading, authToken);
-
+        FocusScope.of(context).requestFocus(FocusNode());
         Navigator.of(context).pushNamed('RemeasureTroughLoadingViewScreen');
       } catch (error) {
         await showDialog<void>(

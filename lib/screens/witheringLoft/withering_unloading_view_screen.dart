@@ -28,6 +28,7 @@ class _WitheringUnloadingViewScreenState extends State<WitheringUnloadingViewScr
 //    print(_batch.batchWeight);
 
 //    Navigator.of(context).pushNamed('MainMenu');
+    FocusScope.of(context).requestFocus(FocusNode());
     Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
   }
 

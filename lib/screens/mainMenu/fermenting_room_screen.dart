@@ -135,7 +135,7 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
           await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
               listen: false)
               .addFermentingItem(_fermenting, authToken);
-
+          FocusScope.of(context).requestFocus(FocusNode());
           Navigator.of(context).pushNamed('FermentingView');
         } catch (e) {
           await showDialog<void>(
@@ -243,7 +243,7 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
           await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
               listen: false)
               .addFermentingItem(_fermenting, authToken);
-
+          FocusScope.of(context).requestFocus(FocusNode());
           Navigator.of(context).pushNamed('FermentingView');
         } catch (e) {
           await showDialog<void>(
@@ -284,7 +284,7 @@ class _FermentingRoomScreenState extends State<FermentingRoomScreen> {
         await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
                 listen: false)
             .addFermentingItem(_fermenting, authToken);
-
+        FocusScope.of(context).requestFocus(FocusNode());
         Navigator.of(context).pushNamed('FermentingView');
       } catch (e) {
         await showDialog<void>(

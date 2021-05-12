@@ -214,6 +214,7 @@ class _PrintScreenState extends State<PrintScreen> {
                           gross,
                           deductions,
                           net);
+                      FocusScope.of(context).requestFocus(FocusNode());
                       Navigator.pushNamed(context, "MainMenu");
                     },
                     child: Text(

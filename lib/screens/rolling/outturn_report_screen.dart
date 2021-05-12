@@ -18,6 +18,7 @@ class OutturnReportScreen extends StatelessWidget {
             icon: const Icon(Icons.check),
             onPressed: () {
 //              Navigator.of(context).pushNamed('MainMenu');
+              FocusScope.of(context).requestFocus(FocusNode());
               Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
             },
             disabledColor: Colors.white,

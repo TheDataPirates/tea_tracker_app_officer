@@ -24,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
       final provider = Provider.of<Auth>(context, listen: false);
       try {
         await provider.login(_editedUser.user_id, _editedUser.password);
-
+        FocusScope.of(context).requestFocus(FocusNode());
         Navigator.of(context).pushReplacementNamed('MainMenu');
       } catch (e) {
         await showDialog<void>(

@@ -88,7 +88,7 @@ class _WitheringFinishingScreenState extends State<WitheringFinishingScreen> {
         await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
             listen: false)
             .addWitheringFinishingItem(_witheringFinishing, authToken);
-
+        FocusScope.of(context).requestFocus(FocusNode());
         Navigator.of(context).pushNamed('WitheringFinishingView');
       } catch (error) {
         await showDialog<void>(

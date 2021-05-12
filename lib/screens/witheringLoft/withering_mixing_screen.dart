@@ -87,7 +87,7 @@ class _WitheringMixingScreenState extends State<WitheringMixingScreen> {
       try {
         await Provider.of<WitheringLoadingUnloadingRollingProvider>(context, listen: false)
             .addWitheringMixingItem(_witheringMixing, authToken);
-
+        FocusScope.of(context).requestFocus(FocusNode());
         Navigator.of(context).pushNamed('WitheringMixingView');
       } catch (e) {
         await showDialog<void>(

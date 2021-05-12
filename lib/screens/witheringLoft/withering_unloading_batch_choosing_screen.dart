@@ -62,7 +62,7 @@ class _WitheringUnloadingBatchChoosingScreenState
 
 //    Provider.of<WitheringLoadingUnloadingProvider>(context, listen: false)
 //        .witheringUnloadingItems.clear();
-
+      FocusScope.of(context).requestFocus(FocusNode());
       Navigator.of(context).pushNamed('WitheringUnloading');
     }
 

@@ -123,7 +123,7 @@ class _WitheringUnloadingScreenState extends State<WitheringUnloadingScreen> {
         await Provider.of<WitheringLoadingUnloadingRollingProvider>(context,
                 listen: false)
             .addWitheringUnloadingItem(_witheringUnloading, authToken);
-
+        FocusScope.of(context).requestFocus(FocusNode());
         Navigator.of(context).pushNamed('WitheringUnloadingView');
       } catch (e) {
         await showDialog<void>(

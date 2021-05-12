@@ -46,6 +46,7 @@ class _RemeasureTroughLoadingViewScreenState
           IconButton(
             icon: const Icon(Icons.check),
             onPressed: () {
+              FocusScope.of(context).requestFocus(FocusNode());
               Navigator.of(context).pushNamed('MainMenu');
 //               Navigator.popUntil(context, ModalRoute.withName('MainMenu'));
             },
