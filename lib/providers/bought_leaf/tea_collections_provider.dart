@@ -169,6 +169,44 @@ class TeaCollections with ChangeNotifier {
     } //raw query to get isdeleted = 0
   }
 
+  Future<void> fetchAndSetReLotData(
+      String id, String date, String authToken) async {
+    final url = '$kURL/bleaf/lots/remeasuring';
+    _lot_items = [];
+    try {
+      final dataList = await http.get(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+      );
+      final extractedDataList = jsonDecode(dataList.body);
+      print(extractedDataList);
+      List loadedLots = extractedDataList['lots'];
+      print(loadedLots);
+      for (var i in loadedLots) {
+        _lot_items.add(
+          Lot(
+              lotId: i['lot_id'],
+              no_of_containers: i['no_of_container'],
+              leaf_grade: i['grade_GL'],
+              gross_weight: i['gross_weight'],
+              water: i['water'],
+              course_leaf: i['course_leaf'],
+              other: i['other'],
+              net_weight: i['net_weight'],
+              deductions: i['deduction'],
+              container_type: i['container_type']),
+        );
+      }
+
+      notifyListeners();
+    } catch (error) {
+      print(error);
+    } //raw query to get isdeleted = 0
+  }
+
   Future<void> deleteLot(String id, String authToken) async {
     final url = '$kURL/bleaf/lot/$id';
     // remove lot from the array
