@@ -410,7 +410,8 @@ class TeaCollections with ChangeNotifier {
 
       if (response.statusCode == 500 || response.statusCode == 404) {
         // check whether server sent bad respond
-        throw Exception('Failed ');
+        final extractedDataList = jsonDecode(response.body);
+        throw Exception(extractedDataList['message']);
       } else if (response.statusCode == 200 && method == 'OfficerOriginal') {
         // respond okay. without having else part this future not return anything, not worked calling placed.
         _newSupplier = Supplier(supId, supName);
