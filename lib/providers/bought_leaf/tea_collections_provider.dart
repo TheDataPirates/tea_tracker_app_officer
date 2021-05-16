@@ -15,6 +15,7 @@ class TeaCollections with ChangeNotifier {
   List<Lot> get lot_items {
     return [..._lot_items];
   }
+
   var _currUser = User();
   User get currUser => _currUser;
 
@@ -94,6 +95,83 @@ class TeaCollections with ChangeNotifier {
       String id, String date, String authToken) async {
     print("fetchAndSetLotData");
     final url = '$kURL/bleaf/lots/$Bulkid';
+    _lot_items = [];
+    try {
+      final dataList = await http.get(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+      );
+      final extractedDataList = jsonDecode(dataList.body);
+      print(extractedDataList);
+      List loadedLots = extractedDataList['lots'];
+      print(loadedLots);
+      for (var i in loadedLots) {
+        _lot_items.add(
+          Lot(
+              lotId: i['lot_id'],
+              no_of_containers: i['no_of_container'],
+              leaf_grade: i['grade_GL'],
+              gross_weight: i['gross_weight'],
+              water: i['water'],
+              course_leaf: i['course_leaf'],
+              other: i['other'],
+              net_weight: i['net_weight'],
+              deductions: i['deduction'],
+              container_type: i['container_type']),
+        );
+      }
+
+      notifyListeners();
+    } catch (error) {
+      print(error);
+    } //raw query to get isdeleted = 0
+  }
+
+  Future<void> fetchAndSetAllLotData(
+      String id, String date, String authToken) async {
+    print("fetchAndSetLotData");
+    final url = '$kURL/bleaf/lots';
+    _lot_items = [];
+    try {
+      final dataList = await http.get(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $authToken'
+        },
+      );
+      final extractedDataList = jsonDecode(dataList.body);
+      print(extractedDataList);
+      List loadedLots = extractedDataList['lots'];
+      print(loadedLots);
+      for (var i in loadedLots) {
+        _lot_items.add(
+          Lot(
+              lotId: i['lot_id'],
+              no_of_containers: i['no_of_container'],
+              leaf_grade: i['grade_GL'],
+              gross_weight: i['gross_weight'],
+              water: i['water'],
+              course_leaf: i['course_leaf'],
+              other: i['other'],
+              net_weight: i['net_weight'],
+              deductions: i['deduction'],
+              container_type: i['container_type']),
+        );
+      }
+
+      notifyListeners();
+    } catch (error) {
+      print(error);
+    } //raw query to get isdeleted = 0
+  }
+
+  Future<void> fetchAndSetReLotData(
+      String id, String date, String authToken) async {
+    final url = '$kURL/bleaf/lots/remeasuring';
     _lot_items = [];
     try {
       final dataList = await http.get(
@@ -212,7 +290,8 @@ class TeaCollections with ChangeNotifier {
         break;
     }
   }
-  int grossWeight(){
+
+  int grossWeight() {
     try {
       int total = 0;
       lot_items.forEach((item) => total += item.gross_weight);
@@ -222,6 +301,7 @@ class TeaCollections with ChangeNotifier {
       print(e);
     }
   }
+
   int calNetWeight(int gWeight) {
     // calculate net weight lot wise
     return (gWeight - lotTotDeduct);
@@ -239,10 +319,9 @@ class TeaCollections with ChangeNotifier {
     }
   }
 
-  int netWeight(){
+  int netWeight() {
     return grossWeight() - totalDeducts();
   }
-
 
   Future<void> verifySupplier(String supId, String supName, String authToken,
       String userId, String method) async {
@@ -291,7 +370,7 @@ class TeaCollections with ChangeNotifier {
           } else {
             throw Exception('Failed ');
           }
-        }else{
+        } else {
           throw Exception('Name is not matched.');
         }
       } else if (supName.isNotEmpty) {
@@ -307,8 +386,6 @@ class TeaCollections with ChangeNotifier {
         final extractedDataList = jsonDecode(dataList.body);
         print(extractedDataList);
         List suppliers = extractedDataList['supplier'];
-
-
 
         if (suppliers.length != 0) {
           supId = suppliers[0]['supplier_id'];

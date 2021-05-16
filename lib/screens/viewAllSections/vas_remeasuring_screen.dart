@@ -29,67 +29,74 @@ class _VasRemeasuringScreenState extends State<VasRemeasuringScreen> {
         title: const Text('Remeasuring View'),
       ),
       body: Container(
-        decoration: BoxDecoration(
-            image : VASBackgroundImage,
-            gradient: kUIGradient
-        ),
-
+        decoration:
+            BoxDecoration(image: VASBackgroundImage, gradient: kUIGradient),
         child: FutureBuilder(
           future: Provider.of<TeaCollections>(context, listen: false)
-              .fetchAndSetLotData(widget.supplierID, currentDate,
-              token), //fetching lot details which is deleted 0 & supplierID & Date
-          builder: (ctx, snapshot) => snapshot.connectionState ==
-              ConnectionState.waiting
-              ? Center(
-            child: CircularProgressIndicator(),
-          )
-              : Consumer<TeaCollections>(
-            child: Center(
-              child: const Text('Got no Remeasured Lots!', style: kEmptyViewText,),
-            ),
-            builder: (ctx, teaCollections, ch) => teaCollections
-                .lot_items.length <=
-                0
-                ? ch
-                : ListView.builder(
-              itemCount: teaCollections.lot_items.length,
-              itemBuilder: (ctx, i) => Card(
-                color: Colors.black54,
-                elevation: 10.0,
-                child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.greenAccent.shade700,
-                    radius: 30.0,
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: FittedBox(
-                        child: Text(
-                          "${teaCollections.lot_items[i].leaf_grade}",
-                          style: TextStyle(color: Colors.white, fontSize: 30),
+              .fetchAndSetReLotData(widget.supplierID, currentDate,
+                  token), //fetching lot details which is deleted 0 & supplierID & Date
+          builder: (ctx, snapshot) =>
+              snapshot.connectionState == ConnectionState.waiting
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Consumer<TeaCollections>(
+                      child: Center(
+                        child: const Text(
+                          'Got no Remeasured Lots!',
+                          style: kEmptyViewText,
                         ),
                       ),
+                      builder: (ctx, teaCollections, ch) =>
+                          teaCollections.lot_items.length <= 0
+                              ? ch
+                              : ListView.builder(
+                                  itemCount: teaCollections.lot_items.length,
+                                  itemBuilder: (ctx, i) => Card(
+                                    color: Colors.black54,
+                                    elevation: 10.0,
+                                    child: ListTile(
+                                      leading: CircleAvatar(
+                                        backgroundColor:
+                                            Colors.greenAccent.shade700,
+                                        radius: 30.0,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(6.0),
+                                          child: FittedBox(
+                                            child: Text(
+                                              "${teaCollections.lot_items[i].leaf_grade}",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 30),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      title: Text(
+                                        "${teaCollections.lot_items[i].gross_weight} KG",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 50),
+                                      ),
+                                      subtitle: Row(
+                                        children: [
+                                          Text(
+                                            "Container type : ${teaCollections.lot_items[i].container_type} ->>",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 25),
+                                          ),
+                                          Text(
+                                            "  Units ${teaCollections.lot_items[i].no_of_containers}",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 25),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
                     ),
-                  ),
-                  title: Text(
-                    "${teaCollections.lot_items[i].gross_weight} KG",
-                    style: TextStyle(color: Colors.white, fontSize: 50),
-                  ),
-                  subtitle: Row(
-                    children: [
-                      Text(
-                        "Container type : ${teaCollections.lot_items[i].container_type} ->>",
-                        style: TextStyle(color: Colors.white, fontSize: 25),
-                      ),
-                      Text(
-                        "  Units ${teaCollections.lot_items[i].no_of_containers}",
-                        style: TextStyle(color: Colors.white, fontSize: 25),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
         ),
       ),
     );
