@@ -209,8 +209,8 @@ class _PrintScreenState extends State<PrintScreen> {
                     onPressed: () {
                       receipt.sample(
                           provider.currUser.user_id,
-                          provider.newSupplier.supplierName,
                           provider.newSupplier.supplierId,
+                          provider.newSupplier.supplierName,
                           gross,
                           deductions,
                           net);

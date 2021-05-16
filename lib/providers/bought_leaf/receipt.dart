@@ -5,7 +5,7 @@ import 'package:blue_thermal_printer/blue_thermal_printer.dart';
 class Receipt {
   BlueThermalPrinter bluetooth = BlueThermalPrinter.instance;
 
-  sample(String officerName, String supId, String supName, int grossWeight, int totalDeducts, int netWeight) async {
+  sample(String officerId, String supId, String supName, int grossWeight, int totalDeducts, int netWeight) async {
     DateTime dateTime = DateTime.now();
     var currentTime = dateTime.format('H:i');
     var currentDate = dateTime.format('d/m/Y');
@@ -21,7 +21,7 @@ class Receipt {
         bluetooth.printNewLine();
         bluetooth.printCustom(currentTime.toString(), 2, 1);
         bluetooth.printNewLine();
-        bluetooth.printLeftRight("Officer Name :", officerName.toString(), 1);
+        bluetooth.printLeftRight("Officer ID :", officerId.toString(), 1);
         bluetooth.printNewLine();
         bluetooth.printLeftRight("Supplier ID :", supId.toString(), 1);
         bluetooth.printNewLine();
